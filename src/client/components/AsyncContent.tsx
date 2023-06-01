@@ -1,4 +1,4 @@
-import { AsyncState } from '../hooks/useAsyncRequest';
+import { AsyncState, hasErrored, isLoading } from '../hooks/useAsyncRequest';
 
 interface AsyncContentProps<T> {
   content: AsyncState<T>;
@@ -6,11 +6,11 @@ interface AsyncContentProps<T> {
 }
 
 export default function AsyncContent<T>({ content, children }: AsyncContentProps<T>) {
-  if (content.state === 'loading') {
+  if (isLoading(content)) {
     return <div>Loading...</div>;
   }
 
-  if (content.state === 'errored') {
+  if (hasErrored(content)) {
     return (
       <div>
         Error:
