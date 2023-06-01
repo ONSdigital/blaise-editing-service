@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## To Do
+- Make the backend serve up the frontend (i.e. the build)
+- Remove/reconfigure CORS
+- Supply backend port via environment variable
+- Add request logging
+- Deployment
+- Ensure existing functionality is tested (frontend and backend)
+- Add Github actions to run lints and tests (STEAL FROM OTHER REPOS)
+
+
 ## Available Scripts
 
 In the project directory, you can run:

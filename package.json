@@ -28,10 +28,10 @@
     "eject": "react-scripts eject",
     "lint": "yarn eslint .",
     "build-server": "tsc --project tsconfig.server.json",
-    "run-server": "node dist/main.js",
+    "run-server": "node dist/server/main.js",
     "start-server": "yarn build-server && yarn run-server",
     "build-server-watch": "yarn build-server -w",
-    "run-server-watch": "nodemon dist/main.js",
+    "run-server-watch": "nodemon dist/server/main.js",
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
     "dev": "concurrently npm:start npm:start-server-watch"
   },
