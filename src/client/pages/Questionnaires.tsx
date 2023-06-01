@@ -1,23 +1,17 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import getQuestionnaires from '../api/questionnaires';
+import { GetQuestionnaires } from '../../shared/responses/GetQuestionnaires';
+import QuestionnairesList from '../components/QuestionnairesList';
+import AsyncContent from '../components/AsyncContent';
+import { useAsyncRequest } from '../hooks/useAsyncRequest';
 
 export default function Questionnaires() {
-  const [questionnaires, setQuestionnaires] = useState<{ name:string }[]>([]);
+  const questionnaires = useAsyncRequest<GetQuestionnaires>(getQuestionnaires);
 
-  useEffect(() => {
-    async function fetchQuestionnaires() {
-      const response = await axios.get('http://localhost:3100/questionnaires');
-      return response.data;
-    }
-
-    fetchQuestionnaires().then(setQuestionnaires);
-  }, []);
   return (
     <div>
-      {questionnaires.map((questionnaire) => {
-        if ('name' in questionnaire) return questionnaire.name;
-        return null;
-      })}
+      <AsyncContent content={questionnaires}>
+        {(loadedQuestionnaires) => <QuestionnairesList questionnaires={loadedQuestionnaires} />}
+      </AsyncContent>
     </div>
   );
 }
