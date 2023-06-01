@@ -4,12 +4,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## To Do
 - Make the backend serve up the frontend (i.e. the build)
+  - Look at how DQS does this, it sets the apps `views` to the `build` directory (see https://github.com/ONSdigital/blaise-deploy-questionnaire-service/blob/main/src/server/server.ts#L59) 
 - Remove/reconfigure CORS
+  - CORS shouldn't be required once the server is serving up the client - just remove it and the dependency
 - Supply backend port via environment variable
+  - Other apps default of `5000`, that might be preferable by app engine.
 - Add request logging
+  - Other apps use pino, I'd suggest looking at winston and express-winston (see https://www.npmjs.com/package/express-winston)
+  - Also take another look at Google Cloud Logging (see https://www.npmjs.com/package/@google-cloud/logging-winston)
 - Deployment
+  - Look at how the other apps do it, will require an App Engine template.
+  - You might also need to make some changes to the package.json
 - Ensure existing functionality is tested (frontend and backend)
-- Add Github actions to run lints and tests (STEAL FROM OTHER REPOS)
+  - The creation of the backend server should be moved to a function so that it can be created for each test.
+  - Use supertest to test the express app
+- Add GitHub actions to run lints and tests
+  - STEAL FROM OTHER REPOS
 
 
 ## Available Scripts
