@@ -34,6 +34,7 @@
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
     "dev": "concurrently npm:start npm:start-server-watch"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
