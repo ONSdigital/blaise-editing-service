@@ -3,8 +3,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## To Do
-- Make the backend serve up the frontend (i.e. the build)
-  - Look at how DQS does this, it sets the apps `views` to the `build` directory (see https://github.com/ONSdigital/blaise-deploy-questionnaire-service/blob/main/src/server/server.ts#L59) 
 - Supply backend port via environment variable
   - Other apps default of `5000`, that might be preferable by app engine.
 - Add request logging
