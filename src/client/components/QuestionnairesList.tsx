@@ -1,4 +1,4 @@
-import Questionnaire from '../../shared/models/Questionnaire';
+import { Questionnaire } from 'blaise-api-node-client';
 
 interface QuestionnairesListProps {
   questionnaires: Questionnaire[];
