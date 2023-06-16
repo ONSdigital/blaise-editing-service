@@ -16,6 +16,8 @@ export default function QuestionnairesList({ questionnaires }: QuestionnairesLis
         {questionnaires.map((questionnaire) => (
           <tr key={questionnaire.name}>
             <td>{questionnaire.name}</td>
+            <td>{questionnaire.serverParkName}</td>
+            <td>{questionnaire.dataRecordCount}</td>
           </tr>
         ))}
       </tbody>

@@ -7,7 +7,7 @@ const app = express();
 const port = 5000;
 
 // where ever the react built package is
-const buildFolder = '../../build';
+const buildFolder = '../build';
 
 // treat the index.html as a template and substitute the values at runtime
 app.set('views', path.join(__dirname, buildFolder));
@@ -20,7 +20,7 @@ app.get('/api/questionnaires', (_req, res: Response<Questionnaire []>) => {
     serverParkName: 'gusty',
     installDate: '2021-01-15T14:41:29.4399898+00:00',
     status: 'Active',
-    dataRecordCount: 0,
+    dataRecordCount: 10,
     hasData: false,
     active: false,
     fieldPeriod: 'dummy',
