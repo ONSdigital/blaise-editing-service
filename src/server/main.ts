@@ -1,11 +1,11 @@
 import express, { Request, Response } from 'express';
-import BlaiseApiClient from 'blaise-api-node-client';
+import BlaiseApiClient, { Questionnaire } from 'blaise-api-node-client';
 import path from 'path';
 import ejs from 'ejs';
 
 const app = express();
 const port = 5000;
-const blaiseUrl = 'http://localhost:5011';
+const blaiseUrl = 'http://localhost:90';
 // where ever the react built package is
 const buildFolder = '../build';
 const blaiseApiClient = new BlaiseApiClient(blaiseUrl);
@@ -15,7 +15,10 @@ app.set('views', path.join(__dirname, buildFolder));
 app.engine('html', ejs.renderFile);
 app.use('/static', express.static(path.join(__dirname, `${buildFolder}/static`)));
 
-app.get('/api/questionnaires', () => blaiseApiClient.getQuestionnaires('gusty'));
+app.get('/api/questionnaires', async (_req: Request, res: Response<Questionnaire[]>) =>  {  
+  var questionnaires = await blaiseApiClient.getQuestionnaires('gusty');
+  return res.status(200).json(questionnaires);
+});
 
 app.get('*/', (_req: Request, res: Response) => {
   res.render('index.html');
