@@ -20,7 +20,8 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "typescript": "*",
-    "web-vitals": "^2.1.0"
+    "web-vitals": "^2.1.0",
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,10 +30,10 @@
     "eject": "react-scripts eject",
     "lint": "yarn eslint .",
     "build-server": "tsc --project tsconfig.server.json",
-    "run-server": "node dist/server/main.js",
+    "run-server": "node dist/main.js",
     "start-server": "yarn build-server && yarn run-server",
     "build-server-watch": "yarn build-server -w",
-    "run-server-watch": "nodemon dist/server/main.js",
+    "run-server-watch": "nodemon dist/main.js",
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
     "dev": "concurrently npm:start npm:start-server-watch"
   },

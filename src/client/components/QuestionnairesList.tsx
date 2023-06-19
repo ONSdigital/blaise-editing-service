@@ -1,4 +1,4 @@
-import Questionnaire from '../../shared/models/Questionnaire';
+import { Questionnaire } from 'blaise-api-node-client';
 
 interface QuestionnairesListProps {
   questionnaires: Questionnaire[];
@@ -16,6 +16,8 @@ export default function QuestionnairesList({ questionnaires }: QuestionnairesLis
         {questionnaires.map((questionnaire) => (
           <tr key={questionnaire.name}>
             <td>{questionnaire.name}</td>
+            <td>{questionnaire.serverParkName}</td>
+            <td>{questionnaire.dataRecordCount}</td>
           </tr>
         ))}
       </tbody>

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { GetQuestionnaires } from '../../shared/responses/GetQuestionnaires';
+import { Questionnaire } from 'blaise-api-node-client';
 
-export default async function getQuestionnaires(): Promise<GetQuestionnaires> {
+export default async function getQuestionnaires(): Promise<Questionnaire []> {
   const response = await axios.get('/api/questionnaires');
   return response.data;
 }
