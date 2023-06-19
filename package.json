@@ -12,6 +12,8 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "axios": "^1.4.0",
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.13.2",
     "concurrently": "^8.1.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
@@ -20,8 +22,7 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "typescript": "*",
-    "web-vitals": "^2.1.0",
-    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,7 +32,7 @@
     "lint": "yarn eslint .",
     "build-server": "tsc --project tsconfig.server.json",
     "run-server": "node dist/main.js",
-    "start-server": "yarn build-server && yarn run-server",
+    "start-server": "yarn build && yarn build-server && yarn run-server",
     "build-server-watch": "yarn build-server -w",
     "run-server-watch": "nodemon dist/main.js",
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
