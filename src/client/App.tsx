@@ -11,11 +11,6 @@ const divStyle = {
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="questionnaires" element={<Questionnaires />} />
-      </Routes>
-
       <Header
         title="Blaise Editing Service"
         navigationLinks={[
@@ -31,7 +26,12 @@ function App() {
           },
         ]}
       />
-      <div style={divStyle} className="ons-page__container ons-container" />
+      <div style={divStyle} className="ons-page__container ons-container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="questionnaires" element={<Questionnaires />} />
+        </Routes>
+      </div>
       <Footer />
     </>
   );

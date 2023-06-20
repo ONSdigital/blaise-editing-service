@@ -1,4 +1,5 @@
 import { Questionnaire } from 'blaise-api-node-client';
+import { ONSTable } from 'blaise-design-system-react-components';
 
 interface QuestionnairesListProps {
   questionnaires: Questionnaire[];
@@ -6,21 +7,23 @@ interface QuestionnairesListProps {
 
 export default function QuestionnairesList({ questionnaires }: QuestionnairesListProps) {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody>
+    <ONSTable
+      tableID="questionnaire-table"
+      columns={[
+        'Questionnaire name',
+        'Server park',
+        'Number of cases',
+      ]}
+    >
+      <>
         {questionnaires.map((questionnaire) => (
-          <tr key={questionnaire.name}>
-            <td>{questionnaire.name}</td>
-            <td>{questionnaire.serverParkName}</td>
-            <td>{questionnaire.dataRecordCount}</td>
+          <tr className="ons-table__row" data-testid="questionnaire-table-row">
+            <td className="ons-table__cell">{questionnaire.name}</td>
+            <td className="ons-table__cell">{questionnaire.serverParkName}</td>
+            <td className="ons-table__cell">{questionnaire.dataRecordCount}</td>
           </tr>
         ))}
-      </tbody>
-    </table>
+      </>
+    </ONSTable>
   );
 }
