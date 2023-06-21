@@ -15,7 +15,7 @@ export default function CasesList({ cases }: CasesListProps) {
       ]}
     >
       <>
-      {cases.map((questionnaireCase) => (
+        {cases.map((questionnaireCase) => (
           <tr className="ons-table__row" data-testid="case-table-row">
             <td className="ons-table__cell">{questionnaireCase.primaryKey}</td>
             <td className="ons-table__cell">{questionnaireCase.outcome}</td>

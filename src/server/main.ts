@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import BlaiseApiClient, { CaseStatus, Outcome, Questionnaire } from 'blaise-api-node-client';
+import BlaiseApiClient, { CaseStatus, Questionnaire } from 'blaise-api-node-client';
 import path from 'path';
 import ejs from 'ejs';
 import dotenv from 'dotenv';
@@ -22,20 +22,12 @@ app.get('/api/questionnaires', async (_req: Request, res: Response<Questionnaire
 });
 
 app.get('/api/cases', async (req: Request, res: Response<CaseStatus[]>) => {
-  let questionnaireName = req.query['questionnaireName'];
-  console.debug('Questionnaire Name= '+questionnaireName);
-  //const cases = await blaiseApiClient.getCaseStatus('gusty','LMS2101_AA1');
-  const cases = [
-    {'primaryKey':'123',
-      'outcome': Outcome.Completed
-    },
-    {'primaryKey':'456',
-      'outcome': Outcome.CompletedNudge
-    },
-    {'primaryKey':'789',
-      'outcome': Outcome.HardRefusal
-    }
-  ];
+  const { questionnaireName } = req.query;
+  if (typeof questionnaireName !== 'string') {
+    throw new Error('Questionnaire name has not been provided');
+  }
+
+  const cases = await blaiseApiClient.getCaseStatus('gusty', questionnaireName);
   return res.status(200).json(cases);
 });
 
