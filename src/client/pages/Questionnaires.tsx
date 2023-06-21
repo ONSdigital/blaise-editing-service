@@ -8,10 +8,8 @@ export default function Questionnaires() {
   const questionnaires = useAsyncRequest<Questionnaire []>(getQuestionnaires);
 
   return (
-    <div>
-      <AsyncContent content={questionnaires}>
-        {(loadedQuestionnaires) => <QuestionnairesList questionnaires={loadedQuestionnaires} />}
-      </AsyncContent>
-    </div>
+    <AsyncContent content={questionnaires}>
+      {(loadedQuestionnaires) => <QuestionnairesList questionnaires={loadedQuestionnaires} />}
+    </AsyncContent>
   );
 }

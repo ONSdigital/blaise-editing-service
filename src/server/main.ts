@@ -2,18 +2,19 @@ import express, { Request, Response } from 'express';
 import BlaiseApiClient, { Questionnaire } from 'blaise-api-node-client';
 import path from 'path';
 import ejs from 'ejs';
+import dotenv from 'dotenv';
+import { getConfiguration } from './config';
+
+dotenv.config();
 
 const app = express();
-const port = 5000;
-const blaiseUrl = 'http://localhost:5011';
-// where ever the react built package is
-const buildFolder = '../build';
-const blaiseApiClient = new BlaiseApiClient(blaiseUrl);
+const { BlaiseApiUrl, BuildFolder, Port } = getConfiguration();
+const blaiseApiClient = new BlaiseApiClient(BlaiseApiUrl);
 
 // treat the index.html as a template and substitute the values at runtime
-app.set('views', path.join(__dirname, buildFolder));
+app.set('views', path.join(__dirname, BuildFolder));
 app.engine('html', ejs.renderFile);
-app.use('/static', express.static(path.join(__dirname, `${buildFolder}/static`)));
+app.use('/static', express.static(path.join(__dirname, `${BuildFolder}/static`)));
 
 app.get('/api/questionnaires', async (_req: Request, res: Response<Questionnaire[]>) => {
   const questionnaires = await blaiseApiClient.getQuestionnaires('gusty');
@@ -24,6 +25,6 @@ app.get('*/', (_req: Request, res: Response) => {
   res.render('index.html');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(Port, () => {
+  console.log(`Example app listening on port ${Port}`);
 });

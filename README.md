@@ -18,6 +18,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - STEAL FROM OTHER REPOS
 
 
+## configuration
+Create a new .env file and add the following variables.
+
+| Variable               | Description                                                                                                                                                                                                                                                                       | Var Example          |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
+| PORT                   | Optional variable, specify the Port for express server to run on. If not passed in this is set as 5000 by default. | 5009                 |
+| BLAISE_API_URL         | Url that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. If not passed in this is set to 'http://localhost:5011' by default.| http://localhost:5011                                                                                                     
+
+The `.env` file should be setup as below
+
+```.env
+PORT='5009'
+BLAISE_API_URL='http://localhost:5011'
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
