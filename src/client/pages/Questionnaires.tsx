@@ -1,5 +1,5 @@
 import { Questionnaire } from 'blaise-api-node-client';
-import getQuestionnaires from '../api/questionnaires';
+import { getQuestionnaires } from '../api/questionnaires';
 import QuestionnairesList from '../components/QuestionnairesList';
 import AsyncContent from '../components/AsyncContent';
 import { useAsyncRequest } from '../hooks/useAsyncRequest';

@@ -3,6 +3,7 @@ import './App.css';
 import { Footer, Header } from 'blaise-design-system-react-components';
 import Home from './pages/Home';
 import Questionnaires from './pages/Questionnaires';
+import Cases from './pages/Cases';
 
 const divStyle = {
   minHeight: 'calc(67vh)',
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="questionnaires" element={<Questionnaires />} />
+          <Route path="cases/:questionnaireName" element={<Cases />} />
         </Routes>
       </div>
       <Footer />
