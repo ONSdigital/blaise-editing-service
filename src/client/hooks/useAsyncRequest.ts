@@ -48,3 +48,16 @@ export function useAsyncRequest<T>(request: () => Promise<T>) {
 
   return state;
 }
+
+export function useAsyncRequestWithParams<T>(request:(param: string) => Promise<T>, param: string) {
+  const [state, setState] = useState<AsyncState<T>>(loading());
+
+  useEffect(() => {
+    setState(loading());
+    request(param)
+      .then((response) => setState(succeeded(response)))
+      .catch((error) => setState(errored(error.message)));
+  }, [request, param]);
+
+  return state;
+}
