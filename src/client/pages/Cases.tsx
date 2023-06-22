@@ -10,7 +10,7 @@ function DisplayCases(questionnaireName:string) {
 
   return (
     <AsyncContent content={cases}>
-      {(loadedCases) => <CasesList cases={loadedCases} questionnaireName />}
+      {(loadedCases) => <CasesList cases={loadedCases} questionnaireName={questionnaireName} />}
     </AsyncContent>
   );
 }
