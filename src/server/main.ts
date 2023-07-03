@@ -1,27 +1,25 @@
 import express, { Request, Response } from 'express';
-import BlaiseApiClient, { CaseStatus, Questionnaire } from 'blaise-api-node-client';
+import BlaiseApiClient, { CaseStatus } from 'blaise-api-node-client';
 import path from 'path';
 import ejs from 'ejs';
 import dotenv from 'dotenv';
 import { getConfiguration } from './config';
+import questionnaireRouter from './routers/questionnaireRouter';
 
 dotenv.config();
 
-const app = express();
+const server = express();
 const { BlaiseApiUrl, BuildFolder, Port } = getConfiguration();
 const blaiseApiClient = new BlaiseApiClient(BlaiseApiUrl);
 
 // treat the index.html as a template and substitute the values at runtime
-app.set('views', path.join(__dirname, BuildFolder));
-app.engine('html', ejs.renderFile);
-app.use('/static', express.static(path.join(__dirname, `${BuildFolder}/static`)));
+server.set('views', path.join(__dirname, BuildFolder));
+server.engine('html', ejs.renderFile);
+server.use('/static', express.static(path.join(__dirname, `${BuildFolder}/static`)));
 
-app.get('/api/questionnaires', async (_req: Request, res: Response<Questionnaire[]>) => {
-  const questionnaires = await blaiseApiClient.getQuestionnaires('gusty');
-  return res.status(200).json(questionnaires);
-});
+server.use("/", questionnaireRouter)
 
-app.get('/api/cases', async (req: Request, res: Response<CaseStatus[]>) => {
+server.get('/api/cases', async (req: Request, res: Response<CaseStatus[]>) => {
   const { questionnaireName } = req.query;
   if (typeof questionnaireName !== 'string') {
     throw new Error('Questionnaire name has not been provided');
@@ -31,10 +29,10 @@ app.get('/api/cases', async (req: Request, res: Response<CaseStatus[]>) => {
   return res.status(200).json(cases);
 });
 
-app.get('*/', (_req: Request, res: Response) => {
+server.get('*/', (_req: Request, res: Response) => {
   res.render('index.html');
 });
 
-app.listen(Port, () => {
+server.listen(Port, () => {
   console.log(`Example app listening on port ${Port}`);
 });
