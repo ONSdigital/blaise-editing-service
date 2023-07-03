@@ -1,6 +1,6 @@
 import BlaiseApiClient from 'blaise-api-node-client';
 import express, { Router } from 'express';
-import QuestionnaireHandler from '../handlers/QuestionnaireHandler';
+import QuestionnaireHandler from '../handlers/questionnaireHandler';
 
 export default function questionnaireRouter(blaiseApiClient: BlaiseApiClient): Router {
   const router = express.Router();
