@@ -7,6 +7,6 @@ export async function getQuestionnaires(): Promise<Questionnaire[]> {
 }
 
 export async function getCaseStatuses(questionnaireName: string): Promise<CaseStatus[]> {
-  const response = await axios.get('/api/cases/', { params: { questionnaireName } });
+  const response = await axios.get(`/api/questionnaires/${questionnaireName}/cases/`);
   return response.data;
 }

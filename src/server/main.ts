@@ -1,10 +1,11 @@
 import express, { Request, Response } from 'express';
-import BlaiseApiClient, { CaseStatus } from 'blaise-api-node-client';
+import BlaiseApiClient from 'blaise-api-node-client';
 import path from 'path';
 import ejs from 'ejs';
 import dotenv from 'dotenv';
 import { getConfiguration } from './config';
 import questionnaireRouter from './routers/questionnaireRouter';
+import caseRouter from './routers/caseRouter';
 
 dotenv.config();
 
@@ -18,19 +19,10 @@ server.engine('html', ejs.renderFile);
 server.use('/static', express.static(path.join(__dirname, `${BuildFolder}/static`)));
 
 server.use('/', questionnaireRouter(blaiseApiClient));
+server.use('/', caseRouter(blaiseApiClient));
 
-server.get('/api/cases', async (req: Request, res: Response<CaseStatus[]>) => {
-  const { questionnaireName } = req.query;
-  if (typeof questionnaireName !== 'string') {
-    throw new Error('Questionnaire name has not been provided');
-  }
-
-  const cases = await blaiseApiClient.getCaseStatus('gusty', questionnaireName);
-  return res.status(200).json(cases);
-});
-
-server.get('*/', (_req: Request, res: Response) => {
-  res.render('index.html');
+server.get('*', (_request: Request, response: Response) => {
+  response.render('index.html');
 });
 
 server.listen(Port, () => {

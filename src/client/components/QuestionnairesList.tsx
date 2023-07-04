@@ -19,7 +19,7 @@ export default function QuestionnairesList({ questionnaires }: QuestionnairesLis
       <>
         {questionnaires.map((questionnaire) => (
           <tr className="ons-table__row" data-testid="questionnaire-table-row">
-            <td className="ons-table__cell"><Link to={`/cases/${questionnaire.name}`}>{questionnaire.name}</Link></td>
+            <td className="ons-table__cell"><Link to={`/questionnaires/${questionnaire.name}/cases`}>{questionnaire.name}</Link></td>
             <td className="ons-table__cell">{questionnaire.serverParkName}</td>
             <td className="ons-table__cell">{questionnaire.dataRecordCount}</td>
           </tr>
