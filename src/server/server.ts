@@ -6,9 +6,8 @@ import { Config } from "./config";
 import caseRouter from "./routers/caseRouter";
 import questionnaireRouter from "./routers/questionnaireRouter";
 
-export function nodeServer(config: Config): Express {
+export function nodeServer(config: Config, blaiseApiClient :BlaiseApiClient): Express {
   const server = express();
-  const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
   // treat the index.html as a template and substitute the values at runtime
   server.set('views', path.join(__dirname, config.BuildFolder));
