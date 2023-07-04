@@ -1,12 +1,12 @@
 import { CaseStatus } from 'blaise-api-node-client';
 import { useParams } from 'react-router-dom';
-import { getCaseStatuses } from '../api/questionnaires';
+import { getStatusOfCases } from '../api/blaiseApi';
 import AsyncContent from '../components/AsyncContent';
 import CasesList from '../components/CasesList';
 import { useAsyncRequestWithParams } from '../hooks/useAsyncRequest';
 
 function DisplayCases(questionnaireName:string) {
-  const cases = useAsyncRequestWithParams<CaseStatus[]>(getCaseStatuses, questionnaireName);
+  const cases = useAsyncRequestWithParams<CaseStatus[]>(getStatusOfCases, questionnaireName);
 
   return (
     <AsyncContent content={cases}>
