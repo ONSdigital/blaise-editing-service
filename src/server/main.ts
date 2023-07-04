@@ -17,7 +17,7 @@ server.set('views', path.join(__dirname, BuildFolder));
 server.engine('html', ejs.renderFile);
 server.use('/static', express.static(path.join(__dirname, `${BuildFolder}/static`)));
 
-server.use("/", questionnaireRouter(blaiseApiClient))
+server.use('/', questionnaireRouter(blaiseApiClient));
 
 server.get('/api/cases', async (req: Request, res: Response<CaseStatus[]>) => {
   const { questionnaireName } = req.query;
