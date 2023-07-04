@@ -4,7 +4,7 @@ export interface Config {
   Port: number;
 }
 
-export function getConfiguration(): Config {
+export default function getConfiguration(): Config {
   const {
     PORT,
     BLAISE_API_URL,
