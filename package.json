@@ -5,10 +5,9 @@
   "target": "esnext",
   "module": "esnext",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test-react": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start-react": "react-scripts start",
+    "build-react": "react-scripts build",
+    "eject-react": "react-scripts eject",
     "test": "jest --coverage --watchAll=false",
     "lint": "yarn eslint .",
     "build-server": "tsc --project tsconfig.server.json",
@@ -54,6 +53,7 @@
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "jest-environment-jsdom": "^29.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
@@ -79,6 +79,6 @@
     "nodemon": "^2.0.22",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
-    "typemoq": "^2.1.0"    
+    "typemoq": "^2.1.0"
   }
 }
