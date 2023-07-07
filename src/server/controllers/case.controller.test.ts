@@ -1,5 +1,5 @@
 import supertest, { Response } from 'supertest';
-import BlaiseClient, { Questionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
+import BlaiseClient, { CaseStatus } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import { Config } from '../config';
 import nodeServer from '../server';
@@ -19,19 +19,20 @@ const server = nodeServer(configMock.object, blaiseApiClientMock.object);
 // supertest will handle all http calls
 const sut = supertest(server);
 
-describe('Get questionnaire tests', () => {
-  it('It should return a 200 response with an expected list of questonnaires', async () => {
+describe('Get case tests', () => {
+  it('It should return a 200 response with an expected list of cases', async () => {
     // arrange
-    // mock blaise client to return a list of questionnaires
-    const questionnaireList: Questionnaire[] = QuestionnaireListMockObject;
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires('gusty')).returns(async () => questionnaireList);
+    // mock blaise client to return a list of cases
+    const questionnaire: string = 'TEST111A';
+    const caseList: CaseStatus[] = []; // sort mock cases
+    blaiseApiClientMock.setup((client) => client.getCaseStatus('gusty', questionnaire)).returns(async () => caseList);
 
     // act
-    const response: Response = await sut.get('/api/questionnaires');
+    const response: Response = await sut.get(`/api/questionnaires/${questionnaire}/cases/status`);
 
     // assert
     expect(response.status).toEqual(200);
-    expect(response.body).toEqual(questionnaireList);
-    blaiseApiClientMock.verify((client) => client.getQuestionnaires('gusty'), Times.once());
+    expect(response.body).toEqual(caseList);
+    blaiseApiClientMock.verify((client) => client.getCaseStatus('gusty', questionnaire), Times.once());
   });
 });
