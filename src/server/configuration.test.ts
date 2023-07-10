@@ -28,6 +28,7 @@ describe('Configuration file tests', () => {
 
     it("should throw an error if the BLAISE_API_URL does not exist in the environment variables", () => { 
         // act && assert
-        expect(new Configuration()).toThrowError()
+
+        expect(() => {new Configuration();}).toThrowError()
     });    
 });

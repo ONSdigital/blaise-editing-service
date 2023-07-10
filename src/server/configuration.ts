@@ -10,7 +10,7 @@ export default class Configuration implements IConfiguration {
           } = process.env;
 
           if (BLAISE_API_URL === undefined){
-            throw new Error("message");
+            throw new Error();
           }
 
           this.BlaiseApiUrl = BLAISE_API_URL;
