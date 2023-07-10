@@ -4183,9 +4183,9 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#make-fieldperiod-opt":
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#BL5FRS-48":
   version "1.0.0"
-  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#4078afcbccc71cae6cb37dc4750c91364bf19b66"
+  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#60756e3c8f3ed92f363333640b62e7bb5c585832"
   dependencies:
     "@babel/preset-env" "^7.14.7"
     axios "^0.21.1"
