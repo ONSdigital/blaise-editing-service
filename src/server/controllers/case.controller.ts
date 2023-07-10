@@ -1,4 +1,4 @@
-import BlaiseClient, { CaseStatus } from 'blaise-api-node-client';
+import BlaiseClient, { ICaseStatus } from 'blaise-api-node-client';
 import express, { Request, Response, Router } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
 
@@ -15,7 +15,7 @@ export default class CaseController implements IControllerInterface {
     return router.get('/api/questionnaires/:questionnaireName/cases/status', this.getStatusOfCases);
   }
 
-  async getStatusOfCases(request: Request, response: Response<CaseStatus[]>) {
+  async getStatusOfCases(request: Request, response: Response<ICaseStatus[]>) {
     const { questionnaireName } = request.params;
 
     if (typeof questionnaireName !== 'string') {

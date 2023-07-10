@@ -1,5 +1,5 @@
 import supertest, { Response } from 'supertest';
-import BlaiseClient, { Questionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
+import BlaiseClient, { IQuestionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import { Config } from '../config';
 import nodeServer from '../server';
@@ -23,7 +23,7 @@ describe('Get questionnaire tests', () => {
   it('It should return a 200 response with an expected list of questonnaires', async () => {
     // arrange
     // mock blaise client to return a list of questionnaires
-    const questionnaireList: Questionnaire[] = QuestionnaireListMockObject;
+    const questionnaireList: IQuestionnaire[] = QuestionnaireListMockObject;
     blaiseApiClientMock.setup((client) => client.getQuestionnaires('gusty')).returns(async () => questionnaireList);
 
     // act

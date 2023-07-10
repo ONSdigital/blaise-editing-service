@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { CaseStatus, Questionnaire } from 'blaise-api-node-client';
+import { ICaseStatus, IQuestionnaire } from 'blaise-api-node-client';
 
-export async function getQuestionnaires(): Promise<Questionnaire[]> {
+export async function getQuestionnaires(): Promise<IQuestionnaire[]> {
   const response = await axios.get('/api/questionnaires');
   return response.data;
 }
 
-export async function getStatusOfCases(questionnaireName: string): Promise<CaseStatus[]> {
+export async function getStatusOfCases(questionnaireName: string): Promise<ICaseStatus[]> {
   const response = await axios.get(`/api/questionnaires/${questionnaireName}/cases/status`);
   return response.data;
 }

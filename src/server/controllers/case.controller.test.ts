@@ -1,5 +1,5 @@
 import supertest, { Response } from 'supertest';
-import BlaiseClient, { CaseStatus } from 'blaise-api-node-client';
+import BlaiseClient, { ICaseStatus, CaseStatusListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import { Config } from '../config';
 import nodeServer from '../server';
@@ -24,7 +24,7 @@ describe('Get case tests', () => {
     // arrange
     // mock blaise client to return a list of cases
     const questionnaire: string = 'TEST111A';
-    const caseList: CaseStatus[] = []; // sort mock cases
+    const caseList: ICaseStatus[] = CaseStatusListMockObject;
     blaiseApiClientMock.setup((client) => client.getCaseStatus('gusty', questionnaire)).returns(async () => caseList);
 
     // act
