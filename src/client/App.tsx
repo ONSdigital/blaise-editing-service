@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="questionnaires" element={<Questionnaires />} />
-          <Route path="cases/:questionnaireName" element={<Cases />} />
+          <Route path="questionnaires/:questionnaireName/cases/" element={<Cases />} />
         </Routes>
       </div>
       <Footer />

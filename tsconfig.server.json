@@ -29,6 +29,12 @@
       "jsx": "react-jsx"
     },
     "include": [
-      "src/server"  ]
+      "src/server"  
+    ],
+    "exclude": [
+      "node_modules",
+      "server/**/*.test.js",
+      "**/*.test.ts"
+    ]
   }
   

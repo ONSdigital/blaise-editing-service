@@ -1,9 +1,9 @@
-import { CaseStatus } from 'blaise-api-node-client';
+import { ICaseStatus } from 'blaise-api-node-client';
 import { ONSTable } from 'blaise-design-system-react-components';
 import { Link } from 'react-router-dom';
 
 interface CasesListProps {
-  cases: CaseStatus[];
+  cases: ICaseStatus[];
   questionnaireName: string;
 }
 
