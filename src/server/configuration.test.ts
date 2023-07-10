@@ -32,9 +32,9 @@ describe('Configuration file tests', () => {
         expect(() => {new Configuration();}).toThrowError('BLAISE_API_URL not found in environment variables')
     });   
 
-    it("should throw an error if the BLAISE_API_URL is empty", () => { 
+    it.each(['', ' ', '  '])("should throw an error if the BLAISE_API_URL is empty", (value) => { 
         // arrange
-        process.env['BLAISE_API_URL'] = ' ';
+        process.env['BLAISE_API_URL'] = value;
         
         // act && assert
         expect(() => {new Configuration();}).toThrowError('BLAISE_API_URL is an empty string')
