@@ -5,6 +5,8 @@ export default class Configuration implements IConfiguration {
     BlaiseApiUrl: string;
     BuildFolder: string;
     Port: number;
+    //SERVER_PARK
+    //VM_EXTERNAL_WEB_URL
 
     constructor() {
         const {
