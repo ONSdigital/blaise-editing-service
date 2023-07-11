@@ -1,11 +1,11 @@
 import listEndpoints, { Endpoint } from 'express-list-endpoints';
 import BlaiseApiClient from 'blaise-api-node-client';
 import { IMock, Mock } from 'typemoq';
-import { Config } from './config';
 import NodeServer from './server';
+import { IConfiguration } from './interfaces/configuration.interface';
 
 // mock config
-const configMock:IMock<Config> = Mock.ofType<Config>();
+const configMock:IMock<IConfiguration> = Mock.ofType<IConfiguration>();
 configMock.setup((config) => config.BuildFolder).returns(() => 'dist');
 
 // mock blaise api client

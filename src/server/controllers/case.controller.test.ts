@@ -1,11 +1,11 @@
 import supertest, { Response } from 'supertest';
 import BlaiseClient, { ICaseStatus, CaseStatusListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
-import { Config } from '../config';
 import nodeServer from '../server';
+import { IConfiguration } from '../interfaces/configuration.interface';
 
 // mock config
-const configMock:IMock<Config> = Mock.ofType<Config>();
+const configMock:IMock<IConfiguration> = Mock.ofType<IConfiguration>();
 configMock.setup((config) => config.BuildFolder).returns(() => 'dist');
 configMock.setup((config) => config.Port).returns(() => 5000);
 configMock.setup((config) => config.BlaiseApiUrl).returns(() => 'localhost');
