@@ -33,12 +33,3 @@ export default class Configuration implements IConfiguration {
           this.Port = +PORT
     }
 }
-
-/* export class TestConfiguration implements IConfiguration {
-
-    BlaiseApiUrl: string;
-
-    constructor(blaiseApiUrl: string) {
-        this.BlaiseApiUrl = blaiseApiUrl;
-    }
-} */
