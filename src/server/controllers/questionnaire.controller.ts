@@ -1,11 +1,15 @@
 import BlaiseClient, { IQuestionnaire } from 'blaise-api-node-client';
 import express, { Request, Response } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
+import { IConfiguration } from '../interfaces/configuration.interface';
 
 export default class QuestionnaireController implements IControllerInterface {
+  config: IConfiguration;
+
   blaiseApiClient: BlaiseClient;
 
-  constructor(blaiseApiClient: BlaiseClient) {
+  constructor(config: IConfiguration, blaiseApiClient: BlaiseClient) {
+    this.config = config;
     this.blaiseApiClient = blaiseApiClient;
     this.getQuestionnaires = this.getQuestionnaires.bind(this);
   }
@@ -16,7 +20,7 @@ export default class QuestionnaireController implements IControllerInterface {
   }
 
   async getQuestionnaires(_request: Request, response: Response<IQuestionnaire[]>) {
-    const questionnaires = await this.blaiseApiClient.getQuestionnaires('gusty');
+    const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
     return response.status(200).json(questionnaires);
   }
 }

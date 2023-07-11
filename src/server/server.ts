@@ -15,11 +15,11 @@ export default function nodeServer(config: IConfiguration, blaiseApiClient :Blai
   server.use('/static', express.static(path.join(__dirname, `${config.BuildFolder}/static`)));
 
   // questionnaire routing
-  const questionnaireController = new QuestionnaireController(blaiseApiClient);
+  const questionnaireController = new QuestionnaireController(config, blaiseApiClient);
   server.use('/', questionnaireController.getRoutes());
 
   // case routing
-  const caseController = new CaseController(blaiseApiClient);
+  const caseController = new CaseController(config, blaiseApiClient);
   server.use('/', caseController.getRoutes());
 
   // catch all other routes renders react pages

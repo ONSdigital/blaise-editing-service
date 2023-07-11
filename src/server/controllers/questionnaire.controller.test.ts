@@ -9,6 +9,7 @@ const configMock:IMock<IConfiguration> = Mock.ofType<IConfiguration>();
 configMock.setup((config) => config.BuildFolder).returns(() => 'dist');
 configMock.setup((config) => config.Port).returns(() => 5000);
 configMock.setup((config) => config.BlaiseApiUrl).returns(() => 'localhost');
+configMock.setup((config) => config.ServerPark).returns(() => 'gusty');
 
 // mock blaise api client
 const blaiseApiClientMock: IMock<BlaiseClient> = Mock.ofType(BlaiseClient);

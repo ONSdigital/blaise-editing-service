@@ -1,11 +1,15 @@
 import BlaiseClient, { ICaseStatus } from 'blaise-api-node-client';
 import express, { Request, Response, Router } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
+import { IConfiguration } from '../interfaces/configuration.interface';
 
 export default class CaseController implements IControllerInterface {
+  config: IConfiguration;
+
   blaiseApiClient: BlaiseClient;
 
-  constructor(blaiseApiClient: BlaiseClient) {
+  constructor(config: IConfiguration, blaiseApiClient: BlaiseClient) {
+    this.config = config;
     this.blaiseApiClient = blaiseApiClient;
     this.getStatusOfCases = this.getStatusOfCases.bind(this);
   }
@@ -22,7 +26,7 @@ export default class CaseController implements IControllerInterface {
       throw new Error('Questionnaire name has not been provided');
     }
 
-    const cases = await this.blaiseApiClient.getCaseStatus('gusty', questionnaireName);
+    const cases = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, questionnaireName);
 
     return response.status(200).json(cases);
   }
