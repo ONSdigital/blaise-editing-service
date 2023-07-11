@@ -10,7 +10,6 @@ export default class Configuration implements IConfiguration {
   ServerPark: string;
 
   ExternalWebUrl: string;
-  // VM_EXTERNAL_WEB_URL
 
   constructor() {
     const {
@@ -20,42 +19,26 @@ export default class Configuration implements IConfiguration {
       VM_EXTERNAL_WEB_URL,
     } = process.env;
 
-    if (BLAISE_API_URL === undefined) {
-      throw new ReferenceError('BLAISE_API_URL was not found in environment variables');
-    }
-
-    if (BLAISE_API_URL.trim() === '') {
-      throw new Error('BLAISE_API_URL is set to an empty string');
-    }
-
-    if (PORT === undefined) {
-      throw new ReferenceError('PORT was not found in environment variables');
-    }
-
-    if (Number.isNaN(+PORT) || +PORT === 0) {
-      throw new TypeError('PORT is not set to a valid number');
-    }
-
-    if (SERVER_PARK === undefined) {
-      throw new ReferenceError('SERVER_PARK was not found in environment variables');
-    }
-
-    if (SERVER_PARK.trim() === '') {
-      throw new Error('SERVER_PARK is set to an empty string');
-    }
-
-    if (VM_EXTERNAL_WEB_URL === undefined) {
-      throw new ReferenceError('VM_EXTERNAL_WEB_URL was not found in environment variables');
-    }
-
-    if (VM_EXTERNAL_WEB_URL.trim() === '') {
-      throw new Error('VM_EXTERNAL_WEB_URL is set to an empty string');
-    }
-
-    this.BlaiseApiUrl = BLAISE_API_URL;
+    this.BlaiseApiUrl = Configuration.getStringFromVariable(BLAISE_API_URL, 'BLAISE_API_URL');
     this.BuildFolder = '../build';
-    this.Port = +PORT;
-    this.ServerPark = SERVER_PARK;
-    this.ExternalWebUrl = VM_EXTERNAL_WEB_URL;
+    this.Port = Configuration.getNumberFromVariable(PORT, 'PORT');
+    this.ServerPark = Configuration.getStringFromVariable(SERVER_PARK, 'SERVER_PARK');
+    this.ExternalWebUrl = Configuration.getStringFromVariable(VM_EXTERNAL_WEB_URL, 'VM_EXTERNAL_WEB_URL');
+  }
+
+  static getStringFromVariable(environmentVariable: string | undefined, variableName: string) {
+    if (environmentVariable === undefined || environmentVariable.trim() === '') {
+      throw ReferenceError(`${variableName} has not been set or is set to an empty string`);
+    }
+    return environmentVariable;
+  }
+
+  static getNumberFromVariable(environmentVariable: string | undefined, variableName: string) {
+    const value = Configuration.getStringFromVariable(environmentVariable, variableName);
+
+    if (Number.isNaN(+value)) {
+      throw new TypeError(`${variableName} is not set to a valid number`);
+    }
+    return +value;
   }
 }

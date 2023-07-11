@@ -33,35 +33,23 @@ describe('Configuration file tests', () => {
     expect(sut.ExternalWebUrl).toEqual(externalWebUrl);
   });
 
-  it('should throw an error if the BLAISE_API_URL does not exist in the environment variables', () => {
-    // arrange
-    process.env['BLAISE_API_URL'] = undefined;
-    const configuration = () => { new Configuration(); };
-
-    // act && assert
-    expect(configuration).toThrowError(ReferenceError);
-    expect(configuration).toThrowError('BLAISE_API_URL was not found in environment variables');
-  });
-
-  it.each(['', ' ', '  '])('should throw an error if the BLAISE_API_URL is empty', (value) => {
+  it.each([undefined, '', ' ', '  '])('should throw an error if the BLAISE_API_URL is empty or does not exist', (value) => {
     // arrange
     process.env['BLAISE_API_URL'] = value;
 
     // act && assert
-    expect(() => { new Configuration(); }).toThrowError('BLAISE_API_URL is set to an empty string');
+    expect(() => { new Configuration(); }).toThrowError('BLAISE_API_URL has not been set or is set to an empty string');
   });
 
-  it('should throw an error if the PORT does not exist in the environment variables', () => {
+  it.each([undefined, '', ' ', '  '])('should throw an error if the PORT is empty or does not exist', (value) => {
     // arrange
-    process.env['PORT'] = undefined;
-    const configuration = () => { new Configuration(); };
+    process.env['PORT'] = value;
 
     // act && assert
-    expect(configuration).toThrowError(ReferenceError);
-    expect(configuration).toThrowError('PORT was not found in environment variables');
+    expect(() => { new Configuration(); }).toThrowError('PORT has not been set or is set to an empty string');
   });
 
-  it.each(['', 'NotNumber', 'eight'])('should throw an error if the PORT is not number', (value) => {
+  it.each(['NotNumber', 'eight'])('should throw an error if the PORT is not number', (value) => {
     // arrange
     process.env['PORT'] = value;
     const configuration = () => { new Configuration(); };
@@ -71,41 +59,21 @@ describe('Configuration file tests', () => {
     expect(configuration).toThrowError('PORT is not set to a valid number');
   });
 
-  it('should throw an error if the SERVER_PARK does not exist in the environment variables', () => {
-    // arrange
-    process.env['SERVER_PARK'] = undefined;
-    const configuration = () => { new Configuration(); };
-
-    // act && assert
-    expect(configuration).toThrowError(ReferenceError);
-    expect(configuration).toThrowError('SERVER_PARK was not found in environment variables');
-  });
-
-  it.each(['', '  ', '   '])('should throw an error if SERVER_PARK is empty', (value) => {
+  it.each([undefined, '', '  ', '   '])('should throw an error if SERVER_PARK is empty or does not exist', (value) => {
     // arrange
     process.env['SERVER_PARK'] = value;
     const configuration = () => { new Configuration(); };
 
     // act && assert
-    expect(configuration).toThrowError('SERVER_PARK is set to an empty string');
+    expect(configuration).toThrowError('SERVER_PARK has not been set or is set to an empty string');
   });
 
-  it('should throw an error if the VM_EXTERNAL_WEB_URL does not exist in the environment variables', () => {
-    // arrange
-    process.env['VM_EXTERNAL_WEB_URL'] = undefined;
-    const configuration = () => { new Configuration(); };
-
-    // act && assert
-    expect(configuration).toThrowError(ReferenceError);
-    expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL was not found in environment variables');
-  });
-
-  it.each(['', '  ', '   '])('should throw an error if VM_EXTERNAL_WEB_URL is empty', (value) => {
+  it.each([undefined, '', '  ', '   '])('should throw an error if VM_EXTERNAL_WEB_URL is empty or does not exist', (value) => {
     // arrange
     process.env['VM_EXTERNAL_WEB_URL'] = value;
     const configuration = () => { new Configuration(); };
 
     // act && assert
-    expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL is set to an empty string');
+    expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL has not been set or is set to an empty string');
   });
 });
