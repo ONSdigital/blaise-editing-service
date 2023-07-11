@@ -8,17 +8,11 @@ describe('Configuration file tests', () => {
     const port = 5000;
 
     beforeEach(() => {
-        jest.resetModules() // Most important - it clears the cache
         process.env['BLAISE_API_URL'] = blaiseApiUrl
         process.env['PORT'] = port.toString()
       });
 
     afterEach(() => {
-        process.env = {...emptyEnv};
-    })
-
-    // ensure other test files are not pullted with environment variable setup  
-    afterAll(() => {
         process.env = {...emptyEnv};
     })
 
