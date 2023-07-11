@@ -13,7 +13,7 @@ export default class Configuration implements IConfiguration {
           } = process.env;
 
           if (BLAISE_API_URL === undefined){
-            throw new ReferenceError('BLAISE_API_URL not found in environment variables');
+            throw new ReferenceError('BLAISE_API_URL was not found in environment variables');
           }
 
           if (BLAISE_API_URL.trim() === ''){
@@ -21,11 +21,11 @@ export default class Configuration implements IConfiguration {
           }
 
           if (PORT === undefined){
-            throw new ReferenceError('PORT not found in environment variables');
+            throw new ReferenceError('PORT was not found in environment variables');
           }
 
           if (isNaN(+PORT) || +PORT === 0){
-            throw new TypeError('PORT is not a valid number');
+            throw new TypeError('PORT is not set to a valid number');
           }
 
           this.BlaiseApiUrl = BLAISE_API_URL;

@@ -33,7 +33,7 @@ describe('Configuration file tests', () => {
         
         // act && assert
         expect(configuration).toThrowError(ReferenceError)
-        expect(configuration).toThrowError('BLAISE_API_URL not found in environment variables')
+        expect(configuration).toThrowError('BLAISE_API_URL was not found in environment variables')
     });   
 
     it.each(['', ' ', '  '])("should throw an error if the BLAISE_API_URL is empty", (value) => { 
@@ -51,16 +51,16 @@ describe('Configuration file tests', () => {
 
         // act && assert
         expect(configuration).toThrowError(ReferenceError)
-        expect(configuration).toThrowError('PORT not found in environment variables')
+        expect(configuration).toThrowError('PORT was not found in environment variables')
     });
     
-    it.each(['', 'NotNumber', 'eight'])("should throw an error if the PORT not number", (value) => { 
+    it.each(['', 'NotNumber', 'eight'])("should throw an error if the PORT is not number", (value) => { 
         // arrange
         process.env['PORT'] = value;
         const configuration = () => {new Configuration();}
         
         // act && assert
         expect(configuration).toThrowError(TypeError)
-        expect(configuration).toThrowError('PORT is not a valid number')
+        expect(configuration).toThrowError('PORT is not set to a valid number')
     });
 });
