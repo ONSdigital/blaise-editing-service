@@ -2,20 +2,16 @@ import supertest, { Response } from 'supertest';
 import BlaiseClient, { ICaseStatus, CaseStatusListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import nodeServer from '../server';
-import { IConfiguration } from '../interfaces/configuration.interface';
+import FakeConfiguration from '../configuration/configuration.fake';
 
-// mock config
-const configMock:IMock<IConfiguration> = Mock.ofType<IConfiguration>();
-configMock.setup((config) => config.BuildFolder).returns(() => 'dist');
-configMock.setup((config) => config.Port).returns(() => 5000);
-configMock.setup((config) => config.BlaiseApiUrl).returns(() => 'localhost');
-configMock.setup((config) => config.ServerPark).returns(() => 'gusty');
+// create fake config
+const configFake = new FakeConfiguration('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com');
 
 // mock blaise api client
 const blaiseApiClientMock: IMock<BlaiseClient> = Mock.ofType(BlaiseClient);
 
 // need to test the endpoints through the express server
-const server = nodeServer(configMock.object, blaiseApiClientMock.object);
+const server = nodeServer(configFake, blaiseApiClientMock.object);
 
 // supertest will handle all http calls
 const sut = supertest(server);

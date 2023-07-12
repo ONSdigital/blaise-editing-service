@@ -27,7 +27,8 @@
   ], 
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "max-len": ["error", { "code": 150 }]
   },
   "ignorePatterns": [".eslintrc.js", "node_modules/*","dist/*","build/*","coverage/*"]
 }
