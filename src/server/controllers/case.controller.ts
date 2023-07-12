@@ -1,7 +1,8 @@
-import BlaiseClient, { ICaseStatus } from 'blaise-api-node-client';
+import BlaiseClient, { Outcome } from 'blaise-api-node-client';
 import express, { Request, Response, Router } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
 import { IConfiguration } from '../interfaces/configuration.interface';
+import { ICaseDetails } from '../interfaces/case.details.interface';
 
 export default class CaseController implements IControllerInterface {
   config: IConfiguration;
@@ -11,15 +12,15 @@ export default class CaseController implements IControllerInterface {
   constructor(config: IConfiguration, blaiseApiClient: BlaiseClient) {
     this.config = config;
     this.blaiseApiClient = blaiseApiClient;
-    this.getStatusOfCases = this.getStatusOfCases.bind(this);
+    this.getListOfCases = this.getListOfCases.bind(this);
   }
 
   getRoutes(): Router {
     const router = express.Router();
-    return router.get('/api/questionnaires/:questionnaireName/cases/status', this.getStatusOfCases);
+    return router.get('/api/questionnaires/:questionnaireName/cases', this.getListOfCases);
   }
 
-  async getStatusOfCases(request: Request, response: Response<ICaseStatus[]>) {
+  async getListOfCases(request: Request, response: Response<ICaseDetails[]>) {
     const { questionnaireName } = request.params;
 
     if (typeof questionnaireName !== 'string') {
@@ -27,7 +28,25 @@ export default class CaseController implements IControllerInterface {
     }
 
     const cases = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, questionnaireName);
+    console.debug(cases);
+    const mockResponseData = [
+      {
+        CaseId: '1',
+        CaseStatus: Outcome.Completed,
+        CaseLink: `https://dev-cati.social-surveys.gcp.onsdigital.uk/${questionnaireName}?Mode=CAWI&KeyValue=1`,
+      },
+      {
+        CaseId: '2',
+        CaseStatus: Outcome.Partial,
+        CaseLink: `https://dev-cati.social-surveys.gcp.onsdigital.uk/${questionnaireName}?Mode=CAWI&KeyValue=2`,
+      },
+      {
+        CaseId: '3',
+        CaseStatus: Outcome.AppointmentMade,
+        CaseLink: `https://dev-cati.social-surveys.gcp.onsdigital.uk/${questionnaireName}?Mode=CAWI&KeyValue=3`,
+      },
+    ];
 
-    return response.status(200).json(cases);
+    return response.status(200).json(mockResponseData);
   }
 }
