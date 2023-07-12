@@ -6,7 +6,7 @@ import QuestionnaireController from './controllers/questionnaire.controller';
 import CaseController from './controllers/case.controller';
 import { IConfiguration } from './interfaces/configuration.interface';
 
-export default function nodeServer(config: IConfiguration, blaiseApiClient :BlaiseClient): Express {
+export default function nodeServer(config: IConfiguration, blaiseApiClient: BlaiseClient): Express {
   const server = express();
 
   // treat the index.html as a template and substitute the values at runtime
