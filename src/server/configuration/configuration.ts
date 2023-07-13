@@ -23,7 +23,7 @@ export default class Configuration implements IConfiguration {
     this.BuildFolder = '../build';
 
     this.BlaiseApiUrl = getStringOrThrowError(BLAISE_API_URL, 'BLAISE_API_URL');
-    this.Port = getNumberOrThrowError(PORT, 'PORT');
+    this.Port = getNumberOrThrowError(PORT, 'PORT') ? getNumberOrThrowError(PORT, 'PORT') : 5000 ;
     this.ServerPark = getStringOrThrowError(SERVER_PARK, 'SERVER_PARK');
     this.ExternalWebUrl = getStringOrThrowError(VM_EXTERNAL_WEB_URL, 'VM_EXTERNAL_WEB_URL');
   }
