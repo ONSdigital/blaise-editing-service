@@ -23,10 +23,10 @@ Create a new .env file and add the following variables.
 
 | Variable               | Description                                                                                                             | Var Example          |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| PORT                   | Optional variable, specify the Port for express server to run on. If not passed in this is set as 5000 by default. | 5000                 |
-| BLAISE_API_URL         | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. If not passed in this is set to 'http://localhost:5011' by default.| http://localhost:5011
+| PORT                   | Specify the Port for express server to run on. | 5000                 |
+| BLAISE_API_URL         | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. Includes protocol i.e http:// | http://localhost:5011
 | SERVER_PARK                   | Specify the name of the Blaise server park. | gusty                  |
-| VM_EXTERNAL_WEB_URL                   | External URL used for CATI dashboard and survey links. | dev-cati.social-surveys.gcp.onsdigital.uk                 |                                                                                                  
+| VM_EXTERNAL_WEB_URL                   | External URL used for CATI dashboard and survey links. Does NOT include any protocols i.e http:// | cati.com                 |                                                                                                  
 
 The `.env` file should be setup as below
 
@@ -34,7 +34,7 @@ The `.env` file should be setup as below
 PORT='5000'
 BLAISE_API_URL='http://localhost:5011'
 SERVER_PARK='gusty'
-VM_EXTERNAL_WEB_URL='<ENVIRONMENT>-cati.social-surveys.gcp.onsdigital.uk'
+VM_EXTERNAL_WEB_URL='cati.com'
 ```
 
 ## Available Scripts
