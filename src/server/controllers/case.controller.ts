@@ -1,8 +1,9 @@
-import BlaiseClient, { ICaseStatus } from 'blaise-api-node-client';
+import BlaiseClient from 'blaise-api-node-client';
 import express, { Request, Response, Router } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
 import { IConfiguration } from '../interfaces/configuration.interface';
 import { ICaseDetails } from '../interfaces/case.details.interface';
+import mapCaseDetails from '../mappers/case.details.mapper';
 
 export default class CaseController implements IControllerInterface {
   config: IConfiguration;
@@ -28,16 +29,8 @@ export default class CaseController implements IControllerInterface {
     }
 
     const caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, questionnaireName);
-    const caseDetailsList = this.mapCaseDetails(questionnaireName, caseStatusList);
+    const caseDetailsList = mapCaseDetails(caseStatusList, questionnaireName, this.config.ExternalWebUrl);
 
     return response.status(200).json(caseDetailsList);
-  }
-
-  mapCaseDetails(questionnaireName:string, caseStatusList: ICaseStatus[]): ICaseDetails[] {
-    return caseStatusList.map((caseStatus) => ({
-      CaseId: caseStatus.primaryKey,
-      CaseStatus: caseStatus.outcome,
-      CaseLink: `https://${this.config.ExternalWebUrl}/${questionnaireName}?Mode=CAWI&KeyValue=${caseStatus.primaryKey}`,
-    }));
   }
 }
