@@ -1,4 +1,4 @@
-import BlaiseClient, { Outcome } from 'blaise-api-node-client';
+import BlaiseClient, { ICaseStatus } from 'blaise-api-node-client';
 import express, { Request, Response, Router } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
 import { IConfiguration } from '../interfaces/configuration.interface';
@@ -27,26 +27,17 @@ export default class CaseController implements IControllerInterface {
       throw new Error('Questionnaire name has not been provided');
     }
 
-    const cases = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, questionnaireName);
-    console.debug(cases);
-    const mockResponseData = [
-      {
-        CaseId: '1',
-        CaseStatus: Outcome.Completed,
-        CaseLink: `https://dev-cati.social-surveys.gcp.onsdigital.uk/${questionnaireName}?Mode=CAWI&KeyValue=1`,
-      },
-      {
-        CaseId: '2',
-        CaseStatus: Outcome.Partial,
-        CaseLink: `https://dev-cati.social-surveys.gcp.onsdigital.uk/${questionnaireName}?Mode=CAWI&KeyValue=2`,
-      },
-      {
-        CaseId: '3',
-        CaseStatus: Outcome.AppointmentMade,
-        CaseLink: `https://dev-cati.social-surveys.gcp.onsdigital.uk/${questionnaireName}?Mode=CAWI&KeyValue=3`,
-      },
-    ];
+    const caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, questionnaireName);
+    const caseDetailsList = this.mapCaseDetails(questionnaireName, caseStatusList);
 
-    return response.status(200).json(mockResponseData);
+    return response.status(200).json(caseDetailsList);
+  }
+
+  mapCaseDetails(questionnaireName:string, caseStatusList: ICaseStatus[]): ICaseDetails[] {
+    return caseStatusList.map((caseStatus) => ({
+      CaseId: caseStatus.primaryKey,
+      CaseStatus: caseStatus.outcome,
+      CaseLink: `https://${this.config.ExternalWebUrl}/${questionnaireName}?Mode=CAWI&KeyValue=${caseStatus.primaryKey}`,
+    }));
   }
 }
