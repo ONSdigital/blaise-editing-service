@@ -21,16 +21,20 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## configuration
 Create a new .env file and add the following variables.
 
-| Variable               | Description                                                                                                                                                                                                                                                                       | Var Example          |
+| Variable               | Description                                                                                                             | Var Example          |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| PORT                   | Optional variable, specify the Port for express server to run on. If not passed in this is set as 5000 by default. | 5009                 |
-| BLAISE_API_URL         | Url that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. If not passed in this is set to 'http://localhost:5011' by default.| http://localhost:5011                                                                                                     
+| PORT                   | Optional variable, specify the Port for express server to run on. If not passed in this is set as 5000 by default. | 5000                 |
+| BLAISE_API_URL         | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. If not passed in this is set to 'http://localhost:5011' by default.| http://localhost:5011
+| SERVER_PARK                   | Specify the name of the Blaise server park. | gusty                  |
+| VM_EXTERNAL_WEB_URL                   | External URL used for CATI dashboard and survey links. | dev-cati.social-surveys.gcp.onsdigital.uk                 |                                                                                                  
 
 The `.env` file should be setup as below
 
 ```.env
-PORT='5009'
+PORT='5000'
 BLAISE_API_URL='http://localhost:5011'
+SERVER_PARK='gusty'
+VM_EXTERNAL_WEB_URL='<ENVIRONMENT>-cati.social-surveys.gcp.onsdigital.uk'
 ```
 
 ## Available Scripts
