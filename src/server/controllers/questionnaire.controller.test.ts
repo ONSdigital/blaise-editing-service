@@ -43,7 +43,7 @@ describe('Get questionnaire tests', () => {
   it('It should return a 500 response when a call is made to retireve a list of questionnaires and the rest api is not availiable', async () => {
     // arrange
     // eslint-prefer-promise-reject-error
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject({ response: { status: 500 }, isAxiosError: true }));
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject({ response: { status: 500 } }));
 
     // act
     const response: Response = await sut.get('/api/questionnaires');
@@ -52,4 +52,15 @@ describe('Get questionnaire tests', () => {
     expect(response.status).toEqual(500);
   });
 
+  it('It should return a 404 response when a call is made to retireve a list of questionnaires and the server park does not exist', async () => {
+    // arrange
+    // eslint-prefer-promise-reject-error
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject({ response: { status: 404 }, isAxiosError: true }));
+
+    // act
+    const response: Response = await sut.get('/api/questionnaires');
+
+    // assert
+    expect(response.status).toEqual(404);
+  });
 });

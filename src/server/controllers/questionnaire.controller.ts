@@ -24,7 +24,14 @@ export default class QuestionnaireController implements IControllerInterface {
       const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
       return response.status(200).json(questionnaires);
     } catch (error) {
+      if (this.errorNotFound(error)) {
+        return response.status(404).json();
+      }
       return response.status(500).json();
     }
+  }
+
+  errorNotFound(error: any): boolean {
+    return (error?.isAxiosError && error.response.status === 404);
   }
 }
