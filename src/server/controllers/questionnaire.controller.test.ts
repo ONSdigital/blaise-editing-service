@@ -21,7 +21,7 @@ describe('Get questionnaire tests', () => {
     // arrange
     // mock blaise client to return a list of questionnaires
     const questionnaireList: IQuestionnaire[] = QuestionnaireListMockObject;
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires('gusty')).returns(async () => questionnaireList);
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(async () => questionnaireList);
 
     // act
     const response: Response = await sut.get('/api/questionnaires');
@@ -29,6 +29,6 @@ describe('Get questionnaire tests', () => {
     // assert
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(questionnaireList);
-    blaiseApiClientMock.verify((client) => client.getQuestionnaires('gusty'), Times.once());
+    blaiseApiClientMock.verify((client) => client.getQuestionnaires(configFake.ServerPark), Times.once());
   });
 });

@@ -55,7 +55,7 @@ describe('Get case tests', () => {
       },
     ];
 
-    blaiseApiClientMock.setup((client) => client.getCaseStatus('gusty', questionnaireName)).returns(async () => caseStatusList);
+    blaiseApiClientMock.setup((client) => client.getCaseStatus(configFake.ServerPark, questionnaireName)).returns(async () => caseStatusList);
 
     // act
     const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases`);
@@ -63,6 +63,6 @@ describe('Get case tests', () => {
     // assert
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(expectedCasesList);
-    blaiseApiClientMock.verify((client) => client.getCaseStatus('gusty', questionnaireName), Times.once());
+    blaiseApiClientMock.verify((client) => client.getCaseStatus(configFake.ServerPark, questionnaireName), Times.once());
   });
 });
