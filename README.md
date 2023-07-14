@@ -21,23 +21,27 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## configuration
 Create a new .env file and add the following variables.
 
-| Variable               | Description                                                                                                                                                                                                                                                                       | Var Example          |
+| Variable               | Description                                                                                                             | Var Example          |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|
-| PORT                   | Optional variable, specify the Port for express server to run on. If not passed in this is set as 5000 by default. | 5009                 |
-| BLAISE_API_URL         | Url that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. If not passed in this is set to 'http://localhost:5011' by default.| http://localhost:5011                                                                                                     
+| PORT                   | Specify the Port for express server to run on. | 5000                 |
+| BLAISE_API_URL         | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on to send calls to. Includes protocol i.e http:// | http://localhost:5011
+| SERVER_PARK                   | Specify the name of the Blaise server park. | gusty                  |
+| VM_EXTERNAL_WEB_URL                   | External URL used for CATI dashboard and survey links. Does NOT include any protocols i.e http:// | cati.com                 |                                                                                                  
 
 The `.env` file should be setup as below
 
 ```.env
-PORT='5009'
+PORT='5000'
 BLAISE_API_URL='http://localhost:5011'
+SERVER_PARK='gusty'
+VM_EXTERNAL_WEB_URL='cati.com'
 ```
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn start-react`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -50,7 +54,7 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### `yarn build-react`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
