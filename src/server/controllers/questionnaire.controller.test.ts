@@ -17,6 +17,14 @@ const server = nodeServer(configFake, blaiseApiClientMock.object);
 const sut = supertest(server);
 
 describe('Get questionnaire tests', () => {
+  beforeEach(() => {
+    blaiseApiClientMock.reset();
+  });
+
+  afterAll(() => {
+    blaiseApiClientMock.reset();
+  });
+
   it('It should return a 200 response with an expected list of questonnaires', async () => {
     // arrange
     // mock blaise client to return a list of questionnaires
@@ -31,4 +39,17 @@ describe('Get questionnaire tests', () => {
     expect(response.body).toEqual(questionnaireList);
     blaiseApiClientMock.verify((client) => client.getQuestionnaires(configFake.ServerPark), Times.once());
   });
+
+  it('It should return a 500 response when a call is made to retireve a list of questionnaires and the rest api is not availiable', async () => {
+    // arrange
+    // eslint-prefer-promise-reject-error
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject({ response: { status: 500 }, isAxiosError: true }));
+
+    // act
+    const response: Response = await sut.get('/api/questionnaires');
+
+    // assert
+    expect(response.status).toEqual(500);
+  });
+
 });
