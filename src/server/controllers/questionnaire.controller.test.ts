@@ -3,6 +3,7 @@ import BlaiseClient, { IQuestionnaire, QuestionnaireListMockObject } from 'blais
 import { IMock, Mock, Times } from 'typemoq';
 import nodeServer from '../server';
 import FakeConfiguration from '../configuration/configuration.fake';
+import { createAxiosError } from './axios.helper';
 
 // create fake config
 const configFake = new FakeConfiguration('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com');
@@ -40,10 +41,11 @@ describe('Get questionnaire tests', () => {
     blaiseApiClientMock.verify((client) => client.getQuestionnaires(configFake.ServerPark), Times.once());
   });
 
-  it('It should return a 500 response when a call is made to retireve a list of questionnaires and the rest api is not availiable', async () => {
+  it('It should return a 500 response when a call is made to retrieve a list of questionnaires and the rest api is not availiable', async () => {
     // arrange
-    // eslint-prefer-promise-reject-error
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject({ response: { status: 500 } }));
+    const axiosError = createAxiosError(500);
+
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject(axiosError));
 
     // act
     const response: Response = await sut.get('/api/questionnaires');
@@ -52,10 +54,24 @@ describe('Get questionnaire tests', () => {
     expect(response.status).toEqual(500);
   });
 
-  it('It should return a 404 response when a call is made to retireve a list of questionnaires and the server park does not exist', async () => {
+  it('It should return a 500 response when the api client throws an error', async () => {
     // arrange
-    // eslint-prefer-promise-reject-error
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject({ response: { status: 404 }, isAxiosError: true }));
+    const apiClientError = new Error();
+
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject(apiClientError));
+
+    // act
+    const response: Response = await sut.get('/api/questionnaires');
+
+    // assert
+    expect(response.status).toEqual(500);
+  });
+
+  it('It should return a 404 response when a call is made to retrieve a list of questionnaires and the server park does not exist', async () => {
+    // arrange
+    const axiosError = createAxiosError(404);
+
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject(axiosError));
 
     // act
     const response: Response = await sut.get('/api/questionnaires');
