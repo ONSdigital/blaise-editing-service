@@ -67,7 +67,7 @@ describe('Get questionnaire tests', () => {
     expect(response.status).toEqual(500);
   });
 
-  it('It should return a 404 response when a call is made to retrieve a list of questionnaires and the server park does not exist', async () => {
+  it('It should return a 404 response when a call is made to retrieve a list of questionnaires and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
 
