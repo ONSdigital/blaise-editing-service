@@ -1,4 +1,4 @@
-import { IConfiguration } from '../interfaces/configuration.interface';
+import { IConfiguration } from '../../../server/interfaces/configuration.interface';
 
 export default class FakeConfiguration implements IConfiguration {
   BlaiseApiUrl: string;

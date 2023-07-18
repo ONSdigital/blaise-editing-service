@@ -1,7 +1,7 @@
 import listEndpoints, { Endpoint } from 'express-list-endpoints';
 import BlaiseApiClient from 'blaise-api-node-client';
 import { IMock, Mock } from 'typemoq';
-import NodeServer from './server';
+import NodeServer from '../../server/server';
 import FakeConfiguration from './configuration/configuration.fake';
 
 // create fake config

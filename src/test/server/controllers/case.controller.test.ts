@@ -1,10 +1,10 @@
 import supertest, { Response } from 'supertest';
 import BlaiseClient, { ICaseStatus, Outcome } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
-import nodeServer from '../server';
+import nodeServer from '../../../server/server';
 import FakeConfiguration from '../configuration/configuration.fake';
-import { ICaseDetails } from '../interfaces/case.details.interface';
-import { createAxiosError } from './axios.helper';
+import { ICaseDetails } from '../../../server/interfaces/case.details.interface';
+import createAxiosError from './axios.test.helper';
 
 // create fake config
 const configFake = new FakeConfiguration('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com');
