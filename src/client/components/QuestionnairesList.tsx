@@ -1,5 +1,5 @@
 import { IQuestionnaire } from 'blaise-api-node-client';
-import { ONSTable } from 'blaise-design-system-react-components';
+import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import { Link } from 'react-router-dom';
 
 interface QuestionnairesListProps {
@@ -7,6 +7,11 @@ interface QuestionnairesListProps {
 }
 
 export default function QuestionnairesList({ questionnaires }: QuestionnairesListProps) {
+  if (questionnaires.length === 0) {
+    return (
+      <ONSPanel spacious status="info">There are no questionnaires available</ONSPanel>
+    );
+  }
   return (
     <ONSTable
       tableID="questionnaire-table"
