@@ -47,30 +47,31 @@ describe('Given there are questionnaires available in blaise', () => {
     });
   });
 
-  describe('Given there are no questionnaires available in blaise', () => {  
+  describe('Given there are no questionnaires available in blaise', () => {
     it('should display a message telling the user there are no questionnaires', async () => {
       // arrange
       // set mock to return an empty array
 
       // act
       // render the page
-  
+
       // assert
       // check the message is on the screen
-    });  
-  });  
+      // check the message is on the screen and that it is in an information panel maybe? Snapshot test as well?
+    });
+  });
 
   // this one test should be enough cover all error scenarios - the granular errors can be tested against the blaise api file
-  describe('Given there the blaise rest api is not available', () => {  
+  describe('Given there the blaise rest api is not available', () => {
     it('should display an error message telling the user to try again in a few minutes', async () => {
       // arrange
       // set mock to throw an error with the message
 
       // act
       // render the page
-  
+
       // assert
-      // check the message is on the screen and that it is in an error panel maybe?      
-    });  
-  });    
+      // check the message is on the screen and that it is in an error panel maybe? Snapshot test as well?
+    });
+  });
 });
