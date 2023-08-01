@@ -43,7 +43,11 @@ export function useAsyncRequest<T>(request: () => Promise<T>) {
     setState(loading());
     request()
       .then((response) => setState(succeeded(response)))
-      .catch((error) => setState(errored(error.message)));
+      .catch((error) => {
+        setState(errored(error.message));
+        console.debug(`error: ${error}`);
+        console.debug(`error message: ${error.message}`);
+      });
   }, [request]);
 
   return state;

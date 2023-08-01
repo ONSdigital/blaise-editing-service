@@ -1,4 +1,4 @@
-import { render, waitForElementToBeRemoved, screen } from '@testing-library/react';
+import { render, act, RenderResult } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { IQuestionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
 import Questionnaires from '../../../client/pages/Questionnaires';
@@ -7,6 +7,7 @@ import { getQuestionnaires } from '../../../client/api/blaiseApi';
 jest.mock('../../../client/api/blaiseApi');
 
 const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<IQuestionnaire[]>>;
+let view:RenderResult;
 
 describe('Given there are questionnaires available in blaise', () => {
   beforeEach(() => {
@@ -19,31 +20,32 @@ describe('Given there are questionnaires available in blaise', () => {
 
   it('should render the page correctly when questionnaires are returned', async () => {
     // act
-    const wrapper = render(
-      <BrowserRouter>
-        <Questionnaires />
-      </BrowserRouter>,
-    );
-
-    await waitForElementToBeRemoved(screen.getByText('Loading...'));
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Questionnaires />
+        </BrowserRouter>,
+      );
+    });
 
     // assert
-    expect(wrapper).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it('should display a list of the expected questionnaires', async () => {
     // act
-    const { queryByText } = render(
-      <BrowserRouter>
-        <Questionnaires />
-      </BrowserRouter>,
-    );
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Questionnaires />
+        </BrowserRouter>,
+      );
+    });
 
-    await waitForElementToBeRemoved(screen.getByText('Loading...'));
 
     // assert
     QuestionnaireListMockObject.forEach((questionnaire) => {
-      expect(queryByText(questionnaire.name)).toBeInTheDocument();
+      expect(view.getByText(questionnaire.name)).toBeInTheDocument();
     });
   });
 });
@@ -59,43 +61,54 @@ describe('Given there are no questionnaires available in blaise', () => {
 
   it('should render the page correctly when no questionnaires are returned', async () => {
     // act
-    const wrapper = render(
-      <BrowserRouter>
-        <Questionnaires />
-      </BrowserRouter>,
-    );
-
-    await waitForElementToBeRemoved(screen.getByText('Loading...'));
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Questionnaires />
+        </BrowserRouter>,
+      );
+    });
 
     // assert
-    expect(wrapper).toMatchSnapshot();
+    expect(view).toMatchSnapshot();
   });
 
   it('should display a message telling the user there are no questionnaires', async () => {
     // act
-    const { queryByText } = render(
-      <BrowserRouter>
-        <Questionnaires />
-      </BrowserRouter>,
-    );
-
-    await waitForElementToBeRemoved(screen.getByText('Loading...'));
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Questionnaires />
+        </BrowserRouter>,
+      );
+    });
 
     // assert
-    expect(queryByText('There are no questionnaires available')).toBeInTheDocument();
+    expect(view.getByText(/There are no questionnaires available/)).toBeInTheDocument();
   });
 });
 
 // this one test should be enough cover all error scenarios - the granular errors can be tested against the blaise api file
 describe('Given there the blaise rest api is not available', () => {
+
+  afterEach(() => {
+    getQuestionnairesMock.mockReset();
+  });
+
   it('should display an error message telling the user to try again in a few minutes', async () => {
     // arrange
-    // set mock to throw an error with the message
+    getQuestionnairesMock.mockRejectedValue(new Error("try again in a few minutes"));
 
     // act
-    // render the page
-
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Questionnaires />
+        </BrowserRouter>,
+      );
+    });
+    
     // assert
-    // check the message is on the screen and that it is in an error panel maybe? Snapshot test as well?
-  });
+    expect(view.getByText(/try again in a few minutes/)).toBeInTheDocument();
+   });
 });

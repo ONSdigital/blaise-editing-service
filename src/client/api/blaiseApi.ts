@@ -6,6 +6,7 @@ export async function getQuestionnaires(): Promise<IQuestionnaire[]> {
   const response = await axios.get('/api/questionnaires');
   // if 404 throw error with not found message
 
+
   // if 500 throw error with default message
 
   return response.data;
