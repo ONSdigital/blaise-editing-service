@@ -4,7 +4,7 @@ import { IControllerInterface } from '../interfaces/controller.interface';
 import { IConfiguration } from '../interfaces/configuration.interface';
 import { ICaseDetails } from '../interfaces/case.details.interface';
 import mapCaseDetails from '../mappers/case.details.mapper';
-import errorNotFound from './axios.helper';
+import notFound from '../../common/axios.helper';
 
 export default class CaseController implements IControllerInterface {
   config: IConfiguration;
@@ -35,7 +35,7 @@ export default class CaseController implements IControllerInterface {
 
       return response.status(200).json(caseDetailsList);
     } catch (error: unknown) {
-      if (errorNotFound(error)) {
+      if (notFound(error)) {
         return response.status(404).json();
       }
       return response.status(500).json();

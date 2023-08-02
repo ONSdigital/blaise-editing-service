@@ -1,3 +1,4 @@
+import { ONSPanel } from 'blaise-design-system-react-components';
 import { AsyncState, hasErrored, isLoading } from '../hooks/useAsyncRequest';
 
 interface AsyncContentProps<T> {
@@ -11,12 +12,7 @@ export default function AsyncContent<T>({ content, children }: AsyncContentProps
   }
 
   if (hasErrored(content)) {
-    return (
-      <div>
-        Error:
-        {content.error}
-      </div>
-    );
+    return <ONSPanel status="error">{content.error}</ONSPanel>;
   }
 
   return <>{children(content.data)}</>;
