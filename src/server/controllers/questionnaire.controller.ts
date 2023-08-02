@@ -2,7 +2,7 @@ import BlaiseClient, { IQuestionnaire } from 'blaise-api-node-client';
 import express, { Request, Response } from 'express';
 import { IControllerInterface } from '../interfaces/controller.interface';
 import { IConfiguration } from '../interfaces/configuration.interface';
-import errorNotFound from './axios.helper';
+import notFound from '../../common/axios.helper';
 
 export default class QuestionnaireController implements IControllerInterface {
   config: IConfiguration;
@@ -25,7 +25,7 @@ export default class QuestionnaireController implements IControllerInterface {
       const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
       return response.status(200).json(questionnaires);
     } catch (error: unknown) {
-      if (errorNotFound(error)) {
+      if (notFound(error)) {
         return response.status(404).json();
       }
       return response.status(500).json();
