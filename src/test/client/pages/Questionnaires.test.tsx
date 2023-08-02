@@ -109,4 +109,21 @@ describe('Given there the blaise rest api is not available', () => {
     // assert
     expect(view.getByText(/try again in a few minutes/)).toBeInTheDocument();
   });
+
+  it('should render the page correctly when an error occurs', async () => {
+    // arrange
+    getQuestionnairesMock.mockRejectedValue(new Error('try again in a few minutes'));
+
+    // act
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Questionnaires />
+        </BrowserRouter>,
+      );
+    });
+
+    // assert
+    expect(view).toMatchSnapshot();
+  });
 });
