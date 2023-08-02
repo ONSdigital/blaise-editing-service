@@ -17,27 +17,27 @@ describe('GetQuestionnaires form Blaise', () => {
     expect(result).toEqual(QuestionnaireListMockObject);
   });
 
-  it('Should throw an error with the message "Unable to find questionnaires, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to find questionnaires, please contact Richmond Rice" when a 404 response is recieved', async () => {
     // arrange
     mock.onGet('/api/questionnaires').reply(404, null);
 
     // act && assert
-    expect(getQuestionnaires()).rejects.toThrow(/Unable to find questionnaires, please contact Richmond Rice/);    
+    expect(getQuestionnaires()).rejects.toThrow(/Unable to find questionnaires, please contact Richmond Rice/);
   });
 
-  it('Should throw an error with the message "Unable to retrieve questionnaires, please try again in a few minutes" when a 500 response is recieved', async () => {
+  it('Should throw the error "Unable to retrieve questionnaires, please try again in a few minutes" when a 500 response is recieved', async () => {
     // arrange
     mock.onGet('/api/questionnaires').reply(500, null);
 
     // act && assert
-    expect(getQuestionnaires()).rejects.toThrow(/Unable to retrieve questionnaires, please try again in a few minutes/); 
+    expect(getQuestionnaires()).rejects.toThrow(/Unable to retrieve questionnaires, please try again in a few minutes/);
   });
 
-  it('Should throw an error with the message "Unable to retrieve questionnaires, please try again in a few minutes" when there is a network error', async () => {
+  it('Should throw the error "Unable to retrieve questionnaires, please try again in a few minutes" when there is a network error', async () => {
     // arrange
     mock.onGet('/api/questionnaires').networkError();
 
     // act && assert
-    expect(getQuestionnaires()).rejects.toThrow(/Unable to retrieve questionnaires, please try again in a few minutes/); 
-  });  
+    expect(getQuestionnaires()).rejects.toThrow(/Unable to retrieve questionnaires, please try again in a few minutes/);
+  });
 });

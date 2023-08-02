@@ -6,12 +6,12 @@ import notFound from '../../common/axios.helper';
 export async function getQuestionnaires(): Promise<IQuestionnaire[]> {
   try {
     const response = await axios.get('/api/questionnaires');
-    
+
     return response.data;
   } catch (error) {
-    if (notFound(error)){
+    if (notFound(error)) {
       throw new Error('Unable to find questionnaires, please contact Richmond Rice');
-    }    
+    }
     throw new Error('Unable to retrieve questionnaires, please try again in a few minutes');
   }
 }
