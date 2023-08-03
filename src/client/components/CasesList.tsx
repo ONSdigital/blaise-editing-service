@@ -1,4 +1,4 @@
-import { ONSTable } from 'blaise-design-system-react-components';
+import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import { Link } from 'react-router-dom';
 import { ICaseDetails } from '../../server/interfaces/case.details.interface';
 
@@ -7,6 +7,9 @@ interface CasesListProps {
 }
 
 export default function CasesList({ cases }: CasesListProps) {
+  if (cases.length === 0) {
+    return <ONSPanel spacious status="info">There are no cases available</ONSPanel>;
+  }
   return (
     <ONSTable
       tableID="case-table"

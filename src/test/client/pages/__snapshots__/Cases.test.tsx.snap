@@ -1,0 +1,400 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given there are cases available in blaise for questionnaire should render the page correctly when cases are returned 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <table
+        class="ons-table"
+        data-testid="case-table"
+        id="case-table"
+      >
+        <thead
+          class="ons-table__head"
+        >
+          <tr
+            class="ons-table__row"
+          >
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              Case ID
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="ons-table__body"
+        >
+          <tr
+            class="ons-table__row"
+            data-testid="case-table-row"
+          >
+            <td
+              class="ons-table__cell"
+            >
+              <a
+                href="http://www.cati.com/1"
+              >
+                1
+              </a>
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              110
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+            data-testid="case-table-row"
+          >
+            <td
+              class="ons-table__cell"
+            >
+              <a
+                href="http://www.cati.com/2"
+              >
+                2
+              </a>
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              430
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+            data-testid="case-table-row"
+          >
+            <td
+              class="ons-table__cell"
+            >
+              <a
+                href="http://www.cati.com/3"
+              >
+                3
+              </a>
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              390
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>,
+  "container": <div>
+    <table
+      class="ons-table"
+      data-testid="case-table"
+      id="case-table"
+    >
+      <thead
+        class="ons-table__head"
+      >
+        <tr
+          class="ons-table__row"
+        >
+          <th
+            class="ons-table__header"
+            scope="col"
+          >
+            Case ID
+          </th>
+          <th
+            class="ons-table__header"
+            scope="col"
+          >
+            Status
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class="ons-table__body"
+      >
+        <tr
+          class="ons-table__row"
+          data-testid="case-table-row"
+        >
+          <td
+            class="ons-table__cell"
+          >
+            <a
+              href="http://www.cati.com/1"
+            >
+              1
+            </a>
+          </td>
+          <td
+            class="ons-table__cell"
+          >
+            110
+          </td>
+        </tr>
+        <tr
+          class="ons-table__row"
+          data-testid="case-table-row"
+        >
+          <td
+            class="ons-table__cell"
+          >
+            <a
+              href="http://www.cati.com/2"
+            >
+              2
+            </a>
+          </td>
+          <td
+            class="ons-table__cell"
+          >
+            430
+          </td>
+        </tr>
+        <tr
+          class="ons-table__row"
+          data-testid="case-table-row"
+        >
+          <td
+            class="ons-table__cell"
+          >
+            <a
+              href="http://www.cati.com/3"
+            >
+              3
+            </a>
+          </td>
+          <td
+            class="ons-table__cell"
+          >
+            390
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given there are no cases available in blaise for questionnaire should render the page correctly when no cases are returned 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          There are no cases available
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
+    >
+      <div
+        class="ons-panel__body "
+      >
+        There are no cases available
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given there the blaise rest api is not available should render the page correctly when an error occurs 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          try again in a few minutes
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+    >
+      <div
+        class="ons-panel__body "
+      >
+        try again in a few minutes
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

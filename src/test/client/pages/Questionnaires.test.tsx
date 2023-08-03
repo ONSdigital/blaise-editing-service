@@ -87,16 +87,16 @@ describe('Given there are no questionnaires available in blaise', () => {
   });
 });
 
-// this one test should be enough cover all error scenarios - the granular errors can be tested against the blaise api file
 describe('Given there the blaise rest api is not available', () => {
+  beforeEach(() => {
+    getQuestionnairesMock.mockRejectedValue(new Error('try again in a few minutes'));
+  });
+
   afterEach(() => {
     getQuestionnairesMock.mockReset();
   });
 
   it('should display an error message telling the user to try again in a few minutes', async () => {
-    // arrange
-    getQuestionnairesMock.mockRejectedValue(new Error('try again in a few minutes'));
-
     // act
     await act(async () => {
       view = render(
@@ -111,9 +111,6 @@ describe('Given there the blaise rest api is not available', () => {
   });
 
   it('should render the page correctly when an error occurs', async () => {
-    // arrange
-    getQuestionnairesMock.mockRejectedValue(new Error('try again in a few minutes'));
-
     // act
     await act(async () => {
       view = render(
