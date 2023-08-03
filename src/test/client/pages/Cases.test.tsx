@@ -1,14 +1,14 @@
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Outcome } from 'blaise-api-node-client';
 import Router from 'react-router';
-import { getListOfCases } from '../../../client/api/blaiseApi';
+import caseDetailsList from '../../mockObjects/caseMocks';
+import { getCases } from '../../../client/api/blaiseApi';
 import { ICaseDetails } from '../../../server/interfaces/case.details.interface';
 import Cases from '../../../client/pages/Cases';
 
 // declare global vars
 const questionnaireName: string = 'TEST111A';
-const getCasesMock = getListOfCases as jest.Mock<Promise<ICaseDetails[]>>;
+const getCasesMock = getCases as jest.Mock<Promise<ICaseDetails[]>>;
 let view:RenderResult;
 
 // declare mocks
@@ -18,22 +18,6 @@ jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), usePar
 jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName });
 
 describe('Given there are cases available in blaise for questionnaire', () => {
-  const caseDetailsList:ICaseDetails[] = [{
-    CaseId: '1',
-    CaseStatus: Outcome.Completed,
-    CaseLink: 'http://www.cati.com/1',
-  },
-  {
-    CaseId: '2',
-    CaseStatus: Outcome.HQRefusal,
-    CaseLink: 'http://www.cati.com/2',
-  },
-  {
-    CaseId: '3',
-    CaseStatus: Outcome.DeleteRequested,
-    CaseLink: 'http://www.cati.com/3',
-  }];
-
   beforeEach(() => {
     getCasesMock.mockImplementation(() => Promise.resolve(caseDetailsList));
   });
