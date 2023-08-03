@@ -16,7 +16,14 @@ export async function getQuestionnaires(): Promise<IQuestionnaire[]> {
   }
 }
 
-export async function getListOfCases(questionnaireName: string): Promise<ICaseDetails[]> {
-  const response = await axios.get(`/api/questionnaires/${questionnaireName}/cases`);
-  return response.data;
+export async function getCases(questionnaireName: string): Promise<ICaseDetails[]> {
+  try {
+    const response = await axios.get(`/api/questionnaires/${questionnaireName}/cases`);
+    return response.data;
+  } catch (error) {
+    if (notFound(error)) {
+      throw new Error('The questionnaire is no longer available');
+    }
+    throw new Error('Unable to retrieve cases, please try again in a few minutes');
+  }
 }
