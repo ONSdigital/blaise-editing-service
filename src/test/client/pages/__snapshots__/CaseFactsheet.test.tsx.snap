@@ -1,0 +1,1328 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given there is a case available in blaise for a questionnaire should display the factsheet correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <dl
+        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+        data-testid="Factsheet"
+        title="Factsheet"
+      >
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          CaseId:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          90001
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Address:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Flat 1
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond House
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rice Road
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Duffrin
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Newport
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Gwent
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          NZ11 4PD
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Interviewer:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rich
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Outcome code:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          110
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Household size:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          1
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Respondents:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond Ricecake
+           
+          Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+      </dl>
+    </div>
+  </body>,
+  "container": <div>
+    <dl
+      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+      data-testid="Factsheet"
+      title="Factsheet"
+    >
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        CaseId:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        90001
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Address:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Flat 1
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond House
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rice Road
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Duffrin
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Newport
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Gwent
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        NZ11 4PD
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Interviewer:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rich
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Outcome code:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        110
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Household size:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        1
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Respondents:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond Ricecake
+         
+        Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+    </dl>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given there is a case available in blaise for a questionnaire should display the factsheet correctly 2`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <dl
+        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+        data-testid="Factsheet"
+        title="Factsheet"
+      >
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          CaseId:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          90001
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Address:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Flat 1
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond House
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rice Road
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Duffrin
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Newport
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Gwent
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          NZ11 4PD
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Interviewer:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rich
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Outcome code:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          110
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Household size:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          3
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Respondents:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond Ricecake
+           
+          Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Bartholomew Edgar
+           
+          Sun Jun 11 1995 00:00:00 GMT+0100 (British Summer Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Sariha Smith
+           
+          Fri Feb 01 1991 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+      </dl>
+    </div>
+  </body>,
+  "container": <div>
+    <dl
+      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+      data-testid="Factsheet"
+      title="Factsheet"
+    >
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        CaseId:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        90001
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Address:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Flat 1
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond House
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rice Road
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Duffrin
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Newport
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Gwent
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        NZ11 4PD
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Interviewer:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rich
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Outcome code:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        110
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Household size:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        3
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Respondents:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond Ricecake
+         
+        Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Bartholomew Edgar
+         
+        Sun Jun 11 1995 00:00:00 GMT+0100 (British Summer Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Sariha Smith
+         
+        Fri Feb 01 1991 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+    </dl>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given there is a case available in blaise for a questionnaire should display the factsheet correctly 3`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <dl
+        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+        data-testid="Factsheet"
+        title="Factsheet"
+      >
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          CaseId:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          90001
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Address:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Flat 1
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond House
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rice Road
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Duffrin
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Newport
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Gwent
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          NZ11 4PD
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Interviewer:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rich
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Outcome code:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          110
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Household size:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          5
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Respondents:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond Ricecake
+           
+          Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Bartholomew Edgar
+           
+          Sun Jun 11 1995 00:00:00 GMT+0100 (British Summer Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Sariha Smith
+           
+          Fri Feb 01 1991 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          George Thompson
+           
+          Wed Jan 25 1995 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Tina Pipes
+           
+          Tue Dec 07 1999 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+      </dl>
+    </div>
+  </body>,
+  "container": <div>
+    <dl
+      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+      data-testid="Factsheet"
+      title="Factsheet"
+    >
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        CaseId:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        90001
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Address:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Flat 1
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond House
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rice Road
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Duffrin
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Newport
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Gwent
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        NZ11 4PD
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Interviewer:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rich
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Outcome code:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        110
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Household size:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        5
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Respondents:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond Ricecake
+         
+        Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Bartholomew Edgar
+         
+        Sun Jun 11 1995 00:00:00 GMT+0100 (British Summer Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Sariha Smith
+         
+        Fri Feb 01 1991 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        George Thompson
+         
+        Wed Jan 25 1995 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Tina Pipes
+         
+        Tue Dec 07 1999 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+    </dl>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given there is a case available in blaise for a questionnaire should display the factsheet correctly 4`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <dl
+        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+        data-testid="Factsheet"
+        title="Factsheet"
+      >
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          CaseId:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          90001
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Address:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Flat 1
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond House
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rice Road
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Duffrin
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Newport
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Gwent
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          NZ11 4PD
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Interviewer:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rich
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Outcome code:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          110
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Household size:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          10
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Respondents:
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Richmond Ricecake
+           
+          Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Bartholomew Edgar
+           
+          Sun Jun 11 1995 00:00:00 GMT+0100 (British Summer Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Sariha Smith
+           
+          Fri Feb 01 1991 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          George Thompson
+           
+          Wed Jan 25 1995 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Tina Pipes
+           
+          Tue Dec 07 1999 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Steve Doe
+           
+          Thu Aug 09 1973 00:00:00 GMT+0100 (British Summer Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Debra Oak
+           
+          Tue Mar 23 1982 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Margret Keys
+           
+          Sat Oct 13 1990 00:00:00 GMT+0100 (British Summer Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Tim Lemmings
+           
+          Sat Feb 24 1996 00:00:00 GMT+0000 (Greenwich Mean Time)
+        </dd>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Becky O'Light
+           
+          Mon Aug 30 1954 00:00:00 GMT+0100 (British Summer Time)
+        </dd>
+      </dl>
+    </div>
+  </body>,
+  "container": <div>
+    <dl
+      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+      data-testid="Factsheet"
+      title="Factsheet"
+    >
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        CaseId:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        90001
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Address:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Flat 1
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond House
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rice Road
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Duffrin
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Newport
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Gwent
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        NZ11 4PD
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Interviewer:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Rich
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Outcome code:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        110
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Household size:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        10
+      </dd>
+      <dt
+        class="ons-metadata__term ons-grid__col ons-col-3@m"
+      >
+        Respondents:
+      </dt>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Richmond Ricecake
+         
+        Fri Feb 15 1980 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Bartholomew Edgar
+         
+        Sun Jun 11 1995 00:00:00 GMT+0100 (British Summer Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Sariha Smith
+         
+        Fri Feb 01 1991 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        George Thompson
+         
+        Wed Jan 25 1995 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Tina Pipes
+         
+        Tue Dec 07 1999 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Steve Doe
+         
+        Thu Aug 09 1973 00:00:00 GMT+0100 (British Summer Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Debra Oak
+         
+        Tue Mar 23 1982 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Margret Keys
+         
+        Sat Oct 13 1990 00:00:00 GMT+0100 (British Summer Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Tim Lemmings
+         
+        Sat Feb 24 1996 00:00:00 GMT+0000 (Greenwich Mean Time)
+      </dd>
+      <dd
+        class="ons-metadata__value ons-grid__col ons-col-9@m"
+      >
+        Becky O'Light
+         
+        Mon Aug 30 1954 00:00:00 GMT+0100 (British Summer Time)
+      </dd>
+    </dl>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given there the blaise rest api is not available should render the page correctly when an error occurs 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          try again in a few minutes
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+    >
+      <div
+        class="ons-panel__body "
+      >
+        try again in a few minutes
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

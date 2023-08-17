@@ -1,5 +1,5 @@
 import { Router } from 'express';
 
-export interface IControllerInterface {
+export interface Controller {
   getRoutes(): Router
 }

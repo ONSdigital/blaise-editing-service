@@ -1,9 +1,9 @@
-import { IQuestionnaire } from 'blaise-api-node-client';
+import { Questionnaire } from 'blaise-api-node-client';
 import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import { Link } from 'react-router-dom';
 
 interface QuestionnairesListProps {
-  questionnaires: IQuestionnaire[];
+  questionnaires: Questionnaire[];
 }
 
 export default function QuestionnairesList({ questionnaires }: QuestionnairesListProps) {

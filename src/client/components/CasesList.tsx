@@ -1,9 +1,9 @@
 import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import { Link } from 'react-router-dom';
-import { ICaseDetails } from '../../server/interfaces/case.details.interface';
+import { CaseDetails } from '../../common/interfaces/caseInterface';
 
 interface CasesListProps {
-  cases: ICaseDetails[];
+  cases: CaseDetails[];
 }
 
 export default function CasesList({ cases }: CasesListProps) {
@@ -16,17 +16,21 @@ export default function CasesList({ cases }: CasesListProps) {
       columns={[
         'Case ID',
         'Status',
+        'Factsheet',
       ]}
     >
       <>
-        {cases.map((questionnaireCase) => (
-          <tr className="ons-table__row" data-testid="case-table-row">
+        {cases.map((questionnaireCase, caseIndex) => (
+          <tr key={questionnaireCase.CaseId} className="ons-table__row" data-testid={`case-table-row${caseIndex}`}>
             <td className="ons-table__cell">
               <Link to={questionnaireCase.CaseLink}>
                 {questionnaireCase.CaseId}
               </Link>
             </td>
             <td className="ons-table__cell">{questionnaireCase.CaseStatus}</td>
+            <td className="ons-table__cell">
+              <Link to={`/questionnaires/${questionnaireCase.QuestionnaireName}/cases/${questionnaireCase.CaseId}/factsheet`}>Factsheet</Link>
+            </td>
           </tr>
         ))}
       </>

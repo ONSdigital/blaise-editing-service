@@ -1,15 +1,15 @@
-import BlaiseClient, { IQuestionnaire } from 'blaise-api-node-client';
+import BlaiseClient, { Questionnaire } from 'blaise-api-node-client';
 import express, { Request, Response } from 'express';
-import { IControllerInterface } from '../interfaces/controller.interface';
-import { IConfiguration } from '../interfaces/configuration.interface';
-import notFound from '../../common/axios.helper';
+import { Controller } from '../interfaces/controllerInterface';
+import { Configuration } from '../interfaces/configurationInterface';
+import notFound from '../../common/helpers/axiosHelper';
 
-export default class QuestionnaireController implements IControllerInterface {
-  config: IConfiguration;
+export default class QuestionnaireController implements Controller {
+  config: Configuration;
 
   blaiseApiClient: BlaiseClient;
 
-  constructor(config: IConfiguration, blaiseApiClient: BlaiseClient) {
+  constructor(config: Configuration, blaiseApiClient: BlaiseClient) {
     this.config = config;
     this.blaiseApiClient = blaiseApiClient;
     this.getQuestionnaires = this.getQuestionnaires.bind(this);
@@ -20,7 +20,7 @@ export default class QuestionnaireController implements IControllerInterface {
     return router.get('/api/questionnaires', this.getQuestionnaires);
   }
 
-  async getQuestionnaires(_request: Request, response: Response<IQuestionnaire[]>) {
+  async getQuestionnaires(_request: Request, response: Response<Questionnaire[]>) {
     try {
       const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
       return response.status(200).json(questionnaires);

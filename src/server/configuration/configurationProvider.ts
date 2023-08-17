@@ -1,7 +1,7 @@
-import { IConfiguration } from '../interfaces/configuration.interface';
-import { getStringOrThrowError, getNumberOrThrowError } from './configuration.helper';
+import { Configuration } from '../interfaces/configurationInterface';
+import { getStringOrThrowError, getNumberOrThrowError } from './configurationHelper';
 
-export default class Configuration implements IConfiguration {
+export default class ConfigurationProvider implements Configuration {
   BlaiseApiUrl: string;
 
   BuildFolder: string;
@@ -20,7 +20,7 @@ export default class Configuration implements IConfiguration {
       VM_EXTERNAL_WEB_URL,
     } = process.env;
 
-    this.BuildFolder = '../build';
+    this.BuildFolder = '../../build';
 
     this.BlaiseApiUrl = getStringOrThrowError(BLAISE_API_URL, 'BLAISE_API_URL');
     this.Port = getNumberOrThrowError(PORT, 'PORT');

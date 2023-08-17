@@ -1,12 +1,12 @@
 import { render, act, RenderResult } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { IQuestionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
+import { Questionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
 import Questionnaires from '../../../client/pages/Questionnaires';
 import { getQuestionnaires } from '../../../client/api/blaiseApi';
 
 jest.mock('../../../client/api/blaiseApi');
 
-const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<IQuestionnaire[]>>;
+const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<Questionnaire[]>>;
 let view:RenderResult;
 
 describe('Given there are questionnaires available in blaise', () => {

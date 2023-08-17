@@ -28,7 +28,14 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": "error",
     "react/react-in-jsx-scope": "off",
-    "max-len": ["error", { "code": 150 }]
+    "max-len": ["error", { "code": 160 }],
+    "import/no-extraneous-dependencies": [
+      "error", {
+         "devDependencies": true
+      }
+  ]
   },
   "ignorePatterns": [".eslintrc.js", "node_modules/*","dist/*","build/*","coverage/*"]
+
+
 }

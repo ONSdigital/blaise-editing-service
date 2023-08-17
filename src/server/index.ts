@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import BlaiseApiClient from 'blaise-api-node-client';
 import nodeServer from './server';
-import Configuration from './configuration/configuration';
+import Configuration from './configuration/configurationProvider';
 
 // create/get configuration
 dotenv.config();
@@ -15,5 +15,6 @@ const server = nodeServer(config, blaiseApiClient);
 
 // run server
 server.listen(config.Port, () => {
+  /* eslint-disable no-console, no-control-regex */
   console.log(`Example app listening on port ${config.Port}`);
 });

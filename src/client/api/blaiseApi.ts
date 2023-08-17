@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { IQuestionnaire } from 'blaise-api-node-client';
-import { ICaseDetails } from '../../server/interfaces/case.details.interface';
-import notFound from '../../common/axios.helper';
+import { Questionnaire } from 'blaise-api-node-client';
+import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
+import notFound from '../../common/helpers/axiosHelper';
 
-export async function getQuestionnaires(): Promise<IQuestionnaire[]> {
+export async function getQuestionnaires(): Promise<Questionnaire[]> {
   try {
     const response = await axios.get('/api/questionnaires');
 
@@ -16,7 +16,7 @@ export async function getQuestionnaires(): Promise<IQuestionnaire[]> {
   }
 }
 
-export async function getCases(questionnaireName: string): Promise<ICaseDetails[]> {
+export async function getCases(questionnaireName: string): Promise<CaseDetails[]> {
   try {
     const response = await axios.get(`/api/questionnaires/${questionnaireName}/cases`);
     return response.data;
@@ -25,5 +25,17 @@ export async function getCases(questionnaireName: string): Promise<ICaseDetails[
       throw new Error('The questionnaire is no longer available');
     }
     throw new Error('Unable to retrieve cases, please try again in a few minutes');
+  }
+}
+
+export async function getCaseFactsheet(questionnaireName: string, caseId: string): Promise<CaseFactsheetDetails> {
+  try {
+    const response = await axios.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/factsheet`);
+    return response.data;
+  } catch (error) {
+    if (notFound(error)) {
+      throw new Error('The questionnaire is no longer available');
+    }
+    throw new Error('Unable to retrieve case factsheet, please try again in a few minutes');
   }
 }

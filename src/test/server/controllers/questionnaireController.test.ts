@@ -1,9 +1,9 @@
 import supertest, { Response } from 'supertest';
-import BlaiseClient, { IQuestionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
+import BlaiseClient, { Questionnaire, QuestionnaireListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import nodeServer from '../../../server/server';
-import FakeConfiguration from '../configuration/configuration.fake';
-import createAxiosError from './axios.test.helper';
+import FakeConfiguration from '../configuration/fakeConfiguration';
+import createAxiosError from './axiosTestHelper';
 
 // create fake config
 const configFake = new FakeConfiguration('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com');
@@ -29,7 +29,7 @@ describe('Get questionnaire tests', () => {
   it('It should return a 200 response with an expected list of questonnaires', async () => {
     // arrange
     // mock blaise client to return a list of questionnaires
-    const questionnaireList: IQuestionnaire[] = QuestionnaireListMockObject;
+    const questionnaireList: Questionnaire[] = QuestionnaireListMockObject;
     blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(async () => questionnaireList);
 
     // act

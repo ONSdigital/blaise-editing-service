@@ -1,11 +1,11 @@
-import Configuration from '../../../server/configuration/configuration';
+import Configuration from '../../../server/configuration/configurationProvider';
 
 /* eslint-disable no-new */
 
 describe('Configuration file tests', () => {
   const emptyEnv = process.env;
   const blaiseApiUrl = 'rest.api.blaise.com';
-  const buildFolder = '../build';
+  const buildFolder = '../../build';
   const port = 5000;
   const serverPark = 'gusty';
   const externalWebUrl = 'cati.blaise.com';
