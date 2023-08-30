@@ -1,11 +1,11 @@
 import dotenv from 'dotenv';
 import BlaiseApiClient from 'blaise-api-node-client';
 import nodeServer from './server';
-import Configuration from './configuration/configurationProvider';
+import ConfigurationProvider from './configuration/ConfigurationProvider';
 
 // create/get configuration
 dotenv.config();
-const config = new Configuration();
+const config = new ConfigurationProvider();
 
 // create client
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);

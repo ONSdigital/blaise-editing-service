@@ -1,7 +1,7 @@
 import { ONSPanel } from 'blaise-design-system-react-components';
 import AsyncContent from '../components/AsyncContent';
 import { useAsyncRequest } from '../hooks/useAsyncRequest';
-import { getSurveys } from '../api/blaiseApi';
+import { getSurveys } from '../clients/serverApi';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import SurveysList from '../components/SurveysList';
 

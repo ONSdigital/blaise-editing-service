@@ -47,6 +47,8 @@
     "axios": "^1.4.0",
     "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#BL5FRS-59",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#BL5FRS-54",
+    "blaise-login-react-client": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?BL5FRS-55",
+    "blaise-login-react-server": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?main",
     "concurrently": "^8.1.0",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
@@ -59,10 +61,10 @@
     "web-vitals": "^2.1.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "@faker-js/faker": "^8.0.2",
     "@types/express-list-endpoints": "^6.0.0",
     "@types/jest": "^27.0.1",
     "@types/supertest": "^2.0.12",

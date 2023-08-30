@@ -2,11 +2,12 @@ import BlaiseClient from 'blaise-api-node-client';
 import express, { Request, Response, Express } from 'express';
 import ejs from 'ejs';
 import path from 'path';
+import { Auth, newLoginHandler } from 'blaise-login-react-server';
 import SurveyController from './controllers/surveyController';
 import CaseController from './controllers/caseController';
-import { Configuration } from './interfaces/configurationInterface';
+import ConfigurationProvider from './configuration/ConfigurationProvider';
 
-export default function nodeServer(config: Configuration, blaiseApiClient: BlaiseClient): Express {
+export default function nodeServer(config: ConfigurationProvider, blaiseApiClient: BlaiseClient): Express {
   const server = express();
 
   // treat the index.html as a template and substitute the values at runtime
@@ -21,6 +22,11 @@ export default function nodeServer(config: Configuration, blaiseApiClient: Blais
   // case routing
   const caseController = new CaseController(config, blaiseApiClient);
   server.use('/', caseController.getRoutes());
+
+  // login routing
+  const auth = new Auth(config);
+  const loginHandler = newLoginHandler(auth, blaiseApiClient);
+  server.use('/', loginHandler);
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {

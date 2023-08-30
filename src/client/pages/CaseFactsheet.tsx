@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useAsyncRequestWithTwoParams } from '../hooks/useAsyncRequest';
 import { CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
-import { getCaseFactsheet } from '../api/blaiseApi';
+import { getCaseFactsheet } from '../clients/serverApi';
 import AsyncContent from '../components/AsyncContent';
 import FactsheetContent from '../components/FactsheetContent';
 

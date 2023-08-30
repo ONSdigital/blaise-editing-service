@@ -1,33 +1,35 @@
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Footer, Header } from 'blaise-design-system-react-components';
-import Cases from './pages/Cases';
-import CaseFactsheet from './pages/CaseFactsheet';
-import Surveys from './pages/Surveys';
+import { ReactElement, useState } from 'react';
+import AppRoutes from './components/AppRoutes';
+import LoginClient from './clients/Login';
 
 const divStyle = {
   minHeight: 'calc(67vh)',
 };
 
-function App() {
+function App(): ReactElement {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const loginClient = new LoginClient(loggedIn, setLoggedIn);
+  const navigationLinks = [
+    {
+      endpoint: '/',
+      id: 'home',
+      label: 'Home',
+    },
+  ];
+
   return (
     <>
       <Header
         title="Blaise Editing Service"
-        navigationLinks={[
-          {
-            endpoint: '/',
-            id: 'home',
-            label: 'Home',
-          },
-        ]}
+        noSave
+        signOutButton={loginClient.loggedIn}
+        signOutFunction={() => loginClient.signOut()}
+        navigationLinks={navigationLinks}
       />
-      <div style={divStyle} className="ons-page__container ons-container">
-        <Routes>
-          <Route path="/" element={<Surveys />} />
-          <Route path="questionnaires/:questionnaireName/cases/" element={<Cases />} />
-          <Route path="questionnaires/:questionnaireName/cases/:caseId/factsheet" element={<CaseFactsheet />} />
-        </Routes>
+      <div style={divStyle} className="ons-page__container ons-container" data-testid="app-content">
+        <AppRoutes loginClient={loginClient} />
       </div>
       <Footer />
     </>

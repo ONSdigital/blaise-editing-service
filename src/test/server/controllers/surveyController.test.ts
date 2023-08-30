@@ -2,14 +2,14 @@ import supertest, { Response } from 'supertest';
 import BlaiseClient, { QuestionnaireListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import nodeServer from '../../../server/server';
-import FakeConfiguration from '../configuration/fakeConfiguration';
+import FakeConfigurationProvider from '../configuration/FakeConfigurationProvider';
 import createAxiosError from './axiosTestHelper';
 import surveyListMockObject from '../../mockObjects/surveyListMockObject';
 import { Survey } from '../../../common/interfaces/surveyInterface';
 import mapSurveys from '../../../server/mappers/surveyMapper';
 
 // create fake config
-const configFake = new FakeConfiguration('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com');
+const configFake = new FakeConfigurationProvider('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com', 'richlikesricecakes', '12h', ['DST']);
 
 // mock blaise api client
 const blaiseApiClientMock: IMock<BlaiseClient> = Mock.ofType(BlaiseClient);

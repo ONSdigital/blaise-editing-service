@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { getCases } from '../api/blaiseApi';
+import { ReactElement } from 'react';
+import { getCases } from '../clients/serverApi';
 import AsyncContent from '../components/AsyncContent';
 import CasesList from '../components/CasesList';
 import { useAsyncRequestWithParam } from '../hooks/useAsyncRequest';
@@ -15,7 +16,7 @@ function DisplayCases(questionnaireName: string) {
   );
 }
 
-export default function Cases() {
+export default function Cases(): ReactElement {
   const { questionnaireName } = useParams();
   if (!questionnaireName) {
     return (

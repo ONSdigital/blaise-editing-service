@@ -2,7 +2,7 @@ import supertest, { Response } from 'supertest';
 import BlaiseClient, { CaseResponse, CaseStatus, CaseStatusListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import nodeServer from '../../../server/server';
-import FakeConfiguration from '../configuration/fakeConfiguration';
+import FakeConfigurationProvider from '../configuration/FakeConfigurationProvider';
 import { CaseDetails, CaseFactsheetDetails } from '../../../common/interfaces/caseInterface';
 import createAxiosError from './axiosTestHelper';
 import { mapCaseDetails, mapCaseFactsheet } from '../../../server/mappers/caseMapper';
@@ -10,7 +10,7 @@ import CaseBuilder from '../../builders/caseBuilder';
 import CaseDetailsBuilder from '../../builders/caseDetailsBuilder';
 
 // create fake config
-const configFake = new FakeConfiguration('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com');
+const configFake = new FakeConfigurationProvider('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com', 'richlikesricecakes', '12h', ['DST']);
 
 // mock blaise api client
 const blaiseApiClientMock: IMock<BlaiseClient> = Mock.ofType(BlaiseClient);
