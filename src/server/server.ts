@@ -2,7 +2,7 @@ import BlaiseClient from 'blaise-api-node-client';
 import express, { Request, Response, Express } from 'express';
 import ejs from 'ejs';
 import path from 'path';
-import QuestionnaireController from './controllers/questionnaireController';
+import SurveyController from './controllers/surveyController';
 import CaseController from './controllers/caseController';
 import { Configuration } from './interfaces/configurationInterface';
 
@@ -14,9 +14,9 @@ export default function nodeServer(config: Configuration, blaiseApiClient: Blais
   server.engine('html', ejs.renderFile);
   server.use('/static', express.static(path.join(__dirname, `${config.BuildFolder}/static`)));
 
-  // questionnaire routing
-  const questionnaireController = new QuestionnaireController(config, blaiseApiClient);
-  server.use('/', questionnaireController.getRoutes());
+  // survey routing
+  const surveyController = new SurveyController(config, blaiseApiClient);
+  server.use('/', surveyController.getRoutes());
 
   // case routing
   const caseController = new CaseController(config, blaiseApiClient);

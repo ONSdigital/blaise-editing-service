@@ -1,18 +1,18 @@
 import axios from 'axios';
-import { Questionnaire } from 'blaise-api-node-client';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
 import notFound from '../../common/helpers/axiosHelper';
+import { Survey } from '../../common/interfaces/surveyInterface';
 
-export async function getQuestionnaires(): Promise<Questionnaire[]> {
+export async function getSurveys(): Promise<Survey[]> {
   try {
-    const response = await axios.get('/api/questionnaires');
+    const response = await axios.get('/api/surveys');
 
     return response.data;
   } catch (error) {
     if (notFound(error)) {
-      throw new Error('Unable to find questionnaires, please contact Richmond Rice');
+      throw new Error('Unable to find surveys, please contact Richmond Rice');
     }
-    throw new Error('Unable to retrieve questionnaires, please try again in a few minutes');
+    throw new Error('Unable to retrieve surveys, please try again in a few minutes');
   }
 }
 

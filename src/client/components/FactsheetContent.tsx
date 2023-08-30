@@ -1,10 +1,11 @@
+import { ReactElement } from 'react';
 import { CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
 
 interface FactsheetContentProps {
   factsheet: CaseFactsheetDetails;
 }
 
-export default function FactsheetContent({ factsheet }: FactsheetContentProps) {
+export default function FactsheetContent({ factsheet }: FactsheetContentProps): ReactElement {
   return (
 
     <dl

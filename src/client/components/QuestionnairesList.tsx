@@ -1,35 +1,32 @@
 import { Questionnaire } from 'blaise-api-node-client';
-import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 interface QuestionnairesListProps {
   questionnaires: Questionnaire[];
 }
 
-export default function QuestionnairesList({ questionnaires }: QuestionnairesListProps) {
-  if (questionnaires.length === 0) {
-    return (
-      <ONSPanel spacious status="info">There are no questionnaires available</ONSPanel>
-    );
-  }
+export default function QuestionnairesList({ questionnaires }: QuestionnairesListProps): ReactElement {
   return (
-    <ONSTable
-      tableID="questionnaire-table"
-      columns={[
-        'Questionnaire name',
-        'Server park',
-        'Number of cases',
-      ]}
+    <dl
+      className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+      title="Questionnares"
+      data-testid="QuestionnaireList"
+      style={{ padding: '0 0 15px 5px' }}
     >
-      <>
-        {questionnaires.map((questionnaire) => (
-          <tr key={questionnaire.name} className="ons-table__row" data-testid="questionnaire-table-row">
-            <td className="ons-table__cell"><Link to={`/questionnaires/${questionnaire.name}/cases`}>{questionnaire.name}</Link></td>
-            <td className="ons-table__cell">{questionnaire.serverParkName}</td>
-            <td className="ons-table__cell">{questionnaire.dataRecordCount}</td>
-          </tr>
-        ))}
-      </>
-    </ONSTable>
+      <dt className="ons-metadata__term ons-grid__col ons-col-6@m">Questionnaire</dt>
+      <dd className="ons-metadata__value ons-grid__col ons-col-6@m" style={{ fontWeight: 'bold' }}>Case Count</dd>
+      {questionnaires.map((questionnaire) => (
+        <React.Fragment key={questionnaire.name}>
+          <dt className="ons-metadata__term ons-grid__col ons-col-6@m">
+            <Link to={`/questionnaires/${questionnaire.name}/cases`} style={{ fontWeight: 'normal' }}>
+              {questionnaire.name}
+            </Link>
+          </dt>
+          <dd className="ons-metadata__value ons-grid__col ons-col-6@m">{questionnaire.dataRecordCount}</dd>
+        </React.Fragment>
+      ))}
+    </dl>
+
   );
 }

@@ -1,47 +1,47 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { QuestionnaireListMockObject } from 'blaise-api-node-client';
-import { getCases, getQuestionnaires, getCaseFactsheet } from '../../../client/api/blaiseApi';
+import { getCases, getSurveys, getCaseFactsheet } from '../../../client/api/blaiseApi';
 import CaseBuilder from '../../builders/caseBuilder';
 import { CaseFactsheetDetails } from '../../../common/interfaces/caseInterface';
 import CaseDetailsBuilder from '../../builders/caseDetailsBuilder';
+import surveyListMockObject from '../../mockObjects/surveyListMockObject';
 
 const mock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 
-describe('GetQuestionnaires from Blaise', () => {
-  it('Should retrieve a list of questionnaires in blaise with a 200 response', async () => {
+describe('GetSurveys from Blaise', () => {
+  it('Should retrieve a list of surveys in blaise with a 200 response', async () => {
     // arrange
-    mock.onGet('/api/questionnaires').reply(200, QuestionnaireListMockObject);
+    mock.onGet('/api/surveys').reply(200, surveyListMockObject);
 
     // act
-    const result = await getQuestionnaires();
+    const result = await getSurveys();
 
     // assert
-    expect(result).toEqual(QuestionnaireListMockObject);
+    expect(result).toEqual(surveyListMockObject);
   });
 
-  it('Should throw the error "Unable to find questionnaires, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to find surveys, please contact Richmond Rice" when a 404 response is recieved', async () => {
     // arrange
-    mock.onGet('/api/questionnaires').reply(404, null);
+    mock.onGet('/api/surveys').reply(404, null);
 
     // act && assert
-    expect(getQuestionnaires()).rejects.toThrow(/Unable to find questionnaires, please contact Richmond Rice/);
+    expect(getSurveys()).rejects.toThrow(/Unable to find surveys, please contact Richmond Rice/);
   });
 
-  it('Should throw the error "Unable to retrieve questionnaires, please try again in a few minutes" when a 500 response is recieved', async () => {
+  it('Should throw the error "Unable to retrieve surveys, please try again in a few minutes" when a 500 response is recieved', async () => {
     // arrange
-    mock.onGet('/api/questionnaires').reply(500, null);
+    mock.onGet('/api/surveys').reply(500, null);
 
     // act && assert
-    expect(getQuestionnaires()).rejects.toThrow(/Unable to retrieve questionnaires, please try again in a few minutes/);
+    expect(getSurveys()).rejects.toThrow(/Unable to retrieve surveys, please try again in a few minutes/);
   });
 
-  it('Should throw the error "Unable to retrieve questionnaires, please try again in a few minutes" when there is a network error', async () => {
+  it('Should throw the error "Unable to retrieve surveys, please try again in a few minutes" when there is a network error', async () => {
     // arrange
-    mock.onGet('/api/questionnaires').networkError();
+    mock.onGet('/api/surveys').networkError();
 
     // act && assert
-    expect(getQuestionnaires()).rejects.toThrow(/Unable to retrieve questionnaires, please try again in a few minutes/);
+    expect(getSurveys()).rejects.toThrow(/Unable to retrieve surveys, please try again in a few minutes/);
   });
 });
 
