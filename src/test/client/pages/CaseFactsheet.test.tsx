@@ -1,10 +1,10 @@
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'react-router';
-import { getCaseFactsheet } from '../../../client/clients/serverApi';
 import { CaseFactsheetDetails } from '../../../common/interfaces/caseInterface';
 import CaseBuilder from '../../builders/caseBuilder';
 import CaseFactsheet from '../../../client/pages/CaseFactsheet';
+import { getCaseFactsheet } from '../../../client/clients/NodeApi';
 
 // declare global vars
 const questionnaireName: string = 'TEST111A';
@@ -13,16 +13,18 @@ let view:RenderResult;
 
 // declare mocks
 /* eslint import/no-extraneous-dependencies: 0 */
-jest.mock('../../../client/clients/serverApi');
 jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), useParams: jest.fn() }));
 jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName, caseId });
-
+jest.mock('../../../client/clients/NodeApi');
 const getCaseFactsheetMock = getCaseFactsheet as jest.Mock<Promise<CaseFactsheetDetails>>;
 
 describe('Given there is a case available in blaise for a questionnaire', () => {
+  afterEach(() => {
+    getCaseFactsheetMock.mockReset();
+  });
+
   it.each([1, 3, 5, 10])('should render the factsheet page for the case correctly', async (value) => {
     // arrange
-
     const caseBuilder = new CaseBuilder(value);
     const expectedCaseFactsheet: CaseFactsheetDetails = caseBuilder.buildCaseFactsheet();
 
@@ -58,7 +60,6 @@ describe('Given there is a case available in blaise for a questionnaire', () => 
 
   it.each([1, 3, 5, 10])('should display the factsheet correctly', async (value) => {
     // arrange
-
     const caseBuilder = new CaseBuilder(value);
     const expectedCaseFactsheet: CaseFactsheetDetails = caseBuilder.buildCaseFactsheet();
 
@@ -98,7 +99,8 @@ describe('Given there the blaise rest api is not available', () => {
     });
 
     // assert
-    expect(view.getByText(/try again in a few minutes/)).toBeInTheDocument();
+    const factsheetView = view.getByTestId('Factsheet');
+    expect(factsheetView).toHaveTextContent('try again in a few minutes');
   });
 
   it('should render the page correctly when an error occurs', async () => {

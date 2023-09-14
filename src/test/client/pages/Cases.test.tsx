@@ -1,22 +1,22 @@
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'react-router';
-import { getCases } from '../../../client/clients/serverApi';
-import { CaseDetails } from '../../../common/interfaces/caseInterface';
 import Cases from '../../../client/pages/Cases';
 import CaseDetailsBuilder from '../../builders/caseDetailsBuilder';
+import { getCases } from '../../../client/clients/NodeApi';
+import { CaseDetails } from '../../../common/interfaces/caseInterface';
 
 // declare global vars
 const questionnaireName: string = 'TEST111A';
-const getCasesMock = getCases as jest.Mock<Promise<CaseDetails[]>>;
-
 let view:RenderResult;
 
 // declare mocks
 /* eslint import/no-extraneous-dependencies: 0 */
-jest.mock('../../../client/clients/serverApi');
 jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), useParams: jest.fn() }));
 jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName });
+
+jest.mock('../../../client/clients/NodeApi');
+const getCasesMock = getCases as jest.Mock<Promise<CaseDetails[]>>;
 
 describe('Given there are cases available in blaise for questionnaire', () => {
   afterEach(() => {
@@ -127,7 +127,8 @@ describe('Given there the blaise rest api is not available', () => {
     });
 
     // assert
-    expect(view.getByText(/try again in a few minutes/)).toBeInTheDocument();
+    const casesView = view.getByTestId('Cases');
+    expect(casesView).toHaveTextContent('try again in a few minutes');
   });
 
   it('should render the page correctly when an error occurs', async () => {

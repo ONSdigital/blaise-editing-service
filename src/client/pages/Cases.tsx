@@ -1,18 +1,20 @@
 import { useParams } from 'react-router-dom';
 import { ReactElement } from 'react';
-import { getCases } from '../clients/serverApi';
 import AsyncContent from '../components/AsyncContent';
 import CasesList from '../components/CasesList';
 import { useAsyncRequestWithParam } from '../hooks/useAsyncRequest';
 import { CaseDetails } from '../../common/interfaces/caseInterface';
+import { getCases } from '../clients/NodeApi';
 
 function DisplayCases(questionnaireName: string) {
-  const cases = useAsyncRequestWithParam<CaseDetails[]>(getCases, questionnaireName);
+  const cases = useAsyncRequestWithParam<CaseDetails[], string>(getCases, questionnaireName);
 
   return (
-    <AsyncContent content={cases}>
-      {(loadedCases) => <CasesList cases={loadedCases} />}
-    </AsyncContent>
+    <div data-testid="Cases">
+      <AsyncContent content={cases}>
+        {(loadedCases) => <CasesList cases={loadedCases} />}
+      </AsyncContent>
+    </div>
   );
 }
 

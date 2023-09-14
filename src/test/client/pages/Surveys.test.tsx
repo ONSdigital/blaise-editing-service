@@ -1,15 +1,18 @@
 import { render, act, RenderResult } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { getSurveys } from '../../../client/clients/serverApi';
-
-import { Survey } from '../../../common/interfaces/surveyInterface';
 import surveyListMockObject from '../../mockObjects/surveyListMockObject';
 import Surveys from '../../../client/pages/Surveys';
+import userMockObject from '../../mockObjects/userMockObject';
+import { getSurveys } from '../../../client/clients/NodeApi';
+import { Survey } from '../../../common/interfaces/surveyInterface';
 
-jest.mock('../../../client/clients/serverApi');
-
-const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
+// set global vars
+const validUserRoles:string[] = ['Manager', 'Editor'];
 let view:RenderResult;
+
+// set mocks
+jest.mock('../../../client/clients/NodeApi');
+const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {
@@ -20,12 +23,16 @@ describe('Given there are surveys available in blaise', () => {
     getSurveysMock.mockReset();
   });
 
-  it('should render the page correctly when surveys are returned', async () => {
+  it.each(validUserRoles)('should render the manager page correctly when surveys are returned', async (userRole) => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
     // act
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Surveys />
+          <Surveys user={user} />
         </BrowserRouter>,
       );
     });
@@ -34,12 +41,16 @@ describe('Given there are surveys available in blaise', () => {
     expect(view).toMatchSnapshot();
   });
 
-  it('should display a list of the expected surveys', async () => {
+  it.each(validUserRoles)('should display a list of the expected surveys', async (userRole) => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
     // act
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Surveys />
+          <Surveys user={user} />
         </BrowserRouter>,
       );
     });
@@ -67,12 +78,16 @@ describe('Given there are no surveys available in blaise', () => {
     getSurveysMock.mockReset();
   });
 
-  it('should render the page correctly when no surveys are returned', async () => {
+  it.each(validUserRoles)('should render the page correctly when no surveys are returned', async (userRole) => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
     // act
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Surveys />
+          <Surveys user={user} />
         </BrowserRouter>,
       );
     });
@@ -81,18 +96,23 @@ describe('Given there are no surveys available in blaise', () => {
     expect(view).toMatchSnapshot();
   });
 
-  it('should display a message telling the user there are no surveys', async () => {
+  it.each(validUserRoles)('should display a message telling the user there are no surveys', async (userRole) => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
     // act
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Surveys />
+          <Surveys user={user} />
         </BrowserRouter>,
       );
     });
 
     // assert
-    expect(view.getByText(/There are no surveys available/)).toBeInTheDocument();
+    const surveysView = view.getByTestId('Surveys');
+    expect(surveysView).toHaveTextContent('There are no surveys available');
   });
 });
 
@@ -105,26 +125,35 @@ describe('Given there the blaise rest api is not available', () => {
     getSurveysMock.mockReset();
   });
 
-  it('should display an error message telling the user to try again in a few minutes', async () => {
+  it.each(validUserRoles)('should display an error message telling the user to try again in a few minutes', async (userRole) => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
     // act
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Surveys />
+          <Surveys user={user} />
         </BrowserRouter>,
       );
     });
 
     // assert
-    expect(view.getByText(/try again in a few minutes/)).toBeInTheDocument();
+    const surveysView = view.getByTestId('Surveys');
+    expect(surveysView).toHaveTextContent('try again in a few minutes');
   });
 
-  it('should render the page correctly when an error occurs', async () => {
+  it.each(validUserRoles)('should render the page correctly for the user when an error occurs', async (userRole) => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
     // act
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Surveys />
+          <Surveys user={user} />
         </BrowserRouter>,
       );
     });
