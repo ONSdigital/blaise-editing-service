@@ -1,19 +1,18 @@
-import BlaiseClient from 'blaise-api-node-client';
 import express, { Request, Response, Router } from 'express';
 import { Controller } from '../interfaces/controllerInterface';
 import { Configuration } from '../interfaces/configurationInterface';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
-import { mapCaseDetails, mapCaseFactsheet } from '../mappers/caseMapper';
 import notFound from '../../common/helpers/axiosHelper';
+import BlaiseApi from '../api/BlaiseApi';
 
 export default class CaseController implements Controller {
   config: Configuration;
 
-  blaiseApiClient: BlaiseClient;
+  blaiseApi: BlaiseApi;
 
-  constructor(config: Configuration, blaiseApiClient: BlaiseClient) {
+  constructor(config: Configuration, blaiseApi: BlaiseApi) {
     this.config = config;
-    this.blaiseApiClient = blaiseApiClient;
+    this.blaiseApi = blaiseApi;
     this.getCases = this.getCases.bind(this);
     this.getCaseFactsheet = this.getCaseFactsheet.bind(this);
   }
@@ -26,16 +25,11 @@ export default class CaseController implements Controller {
     return router;
   }
 
-  async getCases(request: Request, response: Response<CaseDetails[]>) {
+  async getCases(request: Request<{ questionnaireName:string }>, response: Response<CaseDetails[]>) {
     const { questionnaireName } = request.params;
 
-    if (questionnaireName === undefined) {
-      throw new Error('Questionnaire name has not been provided');
-    }
-
     try {
-      const caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, questionnaireName);
-      const caseDetailsList = mapCaseDetails(caseStatusList, questionnaireName, this.config.ExternalWebUrl);
+      const caseDetailsList = await this.blaiseApi.getCaseDetails(questionnaireName);
 
       return response.status(200).json(caseDetailsList);
     } catch (error: unknown) {
@@ -46,23 +40,14 @@ export default class CaseController implements Controller {
     }
   }
 
-  async getCaseFactsheet(request: Request, response: Response<CaseFactsheetDetails>) {
+  async getCaseFactsheet(request: Request<{ questionnaireName:string, caseId:string }>, response: Response<CaseFactsheetDetails>) {
     const {
       questionnaireName,
       caseId,
     } = request.params;
 
-    if (questionnaireName === undefined) {
-      throw new Error('Questionnaire name has not been provided');
-    }
-
-    if (caseId === undefined) {
-      throw new Error('Case ID has not been provided');
-    }
-
     try {
-      const caseResponse = await this.blaiseApiClient.getCase(this.config.ServerPark, questionnaireName, caseId);
-      const caseFactsheet = mapCaseFactsheet(caseResponse);
+      const caseFactsheet = await this.blaiseApi.getCaseFactsheet(questionnaireName, caseId);
 
       return response.status(200).json(caseFactsheet);
     } catch (error: unknown) {

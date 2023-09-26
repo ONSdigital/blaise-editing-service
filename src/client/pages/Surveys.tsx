@@ -4,7 +4,7 @@ import AsyncContent from '../components/AsyncContent';
 import { useAsyncRequest } from '../hooks/useAsyncRequest';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import SurveysList from '../components/SurveysList';
-import { getSurveys } from '../clients/NodeApi';
+import { getSurveys } from '../api/NodeApi';
 
 interface SurveyProps {
   user: User;

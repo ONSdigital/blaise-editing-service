@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import surveyListMockObject from '../../mockObjects/surveyListMockObject';
 import Surveys from '../../../client/pages/Surveys';
 import userMockObject from '../../mockObjects/userMockObject';
-import { getSurveys } from '../../../client/clients/NodeApi';
+import { getSurveys } from '../../../client/api/NodeApi';
 import { Survey } from '../../../common/interfaces/surveyInterface';
 
 // set global vars
@@ -11,7 +11,7 @@ const validUserRoles:string[] = ['Manager', 'Editor'];
 let view:RenderResult;
 
 // set mocks
-jest.mock('../../../client/clients/NodeApi');
+jest.mock('../../../client/api/NodeApi');
 const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
 
 describe('Given there are surveys available in blaise', () => {
@@ -60,10 +60,10 @@ describe('Given there are surveys available in blaise', () => {
       const surveyListView = view.getByTestId(`accordion-${surveyIndex}-heading`);
       expect(surveyListView).toHaveTextContent(survey.name);
 
-      survey.questionnaires.forEach(({ name, dataRecordCount }) => {
+      survey.questionnaires.forEach(({ questionnaireName, numberOfCases }) => {
         const questionnaireListView = view.getByTestId(`accordion-${surveyIndex}-content`);
-        expect(questionnaireListView).toHaveTextContent(name);
-        expect(questionnaireListView).toHaveTextContent(String(dataRecordCount));
+        expect(questionnaireListView).toHaveTextContent(questionnaireName);
+        expect(questionnaireListView).toHaveTextContent(String(numberOfCases));
       });
     });
   });

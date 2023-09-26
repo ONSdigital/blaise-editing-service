@@ -4,11 +4,10 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import { Authenticate } from 'blaise-login-react-client';
 import surveyListMockObject from '../mockObjects/surveyListMockObject';
-import { getSurveys } from '../../client/clients/NodeApi';
+import { getSurveys } from '../../client/api/NodeApi';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import userMockObject from '../mockObjects/userMockObject';
 import App from '../../client/App';
-import MockAuthenticate from '../mockComponents/mockAuthenticate';
 
 // set global variables
 const validUserRoles:string[] = ['Manager', 'Editor'];
@@ -16,9 +15,10 @@ let view:RenderResult;
 
 // create mocks
 jest.mock('blaise-login-react-client');
+const { MockAuthenticate } = jest.requireActual('blaise-login-react-client');
 Authenticate.prototype.render = MockAuthenticate.prototype.render;
 
-jest.mock('../../client/clients/NodeApi');
+jest.mock('../../client/api/NodeApi');
 const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
 
 describe('Renders the correct screen depending if the user has recently logged in', () => {

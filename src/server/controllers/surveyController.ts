@@ -1,19 +1,15 @@
-import BlaiseClient from 'blaise-api-node-client';
 import express, { Request, Response } from 'express';
 import { Controller } from '../interfaces/controllerInterface';
-import { Configuration } from '../interfaces/configurationInterface';
 import notFound from '../../common/helpers/axiosHelper';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import mapSurveys from '../mappers/surveyMapper';
+import BlaiseApi from '../api/BlaiseApi';
 
 export default class SurveyController implements Controller {
-  config: Configuration;
+  blaiseApi: BlaiseApi;
 
-  blaiseApiClient: BlaiseClient;
-
-  constructor(config: Configuration, blaiseApiClient: BlaiseClient) {
-    this.config = config;
-    this.blaiseApiClient = blaiseApiClient;
+  constructor(blaiseApi: BlaiseApi) {
+    this.blaiseApi = blaiseApi;
     this.getSurveys = this.getSurveys.bind(this);
   }
 
@@ -24,7 +20,7 @@ export default class SurveyController implements Controller {
 
   async getSurveys(_request: Request, response: Response<Survey[]>) {
     try {
-      const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
+      const questionnaires = await this.blaiseApi.getQuestionnaires();
       const surveys = mapSurveys(questionnaires);
 
       return response.status(200).json(surveys);

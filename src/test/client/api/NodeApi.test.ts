@@ -1,10 +1,8 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import CaseBuilder from '../../builders/caseBuilder';
-import { CaseFactsheetDetails } from '../../../common/interfaces/caseInterface';
-import CaseDetailsBuilder from '../../builders/caseDetailsBuilder';
 import surveyListMockObject from '../../mockObjects/surveyListMockObject';
-import { getCaseFactsheet, getCases, getSurveys } from '../../../client/clients/NodeApi';
+import { getCaseFactsheet, getCases, getSurveys } from '../../../client/api/NodeApi';
+import { caseDetailsListMockObject, caseFactsheetMockObject } from '../../mockObjects/caseMockObject';
 
 // use axios mock adapter
 const axiosMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -49,10 +47,8 @@ describe('GetSurveys from Blaise', () => {
 describe('GetCases from Blaise', () => {
   const questionnaireName = 'LMS2201_LT1';
 
-  it.each([1, 2, 3, 4])('Should retrieve a list of cases in blaise with a 200 response', async (value) => {
+  it('Should retrieve a list of cases in blaise with a 200 response', async () => {
     // arrange
-    const caseDetailsBuider = new CaseDetailsBuilder(value);
-    const caseDetailsListMockObject = caseDetailsBuider.BuildCaseDetails();
     axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases`).reply(200, caseDetailsListMockObject);
 
     // act
@@ -90,18 +86,16 @@ describe('GetCases from Blaise', () => {
 describe('GetCaseFactsheet from Blaise', () => {
   const questionnaireName = 'LMS2201_LT1';
   const caseId = '900001';
-  const caseBuilder = new CaseBuilder(1);
-  const expectedCaseFactsheet: CaseFactsheetDetails = caseBuilder.buildCaseFactsheet();
 
   it('Should retrieve a list of cases in blaise with a 200 response', async () => {
     // arrange
-    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/${caseId}/factsheet`).reply(200, expectedCaseFactsheet);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/${caseId}/factsheet`).reply(200, caseFactsheetMockObject);
 
     // act
     const result = await getCaseFactsheet(questionnaireName, caseId);
 
     // assert
-    expect(JSON.stringify(result)).toEqual(JSON.stringify(expectedCaseFactsheet));
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(caseFactsheetMockObject));
   });
 
   it('Should throw the error "The questionnaire is no longer available', async () => {

@@ -45,15 +45,12 @@ function displayAllocation(questionnaireName:string) {
   );
 }
 
+export type AllocationParams = {
+  questionnaireName: string
+};
+
 export default function Allocation() {
-  const { questionnaireName } = useParams();
-  if (!questionnaireName) {
-    return (
-      <div>
-        No questionnaire
-      </div>
-    );
-  }
+  const { questionnaireName } = useParams<keyof AllocationParams>() as AllocationParams;
 
   return displayAllocation(questionnaireName);
 }

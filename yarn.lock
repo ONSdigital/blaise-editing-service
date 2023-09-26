@@ -4201,19 +4201,9 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-blaise-api-node-client@ONSDigital/blaise-api-node-client:
+blaise-api-node-client@ONSDigital/blaise-api-node-client#BL5FRS-67, "blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#BL5FRS-67":
   version "1.0.0"
-  uid dbc1474e320153e94a43673c8ecaa18ce1b7c65a
-  resolved "https://codeload.github.com/ONSDigital/blaise-api-node-client/tar.gz/dbc1474e320153e94a43673c8ecaa18ce1b7c65a"
-  dependencies:
-    "@babel/preset-env" "^7.14.7"
-    axios "^0.21.1"
-    blaise-iap-node-provider "https://github.com/ONSdigital/blaise-iap-node-provider.git"
-    typescript "~4.2.2"
-
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client":
-  version "1.0.0"
-  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#dbc1474e320153e94a43673c8ecaa18ce1b7c65a"
+  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#1c2ba850041dc43d1fe3366d62aa417e3d90bba0"
   dependencies:
     "@babel/preset-env" "^7.14.7"
     axios "^0.21.1"
@@ -4241,12 +4231,12 @@ blaise-api-node-client@ONSDigital/blaise-api-node-client:
     path-parse "^1.0.7"
     typescript "~4.2.2"
 
-"blaise-login-react-client@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?91856afb618184a6e7606a520197d36c588c2205":
+"blaise-login-react-client@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?0b91f6c0a9a515c821d5781f6f46ab9592352784":
   version "1.0.0"
-  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?91856afb618184a6e7606a520197d36c588c2205#6ddba9954740225262a54fd117ad944184b4d148"
+  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?0b91f6c0a9a515c821d5781f6f46ab9592352784#97e4521672c593f0fec1ce16abbb95a786886989"
   dependencies:
     axios "~0.21.0"
-    blaise-api-node-client ONSDigital/blaise-api-node-client
+    blaise-api-node-client ONSDigital/blaise-api-node-client#BL5FRS-67
     blaise-design-system-react-components "git+https://github.com/ONSdigital/blaise-design-system-react-components#BL5FRS-54"
     formik "^2.2.9"
     react "^18.2.0"
@@ -4255,13 +4245,13 @@ blaise-api-node-client@ONSDigital/blaise-api-node-client:
     react-router-dom "^6.11.2"
     universal-cookie "^4.0.4"
 
-"blaise-login-react-server@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?main":
+"blaise-login-react-server@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?BL5FRS-67":
   version "1.1.0"
-  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?main#6921391d3f5f253d07e17c332f3e43fb4ce5e17c"
+  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?BL5FRS-67#1e435f5c4b83c43bf16c2cedc2c60a57948bce82"
   dependencies:
     "@babel/preset-env" "^7.14.7"
     axios "^0.21.1"
-    blaise-api-node-client ONSDigital/blaise-api-node-client
+    blaise-api-node-client ONSDigital/blaise-api-node-client#BL5FRS-67
     express "^4.17.2"
     jsonwebtoken "^8.5.1"
     typescript "~4.2.2"

@@ -325,7 +325,9 @@ exports[`Given there are surveys available in blaise should render the manager p
                 <dd
                   class="ons-metadata__value ons-grid__col ons-col-8@m"
                 >
-                  6 /
+                  3
+                   
+                  /
                    
                   5
                 </dd>
@@ -342,7 +344,9 @@ exports[`Given there are surveys available in blaise should render the manager p
                 <dd
                   class="ons-metadata__value ons-grid__col ons-col-8@m"
                 >
-                  6 /
+                  5
+                   
+                  /
                    
                   15
                 </dd>
@@ -359,7 +363,9 @@ exports[`Given there are surveys available in blaise should render the manager p
                 <dd
                   class="ons-metadata__value ons-grid__col ons-col-8@m"
                 >
-                  6 /
+                  3
+                   
+                  /
                    
                   7
                 </dd>
@@ -442,7 +448,9 @@ exports[`Given there are surveys available in blaise should render the manager p
                 <dd
                   class="ons-metadata__value ons-grid__col ons-col-8@m"
                 >
-                  6 /
+                  18
+                   
+                  /
                    
                   24
                 </dd>
@@ -560,7 +568,9 @@ exports[`Given there are surveys available in blaise should render the manager p
               <dd
                 class="ons-metadata__value ons-grid__col ons-col-8@m"
               >
-                6 /
+                3
+                 
+                /
                  
                 5
               </dd>
@@ -577,7 +587,9 @@ exports[`Given there are surveys available in blaise should render the manager p
               <dd
                 class="ons-metadata__value ons-grid__col ons-col-8@m"
               >
-                6 /
+                5
+                 
+                /
                  
                 15
               </dd>
@@ -594,7 +606,9 @@ exports[`Given there are surveys available in blaise should render the manager p
               <dd
                 class="ons-metadata__value ons-grid__col ons-col-8@m"
               >
-                6 /
+                3
+                 
+                /
                  
                 7
               </dd>
@@ -677,7 +691,9 @@ exports[`Given there are surveys available in blaise should render the manager p
               <dd
                 class="ons-metadata__value ons-grid__col ons-col-8@m"
               >
-                6 /
+                18
+                 
+                /
                  
                 24
               </dd>

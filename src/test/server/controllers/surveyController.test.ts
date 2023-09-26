@@ -1,59 +1,52 @@
 import supertest, { Response } from 'supertest';
-import BlaiseClient, { QuestionnaireListMockObject } from 'blaise-api-node-client';
 import { IMock, Mock, Times } from 'typemoq';
 import nodeServer from '../../../server/server';
 import FakeConfigurationProvider from '../configuration/FakeConfigurationProvider';
 import createAxiosError from './axiosTestHelper';
-import surveyListMockObject from '../../mockObjects/surveyListMockObject';
-import { Survey } from '../../../common/interfaces/surveyInterface';
-import mapSurveys from '../../../server/mappers/surveyMapper';
+import BlaiseApi from '../../../server/api/BlaiseApi';
+import surveyAllocationListMockObject from '../../mockObjects/surveyAllocationListMockObject';
+import { questionnaireCaseDetailsListMockObject } from '../../mockObjects/questionnaireListMockObject';
 
 // create fake config
 const configFake = new FakeConfigurationProvider('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com', 'richlikesricecakes', '12h', ['DST']);
 
 // mock blaise api client
-const blaiseApiClientMock: IMock<BlaiseClient> = Mock.ofType(BlaiseClient);
-
-// mock survey mapper
-jest.mock('../../../server/mappers/surveyMapper');
+const blaiseApiMock: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
 
 // need to test the endpoints through the express server
-const server = nodeServer(configFake, blaiseApiClientMock.object);
+const server = nodeServer(configFake, blaiseApiMock.object);
 
 // supertest will handle all http calls
 const sut = supertest(server);
 
 describe('Get surveys tests', () => {
   beforeEach(() => {
-    blaiseApiClientMock.reset();
+    blaiseApiMock.reset();
   });
 
   afterAll(() => {
-    blaiseApiClientMock.reset();
+    blaiseApiMock.reset();
   });
 
   it('It should return a 200 response with an expected list of surveys', async () => {
     // arrange
-    // mock blaise client to return a list of questionnaires
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(async () => QuestionnaireListMockObject);
-
-    const surveyMapperMock = mapSurveys as jest.Mock<Survey[]>;
-    surveyMapperMock.mockReturnValueOnce(surveyListMockObject);
+    // mock blaise client to return a list of questionnaires with allocation
+    blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(async () => questionnaireCaseDetailsListMockObject);
 
     // act
     const response: Response = await sut.get('/api/surveys');
 
     // assert
     expect(response.status).toEqual(200);
-    expect(response.body).toEqual(surveyListMockObject);
-    blaiseApiClientMock.verify((client) => client.getQuestionnaires(configFake.ServerPark), Times.once());
+    expect(response.body).toEqual(surveyAllocationListMockObject);
+    blaiseApiMock.verify((api) => api.getQuestionnaires(), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a list of surveys and the rest api is not availiable', async () => {
     // arrange
     const axiosError = createAxiosError(500);
 
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject(axiosError));
+    blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(() => Promise.reject(axiosError));
 
     // act
     const response: Response = await sut.get('/api/surveys');
@@ -66,7 +59,7 @@ describe('Get surveys tests', () => {
     // arrange
     const apiClientError = new Error();
 
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject(apiClientError));
+    blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(() => Promise.reject(apiClientError));
 
     // act
     const response: Response = await sut.get('/api/surveys');
@@ -79,7 +72,7 @@ describe('Get surveys tests', () => {
     // arrange
     const axiosError = createAxiosError(404);
 
-    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(() => Promise.reject(axiosError));
+    blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(() => Promise.reject(axiosError));
 
     // act
     const response: Response = await sut.get('/api/surveys');

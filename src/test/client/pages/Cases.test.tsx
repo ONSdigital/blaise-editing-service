@@ -2,9 +2,9 @@ import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'react-router';
 import Cases from '../../../client/pages/Cases';
-import CaseDetailsBuilder from '../../builders/caseDetailsBuilder';
-import { getCases } from '../../../client/clients/NodeApi';
+import { getCases } from '../../../client/api/NodeApi';
 import { CaseDetails } from '../../../common/interfaces/caseInterface';
+import { caseDetailsListMockObject } from '../../mockObjects/caseMockObject';
 
 // declare global vars
 const questionnaireName: string = 'TEST111A';
@@ -15,7 +15,7 @@ let view:RenderResult;
 jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), useParams: jest.fn() }));
 jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName });
 
-jest.mock('../../../client/clients/NodeApi');
+jest.mock('../../../client/api/NodeApi');
 const getCasesMock = getCases as jest.Mock<Promise<CaseDetails[]>>;
 
 describe('Given there are cases available in blaise for questionnaire', () => {
@@ -23,10 +23,8 @@ describe('Given there are cases available in blaise for questionnaire', () => {
     getCasesMock.mockReset();
   });
 
-  it.each([1, 2, 3, 4])('should render the page correctly when x cases are returned', async (value) => {
+  it('should render the page correctly when x cases are returned', async () => {
     // arrange
-    const caseDetailsBuider = new CaseDetailsBuilder(value);
-    const caseDetailsListMockObject = caseDetailsBuider.BuildCaseDetails();
 
     getCasesMock.mockImplementation(() => Promise.resolve(caseDetailsListMockObject));
 
@@ -43,10 +41,8 @@ describe('Given there are cases available in blaise for questionnaire', () => {
     expect(view).toMatchSnapshot();
   });
 
-  it.each([1, 2, 3, 4])('should display a list of the expected questionnaires of x cases', async (value) => {
+  it('should display a list of the expected questionnaires of x cases', async () => {
     // arrange
-    const caseDetailsBuider = new CaseDetailsBuilder(value);
-    const caseDetailsListMockObject = caseDetailsBuider.BuildCaseDetails();
     getCasesMock.mockImplementation(() => Promise.resolve(caseDetailsListMockObject));
 
     // act
