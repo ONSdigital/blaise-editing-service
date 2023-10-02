@@ -4,6 +4,7 @@ import mapQuestionnaireDetails from '../mappers/questionnaireMapper';
 import { mapCaseDetails, mapCaseFactsheet } from '../mappers/caseMapper';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
 import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
+import CaseFields from '../../client/enums/CaseFields';
 
 export default class BlaiseApi {
   config: ServerConfiguration;
@@ -23,7 +24,7 @@ export default class BlaiseApi {
   }
 
   async getCaseDetails(questionnaireName: string, username?: string): Promise<CaseDetails[]> {
-    const fieldIds: string[] = ['qserial.serial_number', 'qhadmin.hout', 'allocation.toeditor'];
+    const fieldIds: string[] = [CaseFields.Id, CaseFields.Status, CaseFields.AllocatedTo];
     const caseData = await this.getCaseData(questionnaireName, fieldIds, username);
 
     return mapCaseDetails(caseData, questionnaireName, this.config.ExternalWebUrl);
@@ -52,11 +53,11 @@ export default class BlaiseApi {
 
     return !username
       ? reportData
-      : reportData.filter((caseData) => caseData['allocation.toeditor'] === username);
+      : reportData.filter((caseData) => caseData[CaseFields.AllocatedTo] === username);
   }
 
   private async getQuestionnaireDetails(questionnaire: Questionnaire, username?: string): Promise<QuestionnaireDetails> {
-    const fieldIds: string[] = ['allocation.toeditor'];
+    const fieldIds: string[] = [CaseFields.AllocatedTo];
     const caseData = await this.getCaseData(questionnaire.name, fieldIds, username);
 
     return mapQuestionnaireDetails(questionnaire, caseData);

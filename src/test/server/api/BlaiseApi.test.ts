@@ -14,6 +14,7 @@ import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface
 import { CaseDetails } from '../../../common/interfaces/caseInterface';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { caseFactsheetMockObject, caseResponseMockObject } from '../../mockObjects/caseMockObject';
+import CaseFields from '../../../client/enums/CaseFields';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
@@ -29,7 +30,7 @@ const questionnaireName = 'OPN2201A';
 const username: string = 'toby';
 
 describe('getCaseDetails from Blaise', () => {
-  const fieldIds: string[] = ['qserial.serial_number', 'qhadmin.hout', 'allocation.toeditor'];
+  const fieldIds: string[] = [CaseFields.Id, CaseFields.Status, CaseFields.AllocatedTo];
   beforeEach(() => {
     blaiseApiClientMock.reset();
   });
@@ -261,7 +262,7 @@ describe('getCaseFactsheet from Blaise', () => {
 });
 
 describe('getQuestionnaires from Blaise', () => {
-  const fieldIds: string[] = ['allocation.toeditor'];
+  const fieldIds: string[] = [CaseFields.AllocatedTo];
 
   beforeEach(() => {
     blaiseApiClientMock.reset();
