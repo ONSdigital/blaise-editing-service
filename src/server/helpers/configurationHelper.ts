@@ -30,7 +30,7 @@ export function loadRoles(roles: string | undefined): string[] {
   return roles.split(',');
 }
 
-export function sessionSecret(secret: string | undefined): string {
+export function generateSessionSecret(secret: string | undefined): string {
   if (!secret || secret === '' || secret === '_SESSION_SECRET') {
     return crypto.randomBytes(20).toString('hex');
   }

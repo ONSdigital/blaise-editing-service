@@ -1,21 +1,21 @@
-import { CaseResponse, CaseStatus } from 'blaise-api-node-client';
+import { CaseData, CaseResponse } from 'blaise-api-node-client';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
 
-export function mapCaseDetails(caseStatusList: CaseStatus[], questionnaireName:string, externalWebUrl:string): CaseDetails[] {
-  return caseStatusList.map((caseStatus) => ({
-    CaseId: caseStatus.primaryKey,
-    CaseStatus: caseStatus.outcome,
-    CaseLink: `https://${externalWebUrl}/${questionnaireName}?Mode=CAWI&KeyValue=${caseStatus.primaryKey}`,
-    QuestionnaireName: questionnaireName,
+export function mapCaseDetails(caseDataList: CaseData[], questionnaireName:string, externalWebUrl:string): CaseDetails[] {
+  return caseDataList.map((caseData) => ({
+    CaseId: caseData['qserial.serial_number'],
+    CaseStatus: caseData['qhadmin.hout'],
+    EditorAllocated: caseData['allocation.toeditor'],
+    EditCaseLink: `https://${externalWebUrl}/${questionnaireName}?Mode=CAWI&KeyValue=${caseData['qserial.serial_number']}`,
   }));
 }
 
 export function mapCaseFactsheet(caseResponse: CaseResponse): CaseFactsheetDetails {
   const caseFactSheet: CaseFactsheetDetails = {
     CaseId: caseResponse.caseId,
-    OutcomeCode: caseResponse.fieldData['qhAdmin.HOut'],
+    OutcomeCode: Number(caseResponse.fieldData['qhAdmin.HOut']),
     InterviewerName: caseResponse.fieldData['qhAdmin.Interviewer[1]'],
-    NumberOfRespondents: caseResponse.fieldData['dmhSize'],
+    NumberOfRespondents: Number(caseResponse.fieldData['dmhSize']),
     Address: {
       AddressLine1: caseResponse.fieldData['qDataBag.Prem1'],
       AddressLine2: caseResponse.fieldData['qDataBag.Prem2'],
@@ -37,7 +37,7 @@ export function mapCaseFactsheet(caseResponse: CaseResponse): CaseFactsheetDetai
   for (let respondentNumber = 1; respondentNumber <= numberOfRespondents; respondentNumber += 1) {
     caseFactSheet.Respondents.push({
       RespondentName: caseResponse.fieldData[`dmName[${respondentNumber}]`],
-      DateOfBirth: caseResponse.fieldData[`dmDteOfBth[${respondentNumber}]`],
+      DateOfBirth: new Date(caseResponse.fieldData[`dmDteOfBth[${respondentNumber}]`]),
     });
   }
 

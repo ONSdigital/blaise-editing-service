@@ -14,7 +14,7 @@ export default function AppContent({ user }: AppContentProps): ReactElement {
   return (
     <Routes>
       <Route path="/" element={<Surveys user={user} />} />
-      <Route path="questionnaires/:questionnaireName/cases/" element={<Cases />} />
+      <Route path="questionnaires/:questionnaireName/cases/" element={<Cases user={user} />} />
       <Route path="questionnaires/:questionnaireName/cases/:caseId/factsheet" element={<CaseFactsheet />} />
       <Route path="questionnaires/:questionnaireName/allocation/" element={<Allocation />} />
     </Routes>

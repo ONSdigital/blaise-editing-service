@@ -46,13 +46,14 @@ describe('GetSurveys from Blaise', () => {
 
 describe('GetCases from Blaise', () => {
   const questionnaireName = 'LMS2201_LT1';
+  const username = 'Toby';
 
   it('Should retrieve a list of cases in blaise with a 200 response', async () => {
     // arrange
-    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases`).reply(200, caseDetailsListMockObject);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases?username=${username}`).reply(200, caseDetailsListMockObject);
 
     // act
-    const result = await getCases(questionnaireName);
+    const result = await getCases(questionnaireName, username);
 
     // assert
     expect(result).toEqual(caseDetailsListMockObject);
@@ -60,26 +61,26 @@ describe('GetCases from Blaise', () => {
 
   it('Should throw the error "The questionnaire is no longer available', async () => {
     // arrange
-    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases`).reply(404, null);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases?username=${username}`).reply(404, null);
 
     // act && assert
-    expect(getCases(questionnaireName)).rejects.toThrow(/The questionnaire is no longer available/);
+    expect(getCases(questionnaireName, username)).rejects.toThrow(/The questionnaire is no longer available/);
   });
 
   it('Should throw the error "Unable to retrieve cases, please try again in a few minutes" when a 500 response is recieved', async () => {
     // arrange
-    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases`).reply(500, null);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases?username=${username}`).reply(500, null);
 
     // act && assert
-    expect(getCases(questionnaireName)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+    expect(getCases(questionnaireName, username)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
   });
 
   it('Should throw the error "Unable to retrieve cases, please try again in a few minutes" when there is a network error', async () => {
     // arrange
-    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases`).networkError();
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases?username=${username}`).networkError();
 
     // act && assert
-    expect(getCases(questionnaireName)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+    expect(getCases(questionnaireName, username)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
   });
 });
 

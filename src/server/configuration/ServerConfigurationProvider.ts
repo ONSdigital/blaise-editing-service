@@ -1,10 +1,11 @@
 import { AuthConfig } from 'blaise-login-react-server';
-import { Configuration } from '../interfaces/configurationInterface';
+import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
 import {
-  getStringOrThrowError, getNumberOrThrowError, sessionSecret, getStringOrSetDefault, loadRoles,
-} from './configurationHelper';
+  generateSessionSecret,
+  getNumberOrThrowError, getStringOrSetDefault, getStringOrThrowError, loadRoles,
+} from '../helpers/configurationHelper';
 
-export default class ConfigurationProvider implements Configuration, AuthConfig {
+export default class ServerConfigurationProvider implements ServerConfiguration, AuthConfig {
   BlaiseApiUrl: string;
 
   BuildFolder: string;
@@ -42,7 +43,7 @@ export default class ConfigurationProvider implements Configuration, AuthConfig 
 
     this.ExternalWebUrl = getStringOrThrowError(VM_EXTERNAL_WEB_URL, 'VM_EXTERNAL_WEB_URL');
 
-    this.SessionSecret = sessionSecret(SESSION_SECRET);
+    this.SessionSecret = generateSessionSecret(SESSION_SECRET);
 
     this.SessionTimeout = getStringOrSetDefault(SESSION_TIMEOUT, '12h');
 

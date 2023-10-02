@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Controller } from '../interfaces/controllerInterface';
-import notFound from '../../common/helpers/axiosHelper';
+import notFound from '../helpers/axiosHelper';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import mapSurveys from '../mappers/surveyMapper';
 import BlaiseApi from '../api/BlaiseApi';

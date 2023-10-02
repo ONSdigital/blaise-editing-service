@@ -4,7 +4,7 @@ import path from 'path';
 import { Auth, newLoginHandler } from 'blaise-login-react-server';
 import SurveyController from './controllers/surveyController';
 import CaseController from './controllers/caseController';
-import ConfigurationProvider from './configuration/ConfigurationProvider';
+import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
 
 export default function nodeServer(config: ConfigurationProvider, blaiseApi: BlaiseApi): Express {

@@ -1,4 +1,4 @@
-import ConfigurationProvider from '../../../server/configuration/ConfigurationProvider';
+import ServerConfigurationProvider from '../../../server/configuration/ServerConfigurationProvider';
 
 /* eslint-disable no-new */
 const emptyEnv = process.env;
@@ -26,14 +26,13 @@ describe('Configuration file tests', () => {
 
   it('should populate the properties with values from environement variables when they exist in the environment variables', () => {
     // act
-    const sut = new ConfigurationProvider();
+    const sut = new ServerConfigurationProvider();
 
     // assert
     expect(sut.BlaiseApiUrl).toEqual(blaiseApiUrl);
     expect(sut.BuildFolder).toEqual(buildFolder);
     expect(sut.Port).toEqual(port);
     expect(sut.ServerPark).toEqual(serverPark);
-    expect(sut.ExternalWebUrl).toEqual(externalWebUrl);
   });
 
   it.each([undefined, '', ' ', '  '])('should throw an error if the BLAISE_API_URL is empty or does not exist', (value) => {
@@ -41,7 +40,7 @@ describe('Configuration file tests', () => {
     process.env['BLAISE_API_URL'] = value;
 
     // act
-    const configuration = () => { new ConfigurationProvider(); };
+    const configuration = () => { new ServerConfigurationProvider(); };
 
     // assert
     expect(configuration).toThrowError('BLAISE_API_URL has not been set or is set to an empty string');
@@ -52,7 +51,7 @@ describe('Configuration file tests', () => {
     process.env['PORT'] = value;
 
     // act
-    const configuration = () => { new ConfigurationProvider(); };
+    const configuration = () => { new ServerConfigurationProvider(); };
 
     // act && assert
     expect(configuration).toThrowError('PORT has not been set or is set to an empty string');
@@ -63,7 +62,7 @@ describe('Configuration file tests', () => {
     process.env['PORT'] = value;
 
     // act
-    const configuration = () => { new ConfigurationProvider(); };
+    const configuration = () => { new ServerConfigurationProvider(); };
 
     // assert
     expect(configuration).toThrowError(TypeError);
@@ -75,21 +74,10 @@ describe('Configuration file tests', () => {
     process.env['SERVER_PARK'] = value;
 
     // act
-    const configuration = () => { new ConfigurationProvider(); };
+    const configuration = () => { new ServerConfigurationProvider(); };
 
     // assert
     expect(configuration).toThrowError('SERVER_PARK has not been set or is set to an empty string');
-  });
-
-  it.each([undefined, '', '  ', '   '])('should throw an error if VM_EXTERNAL_WEB_URL is empty or does not exist', (value) => {
-    // arrange
-    process.env['VM_EXTERNAL_WEB_URL'] = value;
-
-    // act
-    const configuration = () => { new ConfigurationProvider(); };
-
-    // assert
-    expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL has not been set or is set to an empty string');
   });
 });
 
@@ -107,7 +95,7 @@ describe('Authentication file tests', () => {
 
   it('should populate the authentication properties with values from environement variables when they exist in the environment variables', () => {
     // act
-    const sut = new ConfigurationProvider();
+    const sut = new ServerConfigurationProvider();
 
     // assert
     expect(sut.SessionSecret).toEqual(sessionSecret);
@@ -121,7 +109,7 @@ describe('Authentication file tests', () => {
     process.env['SESSION_SECRET'] = value;
 
     // act
-    const sut = new ConfigurationProvider();
+    const sut = new ServerConfigurationProvider();
     const containsAlphaNumeric = /\d+/g;
     // assert
     expect(sut.SessionSecret.match(containsAlphaNumeric)).toBeTruthy();
@@ -132,7 +120,7 @@ describe('Authentication file tests', () => {
     process.env['SESSION_TIMEOUT'] = value;
 
     // act
-    const sut = new ConfigurationProvider();
+    const sut = new ServerConfigurationProvider();
 
     // assert
     expect(sut.SessionTimeout).toEqual('12h');
@@ -143,7 +131,7 @@ describe('Authentication file tests', () => {
     process.env['ROLES'] = value;
 
     // act
-    const sut = new ConfigurationProvider();
+    const sut = new ServerConfigurationProvider();
     const allRoles = ['DST', 'BDSS', 'Researcher'];
 
     // assert
@@ -155,9 +143,20 @@ describe('Authentication file tests', () => {
     process.env['BLAISE_API_URL'] = value;
 
     // act
-    const configuration = () => { new ConfigurationProvider(); };
+    const configuration = () => { new ServerConfigurationProvider(); };
 
     // act && assert
     expect(configuration).toThrowError('BLAISE_API_URL has not been set or is set to an empty string');
+  });
+
+  it.each([undefined, '', '  ', '   '])('should throw an error if VM_EXTERNAL_WEB_URL is empty or does not exist', (value) => {
+    // arrange
+    process.env['VM_EXTERNAL_WEB_URL'] = value;
+
+    // act
+    const configuration = () => { new ServerConfigurationProvider(); };
+
+    // assert
+    expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL has not been set or is set to an empty string');
   });
 });

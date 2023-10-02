@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { QuestionnaireCaseDetails } from '../../common/interfaces/surveyInterface';
+import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
 
 interface EditorsQuestionnairesListProps {
-  questionnaires: QuestionnaireCaseDetails[];
+  questionnaires: QuestionnaireDetails[];
 }
 
 export default function EditorsQuestionnairesList({ questionnaires }: EditorsQuestionnairesListProps): ReactElement {
@@ -23,7 +23,7 @@ export default function EditorsQuestionnairesList({ questionnaires }: EditorsQue
               {questionnaire.questionnaireName}
             </Link>
           </dt>
-          <dd className="ons-metadata__value ons-grid__col ons-col-8@m">{questionnaire.numberOfCases}</dd>
+          <dd className="ons-metadata__value ons-grid__col ons-col-8@m">{questionnaire.numberOfCasesAllocated}</dd>
         </React.Fragment>
       ))}
     </dl>

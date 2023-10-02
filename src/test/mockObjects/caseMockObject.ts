@@ -1,4 +1,4 @@
-import { CaseResponse, CaseStatus } from 'blaise-api-node-client';
+import { CaseData, CaseResponse } from 'blaise-api-node-client';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
 
 const questionnaireName = 'OPN2201A';
@@ -16,35 +16,45 @@ const person2Name = 'Bartholomew Edgar';
 const person1Dob = new Date(1980, 1, 15);
 const person2Dob = new Date(1995, 5, 11);
 
-export const caseStatusListMockObject:CaseStatus[] = [{
-  primaryKey: case1PrimaryKey,
-  outcome: case1outcome,
-}, {
-  primaryKey: case2PrimaryKey,
-  outcome: case2outcome,
-}, {
-  primaryKey: case3PrimaryKey,
-  outcome: case3outcome,
-}];
+const blaiseUser1 = 'rrice';
+const blaiseUser2 = 'bedgar';
+
+export const caseDataListMockObject: CaseData[] = [
+  {
+    'qserial.serial_number': case1PrimaryKey,
+    'qhadmin.hout': case1outcome,
+    'allocation.toeditor': blaiseUser1,
+  },
+  {
+    'qserial.serial_number': case2PrimaryKey,
+    'qhadmin.hout': case2outcome,
+    'allocation.toeditor': '',
+  },
+  {
+    'qserial.serial_number': case3PrimaryKey,
+    'qhadmin.hout': case3outcome,
+    'allocation.toeditor': blaiseUser2,
+  },
+];
 
 export const caseDetailsListMockObject:CaseDetails[] = [
   {
     CaseId: case1PrimaryKey,
-    CaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case1PrimaryKey}`,
+    EditCaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case1PrimaryKey}`,
     CaseStatus: case1outcome,
-    QuestionnaireName: questionnaireName,
+    EditorAllocated: blaiseUser1,
   },
   {
     CaseId: case2PrimaryKey,
-    CaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case2PrimaryKey}`,
+    EditCaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case2PrimaryKey}`,
     CaseStatus: case2outcome,
-    QuestionnaireName: questionnaireName,
+    EditorAllocated: '',
   },
   {
     CaseId: case3PrimaryKey,
-    CaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case3PrimaryKey}`,
+    EditCaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case3PrimaryKey}`,
     CaseStatus: case3outcome,
-    QuestionnaireName: questionnaireName,
+    EditorAllocated: blaiseUser2,
   },
 ];
 

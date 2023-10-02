@@ -3,8 +3,8 @@ import { CaseOutcome } from 'blaise-api-node-client';
 export interface CaseDetails {
   CaseId: string,
   CaseStatus: CaseOutcome,
-  CaseLink: string,
-  QuestionnaireName: string
+  EditorAllocated: string
+  EditCaseLink: string;
 }
 
 export interface CaseFactsheetDetails {

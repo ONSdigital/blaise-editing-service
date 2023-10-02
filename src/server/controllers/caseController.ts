@@ -1,16 +1,16 @@
 import express, { Request, Response, Router } from 'express';
 import { Controller } from '../interfaces/controllerInterface';
-import { Configuration } from '../interfaces/configurationInterface';
+import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
-import notFound from '../../common/helpers/axiosHelper';
+import notFound from '../helpers/axiosHelper';
 import BlaiseApi from '../api/BlaiseApi';
 
 export default class CaseController implements Controller {
-  config: Configuration;
+  config: ServerConfiguration;
 
   blaiseApi: BlaiseApi;
 
-  constructor(config: Configuration, blaiseApi: BlaiseApi) {
+  constructor(config: ServerConfiguration, blaiseApi: BlaiseApi) {
     this.config = config;
     this.blaiseApi = blaiseApi;
     this.getCases = this.getCases.bind(this);
@@ -25,11 +25,12 @@ export default class CaseController implements Controller {
     return router;
   }
 
-  async getCases(request: Request<{ questionnaireName:string }>, response: Response<CaseDetails[]>) {
+  async getCases(request: Request<{ questionnaireName:string }, {}, {}, { username:string }>, response: Response<CaseDetails[]>) {
     const { questionnaireName } = request.params;
+    const { username } = request.query;
 
     try {
-      const caseDetailsList = await this.blaiseApi.getCaseDetails(questionnaireName);
+      const caseDetailsList = await this.blaiseApi.getCaseDetails(questionnaireName, username);
 
       return response.status(200).json(caseDetailsList);
     } catch (error: unknown) {

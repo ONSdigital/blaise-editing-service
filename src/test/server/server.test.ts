@@ -6,10 +6,11 @@ import { IMock, Mock } from 'typemoq';
 import supertest from 'supertest';
 import path from 'path';
 import NodeServer from '../../server/server';
-import FakeConfigurationProvider from './configuration/FakeConfigurationProvider';
 import BlaiseApi from '../../server/api/BlaiseApi';
+import FakeServerConfigurationProvider from './configuration/FakeServerConfigurationProvider';
+
 // create fake config
-const configFake = new FakeConfigurationProvider('restapi.blaise.com', 'dist', 5000, 'gusty', 'cati.blaise.com', 'richlikesricecakes', '12h', ['DST']);
+const configFake = new FakeServerConfigurationProvider();
 
 // mock blaise api client
 const blaiseApiMock: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
