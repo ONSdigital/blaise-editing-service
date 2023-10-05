@@ -1,9 +1,9 @@
 export default interface QuestionnaireAllocationDetails {
   name: string,
-  allocation: AllocationDetails[]
+  allocation: OldAllocationDetails[]
 }
 
-export interface AllocationDetails {
+export interface OldAllocationDetails {
   editor: string,
   cases: string[]
 }

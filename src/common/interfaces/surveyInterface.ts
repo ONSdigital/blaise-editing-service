@@ -11,7 +11,7 @@ export interface QuestionnaireDetails {
   numberOfCasesAllocated: number,
 }
 
-export interface AllocationDetails {
+export interface AllocationDetails extends QuestionnaireDetails {
   casesAllocated: CaseDetails[]
   casesNotAllocated: CaseDetails[]
 }

@@ -6,6 +6,7 @@ import SurveyController from './controllers/surveyController';
 import CaseController from './controllers/caseController';
 import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
+import AllocationController from './controllers/allocationController';
 
 export default function nodeServer(config: ConfigurationProvider, blaiseApi: BlaiseApi): Express {
   const server = express();
@@ -22,6 +23,10 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   // case routing
   const caseController = new CaseController(config, blaiseApi);
   server.use('/', caseController.getRoutes());
+
+  // allocation routing
+  const allocationController = new AllocationController(blaiseApi);
+  server.use('/', allocationController.getRoutes());
 
   // login routing
   const auth = new Auth(config);

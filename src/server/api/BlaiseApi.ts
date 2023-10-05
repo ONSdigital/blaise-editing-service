@@ -3,7 +3,7 @@ import { ServerConfiguration } from '../interfaces/serverConfigurationInterface'
 import mapQuestionnaireDetails from '../mappers/questionnaireMapper';
 import { mapCaseDetails, mapCaseFactsheet } from '../mappers/caseMapper';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
-import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
+import { AllocationDetails, QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
 import CaseFields from '../../client/enums/CaseFields';
 
 export default class BlaiseApi {
@@ -43,6 +43,13 @@ export default class BlaiseApi {
     return this.getQuestionnaireDetailsList(questionnaires, username);
   }
 
+  async getAllocationDetails(questionnaireName: string, username?: string): Promise<AllocationDetails> {
+    const questionnaire = await this.blaiseApiClient.getQuestionnaire(this.config.ServerPark, questionnaireName);
+    const questionnaireDetails = await this.getQuestionnaireDetails(questionnaire, username);
+
+    return questionnaireDetails as AllocationDetails;
+  }
+
   private async getCaseFieldsForQuestionnaire(questionnaireName: string, fieldIds: string[]): Promise<QuestionnaireReport> {
     return this.blaiseApiClient.getQuestionnaireReportData(this.config.ServerPark, questionnaireName, fieldIds);
   }
@@ -56,7 +63,7 @@ export default class BlaiseApi {
       : reportData.filter((caseData) => caseData[CaseFields.AllocatedTo] === username);
   }
 
-  private async getQuestionnaireDetails(questionnaire: Questionnaire, username?: string): Promise<QuestionnaireDetails> {
+  async getQuestionnaireDetails(questionnaire: Questionnaire, username?: string): Promise<QuestionnaireDetails> {
     const fieldIds: string[] = [CaseFields.AllocatedTo];
     const caseData = await this.getCaseData(questionnaire.name, fieldIds, username);
 

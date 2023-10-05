@@ -1,8 +1,11 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import surveyListMockObject from '../../mockObjects/surveyListMockObject';
-import { getCaseFactsheet, getCases, getSurveys } from '../../../client/api/NodeApi';
+import {
+  getAllocationDetails, getCaseFactsheet, getCases, getSurveys,
+} from '../../../client/api/NodeApi';
 import { caseDetailsListMockObject, caseFactsheetMockObject } from '../../mockObjects/caseMockObject';
+import { allocationDetailsMockObject } from '../../mockObjects/questionnaireAllocationMockObject';
 
 // use axios mock adapter
 const axiosMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
@@ -121,5 +124,44 @@ describe('GetCaseFactsheet from Blaise', () => {
 
     // act && assert
     expect(getCaseFactsheet(questionnaireName, caseId)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+});
+
+describe('getAllocationDetails from Blaise', () => {
+  const questionnaireName = 'LMS2201_LT1';
+
+  it('Should retrieve allocation details with a 200 response', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/allocation`).reply(200, allocationDetailsMockObject);
+
+    // act
+    const result = await getAllocationDetails(questionnaireName);
+
+    // assert
+    expect(JSON.stringify(result)).toEqual(JSON.stringify(allocationDetailsMockObject));
+  });
+
+  it('Should throw the error "The questionnaire is no longer available', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/allocation`).reply(404, null);
+
+    // act && assert
+    expect(getAllocationDetails(questionnaireName)).rejects.toThrow(/The questionnaire is no longer available/);
+  });
+
+  it('Should throw the error "Unable to retrieve case factsheet, please try again in a few minutes" when a 500 response is recieved', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/allocation`).reply(500, null);
+
+    // act && assert
+    expect(getAllocationDetails(questionnaireName)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+
+  it('Should throw the error "Unable to retrieve case factsheet, please try again in a few minutes" when there is a network error', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/allocation`).networkError();
+
+    // act && assert
+    expect(getAllocationDetails(questionnaireName)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
   });
 });

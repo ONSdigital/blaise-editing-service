@@ -26,7 +26,6 @@ const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient)
 // create service under test
 const sut = new BlaiseApi(configFake, blaiseApiClientMock.object);
 
-const questionnaireName = 'OPN2201A';
 const username: string = 'toby';
 
 describe('getCaseDetails from Blaise', () => {
@@ -37,6 +36,8 @@ describe('getCaseDetails from Blaise', () => {
 
   it('Should retrieve a filtered list of case details is a username is supplied', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
+
     const questionnaireReport: QuestionnaireReport = {
       questionnaireName,
       questionnaireId: '00000000-0000-0000-0000-000000000000',
@@ -91,6 +92,8 @@ describe('getCaseDetails from Blaise', () => {
 
   it('Should retrieve a full list of case details is a username is not supplied', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
+
     const questionnaireReport: QuestionnaireReport = {
       questionnaireName,
       questionnaireId: '00000000-0000-0000-0000-000000000000',
@@ -146,6 +149,8 @@ describe('getCaseDetails from Blaise', () => {
 
   it('Should retrieve an empty list of cases if none are allocated to the user when a username is supplied', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
+
     const questionnaireReport: QuestionnaireReport = {
       questionnaireName,
       questionnaireId: '00000000-0000-0000-0000-000000000000',
@@ -175,6 +180,8 @@ describe('getCaseDetails from Blaise', () => {
 
   it('Should retrieve an empty list is questionnaire has no cases', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
+
     const questionnaireReport: QuestionnaireReport = {
       questionnaireName,
       questionnaireId: '00000000-0000-0000-0000-000000000000',
@@ -193,6 +200,8 @@ describe('getCaseDetails from Blaise', () => {
 
   it('Should call the getCaseDetails function with the expected parameters', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
+
     const questionnaireReport: QuestionnaireReport = {
       questionnaireName,
       questionnaireId: '00000000-0000-0000-0000-000000000000',
@@ -217,6 +226,7 @@ describe('getCaseFactsheet from Blaise', () => {
 
   it('Should retrieve a case factsheet from blaise', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
     const caseId = '90001';
 
     blaiseApiClientMock.setup((client) => client.getCase(configFake.ServerPark, questionnaireName, caseId)).returns(async () => caseResponseMockObject);
@@ -230,6 +240,7 @@ describe('getCaseFactsheet from Blaise', () => {
 
   it('Should call the getCaseFactsheet function with the expected parameters', async () => {
     // arrange
+    const questionnaireName = 'OPN2201A';
     const caseId = '90001';
 
     const caseResponseData: CaseResponse = {
@@ -245,7 +256,7 @@ describe('getCaseFactsheet from Blaise', () => {
         'qDataBag.PostCode': 'NZ11 4PD',
         'qhAdmin.HOut': 110,
         'qhAdmin.Interviewer[1]': 'Rich',
-        dmhSize: 1,
+        'dmhSize': 1,
         'dmName[1]': 'Bartholomew Edgar',
         'dmDteOfBth[1]': new Date(1995, 5, 11),
       },
@@ -374,5 +385,47 @@ describe('getQuestionnaires from Blaise', () => {
 
     // assert
     expect(result).toEqual(expectedQuestionnaireDetails);
+  });
+});
+
+describe('getAllocationDetails from Blaise', () => {
+  const questionnaireName = questionnaire1Mock.name;
+  const fieldIds: string[] = [CaseFields.AllocatedTo];
+
+  beforeEach(() => {
+    blaiseApiClientMock.reset();
+  });
+  it('Should call getQuestionnaire and getQuestionnaireDetails for the questionnaire', async () => {
+    // arrange
+    blaiseApiClientMock.setup((client) => client.getQuestionnaire(configFake.ServerPark, questionnaireName)).returns(async () => questionnaire1Mock);
+    blaiseApiClientMock.setup((client) => client.getQuestionnaireReportData(configFake.ServerPark, It.isAnyString(), fieldIds)).returns(async () => questionnaireReport1MockObject);
+
+    // act
+    await sut.getAllocationDetails(questionnaireName);
+
+    // assert
+    blaiseApiClientMock.verify((client) => client.getQuestionnaire(configFake.ServerPark, questionnaireName), Times.once());
+    blaiseApiClientMock.verify((client) => client.getQuestionnaireReportData(configFake.ServerPark, questionnaireName, fieldIds), Times.once());
+  });
+
+  it('Should return the expected getQuestionnaireDetails for the questionnaire', async () => {
+    // arrange
+    blaiseApiClientMock.setup((client) => client.getQuestionnaire(configFake.ServerPark, questionnaireName)).returns(async () => questionnaire1Mock);
+
+    // mock questionnaire report data
+    blaiseApiClientMock.setup((client) => client.getQuestionnaireReportData(configFake.ServerPark, questionnaireName, fieldIds))
+      .returns(async () => questionnaireReport1MockObject);
+
+    const expectedAllocationDetails: QuestionnaireDetails = {
+      questionnaireName: questionnaire1Mock.name,
+      numberOfCases: questionnaire1Mock.dataRecordCount ?? 0,
+      numberOfCasesAllocated: 2,
+    };
+
+    // act
+    const result = await sut.getAllocationDetails(questionnaireName);
+
+    // assert
+    expect(result).toEqual(expectedAllocationDetails);
   });
 });

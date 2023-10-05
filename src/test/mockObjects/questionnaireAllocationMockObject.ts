@@ -1,6 +1,7 @@
 import QuestionnaireAllocationDetails from '../../common/interfaces/questionnaireAllocationInterface';
+import { AllocationDetails } from '../../common/interfaces/surveyInterface';
 
-const questionnaireAllocationMockObject: QuestionnaireAllocationDetails = {
+export const questionnaireAllocationMockObject: QuestionnaireAllocationDetails = {
   name: 'LMS2101_AA1',
   allocation: [{
     editor: 'Toby Maguire',
@@ -13,4 +14,10 @@ const questionnaireAllocationMockObject: QuestionnaireAllocationDetails = {
   ],
 };
 
-export default questionnaireAllocationMockObject;
+export const allocationDetailsMockObject: AllocationDetails = {
+  questionnaireName: 'LMS2101_AA1',
+  numberOfCases: 900,
+  numberOfCasesAllocated: 100,
+  casesAllocated: [],
+  casesNotAllocated: [],
+};
