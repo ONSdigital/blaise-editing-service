@@ -10,7 +10,7 @@
     "eject-react": "react-scripts eject",
     "clean": "npx rimraf dist && npx rimraf build",
     "test": "jest --coverage --watchAll=false",
-    "lint": "yarn eslint .",
+    "lint": "yarn eslint . --fix",
     "build-server": "tsc --project tsconfig.server.json",
     "run-server": "node ./dist/server/index.js",
     "start-server": "yarn clean && yarn build-react && yarn build-server && yarn run-server",
