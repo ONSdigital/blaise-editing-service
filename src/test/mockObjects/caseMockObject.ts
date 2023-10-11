@@ -58,6 +58,30 @@ export const caseDetailsListMockObject:CaseDetails[] = [
   },
 ];
 
+export const allocatedCaseDetailsListMockObject:CaseDetails[] = [
+  {
+    CaseId: case1PrimaryKey,
+    EditCaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case1PrimaryKey}`,
+    CaseStatus: case1outcome,
+    EditorAllocated: blaiseUser1,
+  },
+  {
+    CaseId: case3PrimaryKey,
+    EditCaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case3PrimaryKey}`,
+    CaseStatus: case3outcome,
+    EditorAllocated: blaiseUser2,
+  },
+];
+
+export const unallocatedCaseDetailsListMockObject:CaseDetails[] = [
+  {
+    CaseId: case2PrimaryKey,
+    EditCaseLink: `https://cati.blaise.com/${questionnaireName}?Mode=CAWI&KeyValue=${case2PrimaryKey}`,
+    CaseStatus: case2outcome,
+    EditorAllocated: '',
+  },
+];
+
 export const caseResponseMockObject: CaseResponse = {
   caseId: case1PrimaryKey,
   fieldData: {

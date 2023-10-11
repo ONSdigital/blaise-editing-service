@@ -3,26 +3,26 @@ import { AllocationDetails } from '../../common/interfaces/surveyInterface';
 import { getAllocationDetails } from '../api/NodeApi';
 import { useAsyncRequestWithParam } from '../hooks/useAsyncRequest';
 import AsyncContent from '../components/AsyncContent';
-import QuestionnaireAllocation from '../components/QuestionnaireAllocation';
+import AllocatedList from '../components/AllocatedList';
 
 function DisplayAllocation(questionnaireName:string) {
   const allocationDetails = useAsyncRequestWithParam<AllocationDetails, string>(getAllocationDetails, questionnaireName);
 
   return (
-    <div data-testid="Allocation">
+    <div data-testid="Allocate">
       <AsyncContent content={allocationDetails}>
-        {(loadedAllocationDetails) => <QuestionnaireAllocation questionnaireName={questionnaireName} allocationDetails={loadedAllocationDetails} />}
+        {(loadedAllocationDetails) => <AllocatedList questionnaireName={questionnaireName} allocationDetails={loadedAllocationDetails} />}
       </AsyncContent>
     </div>
   );
 }
 
-export type AllocationParams = {
+export type AllocateParams = {
   questionnaireName: string
 };
 
-export default function Allocation() {
-  const { questionnaireName } = useParams<keyof AllocationParams>() as AllocationParams;
+export default function Allocate() {
+  const { questionnaireName } = useParams<keyof AllocateParams>() as AllocateParams;
 
   return DisplayAllocation(questionnaireName);
 }

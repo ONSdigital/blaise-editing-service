@@ -256,7 +256,7 @@ describe('getCaseFactsheet from Blaise', () => {
         'qDataBag.PostCode': 'NZ11 4PD',
         'qhAdmin.HOut': 110,
         'qhAdmin.Interviewer[1]': 'Rich',
-        'dmhSize': 1,
+        dmhSize: 1,
         'dmName[1]': 'Bartholomew Edgar',
         'dmDteOfBth[1]': new Date(1995, 5, 11),
       },
