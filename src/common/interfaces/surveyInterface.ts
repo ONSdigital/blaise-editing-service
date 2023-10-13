@@ -1,5 +1,3 @@
-import { CaseDetails } from './caseInterface';
-
 export interface Survey {
   name: string,
   questionnaires: QuestionnaireDetails[],
@@ -12,6 +10,10 @@ export interface QuestionnaireDetails {
 }
 
 export interface AllocationDetails extends QuestionnaireDetails {
-  casesAllocated: CaseDetails[]
-  casesNotAllocated: CaseDetails[]
+  editorAllocationDetails: EditorAllocationDetails[]
+}
+
+export interface EditorAllocationDetails {
+  editor: string,
+  cases: string[]
 }

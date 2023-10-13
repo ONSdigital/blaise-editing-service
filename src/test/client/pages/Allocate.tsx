@@ -1,10 +1,10 @@
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from 'react-router';
-import Allocation from '../../../client/pages/Allocate';
+import Allocate from '../../../client/pages/Allocate';
 import { AllocationDetails } from '../../../common/interfaces/surveyInterface';
 import { getAllocationDetails } from '../../../client/api/NodeApi';
-import { allocationDetailsMockObject } from '../../mockObjects/questionnaireAllocationMockObject';
+import allocationDetailsMockObject from '../../mockObjects/questionnaireAllocationMockObject';
 
 // declare global vars
 const questionnaireName: string = 'TEST111A';
@@ -33,7 +33,7 @@ describe('The allocation page should display the case allocation for the questio
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <Allocation />
+          <Allocate />
         </BrowserRouter>,
       );
     });

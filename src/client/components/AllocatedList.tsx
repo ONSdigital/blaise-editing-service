@@ -4,12 +4,10 @@ import {
 import { ExpandableContent } from 'blaise-design-system-react-components/build/src/components/Accordion';
 import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { OldAllocationDetails } from '../../common/interfaces/questionnaireAllocationInterface';
-import { questionnaireAllocationMockObject } from '../../test/mockObjects/questionnaireAllocationMockObject';
 import EditorAllocation from './EditorAllocation';
-import { AllocationDetails } from '../../common/interfaces/surveyInterface';
+import { AllocationDetails, EditorAllocationDetails } from '../../common/interfaces/surveyInterface';
 
-function CreateAllocatedListContent(questionnaireName: string, allocation: OldAllocationDetails[]):ExpandableContent[] {
+function CreateAllocatedListContent(questionnaireName: string, allocation: EditorAllocationDetails[]):ExpandableContent[] {
   return allocation.map(({ editor, cases }) => ({ title: editor, content: <EditorAllocation cases={cases} editor={editor} questionnaireName={questionnaireName} /> }));
 }
 
@@ -19,8 +17,6 @@ interface AllocatedListProps {
 }
 
 export default function AllocatedList({ questionnaireName, allocationDetails }: AllocatedListProps): ReactElement {
-  const questionnaireAllocationDetails = questionnaireAllocationMockObject;
-
   return (
     <>
       <Link to={`/questionnaires/${questionnaireName}/allocation/allocate`} style={{ fontWeight: 'normal' }}>
@@ -41,7 +37,7 @@ export default function AllocatedList({ questionnaireName, allocationDetails }: 
 
       <br />
       <h3>Currently allocated</h3>
-      <Accordion Expandables={CreateAllocatedListContent(questionnaireName, questionnaireAllocationDetails.allocation)} />
+      <Accordion Expandables={CreateAllocatedListContent(questionnaireName, allocationDetails.editorAllocationDetails)} />
       <br />
     </>
   );

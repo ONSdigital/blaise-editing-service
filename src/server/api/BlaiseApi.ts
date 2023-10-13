@@ -1,9 +1,9 @@
 import BlaiseClient, { CaseData, Questionnaire, QuestionnaireReport } from 'blaise-api-node-client';
 import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
 import mapQuestionnaireDetails from '../mappers/questionnaireMapper';
-import { mapCaseDetails, mapCaseFactsheet } from '../mappers/caseMapper';
+import { mapCaseDetails, mapCaseFactsheet, mapEditorAllocationDetails } from '../mappers/caseMapper';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
-import { AllocationDetails, QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
+import { AllocationDetails, EditorAllocationDetails, QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
 import CaseFields from '../../client/enums/CaseFields';
 
 export default class BlaiseApi {
@@ -45,9 +45,16 @@ export default class BlaiseApi {
 
   async getAllocationDetails(questionnaireName: string, username?: string): Promise<AllocationDetails> {
     const questionnaire = await this.blaiseApiClient.getQuestionnaire(this.config.ServerPark, questionnaireName);
-    const questionnaireDetails = await this.getQuestionnaireDetails(questionnaire, username);
+    const fieldIds: string[] = [CaseFields.Id, CaseFields.AllocatedTo];
 
-    return questionnaireDetails as AllocationDetails;
+    const caseData = await this.getCaseData(questionnaireName, fieldIds, username);
+    const questionaireDetails: QuestionnaireDetails = mapQuestionnaireDetails(questionnaire, caseData);
+    const editorAllocationDetails: EditorAllocationDetails[] = mapEditorAllocationDetails(caseData);
+
+    return {
+      ...questionaireDetails,
+      editorAllocationDetails,
+    };
   }
 
   private async getCaseFieldsForQuestionnaire(questionnaireName: string, fieldIds: string[]): Promise<QuestionnaireReport> {

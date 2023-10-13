@@ -5,7 +5,7 @@ import {
   getAllocationDetails, getCaseFactsheet, getCases, getSurveys,
 } from '../../../client/api/NodeApi';
 import { caseDetailsListMockObject, caseFactsheetMockObject } from '../../mockObjects/caseMockObject';
-import { allocationDetailsMockObject } from '../../mockObjects/questionnaireAllocationMockObject';
+import allocationDetailsMockObject from '../../mockObjects/questionnaireAllocationMockObject';
 
 // use axios mock adapter
 const axiosMock = new MockAdapter(axios, { onNoMatch: 'throwException' });

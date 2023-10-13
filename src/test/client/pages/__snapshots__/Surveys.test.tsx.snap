@@ -295,54 +295,51 @@ exports[`Given there are surveys available in blaise should render the manager p
               data-testid="accordion-0-content"
               id="accordion-0-content"
             >
-              <br />
-              <div
-                class="ons-summary"
-              >
+              <div>
+                <br />
                 <div
-                  class="ons-summary__group"
-                  id="turnover"
+                  class="ons-summary"
                 >
-                  <h2
-                    class="ons-summary__group-title"
-                  >
-                    LMS2101_AA1
-                  </h2>
                   <div
-                    class="ons-summary__items"
+                    class="ons-summary__group"
+                    id="turnover"
                   >
-                    <div
-                      class="ons-summary__item"
-                      id="sales-dates-row"
+                    <h2
+                      class="ons-summary__group-title"
                     >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-dates"
+                      LMS2101_AA1
+                    </h2>
+                    <div
+                      class="ons-summary__items"
+                    >
+                      <div
+                        class="ons-summary__item"
+                        id="sales-dates-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-dates"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases Allocted
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases Allocted
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            3
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              3
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -360,43 +357,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Cases allocated to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
-                    </div>
-                    <div
-                      class="ons-summary__item"
-                      id="sales-value-row"
-                    >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-value"
+                          </dd>
+                        </dl>
+                      </div>
+                      <div
+                        class="ons-summary__item"
+                        id="sales-value-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-value"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases left to allocate
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases left to allocate
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            0
-                             
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              0
+                               
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -414,62 +406,59 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Allocate Cases to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <hr />
               </div>
-              <hr />
-              <br />
-              <div
-                class="ons-summary"
-              >
+              <div>
+                <br />
                 <div
-                  class="ons-summary__group"
-                  id="turnover"
+                  class="ons-summary"
                 >
-                  <h2
-                    class="ons-summary__group-title"
-                  >
-                    LMS2101_AB1
-                  </h2>
                   <div
-                    class="ons-summary__items"
+                    class="ons-summary__group"
+                    id="turnover"
                   >
-                    <div
-                      class="ons-summary__item"
-                      id="sales-dates-row"
+                    <h2
+                      class="ons-summary__group-title"
                     >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-dates"
+                      LMS2101_AB1
+                    </h2>
+                    <div
+                      class="ons-summary__items"
+                    >
+                      <div
+                        class="ons-summary__item"
+                        id="sales-dates-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-dates"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases Allocted
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases Allocted
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            1
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              1
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -487,43 +476,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Cases allocated to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
-                    </div>
-                    <div
-                      class="ons-summary__item"
-                      id="sales-value-row"
-                    >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-value"
+                          </dd>
+                        </dl>
+                      </div>
+                      <div
+                        class="ons-summary__item"
+                        id="sales-value-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-value"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases left to allocate
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases left to allocate
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            0
-                             
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              0
+                               
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -541,62 +525,59 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Allocate Cases to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <hr />
               </div>
-              <hr />
-              <br />
-              <div
-                class="ons-summary"
-              >
+              <div>
+                <br />
                 <div
-                  class="ons-summary__group"
-                  id="turnover"
+                  class="ons-summary"
                 >
-                  <h2
-                    class="ons-summary__group-title"
-                  >
-                    LMS2101_AC1
-                  </h2>
                   <div
-                    class="ons-summary__items"
+                    class="ons-summary__group"
+                    id="turnover"
                   >
-                    <div
-                      class="ons-summary__item"
-                      id="sales-dates-row"
+                    <h2
+                      class="ons-summary__group-title"
                     >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-dates"
+                      LMS2101_AC1
+                    </h2>
+                    <div
+                      class="ons-summary__items"
+                    >
+                      <div
+                        class="ons-summary__item"
+                        id="sales-dates-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-dates"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases Allocted
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases Allocted
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            0
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              0
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -614,43 +595,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Cases allocated to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
-                    </div>
-                    <div
-                      class="ons-summary__item"
-                      id="sales-value-row"
-                    >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-value"
+                          </dd>
+                        </dl>
+                      </div>
+                      <div
+                        class="ons-summary__item"
+                        id="sales-value-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-value"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases left to allocate
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases left to allocate
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            0
-                             
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              0
+                               
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -668,14 +644,14 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Allocate Cases to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <hr />
               </div>
-              <hr />
             </div>
           </details>
           <details
@@ -724,54 +700,51 @@ exports[`Given there are surveys available in blaise should render the manager p
               data-testid="accordion-1-content"
               id="accordion-1-content"
             >
-              <br />
-              <div
-                class="ons-summary"
-              >
+              <div>
+                <br />
                 <div
-                  class="ons-summary__group"
-                  id="turnover"
+                  class="ons-summary"
                 >
-                  <h2
-                    class="ons-summary__group-title"
-                  >
-                    OPN2201A
-                  </h2>
                   <div
-                    class="ons-summary__items"
+                    class="ons-summary__group"
+                    id="turnover"
                   >
-                    <div
-                      class="ons-summary__item"
-                      id="sales-dates-row"
+                    <h2
+                      class="ons-summary__group-title"
                     >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-dates"
+                      OPN2201A
+                    </h2>
+                    <div
+                      class="ons-summary__items"
+                    >
+                      <div
+                        class="ons-summary__item"
+                        id="sales-dates-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-dates"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases Allocted
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases Allocted
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            3
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              3
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -789,43 +762,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Cases allocated to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
-                    </div>
-                    <div
-                      class="ons-summary__item"
-                      id="sales-value-row"
-                    >
-                      <dl
-                        class="ons-summary__row ons-summary__row--has-values"
-                        id="sales-value"
+                          </dd>
+                        </dl>
+                      </div>
+                      <div
+                        class="ons-summary__item"
+                        id="sales-value-row"
                       >
-                        <dt
-                          class="ons-summary__item-title"
+                        <dl
+                          class="ons-summary__row ons-summary__row--has-values"
+                          id="sales-value"
                         >
-                          <div
-                            class="ons-summary__item--text"
+                          <dt
+                            class="ons-summary__item-title"
                           >
-                            Cases left to allocate
-                          </div>
-                        </dt>
-                        <dd
-                          class="ons-summary__values"
-                        >
-                          <span
-                            class="ons-summary__text"
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Cases left to allocate
+                            </div>
+                          </dt>
+                          <dd
+                            class="ons-summary__values"
                           >
-                            0
-                             
-                          </span>
-                        </dd>
-                        <dd
-                          class="ons-summary__actions"
-                        >
-                          <a
-                            class="ons-summary__button"
-                            href="#0"
+                            <span
+                              class="ons-summary__text"
+                            >
+                              0
+                               
+                            </span>
+                          </dd>
+                          <dd
+                            class="ons-summary__actions"
                           >
                             <span
                               aria-hidden="true"
@@ -843,14 +811,14 @@ exports[`Given there are surveys available in blaise should render the manager p
                             >
                               Allocate Cases to editors
                             </span>
-                          </a>
-                        </dd>
-                      </dl>
+                          </dd>
+                        </dl>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <hr />
               </div>
-              <hr />
             </div>
           </details>
         </div>
@@ -934,54 +902,51 @@ exports[`Given there are surveys available in blaise should render the manager p
             data-testid="accordion-0-content"
             id="accordion-0-content"
           >
-            <br />
-            <div
-              class="ons-summary"
-            >
+            <div>
+              <br />
               <div
-                class="ons-summary__group"
-                id="turnover"
+                class="ons-summary"
               >
-                <h2
-                  class="ons-summary__group-title"
-                >
-                  LMS2101_AA1
-                </h2>
                 <div
-                  class="ons-summary__items"
+                  class="ons-summary__group"
+                  id="turnover"
                 >
-                  <div
-                    class="ons-summary__item"
-                    id="sales-dates-row"
+                  <h2
+                    class="ons-summary__group-title"
                   >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-dates"
+                    LMS2101_AA1
+                  </h2>
+                  <div
+                    class="ons-summary__items"
+                  >
+                    <div
+                      class="ons-summary__item"
+                      id="sales-dates-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-dates"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases Allocted
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases Allocted
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          3
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            3
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -999,43 +964,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Cases allocated to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
-                  </div>
-                  <div
-                    class="ons-summary__item"
-                    id="sales-value-row"
-                  >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-value"
+                        </dd>
+                      </dl>
+                    </div>
+                    <div
+                      class="ons-summary__item"
+                      id="sales-value-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-value"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases left to allocate
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases left to allocate
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          0
-                           
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            0
+                             
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1053,62 +1013,59 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Allocate Cases to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
+                        </dd>
+                      </dl>
+                    </div>
                   </div>
                 </div>
               </div>
+              <hr />
             </div>
-            <hr />
-            <br />
-            <div
-              class="ons-summary"
-            >
+            <div>
+              <br />
               <div
-                class="ons-summary__group"
-                id="turnover"
+                class="ons-summary"
               >
-                <h2
-                  class="ons-summary__group-title"
-                >
-                  LMS2101_AB1
-                </h2>
                 <div
-                  class="ons-summary__items"
+                  class="ons-summary__group"
+                  id="turnover"
                 >
-                  <div
-                    class="ons-summary__item"
-                    id="sales-dates-row"
+                  <h2
+                    class="ons-summary__group-title"
                   >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-dates"
+                    LMS2101_AB1
+                  </h2>
+                  <div
+                    class="ons-summary__items"
+                  >
+                    <div
+                      class="ons-summary__item"
+                      id="sales-dates-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-dates"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases Allocted
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases Allocted
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          1
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            1
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1126,43 +1083,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Cases allocated to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
-                  </div>
-                  <div
-                    class="ons-summary__item"
-                    id="sales-value-row"
-                  >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-value"
+                        </dd>
+                      </dl>
+                    </div>
+                    <div
+                      class="ons-summary__item"
+                      id="sales-value-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-value"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases left to allocate
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases left to allocate
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          0
-                           
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            0
+                             
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1180,62 +1132,59 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Allocate Cases to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
+                        </dd>
+                      </dl>
+                    </div>
                   </div>
                 </div>
               </div>
+              <hr />
             </div>
-            <hr />
-            <br />
-            <div
-              class="ons-summary"
-            >
+            <div>
+              <br />
               <div
-                class="ons-summary__group"
-                id="turnover"
+                class="ons-summary"
               >
-                <h2
-                  class="ons-summary__group-title"
-                >
-                  LMS2101_AC1
-                </h2>
                 <div
-                  class="ons-summary__items"
+                  class="ons-summary__group"
+                  id="turnover"
                 >
-                  <div
-                    class="ons-summary__item"
-                    id="sales-dates-row"
+                  <h2
+                    class="ons-summary__group-title"
                   >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-dates"
+                    LMS2101_AC1
+                  </h2>
+                  <div
+                    class="ons-summary__items"
+                  >
+                    <div
+                      class="ons-summary__item"
+                      id="sales-dates-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-dates"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases Allocted
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases Allocted
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          0
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            0
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1253,43 +1202,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Cases allocated to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
-                  </div>
-                  <div
-                    class="ons-summary__item"
-                    id="sales-value-row"
-                  >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-value"
+                        </dd>
+                      </dl>
+                    </div>
+                    <div
+                      class="ons-summary__item"
+                      id="sales-value-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-value"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases left to allocate
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases left to allocate
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          0
-                           
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            0
+                             
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1307,14 +1251,14 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Allocate Cases to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
+                        </dd>
+                      </dl>
+                    </div>
                   </div>
                 </div>
               </div>
+              <hr />
             </div>
-            <hr />
           </div>
         </details>
         <details
@@ -1363,54 +1307,51 @@ exports[`Given there are surveys available in blaise should render the manager p
             data-testid="accordion-1-content"
             id="accordion-1-content"
           >
-            <br />
-            <div
-              class="ons-summary"
-            >
+            <div>
+              <br />
               <div
-                class="ons-summary__group"
-                id="turnover"
+                class="ons-summary"
               >
-                <h2
-                  class="ons-summary__group-title"
-                >
-                  OPN2201A
-                </h2>
                 <div
-                  class="ons-summary__items"
+                  class="ons-summary__group"
+                  id="turnover"
                 >
-                  <div
-                    class="ons-summary__item"
-                    id="sales-dates-row"
+                  <h2
+                    class="ons-summary__group-title"
                   >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-dates"
+                    OPN2201A
+                  </h2>
+                  <div
+                    class="ons-summary__items"
+                  >
+                    <div
+                      class="ons-summary__item"
+                      id="sales-dates-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-dates"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases Allocted
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases Allocted
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          3
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            3
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1428,43 +1369,38 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Cases allocated to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
-                  </div>
-                  <div
-                    class="ons-summary__item"
-                    id="sales-value-row"
-                  >
-                    <dl
-                      class="ons-summary__row ons-summary__row--has-values"
-                      id="sales-value"
+                        </dd>
+                      </dl>
+                    </div>
+                    <div
+                      class="ons-summary__item"
+                      id="sales-value-row"
                     >
-                      <dt
-                        class="ons-summary__item-title"
+                      <dl
+                        class="ons-summary__row ons-summary__row--has-values"
+                        id="sales-value"
                       >
-                        <div
-                          class="ons-summary__item--text"
+                        <dt
+                          class="ons-summary__item-title"
                         >
-                          Cases left to allocate
-                        </div>
-                      </dt>
-                      <dd
-                        class="ons-summary__values"
-                      >
-                        <span
-                          class="ons-summary__text"
+                          <div
+                            class="ons-summary__item--text"
+                          >
+                            Cases left to allocate
+                          </div>
+                        </dt>
+                        <dd
+                          class="ons-summary__values"
                         >
-                          0
-                           
-                        </span>
-                      </dd>
-                      <dd
-                        class="ons-summary__actions"
-                      >
-                        <a
-                          class="ons-summary__button"
-                          href="#0"
+                          <span
+                            class="ons-summary__text"
+                          >
+                            0
+                             
+                          </span>
+                        </dd>
+                        <dd
+                          class="ons-summary__actions"
                         >
                           <span
                             aria-hidden="true"
@@ -1482,14 +1418,14 @@ exports[`Given there are surveys available in blaise should render the manager p
                           >
                             Allocate Cases to editors
                           </span>
-                        </a>
-                      </dd>
-                    </dl>
+                        </dd>
+                      </dl>
+                    </div>
                   </div>
                 </div>
               </div>
+              <hr />
             </div>
-            <hr />
           </div>
         </details>
       </div>

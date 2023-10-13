@@ -1,6 +1,7 @@
 import { CaseData, CaseResponse } from 'blaise-api-node-client';
-import { mapCaseDetails, mapCaseFactsheet } from '../../../server/mappers/caseMapper';
+import { mapCaseDetails, mapCaseFactsheet, mapEditorAllocationDetails } from '../../../server/mappers/caseMapper';
 import { CaseDetails, CaseFactsheetDetails } from '../../../common/interfaces/caseInterface';
+import { EditorAllocationDetails } from '../../../common/interfaces/surveyInterface';
 
 describe('Map case report data to case details list', () => {
   it('It should return a correctly mapped list of cases', () => {
@@ -52,6 +53,50 @@ describe('Map case report data to case details list', () => {
 
     // assert
     expect(result).toEqual(expectedCaseDetails);
+  });
+});
+
+describe('Map case report data to Editor Allocation Details list', () => {
+  it('It should return a correctly mapped list of editor allocation details', () => {
+    // arrange
+    const caseDataList: CaseData[] = [
+      {
+        'qserial.serial_number': '9001',
+        'allocation.toeditor': 'toby',
+      },
+      {
+        'qserial.serial_number': '9002',
+        'allocation.toeditor': '',
+      },
+      {
+        'qserial.serial_number': '9003',
+        'allocation.toeditor': 'toby',
+      },
+      {
+        'qserial.serial_number': '9004',
+        'allocation.toeditor': 'jake',
+      },
+      {
+        'qserial.serial_number': '9005',
+        'allocation.toeditor': '       ',
+      },
+    ];
+
+    const expectedAllocationDetails:EditorAllocationDetails[] = [{
+      editor: 'toby',
+      cases: ['9001', '9003'],
+    },
+    {
+      editor: 'jake',
+      cases: ['9004'],
+    },
+    ];
+
+    // act
+    const result = mapEditorAllocationDetails(caseDataList);
+
+    // assert
+    expect(result).toEqual(expectedAllocationDetails);
   });
 });
 

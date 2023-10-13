@@ -10,7 +10,7 @@ import {
 import {
   questionnaireReport1MockObject, questionnaireReport2MockObject, questionnaireReport3MockObject, questionnaireReport4MockObject,
 } from '../../mockObjects/questionnaireReportMockObjects';
-import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
+import { AllocationDetails, QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 import { CaseDetails } from '../../../common/interfaces/caseInterface';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { caseFactsheetMockObject, caseResponseMockObject } from '../../mockObjects/caseMockObject';
@@ -390,7 +390,7 @@ describe('getQuestionnaires from Blaise', () => {
 
 describe('getAllocationDetails from Blaise', () => {
   const questionnaireName = questionnaire1Mock.name;
-  const fieldIds: string[] = [CaseFields.AllocatedTo];
+  const fieldIds: string[] = [CaseFields.Id, CaseFields.AllocatedTo];
 
   beforeEach(() => {
     blaiseApiClientMock.reset();
@@ -416,10 +416,15 @@ describe('getAllocationDetails from Blaise', () => {
     blaiseApiClientMock.setup((client) => client.getQuestionnaireReportData(configFake.ServerPark, questionnaireName, fieldIds))
       .returns(async () => questionnaireReport1MockObject);
 
-    const expectedAllocationDetails: QuestionnaireDetails = {
+    const expectedAllocationDetails: AllocationDetails = {
       questionnaireName: questionnaire1Mock.name,
       numberOfCases: questionnaire1Mock.dataRecordCount ?? 0,
       numberOfCasesAllocated: 2,
+      editorAllocationDetails: [{
+        editor: 'toby',
+        cases: ['9001', '9003'],
+      },
+      ],
     };
 
     // act

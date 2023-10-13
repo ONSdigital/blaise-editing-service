@@ -4,7 +4,7 @@ import nodeServer from '../../../server/server';
 import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
-import { allocationDetailsMockObject } from '../../mockObjects/questionnaireAllocationMockObject';
+import allocationDetailsMockObject from '../../mockObjects/questionnaireAllocationMockObject';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
