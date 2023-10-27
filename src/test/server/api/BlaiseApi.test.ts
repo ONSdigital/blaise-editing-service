@@ -14,7 +14,7 @@ import { AllocationDetails, QuestionnaireDetails } from '../../../common/interfa
 import { CaseDetails } from '../../../common/interfaces/caseInterface';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { caseFactsheetMockObject, caseResponseMockObject } from '../../mockObjects/caseMockObject';
-import CaseFields from '../../../client/enums/CaseFields';
+import CaseFields from '../../../client/Common/enums/CaseFields';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();

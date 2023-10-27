@@ -4,7 +4,7 @@ import mapQuestionnaireDetails from '../mappers/questionnaireMapper';
 import { mapCaseDetails, mapCaseFactsheet, mapEditorAllocationDetails } from '../mappers/caseMapper';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
 import { AllocationDetails, EditorAllocationDetails, QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
-import CaseFields from '../../client/enums/CaseFields';
+import CaseFields from '../../client/Common/enums/CaseFields';
 
 export default class BlaiseApi {
   config: ServerConfiguration;

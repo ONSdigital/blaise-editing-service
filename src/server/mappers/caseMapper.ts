@@ -1,6 +1,6 @@
 import { CaseData, CaseResponse } from 'blaise-api-node-client';
 import { CaseDetails, CaseFactsheetDetails } from '../../common/interfaces/caseInterface';
-import CaseFields from '../../client/enums/CaseFields';
+import CaseFields from '../../client/Common/enums/CaseFields';
 import { EditorAllocationDetails } from '../../common/interfaces/surveyInterface';
 import stringIsNullOrEmpty from '../../common/helpers/stringHelper';
 
@@ -22,12 +22,12 @@ export function mapEditorAllocationDetails(caseDataList: CaseData[]): EditorAllo
     const caseId:string = caseAssigned[CaseFields.Id];
     const existingEditorAllocation = editorAllocationDetails.find((allocationDetails) => allocationDetails.editor === editor);
 
-    if(existingEditorAllocation) {
+    if (existingEditorAllocation) {
       existingEditorAllocation.cases.push(caseId);
       return;
     }
-    
-    editorAllocationDetails.push({editor, cases: [caseId]})
+
+    editorAllocationDetails.push({ editor, cases: [caseId] });
   });
 
   return editorAllocationDetails;
