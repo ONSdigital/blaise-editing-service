@@ -1,4 +1,8 @@
+import { CaseOutcome } from 'blaise-api-node-client';
+import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import ServerConfigurationProvider from '../../../server/configuration/ServerConfigurationProvider';
+import { RoleConfiguration } from '../../../server/interfaces/roleConfigurationInterface';
+import { getSurveyConfigForRole, getSurveysForRole } from '../../../server/helpers/configurationHelper';
 
 export default class FakeServerConfigurationProvider implements ServerConfigurationProvider {
   BlaiseApiUrl: string;
@@ -17,6 +21,12 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
 
   Roles: string[];
 
+  DefaultSessionTimeout: string = '12h';
+
+  DefaultRoles: string[] = ['SVT_Supervisor', 'SVT_Editor'];
+
+  RoleConfiguration: RoleConfiguration[];
+
   constructor(
     blaiseApiUrl?: string,
     buildFolder?: string,
@@ -26,6 +36,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
     sessionSecret?: string,
     sessionTimeout?: string,
     roles?: string[],
+    roleConfiguration?: RoleConfiguration[],
   ) {
     this.BlaiseApiUrl = blaiseApiUrl ?? 'restapi.blaise.com';
     this.BuildFolder = buildFolder ?? 'dist';
@@ -33,7 +44,52 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
     this.ServerPark = serverPark ?? 'gusty';
     this.ExternalWebUrl = externalWebUrl ?? 'cati.blaise.com';
     this.SessionSecret = sessionSecret ?? 'richlikesricecakes';
-    this.SessionTimeout = sessionTimeout ?? '12h';
-    this.Roles = roles ?? ['DST'];
+    this.SessionTimeout = sessionTimeout ?? this.DefaultSessionTimeout;
+    this.Roles = roles ?? this.DefaultRoles;
+    this.RoleConfiguration = roleConfiguration ?? [{
+      Role: 'SVT_Supervisor',
+      Surveys: [{
+        Survey: 'FRS',
+        Organisations: [Organisation.ONS],
+        Outcomes: [CaseOutcome.Completed, CaseOutcome.CompletedNudge, CaseOutcome.CompletedProxy],
+      }],
+    },
+    {
+      Role: 'SVT_Editor',
+      Surveys: [{
+        Survey: 'TEST',
+        Organisations: [Organisation.ONS],
+        Outcomes: [],
+      },
+      {
+        Survey: 'FRS',
+        Organisations: [Organisation.ONS],
+        Outcomes: [CaseOutcome.Completed, CaseOutcome.CompletedNudge, CaseOutcome.CompletedProxy],
+      }],
+    },
+    {
+      Role: 'SVT_NotConfigured',
+      Surveys: [{
+        Survey: 'LMS',
+        Organisations: [Organisation.ONS],
+        Outcomes: [CaseOutcome.Completed, CaseOutcome.CompletedNudge, CaseOutcome.CompletedProxy],
+      }],
+    },
+    {
+      Role: 'SVT_AllOutcomes',
+      Surveys: [{
+        Survey: 'FRS',
+        Organisations: [Organisation.ONS],
+        Outcomes: [],
+      }],
+    }];
+  }
+
+  getSurveysForRole(userRole: string) {
+    return getSurveysForRole(this.RoleConfiguration, userRole);
+  }
+
+  getSurveyConfigForRole(surveyTla: string, userRole: string) {
+    return getSurveyConfigForRole(this.RoleConfiguration, surveyTla, userRole);
   }
 }

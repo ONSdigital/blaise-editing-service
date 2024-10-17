@@ -1,28 +1,41 @@
-import { CaseOutcome } from 'blaise-api-node-client';
-
-export interface CaseDetails {
-  CaseId: string,
-  CaseStatus: CaseOutcome,
-  EditorAllocated: string
-  EditCaseLink: string;
+export interface HousingBenefits {
+  Amount: string,
+  PeriodCode: string,
 }
 
-export interface CaseFactsheetDetails {
+export interface CaseSummaryDetails {
   CaseId: string
-  OutcomeCode: number,
+  OutcomeCode: string,
+  InterviewDate: Date,
+  District: string,
   InterviewerName: string,
-  NumberOfRespondents: number,
-  Address: {
-    AddressLine1: string,
-    AddressLine2: string,
-    AddressLine3: string,
-    AddressLine4: string,
-    County: string,
-    Town: string,
-    Postcode: string,
+  NumberOfRespondents: string,
+  Household: {
+    Accommodation: {
+      Main: string,
+      Type: string,
+    }
+    FloorNumber: string,
+    Status: string,
+    NumberOfBedrooms: string,
+    ReceiptOfHousingBenefit: HousingBenefits[],
+    CouncilTaxBand: string,
+    BusinessRoom: boolean,
+    SelfEmployed: boolean,
+    SelfEmployedMembers: string[],
+    IncomeSupport: boolean,
+    IncomeSupportMembers: string[],
+    IncomeBasedJaSupport: boolean,
+    IncomeBasedJaSupportMembers: string[],
+
   },
   Respondents: {
+    PersonNumber: string,
     RespondentName: string,
+    BenefitUnit: string,
+    Sex: string,
     DateOfBirth: Date,
+    MaritalStatus: string,
+    Relationship: string[],
   }[]
 }

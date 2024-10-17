@@ -3,14 +3,18 @@ import {
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Authenticate } from 'blaise-login-react-client';
-import surveyListMockObject from '../mockObjects/surveyListMockObject';
-import { getSurveys } from '../../client/Common/api/NodeApi';
+import { getEditorInformation, getSupervisorEditorInformation, getSurveys } from '../../client/api/NodeApi';
 import { Survey } from '../../common/interfaces/surveyInterface';
-import userMockObject from '../mockObjects/userMockObject';
+import userMockObject from '../server/mockObjects/userMockObject';
 import App from '../../client/App';
+import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from './MockObjects/SupervisorMockObjects';
+import { EditorInformation } from '../../client/Interfaces/editorInterface';
+import { SupervisorInformation } from '../../client/Interfaces/supervisorInterface';
+import FilteredSurveyListMockObject from './MockObjects/SurveyMockObjects';
+import { EditorInformationMockObject1, EditorInformationMockObject2 } from './MockObjects/EditorMockObjects';
 
 // set global variables
-const validUserRoles:string[] = ['Manager', 'Editor'];
+const validUserRoles:string[] = ['SVT_Supervisor', 'SVT_Editor'];
 let view:RenderResult;
 
 // create mocks
@@ -18,16 +22,24 @@ jest.mock('blaise-login-react-client');
 const { MockAuthenticate } = jest.requireActual('blaise-login-react-client');
 Authenticate.prototype.render = MockAuthenticate.prototype.render;
 
-jest.mock('../../client/Common/api/NodeApi');
+jest.mock('../../client/api/NodeApi');
 const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
+const getEditorInformationMock = getEditorInformation as jest.Mock<Promise<EditorInformation>>;
+const getSupervisorEditorInformationMock = getSupervisorEditorInformation as jest.Mock<Promise<SupervisorInformation>>;
 
 describe('Renders the correct screen depending if the user has recently logged in', () => {
   beforeEach(() => {
-    getSurveysMock.mockImplementation(() => Promise.resolve(surveyListMockObject));
+    getSurveysMock.mockImplementation(() => Promise.resolve(FilteredSurveyListMockObject));
+    getEditorInformationMock.mockReturnValueOnce(Promise.resolve(EditorInformationMockObject1))
+      .mockReturnValueOnce(Promise.resolve(EditorInformationMockObject2));
+    getSupervisorEditorInformationMock.mockReturnValueOnce(Promise.resolve(SupervisorInformationMockObject1))
+      .mockReturnValueOnce(Promise.resolve(SupervisorInformationMockObject2));
   });
 
   afterEach(() => {
     getSurveysMock.mockReset();
+    getEditorInformationMock.mockReset();
+    getSupervisorEditorInformationMock.mockReset();
   });
 
   it('Should display a message asking the user to enter their Blaise user credentials if they are not logged in', async () => {
@@ -63,6 +75,6 @@ describe('Renders the correct screen depending if the user has recently logged i
 
     // assert
     const appView = view.getByTestId('app-content');
-    expect(appView).toHaveTextContent(`Bonjour tout le monde ${user.name}`);
+    expect(appView).toHaveTextContent('Welcome to the editing service.');
   });
 });

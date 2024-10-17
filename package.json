@@ -9,7 +9,9 @@
     "build-react": "react-scripts build",
     "eject-react": "react-scripts eject",
     "clean": "npx rimraf dist && npx rimraf build",
-    "test": "jest --coverage --watchAll=false",
+    "test-react": "yarn clean && yarn build-react && jest --coverage --watchAll=false",
+    "test-server": "yarn clean && yarn build-server && jest --coverage --watchAll=false",
+    "test": "yarn clean && yarn build-react && yarn build-server && jest --coverage --watchAll=false",
     "lint": "yarn eslint . --fix",
     "build-server": "tsc --project tsconfig.server.json",
     "run-server": "node ./dist/server/index.js",
@@ -17,7 +19,9 @@
     "build-server-watch": "yarn build-server -w",
     "run-server-watch": "nodemon ./dist/server/index.js",
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
-    "dev": "concurrently npm:start-react npm:start-server-watch"
+    "dev": "concurrently npm:start-react npm:start-server-watch",
+    "gcp-build": "GENERATE_SOURCEMAP=false react-scripts build && tsc --project tsconfig.server.json",
+    "start": "node ./dist/server/index.js"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
@@ -38,7 +42,10 @@
       "last 1 safari version"
     ]
   },
-  "resolutions": { "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#BL5FRS-67" },
+  "resolutions": {
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#c8449e9905c9f8952f0465b6861253e7c740ac26",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#14786b365ff2bf5cc3a393ba2ae3cd2e2dd857b6"
+  },
   "dependencies": {
     "@types/ejs": "^3.1.2",
     "@types/node": "^16.7.13",
@@ -46,11 +53,12 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
-    "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#BL5FRS-67",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#BL5FRS-54",
-    "blaise-login-react-client": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?dd8a036025ee8ed58a76b1c798daf04c33f4cc5a",
-    "blaise-login-react-server": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?dd8a036025ee8ed58a76b1c798daf04c33f4cc5a",
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#c8449e9905c9f8952f0465b6861253e7c740ac26",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#14786b365ff2bf5cc3a393ba2ae3cd2e2dd857b6",
+    "blaise-login-react-client": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?39f4182a62b1faaf01039fb8c94adc296ac78766",
+    "blaise-login-react-server": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?39f4182a62b1faaf01039fb8c94adc296ac78766",
     "concurrently": "^8.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
@@ -66,6 +74,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@types/express": "^4.17.12",
     "@types/express-list-endpoints": "^6.0.0",
     "@types/jest": "^27.0.1",
     "@types/supertest": "^2.0.12",

@@ -32,9 +32,14 @@ The `.env` file should be setup as below
 
 ```.env
 PORT='5000'
-BLAISE_API_URL='http://localhost:5011'
+BLAISE_API_URL='http://localhost:8080'
 SERVER_PARK='gusty'
 VM_EXTERNAL_WEB_URL='cati.com'
+```
+
+Open a tunnel to our Blaise RESTful API in your GCP project:
+```shell
+gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:8080 --zone europe-west2-a
 ```
 
 ## Available Scripts

@@ -24,10 +24,11 @@ describe('All expected routes are registered', () => {
 
     const expectedEndpoints:Endpoint[] = [
       // needs to be in the same order they are added to the server
-      { methods: ['GET'], middlewares: ['bound getSurveys'], path: '/api/surveys' },
-      { methods: ['GET'], middlewares: ['bound getCases'], path: '/api/questionnaires/:questionnaireName/cases' },
-      { methods: ['GET'], middlewares: ['bound getCaseFactsheet'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/factsheet' },
-      { methods: ['GET'], middlewares: ['bound getAllocationDetails'], path: '/api/questionnaires/:questionnaireName/allocation' },
+      { methods: ['GET'], middlewares: ['bound ', 'bound getSurveys'], path: '/api/surveys' },
+      { methods: ['GET'], middlewares: ['bound ', 'bound getCaseSummary'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/summary' },
+      { methods: ['GET'], middlewares: ['bound ', 'bound getCaseEditInformation'], path: '/api/questionnaires/:questionnaireName/cases/edit' },
+      { methods: ['PATCH'], middlewares: ['bound ', 'bound allocateCases'], path: '/api/questionnaires/:questionnaireName/cases' },
+      { methods: ['GET'], middlewares: ['bound ', 'bound getUsers'], path: '/api/users' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/current-user' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username/authorised' },
@@ -57,6 +58,6 @@ describe('Render react pages as default route', () => {
     expect(result.error).toBeFalsy();
     expect(result.statusCode).toEqual(200);
     expect(result.type).toEqual('text/html');
-    expect(result.text).toContain('Web site created using create-react-app');
+    expect(result.text).toContain('Edit interview data and view statistics on editing progress');
   });
 });

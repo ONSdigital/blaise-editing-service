@@ -6,14 +6,6 @@ export interface Survey {
 export interface QuestionnaireDetails {
   questionnaireName: string,
   numberOfCases: number,
-  numberOfCasesAllocated: number,
-}
-
-export interface AllocationDetails extends QuestionnaireDetails {
-  editorAllocationDetails: EditorAllocationDetails[]
-}
-
-export interface EditorAllocationDetails {
-  editor: string,
-  cases: string[]
+  fieldPeriod: string | null,
+  surveyTla: string,
 }

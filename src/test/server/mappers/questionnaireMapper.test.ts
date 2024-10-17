@@ -1,75 +1,56 @@
-import { CaseData, Questionnaire } from 'blaise-api-node-client';
+import { Questionnaire } from 'blaise-api-node-client';
 import mapQuestionnaireDetails from '../../../server/mappers/questionnaireMapper';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 
-describe('Map a list of questionnaires and reports to a questionnaire allocation list', () => {
-  it('It should return a correctly mapped list of questionnaires', () => {
+describe('Map a questionnaire', () => {
+  it('It should return a correctly mapped questionnaire given all details are present', () => {
     // arrange
-    const username: string = 'toby';
 
     const questionnaire: Questionnaire = {
-      name: 'LMS2101_AA1',
+      name: 'FRS2504A_EDIT',
       serverParkName: 'gusty',
       installDate: '2021-01-15T15:26:43.4233454+00:00',
-      status: 'Active',
+      fieldPeriod: '2021-01-01T00:00:00',
+      surveyTla: 'LMS',
       dataRecordCount: 3,
-      hasData: false,
-      active: false,
+      hasData: true,
+      active: true,
     };
 
-    const caseData: CaseData[] = [
-      {
-        'qserial.serial_number': '9001',
-        'qhadmin.hout': 110,
-        'allocation.toeditor': 'jakew',
-      },
-      {
-        'qserial.serial_number': '9002',
-        'qhadmin.hout': 210,
-        'allocation.toeditor': username,
-      },
-      {
-        'qserial.serial_number': '9003',
-        'qhadmin.hout': 210,
-        'allocation.toeditor': '',
-      },
-    ];
-
     const expectedQuestionnaireDetails: QuestionnaireDetails = {
-      questionnaireName: questionnaire.name,
-      numberOfCases: questionnaire.dataRecordCount ?? 0,
-      numberOfCasesAllocated: 2,
+      questionnaireName: 'FRS2504A_EDIT',
+      numberOfCases: 3,
+      fieldPeriod: 'January 2021',
+      surveyTla: 'LMS',
     };
 
     // act
-    const result = mapQuestionnaireDetails(questionnaire, caseData);
+    const result = mapQuestionnaireDetails(questionnaire);
 
     // assert
     expect(result).toEqual(expectedQuestionnaireDetails);
   });
 
-  it('It should return a correctly mapped list of questionnaires when there are no cases', () => {
+  it('It should return a correctly mapped questionnaire given some details are missing', () => {
     // arrange
+
     const questionnaire: Questionnaire = {
-      name: 'LMS2101_AA1',
+      name: 'FRS2504A_EDIT',
       serverParkName: 'gusty',
       installDate: '2021-01-15T15:26:43.4233454+00:00',
-      status: 'Active',
-      dataRecordCount: 0,
       hasData: false,
-      active: false,
+      active: true,
     };
 
-    const caseData: CaseData[] = [];
-
     const expectedQuestionnaireDetails: QuestionnaireDetails = {
-      questionnaireName: questionnaire.name,
-      numberOfCases: questionnaire.dataRecordCount ?? 0,
-      numberOfCasesAllocated: 0,
+      questionnaireName: 'FRS2504A_EDIT',
+      numberOfCases: 0,
+      fieldPeriod: 'N/A',
+      surveyTla: 'N/A',
     };
 
     // act
-    const result = mapQuestionnaireDetails(questionnaire, caseData);
+    const result = mapQuestionnaireDetails(questionnaire);
 
     // assert
     expect(result).toEqual(expectedQuestionnaireDetails);

@@ -1,3 +1,4 @@
+import { CaseOutcome } from 'blaise-api-node-client';
 import ServerConfigurationProvider from '../../../server/configuration/ServerConfigurationProvider';
 
 /* eslint-disable no-new */
@@ -9,8 +10,9 @@ const serverPark = 'gusty';
 const externalWebUrl = 'cati.blaise.com';
 const sessionSecret = 'richlikesricecakes';
 const sessionTimeout = '12h';
-const roles = 'DST';
-const rolesArray = ['DST'];
+const roles = 'SVT_Supervisor,SVT_Editor';
+const rolesList = ['SVT_Supervisor', 'SVT_Editor'];
+const surveys = 'FRS';
 
 describe('Configuration file tests', () => {
   beforeEach(() => {
@@ -29,7 +31,7 @@ describe('Configuration file tests', () => {
     const sut = new ServerConfigurationProvider();
 
     // assert
-    expect(sut.BlaiseApiUrl).toEqual(blaiseApiUrl);
+    expect(sut.BlaiseApiUrl).toEqual(`http://${blaiseApiUrl}`);
     expect(sut.BuildFolder).toEqual(buildFolder);
     expect(sut.Port).toEqual(port);
     expect(sut.ServerPark).toEqual(serverPark);
@@ -86,6 +88,7 @@ describe('Authentication file tests', () => {
     process.env['SESSION_SECRET'] = sessionSecret;
     process.env['SESSION_TIMEOUT'] = sessionTimeout;
     process.env['ROLES'] = roles;
+    process.env['SURVEYS'] = surveys;
     process.env['BLAISE_API_URL'] = blaiseApiUrl;
   });
 
@@ -100,8 +103,8 @@ describe('Authentication file tests', () => {
     // assert
     expect(sut.SessionSecret).toEqual(sessionSecret);
     expect(sut.SessionTimeout).toEqual(sessionTimeout);
-    expect(sut.Roles).toEqual(rolesArray);
-    expect(sut.BlaiseApiUrl).toEqual(blaiseApiUrl);
+    expect(sut.Roles).toEqual(rolesList);
+    expect(sut.BlaiseApiUrl).toEqual(`http://${blaiseApiUrl}`);
   });
 
   it.each([undefined, ''])('should return a session secret alpha numeric hex if SESSION_SECRET is empty or does not exist', (value) => {
@@ -123,19 +126,18 @@ describe('Authentication file tests', () => {
     const sut = new ServerConfigurationProvider();
 
     // assert
-    expect(sut.SessionTimeout).toEqual('12h');
+    expect(sut.SessionTimeout).toEqual(sut.DefaultSessionTimeout);
   });
 
-  it.each([undefined, ''])('should return all roles if a role empty or does not exist', (value) => {
+  it.each([undefined, '', '_ROLES'])('should return the roles listed in the role config if roles is empty or does not exist', (value) => {
     // arrange
     process.env['ROLES'] = value;
 
     // act
     const sut = new ServerConfigurationProvider();
-    const allRoles = ['DST', 'BDSS', 'Researcher'];
 
     // assert
-    expect(sut.Roles).toEqual(allRoles);
+    expect(sut.Roles).toEqual(['SVT_Supervisor', 'SVT_Editor']);
   });
 
   it.each([undefined, '', '  ', '   '])('should throw an error if BLAISE_API_URL is empty or does not exist', (value) => {
@@ -158,5 +160,28 @@ describe('Authentication file tests', () => {
 
     // assert
     expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL has not been set or is set to an empty string');
+  });
+
+  it.each(['SVT_Supervisor', 'SVT_Editor'])('should return the expected surveys for the role', (role) => {
+    // arrange
+    const sut = new ServerConfigurationProvider();
+
+    // act
+    const result = sut.getSurveysForRole(role);
+
+    // assert
+    expect(result).toEqual(['FRS']);
+  });
+
+  it.each(['SVT_Supervisor', 'SVT_Editor'])('should return the expected survey configuration for FRS', (role) => {
+    // arrange
+    const sut = new ServerConfigurationProvider();
+
+    // act
+    const result = sut.getSurveyConfigForRole('FRS', role);
+
+    // assert
+    expect(result.Survey).toEqual('FRS');
+    expect(result.Outcomes).toEqual([CaseOutcome.Completed, CaseOutcome.CompletedNudge, CaseOutcome.CompletedProxy]);
   });
 });

@@ -52,3 +52,21 @@ width: 40% !important;
 .ons-summary__item-title, .ons-summary__values  {
   flex: 2 !important;
 }
+
+.ons-table__cell.links {
+  text-align: right;
+}
+
+a.nav:link {color:#000;  font-Weight: 'normal';}
+a.nav:hover {color:#000;  font-Weight: 'normal';}
+a.nav:visited {color:#000;  font-Weight: 'normal';}
+
+a.allocate:link {color:#000;  font-Weight: 'normal';}
+a.allocate:hover {color:#000;  font-Weight: 'normal';}
+a.allocate:visited {color:#000;  font-Weight: 'normal';}
+ 
+a.case:link {color:#000;  font-Weight: 'normal';}
+a.case:hover {color:#000;  font-Weight: 'normal';}
+a.case:visited {color:#000;  font-Weight: 'normal';}
+
+#questionnaire-accordion {margin:0 0 40px 20px;}

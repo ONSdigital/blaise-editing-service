@@ -26,16 +26,20 @@
       "@typescript-eslint"
   ], 
   "rules": {
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
-    "no-spaced-func": "off", 
-    "max-len": ["error", { "code": 180 }],
+    "no-constant-condition": "error",
+    "no-unused-vars": "error",
+    "no-unreachable": "error",
+    "no-spaced-func": "off",
+    "max-len": ["off", { "code": 200 }],
     "import/no-extraneous-dependencies": [
       "error", {
          "devDependencies": true
       }
-  ]
+  ],
+  "no-param-reassign": ["error", { "props": false }]
   },
   "ignorePatterns": [".eslintrc.js", "node_modules/*","dist/*","build/*","coverage/*"]
 

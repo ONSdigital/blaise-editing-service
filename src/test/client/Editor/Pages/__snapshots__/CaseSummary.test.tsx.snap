@@ -1,0 +1,796 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given there is a case available in blaise for a questionnaire should display the summary correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        data-testid="Summary"
+      >
+        <div
+          class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+        >
+          <div
+            class="ons-panel__body "
+          >
+            Case summary for
+             
+            <strong>
+              9001
+            </strong>
+             
+            completed by
+             
+            <strong>
+              Rich
+            </strong>
+          </div>
+        </div>
+        <dl
+          class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+          style="margin: 2% 5% 2% 5%;"
+          title="summary"
+        >
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Serial Number
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            9001
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Outcome code
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            110
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Interview date
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Sat May 11 2024
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            District
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Gwent
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Interviewer name
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Rich
+          </dd>
+        </dl>
+        <br />
+        <table
+          class="ons-table"
+          data-testid="Respondents-table"
+          id="Respondents-table"
+        >
+          <caption
+            class="table__caption"
+          >
+            Relationship Grid
+          </caption>
+          <thead
+            class="ons-table__head"
+          >
+            <tr
+              class="ons-table__row"
+            >
+              <th
+                class="ons-table__header"
+                scope="col"
+              />
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                Name
+              </th>
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                BU
+              </th>
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                Sex
+              </th>
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                DOB
+              </th>
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                Marital status
+              </th>
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                1
+              </th>
+              <th
+                class="ons-table__header"
+                scope="col"
+              >
+                2
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="ons-table__body"
+          >
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                aria-label="RespondentNumber"
+                class="ons-table__cell"
+              >
+                1
+              </td>
+              <td
+                aria-label="RespondentName"
+                class="ons-table__cell status"
+              >
+                Richmond Ricecake
+              </td>
+              <td
+                aria-label="BenefitUnit"
+                class="ons-table__cell"
+              >
+                1
+              </td>
+              <td
+                aria-label="Sex"
+                class="ons-table__cell"
+              >
+                M
+              </td>
+              <td
+                aria-label="DateOfBirth"
+                class="ons-table__cell"
+              >
+                Tue Jan 15 1980
+              </td>
+              <td
+                aria-label="MaritalStatus"
+                class="ons-table__cell"
+              >
+                COH
+              </td>
+              <td
+                aria-label="Relationship-1"
+                class="ons-table__cell"
+              >
+                *
+              </td>
+              <td
+                aria-label="Relationship-1"
+                class="ons-table__cell"
+              >
+                1
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                aria-label="RespondentNumber"
+                class="ons-table__cell"
+              >
+                2
+              </td>
+              <td
+                aria-label="RespondentName"
+                class="ons-table__cell status"
+              >
+                Betty Bettison
+              </td>
+              <td
+                aria-label="BenefitUnit"
+                class="ons-table__cell"
+              >
+                1
+              </td>
+              <td
+                aria-label="Sex"
+                class="ons-table__cell"
+              >
+                F
+              </td>
+              <td
+                aria-label="DateOfBirth"
+                class="ons-table__cell"
+              >
+                Sun Jun 11 1995
+              </td>
+              <td
+                aria-label="MaritalStatus"
+                class="ons-table__cell"
+              >
+                COH
+              </td>
+              <td
+                aria-label="Relationship-2"
+                class="ons-table__cell"
+              >
+                1
+              </td>
+              <td
+                aria-label="Relationship-2"
+                class="ons-table__cell"
+              >
+                *
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+        <dl
+          class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+          style="margin: 2% 5% 2% 5%;"
+        >
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Accommodation type
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Main: House/Bungalow - Type: Detached
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Floor number
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            2
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Household Status
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Conventional
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Number of bedrooms
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            2
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Receipt of housing benefit
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            <span>
+              amount: 380, period: One week
+              <br />
+            </span>
+            <span>
+              amount: 420, period: Two weeks
+              <br />
+            </span>
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Council tax band
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Band A
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Business room
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Yes
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Self employed
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Yes - H/H members: 1, 2
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Income support
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Yes - H/H members: 1
+          </dd>
+          <dt
+            class="ons-metadata__term ons-grid__col ons-col-3@m"
+          >
+            Income based JA support
+          </dt>
+          <dd
+            class="ons-metadata__value ons-grid__col ons-col-9@m"
+          >
+            Yes - H/H members: 1
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      data-testid="Summary"
+    >
+      <div
+        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          Case summary for
+           
+          <strong>
+            9001
+          </strong>
+           
+          completed by
+           
+          <strong>
+            Rich
+          </strong>
+        </div>
+      </div>
+      <dl
+        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+        style="margin: 2% 5% 2% 5%;"
+        title="summary"
+      >
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Serial Number
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          9001
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Outcome code
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          110
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Interview date
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Sat May 11 2024
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          District
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Gwent
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Interviewer name
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Rich
+        </dd>
+      </dl>
+      <br />
+      <table
+        class="ons-table"
+        data-testid="Respondents-table"
+        id="Respondents-table"
+      >
+        <caption
+          class="table__caption"
+        >
+          Relationship Grid
+        </caption>
+        <thead
+          class="ons-table__head"
+        >
+          <tr
+            class="ons-table__row"
+          >
+            <th
+              class="ons-table__header"
+              scope="col"
+            />
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              Name
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              BU
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              Sex
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              DOB
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              Marital status
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              1
+            </th>
+            <th
+              class="ons-table__header"
+              scope="col"
+            >
+              2
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="ons-table__body"
+        >
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              aria-label="RespondentNumber"
+              class="ons-table__cell"
+            >
+              1
+            </td>
+            <td
+              aria-label="RespondentName"
+              class="ons-table__cell status"
+            >
+              Richmond Ricecake
+            </td>
+            <td
+              aria-label="BenefitUnit"
+              class="ons-table__cell"
+            >
+              1
+            </td>
+            <td
+              aria-label="Sex"
+              class="ons-table__cell"
+            >
+              M
+            </td>
+            <td
+              aria-label="DateOfBirth"
+              class="ons-table__cell"
+            >
+              Tue Jan 15 1980
+            </td>
+            <td
+              aria-label="MaritalStatus"
+              class="ons-table__cell"
+            >
+              COH
+            </td>
+            <td
+              aria-label="Relationship-1"
+              class="ons-table__cell"
+            >
+              *
+            </td>
+            <td
+              aria-label="Relationship-1"
+              class="ons-table__cell"
+            >
+              1
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              aria-label="RespondentNumber"
+              class="ons-table__cell"
+            >
+              2
+            </td>
+            <td
+              aria-label="RespondentName"
+              class="ons-table__cell status"
+            >
+              Betty Bettison
+            </td>
+            <td
+              aria-label="BenefitUnit"
+              class="ons-table__cell"
+            >
+              1
+            </td>
+            <td
+              aria-label="Sex"
+              class="ons-table__cell"
+            >
+              F
+            </td>
+            <td
+              aria-label="DateOfBirth"
+              class="ons-table__cell"
+            >
+              Sun Jun 11 1995
+            </td>
+            <td
+              aria-label="MaritalStatus"
+              class="ons-table__cell"
+            >
+              COH
+            </td>
+            <td
+              aria-label="Relationship-2"
+              class="ons-table__cell"
+            >
+              1
+            </td>
+            <td
+              aria-label="Relationship-2"
+              class="ons-table__cell"
+            >
+              *
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <dl
+        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+        style="margin: 2% 5% 2% 5%;"
+      >
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Accommodation type
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Main: House/Bungalow - Type: Detached
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Floor number
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          2
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Household Status
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Conventional
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Number of bedrooms
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          2
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Receipt of housing benefit
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          <span>
+            amount: 380, period: One week
+            <br />
+          </span>
+          <span>
+            amount: 420, period: Two weeks
+            <br />
+          </span>
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Council tax band
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Band A
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Business room
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Yes
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Self employed
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Yes - H/H members: 1, 2
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Income support
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Yes - H/H members: 1
+        </dd>
+        <dt
+          class="ons-metadata__term ons-grid__col ons-col-3@m"
+        >
+          Income based JA support
+        </dt>
+        <dd
+          class="ons-metadata__value ons-grid__col ons-col-9@m"
+        >
+          Yes - H/H members: 1
+        </dd>
+      </dl>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
