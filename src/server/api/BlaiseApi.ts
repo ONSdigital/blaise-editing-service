@@ -46,7 +46,7 @@ export default class BlaiseApi {
     const caseEditInformationList = await this.blaiseApiClient.getCaseEditInformation(this.config.ServerPark, questionnaireName);
 
     caseEditInformationList.forEach((caseEditInformation) => {
-      caseEditInformation.editUrl = `https://${this.config.ExternalWebUrl}/${questionnaireName}?Mode=CAWI&KeyValue=${caseEditInformation.primaryKey}`;
+      caseEditInformation.editUrl = `https://${this.config.ExternalWebUrl}/${questionnaireName}?KeyValue=${caseEditInformation.primaryKey}`;
     });
 
     return caseEditInformationList;
