@@ -43,7 +43,7 @@
     ]
   },
   "resolutions": {
-    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#c8449e9905c9f8952f0465b6861253e7c740ac26",
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#7384cc90a769b42d7b12341a3aaca74f2e761011",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#14786b365ff2bf5cc3a393ba2ae3cd2e2dd857b6"
   },
   "dependencies": {
@@ -53,7 +53,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
-    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#c8449e9905c9f8952f0465b6861253e7c740ac26",
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#7384cc90a769b42d7b12341a3aaca74f2e761011",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#14786b365ff2bf5cc3a393ba2ae3cd2e2dd857b6",
     "blaise-login-react-client": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?39f4182a62b1faaf01039fb8c94adc296ac78766",
     "blaise-login-react-server": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?39f4182a62b1faaf01039fb8c94adc296ac78766",
