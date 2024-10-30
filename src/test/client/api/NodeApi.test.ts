@@ -112,7 +112,7 @@ describe('getEditorInformation from Blaise', () => {
       interviewer: '',
       editedStatus: EditedStatus.Finished,
       organisation: Organisation.ONS,
-      editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001011',
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
     },
     {
       primaryKey: '10001012',
@@ -121,7 +121,7 @@ describe('getEditorInformation from Blaise', () => {
       interviewer: '',
       editedStatus: EditedStatus.NotStarted,
       organisation: Organisation.ONS,
-      editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012',
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
     }];
 
     const expectedEditorInformation: EditorInformation = {
@@ -130,12 +130,12 @@ describe('getEditorInformation from Blaise', () => {
         {
           CaseId: '10001011',
           EditStatus: 'Completed',
-          EditUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001011',
+          EditUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
         },
         {
           CaseId: '10001012',
           EditStatus: 'Not started',
-          EditUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012',
+          EditUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
         },
       ],
     };
@@ -157,7 +157,7 @@ describe('getEditorInformation from Blaise', () => {
       interviewer: '',
       editedStatus: EditedStatus.Finished,
       organisation: Organisation.ONS,
-      editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001011',
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
     },
     {
       primaryKey: '10001012',
@@ -166,7 +166,7 @@ describe('getEditorInformation from Blaise', () => {
       interviewer: '',
       editedStatus: EditedStatus.NotStarted,
       organisation: Organisation.ONS,
-      editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012',
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
     }];
 
     const expectedEditorInformation: EditorInformation = {
@@ -175,7 +175,7 @@ describe('getEditorInformation from Blaise', () => {
         {
           CaseId: '10001012',
           EditStatus: 'Not started',
-          EditUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012',
+          EditUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
         },
       ],
     };
