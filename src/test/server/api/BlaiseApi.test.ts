@@ -147,7 +147,7 @@ describe('getCaseEditInformation from Blaise', () => {
   it('Should return an expected list of Cases for editing', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const expectedEditUrlBase = `https://${configFake.ExternalWebUrl}/${questionnaireName}?Mode=CAWI&KeyValue=`;
+    const expectedEditUrlBase = `https://${configFake.ExternalWebUrl}/${questionnaireName}?KeyValue=`;
     blaiseApiClientMock.setup((client) => client.getCaseEditInformation(configFake.ServerPark, questionnaireName)).returns(async () => CaseEditInformationListMockObject);
 
     // act

@@ -11,7 +11,7 @@ export const caseEditInformationMockObject1: CaseEditInformation = {
   interviewer: '',
   editedStatus: EditedStatus.Finished,
   organisation: Organisation.ONS,
-  editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001011',
+  editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
 };
 export const caseEditInformationMockObject2: CaseEditInformation = {
   primaryKey: '10001012',
@@ -20,7 +20,7 @@ export const caseEditInformationMockObject2: CaseEditInformation = {
   interviewer: '',
   editedStatus: EditedStatus.NotStarted,
   organisation: Organisation.ONS,
-  editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012',
+  editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
 };
 export const caseEditInformationMockObject3: CaseEditInformation = {
   primaryKey: '10001013',
@@ -29,7 +29,7 @@ export const caseEditInformationMockObject3: CaseEditInformation = {
   interviewer: '',
   editedStatus: EditedStatus.Query,
   organisation: Organisation.ONS,
-  editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001013',
+  editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
 };
 export const caseEditInformationMockObject4: CaseEditInformation = {
   primaryKey: '10001014',
@@ -38,7 +38,7 @@ export const caseEditInformationMockObject4: CaseEditInformation = {
   interviewer: '',
   editedStatus: EditedStatus.Started,
   organisation: Organisation.ONS,
-  editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001014',
+  editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
 };
 export const caseEditInformationMockObject5: CaseEditInformation = {
   primaryKey: '10001015',
@@ -47,7 +47,7 @@ export const caseEditInformationMockObject5: CaseEditInformation = {
   interviewer: '',
   editedStatus: EditedStatus.Started,
   organisation: Organisation.ONS,
-  editUrl: 'https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001015',
+  editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
 };
 
 export const CaseEditInformationListMockObject: CaseEditInformation[] = [

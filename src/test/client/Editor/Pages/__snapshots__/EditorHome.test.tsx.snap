@@ -377,7 +377,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                           </a>
                            | 
                           <a
-                            href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001011"
+                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -418,7 +418,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                           </a>
                            | 
                           <a
-                            href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012"
+                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001012"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -459,7 +459,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                           </a>
                            | 
                           <a
-                            href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001013"
+                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001013"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -500,7 +500,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                           </a>
                            | 
                           <a
-                            href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001014"
+                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001014"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -541,7 +541,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                           </a>
                            | 
                           <a
-                            href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001015"
+                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001015"
                             rel="noopener noreferrer"
                             target="_blank"
                           >
@@ -825,7 +825,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                         </a>
                          | 
                         <a
-                          href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001011"
+                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
                           rel="noopener noreferrer"
                           target="_blank"
                         >
@@ -866,7 +866,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                         </a>
                          | 
                         <a
-                          href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001012"
+                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001012"
                           rel="noopener noreferrer"
                           target="_blank"
                         >
@@ -907,7 +907,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                         </a>
                          | 
                         <a
-                          href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001013"
+                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001013"
                           rel="noopener noreferrer"
                           target="_blank"
                         >
@@ -948,7 +948,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                         </a>
                          | 
                         <a
-                          href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001014"
+                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001014"
                           rel="noopener noreferrer"
                           target="_blank"
                         >
@@ -989,7 +989,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
                         </a>
                          | 
                         <a
-                          href="https://cati.blaise.com/FRS2504A?Mode=CAWI&KeyValue=10001015"
+                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001015"
                           rel="noopener noreferrer"
                           target="_blank"
                         >
