@@ -8,7 +8,6 @@ import { useAsyncRequest } from '../../Common/hooks/useAsyncRequest';
 export default function SupervisorHome() {
   // TODO: maybe filter surveys returned here - pass user details to node and bring back full list or filtered
   const surveys = useAsyncRequest<Survey[]>(getSurveys);
-  console.log("DEBUG: Fetched surveys data:", surveys);
 
   return (
     <>
@@ -17,10 +16,7 @@ export default function SupervisorHome() {
       </ONSPanel>
       <div data-testid="Surveys">
         <AsyncContent content={surveys}>
-          {(loadedSurveys) => {
-            console.log("DEBUG: Surveys to be displayed in SurveysList:", loadedSurveys);
-            return <SurveysList surveys={loadedSurveys} />;
-          }}
+          {(loadedSurveys) => <SurveysList surveys={loadedSurveys} />}
         </AsyncContent>
       </div>
     </>

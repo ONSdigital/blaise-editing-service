@@ -15,11 +15,9 @@ function axiosConfig(): AxiosRequestConfig {
 export async function getDataFromNode<T>(url: string, notFoundError: string): Promise<T> {
   try {
     const response = await axios.get(url, axiosConfig());
-    console.log("DEBUG: Successfully retrieved Response data:", response.data);
 
     return response.data;
   } catch (error) {
-    console.log("DEBUG: Computer said no:", error);
     if (notFound(error)) {
       throw new Error(notFoundError);
     }
