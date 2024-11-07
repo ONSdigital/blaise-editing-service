@@ -7,6 +7,7 @@ import { useAsyncRequest } from '../../Common/hooks/useAsyncRequest';
 
 export default function SupervisorHome() {
   // TODO: maybe filter surveys returned here - pass user details to node and bring back full list or filtered
+  console.log('SupervisorHome');
   const surveys = useAsyncRequest<Survey[]>(getSurveys);
 
   return (

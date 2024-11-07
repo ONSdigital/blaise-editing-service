@@ -21,7 +21,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
         >
           <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Field period:</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-7@m"><strong>{questionnaire.fieldPeriod}</strong></dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Cases assigned to me:</dt>
+          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Training cases assigned to me:</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-7@m"><strong>{editorInformation.numberOfCasesAllocated}</strong></dd>
 
         </dl>
@@ -31,7 +31,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
       <ONSTable
         columns={[
           'Case ID',
-          'Status',
+          'Scenario',
           '',
         ]}
         tableID={`${questionnaire.questionnaireName}-Case-table`}
@@ -45,8 +45,11 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
               <td className="ons-table__cell" aria-label={`${questionnaire.questionnaireName}-CaseID`}>
                 {caseDetails.CaseId}
               </td>
+              <td className="ons-table__cell" aria-label={`${questionnaire.questionnaireName}-Scenario`}>
+                Wales
+              </td>
               <td className="ons-table__cell links">
-                <Link to={caseDetails.EditUrl} target="_blank" rel="noopener noreferrer">View case</Link>
+                <Link to={caseDetails.EditUrl} target="_blank" rel="noopener noreferrer">Enter training case</Link>
               </td>
             </tr>
           ))}

@@ -5,10 +5,11 @@ import { EditorInformation } from '../Interfaces/editorInterface';
 import mapEditorInformation from '../Mappers/editorInformaitionMapper';
 import mapSupervisorInformation from '../Mappers/supervisorInformationMapper';
 import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
-import { getDataFromNode } from './AxiosApi';
+import getDataFromNode from './AxiosApi';
 
 export async function getSurveys(): Promise<Survey[]> {
-  return getDataFromNode('/api/surveys}', 'Unable to find surveys, please contact Richmond Rice');
+  console.log('Nodeapi - getSurveys');
+  return getDataFromNode('/api/surveys', 'Unable to find surveys, please contact Richmond Rice');
 }
 
 export async function getCaseSummary(questionnaireName: string, caseId: string): Promise<CaseSummaryDetails> {

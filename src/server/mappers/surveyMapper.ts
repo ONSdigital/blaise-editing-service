@@ -5,7 +5,6 @@ export default function mapSurveys(questionnaires: QuestionnaireDetails[]): Surv
 
   questionnaires.forEach((questionnaire) => {
     const surveyElement = surveys.find((survey) => survey.name === questionnaire.surveyTla);
-
     if (surveyElement === undefined) {
       surveys.push({
         name: questionnaire.surveyTla,

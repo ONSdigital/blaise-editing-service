@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { CaseEditInformation } from 'blaise-api-node-client';
-import { Auth } from 'blaise-login-react-server';
 import { Controller } from '../interfaces/controllerInterface';
 import notFound from '../helpers/axiosHelper';
 import BlaiseApi from '../api/BlaiseApi';
@@ -21,10 +20,9 @@ export default class CaseController implements Controller {
   }
 
   getRoutes() {
-    const auth = new Auth(this.configuration);
     const router = express.Router();
-    router.get('/api/questionnaires/:questionnaireName/cases/:caseId/summary', auth.Middleware, this.getCaseSummary);
-    router.get('/api/questionnaires/:questionnaireName/cases/edit', auth.Middleware, this.getCaseEditInformation);
+    router.get('/api/questionnaires/:questionnaireName/cases/:caseId/summary', this.getCaseSummary);
+    router.get('/api/questionnaires/:questionnaireName/cases/edit', this.getCaseEditInformation);
 
     return router;
   }

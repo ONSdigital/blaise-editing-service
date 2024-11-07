@@ -23,7 +23,7 @@ export default class BlaiseApi {
 
   async getQuestionnaires(): Promise<QuestionnaireDetails[]> {
     const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
-
+    console.log('questionnaires');
     const questionnaireDetailsList: QuestionnaireDetails[] = [];
     questionnaires.forEach((questionnaire : Questionnaire) => {
       questionnaireDetailsList.push(mapQuestionnaireDetails(questionnaire));
