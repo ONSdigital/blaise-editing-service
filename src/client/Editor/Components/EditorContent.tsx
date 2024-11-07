@@ -1,9 +1,8 @@
-import { ONSPanel, ONSSelect, ONSTable } from 'blaise-design-system-react-components';
-import { ReactElement, useState } from 'react';
+import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
+import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { EditorInformation } from '../../Interfaces/editorInterface';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
-import { DownloadCaseSummaryLink } from '../../Common/components/DownloadCaseSummaryink';
 
 interface EditorContentProps {
   editorInformation: EditorInformation;
@@ -11,8 +10,6 @@ interface EditorContentProps {
 }
 
 export default function EditorContent({ editorInformation, questionnaire }: EditorContentProps): ReactElement {
-  const [status, setStatus] = useState('');
-
   return (
     <div className="editorContent" data-testid={`${questionnaire.questionnaireName}-editorContent`}>
       <ONSPanel status="info">
@@ -30,35 +27,6 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
         </dl>
       </ONSPanel>
       <br />
-      <ONSSelect
-        defaultValue="in-progress"
-        id="filter-cases"
-        label="Filter cases"
-        onChange={(e) => setStatus(e.target.value)}
-        options={[
-          {
-            label: 'All',
-            value: '',
-          },
-          {
-            label: 'In progress',
-            value: 'In progress',
-          },
-          {
-            label: 'Queried',
-            value: 'Queried',
-          },
-          {
-            label: 'Completed',
-            value: 'Completed',
-          },
-          {
-            label: 'Not started',
-            value: 'Not started',
-          },
-        ]}
-        value=""
-      />
 
       <ONSTable
         columns={[
@@ -69,7 +37,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
         tableID={`${questionnaire.questionnaireName}-Case-table`}
       >
         <>
-          {editorInformation.Cases.filter((c) => (status.length > 0 ? c.EditStatus === status : c)).map((caseDetails) => (
+          {editorInformation.Cases.map((caseDetails) => (
             <tr
               className="ons-table__row"
               key={caseDetails.CaseId}
@@ -77,15 +45,8 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
               <td className="ons-table__cell" aria-label={`${questionnaire.questionnaireName}-CaseID`}>
                 {caseDetails.CaseId}
               </td>
-              <td className="ons-table__cell status" aria-label={`${questionnaire.questionnaireName}-EditStatus`}>
-                {caseDetails.EditStatus}
-              </td>
               <td className="ons-table__cell links">
-                <DownloadCaseSummaryLink caseId={caseDetails.CaseId} />
-                {' | '}
-                <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/${caseDetails.CaseId}/summary`}>View case summary</Link>
-                {' | '}
-                <Link to={caseDetails.EditUrl} target="_blank" rel="noopener noreferrer">Edit case</Link>
+                <Link to={caseDetails.EditUrl} target="_blank" rel="noopener noreferrer">View case</Link>
               </td>
             </tr>
           ))}
