@@ -8,6 +8,7 @@ import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
 import { getDataFromNode } from './AxiosApi';
 
 export async function getSurveys(): Promise<Survey[]> {
+  console.log("DEBUG: returning getDataFromNode from getSurveys()")
   return getDataFromNode('/api/surveys}', 'Unable to find surveys, please contact Richmond Rice');
 }
 
