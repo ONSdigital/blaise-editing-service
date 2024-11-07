@@ -1,18 +1,13 @@
 import { ONSPanel } from 'blaise-design-system-react-components';
-import { User } from 'blaise-api-node-client';
 import { Survey } from '../../../common/interfaces/surveyInterface';
-import { useAsyncRequestWithParam } from '../../Common/hooks/useAsyncRequest';
 import { getSurveys } from '../../api/NodeApi';
 import AsyncContent from '../../Common/components/AsyncContent';
 import SurveysList from '../../Common/components/SurveysList';
+import { useAsyncRequest } from '../../Common/hooks/useAsyncRequest';
 
-interface SurveyProps {
-  user: User;
-}
-
-export default function SupervisorHome({ user }: SurveyProps) {
+export default function SupervisorHome() {
   // TODO: maybe filter surveys returned here - pass user details to node and bring back full list or filtered
-  const surveys = useAsyncRequestWithParam<Survey[], string>(getSurveys, user.role);
+  const surveys = useAsyncRequest<Survey[]>(getSurveys);
 
   return (
     <>
@@ -21,7 +16,7 @@ export default function SupervisorHome({ user }: SurveyProps) {
       </ONSPanel>
       <div data-testid="Surveys">
         <AsyncContent content={surveys}>
-          {(loadedSurveys) => <SurveysList surveys={loadedSurveys} user={user} />}
+          {(loadedSurveys) => <SurveysList surveys={loadedSurveys} />}
         </AsyncContent>
       </div>
     </>

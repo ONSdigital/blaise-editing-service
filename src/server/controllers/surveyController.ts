@@ -24,11 +24,9 @@ export default class SurveyController implements Controller {
     return router.get('/api/surveys', auth.Middleware, this.getSurveys);
   }
 
-  async getSurveys(request: Request<{}, {}, {}, { userRole:string }>, response: Response<Survey[]>) {
-    const { userRole } = request.query;
-
+  async getSurveys(_request: Request<{}, {}, {}, { }>, response: Response<Survey[]>) {
     try {
-      const questionnaires = await this.GetQuestionnairesForRole(userRole);
+      const questionnaires = await this.GetQuestionnairesForRole();
       const surveys = mapSurveys(questionnaires ?? []);
 
       return response.status(200).json(surveys);
@@ -40,10 +38,7 @@ export default class SurveyController implements Controller {
     }
   }
 
-  async GetQuestionnairesForRole(userRole: string): Promise<QuestionnaireDetails[]> {
-    const surveys = this.configuration.getSurveysForRole(userRole);
-    const questionnaires = await this.blaiseApi.getQuestionnaires();
-
-    return questionnaires.filter((q) => surveys.includes(q.surveyTla));
+  async GetQuestionnairesForRole(): Promise<QuestionnaireDetails[]> {
+    return this.blaiseApi.getQuestionnaires();
   }
 }

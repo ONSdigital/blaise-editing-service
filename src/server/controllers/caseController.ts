@@ -18,7 +18,6 @@ export default class CaseController implements Controller {
     this.configuration = configuration;
     this.getCaseEditInformation = this.getCaseEditInformation.bind(this);
     this.getCaseSummary = this.getCaseSummary.bind(this);
-    this.allocateCases = this.allocateCases.bind(this);
   }
 
   getRoutes() {
@@ -26,7 +25,6 @@ export default class CaseController implements Controller {
     const router = express.Router();
     router.get('/api/questionnaires/:questionnaireName/cases/:caseId/summary', auth.Middleware, this.getCaseSummary);
     router.get('/api/questionnaires/:questionnaireName/cases/edit', auth.Middleware, this.getCaseEditInformation);
-    router.patch('/api/questionnaires/:questionnaireName/cases', auth.Middleware, this.allocateCases);
 
     return router;
   }
@@ -50,12 +48,11 @@ export default class CaseController implements Controller {
     }
   }
 
-  async getCaseEditInformation(request: Request<{ questionnaireName:string }, {}, {}, { userRole:string }>, response: Response<CaseEditInformation[]>) {
+  async getCaseEditInformation(request: Request<{ questionnaireName:string }, {}, {}, { }>, response: Response<CaseEditInformation[]>) {
     const { questionnaireName } = request.params;
-    const { userRole } = request.query;
 
     try {
-      const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName, userRole);
+      const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName);
 
       return response.status(200).json(caseEditInformationList);
     } catch (error: unknown) {
@@ -66,35 +63,7 @@ export default class CaseController implements Controller {
     }
   }
 
-  async GetCaseEditInformationForRole(questionnaireName:string, userRole: string): Promise<CaseEditInformation[]> {
-    const cases = await this.blaiseApi.getCaseEditInformation(questionnaireName);
-    const surveyTla = questionnaireName.substring(0, 3);
-    const roleConfig = this.configuration.getSurveyConfigForRole(surveyTla, userRole);
-
-    const filteredcases = cases
-      .filter((caseEditInformation) => roleConfig.Organisations.includes(caseEditInformation.organisation))
-      .filter((caseEditInformation) => (roleConfig.Outcomes.length > 0 ? roleConfig.Outcomes.includes(caseEditInformation.outcome) : caseEditInformation));
-
-    return filteredcases;
-  }
-
-  async allocateCases(request: Request<{ questionnaireName:string }, {}, { name:string, cases: string[] }, { }>, response: Response) {
-    const { questionnaireName } = request.params;
-    const { name, cases } = request.body;
-
-    try {
-      await Promise.all(
-        cases.map(async (caseId) => {
-          await this.blaiseApi.updateCase(questionnaireName, caseId, { 'QEdit.AssignedTo': name });
-        }),
-      );
-
-      return response.status(204).json();
-    } catch (error: unknown) {
-      if (notFound(error)) {
-        return response.status(404).json();
-      }
-      return response.status(500).json();
-    }
+  async GetCaseEditInformationForRole(questionnaireName:string): Promise<CaseEditInformation[]> {
+    return this.blaiseApi.getCaseEditInformation(questionnaireName);
   }
 }

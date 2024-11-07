@@ -1,31 +1,16 @@
 import { ReactElement, SetStateAction, useState } from 'react';
 import { ONSSelect } from 'blaise-design-system-react-components';
-import { User } from 'blaise-api-node-client';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 import Option from '../../Interfaces/controlsInterface';
-import UserRole from '../enums/UserTypes';
-import SupervisorQuestionnaireDetails from '../../Supervisor/Components/SupervisorQuestionnaireDetails';
-import EditorQuestionnaireDetails from '../../Editor/Components/EditorQuestionnaireDetails';
-import ErrorPanel from './ErrorPanel';
 import questionnaireDisplayName from '../functions/QuestionnaireFunctions';
+import EditorQuestionnairesDetails from '../../Editor/Components/EditorQuestionnaireDetails';
 
 interface QuestionnairesListProps {
   questionnaires: QuestionnaireDetails[];
-  user: User
 }
 
-function RenderQuestionnaireDetails(user:User, questionnaire:QuestionnaireDetails) {
-  const { role, name } = user;
-
-  if (role === UserRole.SVT_Supervisor) {
-    return <SupervisorQuestionnaireDetails questionnaire={questionnaire} supervisorRole={UserRole.SVT_Supervisor} editorRole={UserRole.SVT_Editor} />;
-  }
-
-  if (role === UserRole.SVT_Editor) {
-    return <EditorQuestionnaireDetails questionnaire={questionnaire} username={name} editorRole={UserRole.SVT_Editor} />;
-  }
-
-  return <ErrorPanel message={`User role ${role} not recognised`} />;
+function RenderQuestionnaireDetails(questionnaire:QuestionnaireDetails) {
+  return <EditorQuestionnairesDetails questionnaire={questionnaire} />;
 }
 
 function getquestionnaireOptions(questionnaires: QuestionnaireDetails[]): Option[] {
@@ -61,7 +46,7 @@ function getDefaultQuestionnaireOptionValue(questionnaires: QuestionnaireDetails
   return defaultQuestionnaire.questionnaireName;
 }
 
-export default function QuestionnairesList({ questionnaires, user }: QuestionnairesListProps): ReactElement {
+export default function QuestionnairesList({ questionnaires }: QuestionnairesListProps): ReactElement {
   const [questionnaireValue, setQuestionnaireValue] = useState(getDefaultQuestionnaireOptionValue(questionnaires));
 
   const handleQuestionnaireChange = (e: { target: { value: SetStateAction<string>; }; }) => {
@@ -81,7 +66,7 @@ export default function QuestionnairesList({ questionnaires, user }: Questionnai
         testId="select-questionnaire"
       />
       {
-        RenderQuestionnaireDetails(user, getQuestionnaire(questionnaires, questionnaireValue))
+        RenderQuestionnaireDetails(getQuestionnaire(questionnaires, questionnaireValue))
       }
     </>
   );

@@ -11,11 +11,9 @@ const divStyle = {
 
 interface LayoutTemplateProps {
   children: React.ReactNode;
-  showSignOutButton: boolean;
-  signOut: () => void;
 }
 
-export default function LayoutTemplate({ children, showSignOutButton, signOut }: LayoutTemplateProps) {
+export default function LayoutTemplate({ children }: LayoutTemplateProps) {
   const navigate = useNavigate();
 
   return (
@@ -25,8 +23,6 @@ export default function LayoutTemplate({ children, showSignOutButton, signOut }:
       <Header
         title="Blaise Editing Service"
         noSave
-        signOutButton={showSignOutButton}
-        signOutFunction={() => { signOut(); navigate('/'); }}
       />
 
       <SubNavigationTemplate>

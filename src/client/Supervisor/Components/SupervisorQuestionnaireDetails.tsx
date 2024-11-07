@@ -1,20 +1,17 @@
 import { ReactElement } from 'react';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
-import { useAsyncRequestWithThreeParams } from '../../Common/hooks/useAsyncRequest';
+import { useAsyncRequestWithParam } from '../../Common/hooks/useAsyncRequest';
 import { getSupervisorEditorInformation } from '../../api/NodeApi';
 import AsyncContent from '../../Common/components/AsyncContent';
 import { SupervisorInformation } from '../../Interfaces/supervisorInterface';
 import SupervisorContent from './SupervisorContent';
-import UserRole from '../../Common/enums/UserTypes';
 
 interface SupervisorQuestionnairesDetailsProps {
   questionnaire: QuestionnaireDetails;
-  supervisorRole: UserRole;
-  editorRole: UserRole;
 }
 
-export default function SupervisorQuestionnairesDetails({ questionnaire, supervisorRole, editorRole }: SupervisorQuestionnairesDetailsProps): ReactElement {
-  const supervisorInformation = useAsyncRequestWithThreeParams<SupervisorInformation, string, UserRole, UserRole>(getSupervisorEditorInformation, questionnaire.questionnaireName, supervisorRole, editorRole);
+export default function SupervisorQuestionnairesDetails({ questionnaire }: SupervisorQuestionnairesDetailsProps): ReactElement {
+  const supervisorInformation = useAsyncRequestWithParam<SupervisorInformation, string>(getSupervisorEditorInformation, questionnaire.questionnaireName);
 
   return (
 
