@@ -13,7 +13,7 @@ export default function SupervisorHome() {
   return (
     <>
       <ONSPanel status="info">
-        Welcome to BUTT - Blaise User Training Tool.
+        The following questionnaires are for training purposes only.
       </ONSPanel>
       <div data-testid="Surveys">
         <AsyncContent content={surveys}>

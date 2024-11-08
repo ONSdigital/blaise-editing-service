@@ -21,7 +21,7 @@ export default function LayoutTemplate({ children }: LayoutTemplateProps) {
     <>
       <NotProductionWarning />
       <Header
-        title="Blaise User Training Tool"
+        title="Blaise Questionnaire Trainer"
         noSave
       />
 
