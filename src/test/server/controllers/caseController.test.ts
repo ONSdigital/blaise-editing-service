@@ -560,7 +560,7 @@ describe('allocate cases tests', () => {
     const questionnaireName: string = 'TEST111A';
     const editor: string = 'jake';
     const payload = { name: editor, cases: [caseId1, caseId2] };
-    const caseFields = { 'QEdit.AssignedTo': editor };
+    const caseFields = { 'QEdit.AssignedTo': editor, 'QEdit.Edited': 1 };
 
     blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId1, caseFields));
     blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId2, caseFields));

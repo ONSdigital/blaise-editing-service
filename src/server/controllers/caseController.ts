@@ -85,7 +85,10 @@ export default class CaseController implements Controller {
     try {
       await Promise.all(
         cases.map(async (caseId) => {
-          await this.blaiseApi.updateCase(questionnaireName, caseId, { 'QEdit.AssignedTo': name });
+          await this.blaiseApi.updateCase(questionnaireName, caseId, {
+            'QEdit.AssignedTo': name,
+            'QEdit.Edited': 1,
+          });
         }),
       );
 
