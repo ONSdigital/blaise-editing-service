@@ -98,6 +98,67 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
         </select>
       </div>
       <br />
+      <div>
+        <label
+          class="ons-label"
+          for="number-of-cases"
+        >
+          Number of cases
+           
+        </label>
+        <select
+          class="ons-input "
+          data-testid="number-of-cases"
+          id="number-of-cases"
+          name="select"
+        >
+          <option
+            data-testid="select-number-of-cases"
+            disabled=""
+            selected=""
+            value=""
+          >
+            Select an option
+          </option>
+          <option
+            data-testid="option-number-of-cases--1"
+            value="-1"
+          >
+            All
+          </option>
+          <option
+            data-testid="option-number-of-cases-50"
+            value="50"
+          >
+            50
+          </option>
+          <option
+            data-testid="option-number-of-cases-25"
+            value="25"
+          >
+            25
+          </option>
+          <option
+            data-testid="option-number-of-cases-10"
+            value="10"
+          >
+            10
+          </option>
+          <option
+            data-testid="option-number-of-cases-5"
+            value="5"
+          >
+            5
+          </option>
+          <option
+            data-testid="option-number-of-cases-1"
+            value="1"
+          >
+            1
+          </option>
+        </select>
+      </div>
+      <br />
       <button
         class="ons-btn "
         data-testid="button"
@@ -201,6 +262,67 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
           value="Rich"
         >
           Rich (0 case(s))
+        </option>
+      </select>
+    </div>
+    <br />
+    <div>
+      <label
+        class="ons-label"
+        for="number-of-cases"
+      >
+        Number of cases
+         
+      </label>
+      <select
+        class="ons-input "
+        data-testid="number-of-cases"
+        id="number-of-cases"
+        name="select"
+      >
+        <option
+          data-testid="select-number-of-cases"
+          disabled=""
+          selected=""
+          value=""
+        >
+          Select an option
+        </option>
+        <option
+          data-testid="option-number-of-cases--1"
+          value="-1"
+        >
+          All
+        </option>
+        <option
+          data-testid="option-number-of-cases-50"
+          value="50"
+        >
+          50
+        </option>
+        <option
+          data-testid="option-number-of-cases-25"
+          value="25"
+        >
+          25
+        </option>
+        <option
+          data-testid="option-number-of-cases-10"
+          value="10"
+        >
+          10
+        </option>
+        <option
+          data-testid="option-number-of-cases-5"
+          value="5"
+        >
+          5
+        </option>
+        <option
+          data-testid="option-number-of-cases-1"
+          value="1"
+        >
+          1
         </option>
       </select>
     </div>
@@ -375,6 +497,67 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
         </select>
       </div>
       <br />
+      <div>
+        <label
+          class="ons-label"
+          for="number-of-cases"
+        >
+          Number of cases
+           
+        </label>
+        <select
+          class="ons-input "
+          data-testid="number-of-cases"
+          id="number-of-cases"
+          name="select"
+        >
+          <option
+            data-testid="select-number-of-cases"
+            disabled=""
+            selected=""
+            value=""
+          >
+            Select an option
+          </option>
+          <option
+            data-testid="option-number-of-cases--1"
+            value="-1"
+          >
+            All
+          </option>
+          <option
+            data-testid="option-number-of-cases-50"
+            value="50"
+          >
+            50
+          </option>
+          <option
+            data-testid="option-number-of-cases-25"
+            value="25"
+          >
+            25
+          </option>
+          <option
+            data-testid="option-number-of-cases-10"
+            value="10"
+          >
+            10
+          </option>
+          <option
+            data-testid="option-number-of-cases-5"
+            value="5"
+          >
+            5
+          </option>
+          <option
+            data-testid="option-number-of-cases-1"
+            value="1"
+          >
+            1
+          </option>
+        </select>
+      </div>
+      <br />
       <button
         class="ons-btn "
         data-testid="button"
@@ -484,6 +667,67 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
           value="Rich"
         >
           Rich (0 case(s))
+        </option>
+      </select>
+    </div>
+    <br />
+    <div>
+      <label
+        class="ons-label"
+        for="number-of-cases"
+      >
+        Number of cases
+         
+      </label>
+      <select
+        class="ons-input "
+        data-testid="number-of-cases"
+        id="number-of-cases"
+        name="select"
+      >
+        <option
+          data-testid="select-number-of-cases"
+          disabled=""
+          selected=""
+          value=""
+        >
+          Select an option
+        </option>
+        <option
+          data-testid="option-number-of-cases--1"
+          value="-1"
+        >
+          All
+        </option>
+        <option
+          data-testid="option-number-of-cases-50"
+          value="50"
+        >
+          50
+        </option>
+        <option
+          data-testid="option-number-of-cases-25"
+          value="25"
+        >
+          25
+        </option>
+        <option
+          data-testid="option-number-of-cases-10"
+          value="10"
+        >
+          10
+        </option>
+        <option
+          data-testid="option-number-of-cases-5"
+          value="5"
+        >
+          5
+        </option>
+        <option
+          data-testid="option-number-of-cases-1"
+          value="1"
+        >
+          1
         </option>
       </select>
     </div>

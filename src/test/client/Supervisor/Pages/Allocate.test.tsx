@@ -127,6 +127,28 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
     expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Jake', ['10001013']);
   });
 
+  it('should call updateAllocationDetails with the expected parameters when the allocation button is clicked is clicked and number of cases is limited to 1', async () => {
+    // arrange
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Allocate supervisorRole={supervisorRole} editorRole={editorRole} reallocate={reallocate} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('select-from'), { target: { value: 'bob' } });
+      fireEvent.change(view.getByTestId('select-to'), { target: { value: 'Jake' } });
+      fireEvent.change(view.getByTestId('number-of-cases'), { target: { value: '1' } });
+      fireEvent.click(view.getByText('Allocate'));
+    });
+
+    // assert
+    expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Jake', ['10001011']);
+  });  
+
   it('should show a success message when allocation is successful', async () => {
     // arrange
     await act(async () => {
@@ -176,7 +198,7 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
 
     expect(view.queryByTestId('SuccessMessage')).not.toBeInTheDocument();
   });
-});
+}); 
 
 describe('Given we wish to reallocte cases from an Editor to another Editor', () => {
   const reallocate = true;
@@ -220,7 +242,7 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
     expect(panelView).toHaveTextContent('Reallocate cases from one editor to another editor. All non-completed cases will be transfered');
   });
 
-  it('should display alist of editors for realloction from', async () => {
+  it('should display a list of editors for realloction from', async () => {
     // arrange && act
     await act(async () => {
       view = render(
@@ -279,6 +301,28 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
 
     // assert
     expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Rich', ['10001012', '10001015']);
+  }); 
+
+  it('should call updateAllocationDetails with the expected parameters when the allocation button is clicked and number of cases is limited to 1', async () => {
+    // arrange
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <Allocate supervisorRole={supervisorRole} editorRole={editorRole} reallocate={reallocate} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('select-from'), { target: { value: 'Jake' } });
+      fireEvent.change(view.getByTestId('select-to'), { target: { value: 'Rich' } });
+      fireEvent.change(view.getByTestId('number-of-cases'), { target: { value: '1' } });
+      fireEvent.click(view.getByText('Reallocate'));
+    });
+
+    // assert
+    expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Rich', ['10001012']);
   });
 
   it('should show a success message when reallocation is successful', async () => {
@@ -329,5 +373,5 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
     expect(errorMessage).toHaveTextContent('Case(s) could not be allocated, please try again in a few seconds');
 
     expect(view.queryByTestId('SuccessMessage')).not.toBeInTheDocument();
-  });
+  }); 
 });

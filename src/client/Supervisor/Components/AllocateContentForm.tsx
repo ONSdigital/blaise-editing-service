@@ -16,7 +16,19 @@ export default function AllocateCases({
 } : AllocateProps): ReactElement {
   const [casesValue, setCasesValue] = useState(['']);
   const [nameValue, setNameValue] = useState('');
+  const [numberOfCasesValue, setNumberOfCasesValue] = useState('-1');
   const [submitting, setSubmitting] = useState(false);
+
+  async function allocateCasesFunction() {
+    const numberOfCases = +numberOfCasesValue;
+
+    if (numberOfCases === -1 || casesValue.length <= numberOfCases) {
+      await allocateCases(nameValue, casesValue);
+      return;
+    }
+
+    await allocateCases(nameValue, casesValue.slice(0, numberOfCases));
+  }
 
   const handleCasesChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     const user = allocationDetails.find((i) => i.Name === e.target.value);
@@ -25,6 +37,10 @@ export default function AllocateCases({
 
   const handleNameChange = (e: { target: { value: SetStateAction<string>; }; }) => {
     setNameValue(e.target?.value);
+  };
+
+  const handleNumberOfCasesChange = (e: { target: { value: SetStateAction<string>; }; }) => {
+    setNumberOfCasesValue(e.target?.value);
   };
 
   if (fromOptions.length === 0 || toOptions.length === 0) {
@@ -58,11 +74,43 @@ export default function AllocateCases({
         testId="select-to"
       />
       <br />
+      <ONSSelect
+        id="number-of-cases"
+        label="Number of cases"
+        options={[{
+          label: 'All',
+          value: '-1',
+        },
+        {
+          label: '50',
+          value: '50',
+        },
+        {
+          label: '25',
+          value: '25',
+        },
+        {
+          label: '10',
+          value: '10',
+        },
+        {
+          label: '5',
+          value: '5',
+        },
+        {
+          label: '1',
+          value: '1',
+        }]}
+        value=""
+        onChange={handleNumberOfCasesChange}
+        testId="number-of-cases"
+      />
+      <br />
       <ONSButton
         label={`${reallocate ? 'Reallocate' : 'Allocate'}`}
         primary
         loading={submitting}
-        onClick={async () => { setSubmitting(true); await allocateCases(nameValue, casesValue); setSubmitting(false); }}
+        onClick={async () => { setSubmitting(true); await allocateCasesFunction(); setSubmitting(false); }}
       />
     </>
   );
