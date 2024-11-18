@@ -97,7 +97,6 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
           </option>
         </select>
       </div>
-      <br />
       <div>
         <label
           class="ons-label"
@@ -115,13 +114,13 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
           <option
             data-testid="select-number-of-cases"
             disabled=""
-            selected=""
             value=""
           >
             Select an option
           </option>
           <option
             data-testid="option-number-of-cases--1"
+            selected=""
             value="-1"
           >
             All
@@ -265,7 +264,6 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
         </option>
       </select>
     </div>
-    <br />
     <div>
       <label
         class="ons-label"
@@ -283,13 +281,13 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
         <option
           data-testid="select-number-of-cases"
           disabled=""
-          selected=""
           value=""
         >
           Select an option
         </option>
         <option
           data-testid="option-number-of-cases--1"
+          selected=""
           value="-1"
         >
           All
@@ -496,7 +494,6 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
           </option>
         </select>
       </div>
-      <br />
       <div>
         <label
           class="ons-label"
@@ -514,13 +511,13 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
           <option
             data-testid="select-number-of-cases"
             disabled=""
-            selected=""
             value=""
           >
             Select an option
           </option>
           <option
             data-testid="option-number-of-cases--1"
+            selected=""
             value="-1"
           >
             All
@@ -670,7 +667,6 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
         </option>
       </select>
     </div>
-    <br />
     <div>
       <label
         class="ons-label"
@@ -688,13 +684,13 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
         <option
           data-testid="select-number-of-cases"
           disabled=""
-          selected=""
           value=""
         >
           Select an option
         </option>
         <option
           data-testid="option-number-of-cases--1"
+          selected=""
           value="-1"
         >
           All

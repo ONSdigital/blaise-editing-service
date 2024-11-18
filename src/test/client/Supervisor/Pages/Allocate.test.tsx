@@ -147,7 +147,7 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
 
     // assert
     expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Jake', ['10001011']);
-  });  
+  });
 
   it('should show a success message when allocation is successful', async () => {
     // arrange
@@ -198,7 +198,7 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
 
     expect(view.queryByTestId('SuccessMessage')).not.toBeInTheDocument();
   });
-}); 
+});
 
 describe('Given we wish to reallocte cases from an Editor to another Editor', () => {
   const reallocate = true;
@@ -301,7 +301,7 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
 
     // assert
     expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Rich', ['10001012', '10001015']);
-  }); 
+  });
 
   it('should call updateAllocationDetails with the expected parameters when the allocation button is clicked and number of cases is limited to 1', async () => {
     // arrange
@@ -373,5 +373,5 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
     expect(errorMessage).toHaveTextContent('Case(s) could not be allocated, please try again in a few seconds');
 
     expect(view.queryByTestId('SuccessMessage')).not.toBeInTheDocument();
-  }); 
+  });
 });

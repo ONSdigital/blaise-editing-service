@@ -73,7 +73,6 @@ export default function AllocateCases({
         onChange={handleNameChange}
         testId="select-to"
       />
-      <br />
       <ONSSelect
         id="number-of-cases"
         label="Number of cases"
@@ -102,6 +101,7 @@ export default function AllocateCases({
           value: '1',
         }]}
         value=""
+        defaultValue="-1"
         onChange={handleNumberOfCasesChange}
         testId="number-of-cases"
       />
