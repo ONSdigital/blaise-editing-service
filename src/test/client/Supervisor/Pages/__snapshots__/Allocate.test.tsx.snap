@@ -132,10 +132,46 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
             50
           </option>
           <option
+            data-testid="option-number-of-cases-45"
+            value="45"
+          >
+            45
+          </option>
+          <option
+            data-testid="option-number-of-cases-40"
+            value="40"
+          >
+            40
+          </option>
+          <option
+            data-testid="option-number-of-cases-35"
+            value="35"
+          >
+            35
+          </option>
+          <option
+            data-testid="option-number-of-cases-30"
+            value="30"
+          >
+            30
+          </option>
+          <option
             data-testid="option-number-of-cases-25"
             value="25"
           >
             25
+          </option>
+          <option
+            data-testid="option-number-of-cases-20"
+            value="20"
+          >
+            20
+          </option>
+          <option
+            data-testid="option-number-of-cases-15"
+            value="15"
+          >
+            15
           </option>
           <option
             data-testid="option-number-of-cases-10"
@@ -299,10 +335,46 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
           50
         </option>
         <option
+          data-testid="option-number-of-cases-45"
+          value="45"
+        >
+          45
+        </option>
+        <option
+          data-testid="option-number-of-cases-40"
+          value="40"
+        >
+          40
+        </option>
+        <option
+          data-testid="option-number-of-cases-35"
+          value="35"
+        >
+          35
+        </option>
+        <option
+          data-testid="option-number-of-cases-30"
+          value="30"
+        >
+          30
+        </option>
+        <option
           data-testid="option-number-of-cases-25"
           value="25"
         >
           25
+        </option>
+        <option
+          data-testid="option-number-of-cases-20"
+          value="20"
+        >
+          20
+        </option>
+        <option
+          data-testid="option-number-of-cases-15"
+          value="15"
+        >
+          15
         </option>
         <option
           data-testid="option-number-of-cases-10"
@@ -529,10 +601,46 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
             50
           </option>
           <option
+            data-testid="option-number-of-cases-45"
+            value="45"
+          >
+            45
+          </option>
+          <option
+            data-testid="option-number-of-cases-40"
+            value="40"
+          >
+            40
+          </option>
+          <option
+            data-testid="option-number-of-cases-35"
+            value="35"
+          >
+            35
+          </option>
+          <option
+            data-testid="option-number-of-cases-30"
+            value="30"
+          >
+            30
+          </option>
+          <option
             data-testid="option-number-of-cases-25"
             value="25"
           >
             25
+          </option>
+          <option
+            data-testid="option-number-of-cases-20"
+            value="20"
+          >
+            20
+          </option>
+          <option
+            data-testid="option-number-of-cases-15"
+            value="15"
+          >
+            15
           </option>
           <option
             data-testid="option-number-of-cases-10"
@@ -702,10 +810,46 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor shoul
           50
         </option>
         <option
+          data-testid="option-number-of-cases-45"
+          value="45"
+        >
+          45
+        </option>
+        <option
+          data-testid="option-number-of-cases-40"
+          value="40"
+        >
+          40
+        </option>
+        <option
+          data-testid="option-number-of-cases-35"
+          value="35"
+        >
+          35
+        </option>
+        <option
+          data-testid="option-number-of-cases-30"
+          value="30"
+        >
+          30
+        </option>
+        <option
           data-testid="option-number-of-cases-25"
           value="25"
         >
           25
+        </option>
+        <option
+          data-testid="option-number-of-cases-20"
+          value="20"
+        >
+          20
+        </option>
+        <option
+          data-testid="option-number-of-cases-15"
+          value="15"
+        >
+          15
         </option>
         <option
           data-testid="option-number-of-cases-10"
