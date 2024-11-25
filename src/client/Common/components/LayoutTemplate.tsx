@@ -44,7 +44,6 @@ export default function LayoutTemplate({ children, showSignOutButton, signOut }:
 
       <DefaultErrorBoundary>
         <div style={divStyle} className="ons-page__container ons-container" data-testid="app-content">
-
           {children}
         </div>
       </DefaultErrorBoundary>

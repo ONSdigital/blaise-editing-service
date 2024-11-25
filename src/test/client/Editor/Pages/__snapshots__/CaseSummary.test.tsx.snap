@@ -314,10 +314,6 @@ exports[`Given there is a case available in blaise for a questionnaire should di
               amount: 380, period: One week
               <br />
             </span>
-            <span>
-              amount: 420, period: Two weeks
-              <br />
-            </span>
           </dd>
           <dt
             class="ons-metadata__term ons-grid__col ons-col-3@m"
@@ -681,10 +677,6 @@ exports[`Given there is a case available in blaise for a questionnaire should di
         >
           <span>
             amount: 380, period: One week
-            <br />
-          </span>
-          <span>
-            amount: 420, period: Two weeks
             <br />
           </span>
         </dd>

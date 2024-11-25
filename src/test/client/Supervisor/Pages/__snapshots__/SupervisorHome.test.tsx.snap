@@ -426,6 +426,12 @@ exports[`Given there are surveys available in blaise should render the superviso
                           >
                             Reallocate
                           </a>
+                           | 
+                          <a
+                            href="/questionnaires/FRS2504A_EDIT/cases/search"
+                          >
+                            Search
+                          </a>
                         </td>
                         <td
                           class="ons-table__cell"
@@ -761,6 +767,12 @@ exports[`Given there are surveys available in blaise should render the superviso
                           href="/questionnaires/FRS2504A_EDIT/reallocate"
                         >
                           Reallocate
+                        </a>
+                         | 
+                        <a
+                          href="/questionnaires/FRS2504A_EDIT/cases/search"
+                        >
+                          Search
                         </a>
                       </td>
                       <td
