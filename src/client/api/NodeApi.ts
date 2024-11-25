@@ -46,5 +46,15 @@ export async function getAllocationDetails(questionnaireName: string, supervisor
 
 export async function updateAllocationDetails(questionnaireName: string, name:string, cases:string[]): Promise<void> {
   const payload = { name, cases };
-  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/`, payload, 'Unable to allocate, please contact Richmond Rice');
+  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/allocate`, payload, 'Unable to allocate, please contact Richmond Rice');
+}
+
+export async function getCaseSearchResults(questionnaireName: string, caseId: string, role: string): Promise<CaseEditInformation[]> {
+  const caseEditInformationList = await getCaseEditInformation(questionnaireName, role);
+  return caseEditInformationList.filter((caseEditInformation) => caseEditInformation.primaryKey.startsWith(caseId));
+}
+
+export async function recodeCase(questionnaireName: string, caseId:string, outcomeCode:string): Promise<void> {
+  const payload = { outcomeCode };
+  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/${caseId}/recode`, payload, 'Unable to recode, please contact Richmond Rice');
 }

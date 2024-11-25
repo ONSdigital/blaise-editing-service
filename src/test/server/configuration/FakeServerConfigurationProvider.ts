@@ -68,6 +68,24 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
       }],
     },
     {
+      Role: 'FRS_Research',
+      Surveys: [{
+        Survey: 'FRS',
+        Organisations: [],
+        Outcomes: [],
+      },
+      ],
+    },
+    {
+      Role: 'Survey_Support',
+      Surveys: [{
+        Survey: 'FRS',
+        Organisations: [],
+        Outcomes: [],
+      },
+      ],
+    },
+    {
       Role: 'SVT_NotConfigured',
       Surveys: [{
         Survey: 'LMS',

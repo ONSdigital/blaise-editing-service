@@ -34,7 +34,7 @@ describe('getQuestionnaires from Blaise', () => {
     blaiseApiClientMock.verify((client) => client.getQuestionnaires(configFake.ServerPark), Times.once());
   });
 
-  it('Should return an expected list of edit questionnaires for editing', async () => {
+  it('Should return an expected list of questionnaires', async () => {
     // arrange
     const questionnaireList: Questionnaire[] = [
       {
@@ -67,8 +67,9 @@ describe('getQuestionnaires from Blaise', () => {
     const result = await sut.getQuestionnaires();
 
     // assert
-    expect(result.length).toEqual(1);
-    expect(result[0]?.questionnaireName).toEqual('FRS2408B_EDIT');
+    expect(result.length).toEqual(2);
+    expect(result[0]?.questionnaireName).toEqual('FRS2408B');
+    expect(result[1]?.questionnaireName).toEqual('FRS2408B_EDIT');
   });
 });
 
@@ -113,7 +114,7 @@ describe('updateCase from Blaise', () => {
 
   it('Should call the update function with the expected parameters', async () => {
     // arrange
-    const questionnaireName = 'OPN2201A';
+    const questionnaireName = 'FRS2504A_EDIT';
     const caseId = '9001';
     const caseFields = {};
 
@@ -134,7 +135,7 @@ describe('getCaseEditInformation from Blaise', () => {
 
   it('Should call getCaseEditInformation for a given questionnaire', async () => {
     // arrange
-    const questionnaireName = 'FRS2504A';
+    const questionnaireName = 'FRS2504A_EDIT';
     blaiseApiClientMock.setup((client) => client.getCaseEditInformation(configFake.ServerPark, questionnaireName)).returns(async () => CaseEditInformationListMockObject);
 
     // act
@@ -146,7 +147,7 @@ describe('getCaseEditInformation from Blaise', () => {
 
   it('Should return an expected list of Cases for editing', async () => {
     // arrange
-    const questionnaireName = 'FRS2504A';
+    const questionnaireName = 'FRS2504A_EDIT';
     const expectedEditUrlBase = `https://${configFake.ExternalWebUrl}/${questionnaireName}?KeyValue=`;
     blaiseApiClientMock.setup((client) => client.getCaseEditInformation(configFake.ServerPark, questionnaireName)).returns(async () => CaseEditInformationListMockObject);
 
@@ -161,6 +162,7 @@ describe('getCaseEditInformation from Blaise', () => {
       expect(caseEditInformation.editedStatus).toEqual(CaseEditInformationListMockObject[index]?.editedStatus);
       expect(caseEditInformation.interviewer).toEqual(CaseEditInformationListMockObject[index]?.interviewer);
       expect(caseEditInformation.editUrl).toEqual(`${expectedEditUrlBase}${caseEditInformation.primaryKey}`);
+      expect(caseEditInformation.readOnlyUrl).toEqual(`${expectedEditUrlBase}${caseEditInformation.primaryKey}&DataEntrySettings=ReadOnly`);
     });
   });
 });
