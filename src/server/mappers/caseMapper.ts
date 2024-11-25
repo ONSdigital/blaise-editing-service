@@ -189,7 +189,7 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
     InterviewDate: new Date(caseResponse.fieldData['QSignIn.StartDat']),
     District: caseResponse.fieldData['qDataBag.District'],
     InterviewerName: caseResponse.fieldData['qhAdmin.Interviewer[1]'],
-    NumberOfRespondents: caseResponse.fieldData['dmhSize'], // 'hhsize' in B4, check with BDSS?
+    NumberOfRespondents: caseResponse.fieldData['dmhSize'],
     Household: {
       Accommodation: {
         Main: Accommodation[Number(caseResponse.fieldData['qhAdmin.QObsSheet.MainAcD'])] ?? '',

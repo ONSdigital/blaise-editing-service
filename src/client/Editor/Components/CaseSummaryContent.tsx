@@ -46,7 +46,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
         <dd className="ons-metadata__value ons-grid__col ons-col-9@m">{caseSummary.OutcomeCode}</dd>
 
         <dt className="ons-metadata__term ons-grid__col ons-col-3@m">Interview date</dt>
-        <dd className="ons-metadata__value ons-grid__col ons-col-9@m">{caseSummary.InterviewDate.toDateString()}</dd>
+        <dd className="ons-metadata__value ons-grid__col ons-col-9@m">{caseSummary.InterviewDate == null ? 'N/A' : caseSummary.InterviewDate.toDateString()}</dd>
         <dt className="ons-metadata__term ons-grid__col ons-col-3@m">District</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-9@m">{caseSummary.District}</dd>
 
@@ -80,7 +80,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
                 {respondent.Sex}
               </td>
               <td className="ons-table__cell" aria-label="DateOfBirth">
-                {respondent.DateOfBirth.toDateString()}
+                {respondent.DateOfBirth == null ? 'N/A' : respondent.DateOfBirth.toDateString() }
               </td>
               <td className="ons-table__cell" aria-label="MaritalStatus">
                 {respondent.MaritalStatus}

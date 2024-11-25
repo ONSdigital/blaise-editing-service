@@ -4,12 +4,12 @@ import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 import { SupervisorInformation } from '../../Interfaces/supervisorInterface';
 
-interface SupervisorQuestionnairesDetailsProps {
+interface SupervisorContentProps {
   questionnaire: QuestionnaireDetails;
   supervisorInformation: SupervisorInformation;
 }
 
-export default function SupervisorContent({ questionnaire, supervisorInformation }: SupervisorQuestionnairesDetailsProps): ReactElement {
+export default function SupervisorContent({ questionnaire, supervisorInformation }: SupervisorContentProps): ReactElement {
   return (
     <div className="questionnaire">
       <ONSPanel status="info">
@@ -69,6 +69,8 @@ export default function SupervisorContent({ questionnaire, supervisorInformation
               <Link to={`/questionnaires/${questionnaire.questionnaireName}/allocate`}>Allocate</Link>
               {' | '}
               <Link to={`/questionnaires/${questionnaire.questionnaireName}/reallocate`}>Reallocate</Link>
+              {' | '}
+              <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/search`}>Search</Link>
             </td>
             <td className="ons-table__cell" />
             <td className="ons-table__cell" />

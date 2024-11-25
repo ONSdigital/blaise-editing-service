@@ -124,6 +124,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001012',
@@ -133,6 +134,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001013',
@@ -142,6 +144,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Query,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001014',
@@ -151,6 +154,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001015',
@@ -160,6 +164,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -172,6 +177,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001012',
@@ -181,6 +187,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001014',
@@ -190,6 +197,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001015',
@@ -199,6 +207,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -226,6 +235,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001012',
@@ -235,6 +245,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001013',
@@ -244,6 +255,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Query,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001014',
@@ -253,6 +265,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001015',
@@ -262,6 +275,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -274,6 +288,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001012',
@@ -283,6 +298,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001014',
@@ -292,6 +308,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -319,6 +336,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.NatCen,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001012',
@@ -328,6 +346,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001013',
@@ -337,6 +356,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Query,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001014',
@@ -346,6 +366,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.Nisra,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001015',
@@ -355,6 +376,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -367,6 +389,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -394,6 +417,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001012',
@@ -403,6 +427,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001013',
@@ -412,6 +437,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Query,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001014',
@@ -421,6 +447,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
       },
       {
         primaryKey: '10001015',
@@ -430,6 +457,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -457,6 +485,7 @@ describe('Get case edit information tests', () => {
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
         editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
       },
     ];
 
@@ -567,7 +596,7 @@ describe('allocate cases tests', () => {
 
     // act
     const response: Response = await sut
-      .patch(`/api/questionnaires/${questionnaireName}/cases`).send(payload);
+      .patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
     expect(response.status).toEqual(204);
@@ -584,7 +613,7 @@ describe('allocate cases tests', () => {
     blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
 
     // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases`).send(payload);
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
     expect(response.status).toEqual(500);
@@ -599,7 +628,7 @@ describe('allocate cases tests', () => {
     blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
 
     // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases`).send(payload);
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
     expect(response.status).toEqual(500);
@@ -614,7 +643,93 @@ describe('allocate cases tests', () => {
     blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
 
     // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases`).send(payload);
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+
+    // assert
+    expect(response.status).toEqual(404);
+  });
+});
+
+describe('recode case tests', () => {
+  beforeEach(() => {
+    blaiseApiMock.reset();
+  });
+
+  afterAll(() => {
+    blaiseApiMock.reset();
+  });
+
+  it('It should return a 204 response when cases are recoded', async () => {
+    // arrange
+    const questionnaireName: string = 'TEST111A';
+    const editQuestionnaireName: string = 'TEST111A_EDIT';
+    const caseId: string = '9001';
+    const outcomeCode:string = '210';
+    const payload = { outcomeCode };
+    const caseFields1 = { 'qhAdmin.HOut': outcomeCode };
+    const caseFields2 = {
+      'qhAdmin.HOut': outcomeCode, 'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
+    };
+
+    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId, caseFields1));
+    blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
+
+    // act
+    const response: Response = await sut
+      .patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
+
+    // assert
+    expect(response.status).toEqual(204);
+    blaiseApiMock.verify((api) => api.updateCase(questionnaireName, caseId, caseFields1), Times.once());
+    blaiseApiMock.verify((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2), Times.once());
+  });
+
+  it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
+    // arrange
+    const axiosError = createAxiosError(500);
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    const outcomeCode:string = '210';
+    const payload = { outcomeCode };
+
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+
+    // act
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
+
+    // assert
+    expect(response.status).toEqual(500);
+  });
+
+  it('It should return a 500 response when the api client throws an error', async () => {
+    // arrange
+    const clientError = new Error();
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    const outcomeCode:string = '210';
+    const payload = { outcomeCode };
+
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
+
+    // act
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
+
+    // assert
+    expect(response.status).toEqual(500);
+  });
+
+  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
+    // arrange
+    const axiosError = createAxiosError(404);
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    const outcomeCode:string = '210';
+    const payload = { outcomeCode };
+
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+
+    // act
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
 
     // assert
     expect(response.status).toEqual(404);
