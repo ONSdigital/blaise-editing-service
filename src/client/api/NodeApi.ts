@@ -53,8 +53,3 @@ export async function getCaseSearchResults(questionnaireName: string, caseId: st
   const caseEditInformationList = await getCaseEditInformation(questionnaireName, role);
   return caseEditInformationList.filter((caseEditInformation) => caseEditInformation.primaryKey.startsWith(caseId));
 }
-
-export async function recodeCase(questionnaireName: string, caseId:string, outcomeCode:string): Promise<void> {
-  const payload = { outcomeCode };
-  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/${caseId}/recode`, payload, 'Unable to recode, please contact Richmond Rice');
-}
