@@ -16,7 +16,7 @@ interface AppContentProps {
 }
 
 export default function AppContent({ user }: AppContentProps): ReactElement {
-  const userRole:UserRole = UserRole[user.role as UserRole];
+  const userRole:UserRole = user.role as UserRole;
 
   return (
     <>

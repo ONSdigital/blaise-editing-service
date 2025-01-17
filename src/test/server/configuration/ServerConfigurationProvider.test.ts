@@ -11,8 +11,8 @@ const serverPark = 'gusty';
 const externalWebUrl = 'cati.blaise.com';
 const sessionSecret = 'richlikesricecakes';
 const sessionTimeout = '12h';
-const roles = 'SVT_Supervisor,SVT_Editor';
-const rolesList = ['SVT_Supervisor', 'SVT_Editor'];
+const roles = 'SVT Supervisor,SVT Editor';
+const rolesList = ['SVT Supervisor', 'SVT Editor'];
 const surveys = 'FRS';
 
 describe('Configuration file tests', () => {
@@ -138,7 +138,7 @@ describe('Authentication file tests', () => {
     const sut = new ServerConfigurationProvider();
 
     // assert
-    expect(sut.Roles).toEqual(['SVT_Supervisor', 'SVT_Editor', 'FRS_Research', 'Survey_Support']);
+    expect(sut.Roles).toEqual(['SVT Supervisor', 'SVT Editor', 'FRS Research', 'Survey Support']);
   });
 
   it.each([undefined, '', '  ', '   '])('should throw an error if BLAISE_API_URL is empty or does not exist', (value) => {
@@ -163,7 +163,7 @@ describe('Authentication file tests', () => {
     expect(configuration).toThrowError('VM_EXTERNAL_WEB_URL has not been set or is set to an empty string');
   });
 
-  it.each(['SVT_Supervisor', 'SVT_Editor'])('should return the expected surveys for the SVT role', (role) => {
+  it.each(['SVT Supervisor', 'SVT Editor'])('should return the expected surveys for the SVT role', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -174,7 +174,7 @@ describe('Authentication file tests', () => {
     expect(result).toEqual(['FRS']);
   });
 
-  it.each(['SVT_Supervisor', 'SVT_Editor'])('should return the expected outcome configuration for SVT roles for FRS', (role) => {
+  it.each(['SVT Supervisor', 'SVT Editor'])('should return the expected outcome configuration for SVT roles for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -186,7 +186,7 @@ describe('Authentication file tests', () => {
     expect(result.Outcomes).toEqual([CaseOutcome.Completed, CaseOutcome.CompletedNudge, CaseOutcome.CompletedProxy]);
   });
 
-  it.each(['SVT_Supervisor', 'SVT_Editor'])('should return the expected organisation configuration for SVT roles for FRS', (role) => {
+  it.each(['SVT Supervisor', 'SVT Editor'])('should return the expected organisation configuration for SVT roles for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -198,7 +198,7 @@ describe('Authentication file tests', () => {
     expect(result.Organisations).toEqual([Organisation.ONS]);
   });
 
-  it.each(['FRS_Research'])('should return the expected surveys for the FRS Research role', (role) => {
+  it.each(['FRS Research'])('should return the expected surveys for the FRS Research role', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -209,7 +209,7 @@ describe('Authentication file tests', () => {
     expect(result).toEqual(['FRS']);
   });
 
-  it.each(['FRS_Research'])('should return the expected outcome configuration for FRS Research role for FRS', (role) => {
+  it.each(['FRS Research'])('should return the expected outcome configuration for FRS Research role for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -221,7 +221,7 @@ describe('Authentication file tests', () => {
     expect(result.Outcomes).toEqual([]);
   });
 
-  it.each(['FRS_Research'])('should return the expected organisation configuration for FRS Research role for FRS', (role) => {
+  it.each(['FRS Research'])('should return the expected organisation configuration for FRS Research role for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -233,7 +233,7 @@ describe('Authentication file tests', () => {
     expect(result.Organisations).toEqual([]);
   });
 
-  it.each(['Survey_Support'])('should return the expected surveys for the Survey Support role', (role) => {
+  it.each(['Survey Support'])('should return the expected surveys for the Survey Support role', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -244,7 +244,7 @@ describe('Authentication file tests', () => {
     expect(result).toEqual(['FRS']);
   });
 
-  it.each(['Survey_Support'])('should return the expected outcome configuration for Survey Support role for FRS', (role) => {
+  it.each(['Survey Support'])('should return the expected outcome configuration for Survey Support role for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -256,7 +256,7 @@ describe('Authentication file tests', () => {
     expect(result.Outcomes).toEqual([]);
   });
 
-  it.each(['Survey_Support'])('should return the expected organisation configuration for Survey Support role for FRS', (role) => {
+  it.each(['Survey Support'])('should return the expected organisation configuration for Survey Support role for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
