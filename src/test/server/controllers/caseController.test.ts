@@ -29,7 +29,7 @@ const sut = supertest(server);
 // Using Node.js `assert`
 // const assert = require('assert').strict;
 
-const validUserRoles:string[] = ['SVT_Supervisor', 'SVT_Editor'];
+const validUserRoles:string[] = ['SVT Supervisor', 'SVT Editor'];
 
 describe('Get case summary tests', () => {
   beforeEach(() => {
@@ -407,7 +407,7 @@ describe('Get case edit information tests', () => {
   it('should return a 200 response with a list of all case edit details When the Outcome Filter list is empty', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_AllOutcomes';
+    const userRole = 'SVT AllOutcomes';
     const caseEditInformationListMockObject : CaseEditInformation[] = [
       {
         primaryKey: '10001011',
@@ -475,7 +475,7 @@ describe('Get case edit information tests', () => {
   it('should return a 500 response if the users role is not configured for the survey', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_NotConfigured'; // configured for LMS questionnaires only
+    const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
     const caseEditInformationListMockObject : CaseEditInformation[] = [
       {
         primaryKey: '10001011',
@@ -501,7 +501,7 @@ describe('Get case edit information tests', () => {
   it('should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     const axiosError = createAxiosError(500);
 
@@ -517,7 +517,7 @@ describe('Get case edit information tests', () => {
   it('should return a 500 response when the api client throws an error', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     const apiClientError = new Error();
 
@@ -559,7 +559,7 @@ describe('Get case edit information tests', () => {
   it('should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     const axiosError = createAxiosError(404);
 
