@@ -14,7 +14,7 @@ import FilteredSurveyListMockObject from './MockObjects/SurveyMockObjects';
 import { EditorInformationMockObject1, EditorInformationMockObject2 } from './MockObjects/EditorMockObjects';
 
 // set global variables
-const validUserRoles:string[] = ['SVT_Supervisor', 'SVT_Editor'];
+const validUserRoles:string[] = ['SVT Supervisor', 'SVT Editor'];
 let view:RenderResult;
 
 // create mocks
