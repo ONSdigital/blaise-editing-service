@@ -10,6 +10,7 @@ import {
   getAllocationDetails,
   updateAllocationDetails,
   getCaseSearchResults,
+  setCaseToUpdate,
 } from '../../../client/api/NodeApi';
 import { EditorInformation } from '../../../client/Interfaces/editorInterface';
 import { SupervisorInformation } from '../../../client/Interfaces/supervisorInterface';
@@ -561,5 +562,36 @@ describe('getCaseSearchResults from Blaise for FRS Research role', () => {
 
     // act && assert
     expect(getCaseSearchResults(questionnaireName, caseId, role)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+});
+
+describe('setCaseToUpdate in Blaise', () => {
+  const questionnaireName = 'FRS2201';
+  const caseId = '9001';
+  it('Should update case details with a 204 response', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).reply(204, null);
+    // act
+    const result = await setCaseToUpdate(questionnaireName, caseId);
+    // assert
+    expect(result).toBeUndefined();
+  });
+  it('Should throw the error "Unable to set case to update, please contact Richmond Rice" when a 404 response is recieved', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).reply(404, null);
+    // act && assert
+    expect(setCaseToUpdate(questionnaireName, caseId)).rejects.toThrow('Unable to set case to update, please contact Richmond Rice');
+  });
+  it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).reply(500, null);
+    // act && assert
+    expect(setCaseToUpdate(questionnaireName, caseId)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+  it('Should throw the error "Unable to complete request, please try again in a few minutes" when there is a network error', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).networkError();
+    // act && assert
+    expect(setCaseToUpdate(questionnaireName, caseId)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
   });
 });

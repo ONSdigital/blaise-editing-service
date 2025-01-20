@@ -48,7 +48,7 @@ export default function CaseSearchDetails({ questionnaireName, caseId, role }: C
                     {Organisation[caseDetails.organisation]}
                   </td>
                   <td className="ons-table__cell links">
-                    <CaseSearchLinks caseDetails={caseDetails} role={role} />
+                    <CaseSearchLinks questionnaireName={questionnaireName} caseDetails={caseDetails} role={role} />
                   </td>
                 </tr>
               ))}

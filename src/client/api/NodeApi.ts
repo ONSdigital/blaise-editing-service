@@ -53,3 +53,7 @@ export async function getCaseSearchResults(questionnaireName: string, caseId: st
   const caseEditInformationList = await getCaseEditInformation(questionnaireName, role);
   return caseEditInformationList.filter((caseEditInformation) => caseEditInformation.primaryKey.startsWith(caseId));
 }
+
+export async function setCaseToUpdate(questionnaireName: string, caseId:string): Promise<void> {
+  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/${caseId}/update`, {}, 'Unable to set case to update, please contact Richmond Rice');
+}

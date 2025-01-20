@@ -649,3 +649,61 @@ describe('allocate cases tests', () => {
     expect(response.status).toEqual(404);
   });
 });
+
+describe('set to update case tests', () => {
+  beforeEach(() => {
+    blaiseApiMock.reset();
+  });
+  afterAll(() => {
+    blaiseApiMock.reset();
+  });
+  it('It should return a 204 response when cases are set to update', async () => {
+    // arrange
+    const questionnaireName: string = 'TEST111A';
+    const editQuestionnaireName: string = 'TEST111A_EDIT';
+    const caseId: string = '9001';
+    const caseFields2 = {
+      'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
+    };
+    blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
+    // act
+    const response: Response = await sut
+      .patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    expect(response.status).toEqual(204);
+    blaiseApiMock.verify((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2), Times.once());
+  });
+  it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
+    // arrange
+    const axiosError = createAxiosError(500);
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+    // act
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    expect(response.status).toEqual(500);
+  });
+  it('It should return a 500 response when the api client throws an error', async () => {
+    // arrange
+    const clientError = new Error();
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
+    // act
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    expect(response.status).toEqual(500);
+  });
+  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
+    // arrange
+    const axiosError = createAxiosError(404);
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+    // act
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    expect(response.status).toEqual(404);
+  });
+});
