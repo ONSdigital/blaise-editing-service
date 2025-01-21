@@ -11,7 +11,22 @@ export default function EditCaseForm() {
   const { questionnaireName, caseId } = useParams<keyof CaseSummaryParams>() as CaseSummaryParams;
   const { caseDetails, role }: { caseDetails: CaseEditInformation, role: UserRole } = useLocation().state;
   const [submitting, setSubmitting] = useState(false);
-  console.log(role);
+  const [actionState, setActionState] = useState({
+    actionPerformed: false,
+    actionSuccess: false,
+  });
+
+  const updateCase = async () => {
+    setSubmitting(true);
+    setActionState({ actionPerformed: true, actionSuccess: false });
+    await setCaseToUpdate(questionnaireName, caseId);
+    // if (responseStatus === 204) {
+    //   setActionState({ actionPerformed: true, actionSuccess: true });
+    // } else {
+    //   setActionState({ actionPerformed: true, actionSuccess: false });
+    // }
+    setSubmitting(false);
+  };
 
   return (
     <>
@@ -45,19 +60,25 @@ export default function EditCaseForm() {
         )}
 
       </div>
+      {(actionState.actionPerformed && actionState.actionSuccess)
+        ? (
+          <ONSPanel status="success">
+            You have successfully set the case to sync with the editing database overnight
+          </ONSPanel>
+        ) : null}
       {role === UserRole.Survey_Support && (
         <>
           <br />
           <br />
           <br />
           <ONSPanel status="warn">
-            Once Editing is comeplete set the case to sync with editing database overnight below.
+            Once Editing is complete set the case to sync with the editing database overnight below.
           </ONSPanel>
           <ONSButton
             label="Set sync with editing overnight"
             primary
             loading={submitting}
-            onClick={async () => { setSubmitting(true); await setCaseToUpdate(questionnaireName, caseId); setSubmitting(false); }}
+            onClick={updateCase}
           />
         </>
       )}
