@@ -19,7 +19,7 @@ export default function CaseSearch(): ReactElement {
         <dl
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
           title="Questionnares"
-          data-testid={`${questionnaireName}-Search-Content`}
+          data-testid={`${questionnaireName}-Supervisor-Content`}
           style={{ padding: '0 0 15px 5px' }}
         >
           <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Questionnaire Name:</dt>
