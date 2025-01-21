@@ -15,7 +15,7 @@ export default function SupportContent({ questionnaire }: RSupportContentProps):
         <dl
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
           title="Questionnares"
-          data-testid={`${questionnaire.questionnaireName}-Search-Content`}
+          data-testid={`${questionnaire.questionnaireName}-Support-Content`}
           style={{ padding: '0 0 15px 5px' }}
         >
           <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Field period:</dt>
