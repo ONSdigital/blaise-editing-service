@@ -1,13 +1,19 @@
-import { render, act, RenderResult } from '@testing-library/react';
+import {
+  render, act, RenderResult, fireEvent,
+} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { CaseEditInformation } from 'blaise-api-node-client';
+import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import userMockObject from '../../../server/mockObjects/userMockObject';
-import { getSupervisorEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
+import { getCaseSearchResults, getSupervisorEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
 import SupervisorHome from '../../../../client/Supervisor/Pages/SupervisorHome';
 import { SupervisorInformation } from '../../../../client/Interfaces/supervisorInterface';
 import UserRole from '../../../../client/Common/enums/UserTypes';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../MockObjects/SupervisorMockObjects';
+import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
+import CaseSearchForm from '../../../../client/Common/components/CaseSearchForm';
 
 // set global vars
 const userRole:string = UserRole.SVT_Supervisor;
@@ -17,6 +23,7 @@ let view:RenderResult;
 jest.mock('../../../../client/api/NodeApi');
 const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
 const getSupervisorCaseInformationMock = getSupervisorEditorInformation as jest.Mock<Promise<SupervisorInformation>>;
+const getCaseInformationMock = getCaseSearchResults as jest.Mock<Promise<CaseEditInformation[]>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {
@@ -99,6 +106,83 @@ describe('Given there are surveys available in blaise', () => {
   });
 });
 
+describe('Given that search is clicked', () => {
+  beforeEach(() => {
+    getCaseInformationMock.mockImplementation(() => Promise.resolve(CaseEditInformationListMockObject));
+  });
+
+  it('should render the search page correctly', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+
+    // act
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // assert
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should render the search page correctly when cases are searched for', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should display the expected case details when cases are searched for', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+
+    const caseIdRows = view.getAllByLabelText(`${questionnaireName}-CaseID`);
+    const outcomeRows = view.getAllByLabelText(`${questionnaireName}-Outcome`);
+    const interviewerRows = view.getAllByLabelText(`${questionnaireName}-Interviewer`);
+    const organisationRows = view.getAllByLabelText(`${questionnaireName}-Organisation`);
+    const linksRows = view.getAllByLabelText(`${questionnaireName}-Links`);
+
+    CaseEditInformationListMockObject.forEach((caseDetails, index) => {
+      expect(caseIdRows[index]).toHaveTextContent(caseDetails.primaryKey);
+      expect(outcomeRows[index]).toHaveTextContent(caseDetails.outcome.toString());
+      expect(interviewerRows[index]).toHaveTextContent(caseDetails.interviewer);
+      expect(organisationRows[index]).toHaveTextContent(Organisation[caseDetails.organisation]?.toString() ?? '');
+      expect(linksRows[index]).toHaveTextContent('Edit case | View case');
+    });
+  });
+});
 describe('Given there are no surveys available in blaise', () => {
   beforeEach(() => {
     getSurveysMock.mockImplementation(() => Promise.resolve([]));

@@ -1,26 +1,32 @@
-import { act, render, RenderResult } from '@testing-library/react';
+import {
+  act, fireEvent, render, RenderResult,
+} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { CaseEditInformation } from 'blaise-api-node-client';
+import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import UserRole from '../../../../client/Common/enums/UserTypes';
-import { getSurveys } from '../../../../client/api/NodeApi';
+import { getCaseSearchResults, getSurveys } from '../../../../client/api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import userMockObject from '../../../server/mockObjects/userMockObject';
 import SupportHome from '../../../../client/Support/Pages/SupportHome';
+import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
 
 // set global vars
 const userRole:string = UserRole.Survey_Support;
 let view:RenderResult;
-
 // set mocks
 jest.mock('../../../../client/api/NodeApi');
 const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
+const getCaseInformationMock = getCaseSearchResults as jest.Mock<Promise<CaseEditInformation[]>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {
     getSurveysMock.mockImplementation(() => Promise.resolve(FilteredSurveyListMockObject));
+    getCaseInformationMock.mockImplementation(() => Promise.resolve(CaseEditInformationListMockObject));
   });
 
-  it('should render the Research page correctly when surveys are returned', async () => {
+  it('should render the Support page correctly when surveys are returned', async () => {
     // arrange
     const user = userMockObject;
     user.role = userRole;
@@ -70,6 +76,84 @@ describe('Given there are surveys available in blaise', () => {
       const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Support-Content`);
       expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.fieldPeriod));
       expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.numberOfCases));
+    });
+  });
+
+  it('should render the Support page correctly when surveys are returned and search used', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <SupportHome user={user} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should display the expected questionnaire and case details when search used', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <SupportHome user={user} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+    FilteredSurveyListMockObject.forEach((survey, surveyIndex) => {
+      const surveyListView = view.getByTestId(`survey-accordion-${surveyIndex}-heading`);
+      expect(surveyListView).toHaveTextContent(survey.name);
+
+      const questionnaireListView = view.getByTestId(`survey-accordion-${surveyIndex}-content`);
+
+      const defaultQuestionnaire = survey.questionnaires[0];
+      if (defaultQuestionnaire === undefined) {
+        throw Error('No default questionnaire found');
+      }
+
+      const defaultQuestionnaireName = defaultQuestionnaire.questionnaireName;
+
+      expect(questionnaireListView).toHaveTextContent(defaultQuestionnaire.questionnaireName.replace('_EDIT', ''));
+
+      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Support-Content`);
+      expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.fieldPeriod));
+      expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.numberOfCases));
+
+      const caseIdRows = view.getAllByLabelText(`${defaultQuestionnaireName}-CaseID`);
+      const outcomeRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Outcome`);
+      const interviewerRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Interviewer`);
+      const organisationRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Organisation`);
+      const linksRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Links`);
+
+      CaseEditInformationListMockObject.forEach((caseDetails, index) => {
+        expect(caseIdRows[index]).toHaveTextContent(caseDetails.primaryKey);
+        expect(outcomeRows[index]).toHaveTextContent(caseDetails.outcome.toString());
+        expect(interviewerRows[index]).toHaveTextContent(caseDetails.interviewer);
+        expect(organisationRows[index]).toHaveTextContent(Organisation[caseDetails.organisation]?.toString() ?? '');
+        expect(linksRows[index]).toHaveTextContent('Edit interviewer case | View interviewer case');
+      });
     });
   });
 });
