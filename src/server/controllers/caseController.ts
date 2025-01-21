@@ -118,6 +118,8 @@ export default class CaseController implements Controller {
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
+        console.log("Error in setCaseToUpdate");
+        console.log(error);
         return response.status(404).json();
       }
       return response.status(500).json();
