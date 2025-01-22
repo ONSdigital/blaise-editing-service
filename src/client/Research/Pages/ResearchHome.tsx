@@ -1,4 +1,3 @@
-import { ONSPanel } from 'blaise-design-system-react-components';
 import { User } from 'blaise-api-node-client';
 import { Survey } from '../../../common/interfaces/surveyInterface';
 import { useAsyncRequestWithParam } from '../../Common/hooks/useAsyncRequest';
@@ -14,15 +13,10 @@ export default function ResearchHome({ user }: SurveyProps) {
   const surveys = useAsyncRequestWithParam<Survey[], string>(getSurveys, user.role);
 
   return (
-    <>
-      <ONSPanel status="info">
-        Welcome to the editing service.
-      </ONSPanel>
-      <div data-testid="Surveys">
-        <AsyncContent content={surveys}>
-          {(loadedSurveys) => <SurveysList surveys={loadedSurveys} user={user} />}
-        </AsyncContent>
-      </div>
-    </>
+    <div data-testid="Surveys">
+      <AsyncContent content={surveys}>
+        {(loadedSurveys) => <SurveysList surveys={loadedSurveys} user={user} />}
+      </AsyncContent>
+    </div>
   );
 }
