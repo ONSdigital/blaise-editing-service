@@ -6,15 +6,6 @@ exports[`Given there are no surveys available in blaise should render the page c
   "baseElement": <body>
     <div>
       <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          Welcome to the editing service.
-        </div>
-      </div>
-      <div
         data-testid="Surveys"
       >
         <div
@@ -30,15 +21,6 @@ exports[`Given there are no surveys available in blaise should render the page c
     </div>
   </body>,
   "container": <div>
-    <div
-      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-    >
-      <div
-        class="ons-panel__body "
-      >
-        Welcome to the editing service.
-      </div>
-    </div>
     <div
       data-testid="Surveys"
     >
@@ -112,15 +94,6 @@ exports[`Given there are surveys available in blaise should render the Support p
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          Welcome to the editing service.
-        </div>
-      </div>
       <div
         data-testid="Surveys"
       >
@@ -295,15 +268,6 @@ exports[`Given there are surveys available in blaise should render the Support p
     </div>
   </body>,
   "container": <div>
-    <div
-      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-    >
-      <div
-        class="ons-panel__body "
-      >
-        Welcome to the editing service.
-      </div>
-    </div>
     <div
       data-testid="Surveys"
     >
@@ -535,15 +499,6 @@ exports[`Given there are surveys available in blaise should render the Support p
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          Welcome to the editing service.
-        </div>
-      </div>
       <div
         data-testid="Surveys"
       >
@@ -985,15 +940,6 @@ exports[`Given there are surveys available in blaise should render the Support p
     </div>
   </body>,
   "container": <div>
-    <div
-      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-    >
-      <div
-        class="ons-panel__body "
-      >
-        Welcome to the editing service.
-      </div>
-    </div>
     <div
       data-testid="Surveys"
     >
@@ -1493,15 +1439,6 @@ exports[`Given there the blaise rest api is not available should render the page
   "baseElement": <body>
     <div>
       <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          Welcome to the editing service.
-        </div>
-      </div>
-      <div
         data-testid="Surveys"
       >
         <div
@@ -1524,15 +1461,6 @@ exports[`Given there the blaise rest api is not available should render the page
     </div>
   </body>,
   "container": <div>
-    <div
-      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-    >
-      <div
-        class="ons-panel__body "
-      >
-        Welcome to the editing service.
-      </div>
-    </div>
     <div
       data-testid="Surveys"
     >
