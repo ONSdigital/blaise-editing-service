@@ -54,6 +54,16 @@ export async function getCaseSearchResults(questionnaireName: string, caseId: st
   return caseEditInformationList.filter((caseEditInformation) => caseEditInformation.primaryKey.startsWith(caseId));
 }
 
-export async function setCaseToUpdate(questionnaireName: string, caseId:string): Promise<void> {
-  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/${caseId}/update`, {}, 'Unable to set case to update, please raise this on service desk stating the time and date of failure');
+export async function getSpecificCaseEditInformation(questionnaireName: string, caseId: string, role: string): Promise<CaseEditInformation> {
+  const caseEditInformationList = await getCaseEditInformation(questionnaireName, role);
+  const caseEditInformation = caseEditInformationList.find((caseDetails) => caseDetails.primaryKey === caseId);
+  if (!caseEditInformation) {
+    throw new Error(`Case details not found with case ID: ${caseId}`);
+  }
+  return caseEditInformation;
+}
+
+export async function setCaseToUpdate(questionnaireName: string, caseId:string): Promise<number> {
+  const responseStatus = await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/${caseId}/update`, {}, 'Unable to set case to update, please raise this on service desk stating the time and date of failure');
+  return responseStatus;
 }
