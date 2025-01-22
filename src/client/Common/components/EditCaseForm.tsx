@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { setCaseToUpdate } from '../../api/NodeApi';
 import { CaseSummaryParams } from '../types/CaseSummaryParams';
 import UserRole from '../enums/UserTypes';
+import questionnaireDisplayName from '../functions/QuestionnaireFunctions';
 
 export default function EditCaseForm() {
   const { questionnaireName, caseId } = useParams<keyof CaseSummaryParams>() as CaseSummaryParams;
@@ -33,7 +34,7 @@ export default function EditCaseForm() {
       <ONSPanel status="info">
         Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
       </ONSPanel>
-      <h1 className="ons-u-mt-s">{questionnaireName}</h1>
+      <h1 className="ons-u-mt-s">{questionnaireDisplayName(questionnaireName)}</h1>
       <ONSTable
         columns={[]}
         tableID={`${caseId}-Case-details`}
