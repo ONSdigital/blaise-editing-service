@@ -1,111 +1,112 @@
 import { CaseEditInformation } from 'blaise-api-node-client';
 import { ONSButton, ONSPanel, ONSTable } from 'blaise-design-system-react-components';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import { setCaseToUpdate } from '../../api/NodeApi';
-import { CaseSummaryParams } from '../types/CaseSummaryParams';
 import UserRole from '../enums/UserTypes';
 import questionnaireDisplayName from '../functions/QuestionnaireFunctions';
+import { Message } from '../types/MessageType';
 
-export default function EditCaseForm() {
-  const { questionnaireName, caseId } = useParams<keyof CaseSummaryParams>() as CaseSummaryParams;
-  const { caseDetails, role }: { caseDetails: CaseEditInformation, role: UserRole } = useLocation().state;
+interface EditCaseFormProps {
+  caseDetails: CaseEditInformation;
+  questionnaireName: string;
+  caseId: string;
+  role: UserRole;
+  setMessage: React.Dispatch<React.SetStateAction<Message>>;
+}
+
+export default function EditCaseForm({
+  caseDetails, questionnaireName, caseId, role, setMessage,
+}: EditCaseFormProps): ReactElement {
   const [submitting, setSubmitting] = useState(false);
-  const [actionState, setActionState] = useState({
-    actionPerformed: false,
-    actionSuccess: false,
-  });
 
-  const updateCase = async () => {
+  const updateCase = useCallback(async () => {
     setSubmitting(true);
-    setActionState({ actionPerformed: true, actionSuccess: false });
-    await setCaseToUpdate(questionnaireName, caseId);
-    // if (responseStatus === 204) {
-    //   setActionState({ actionPerformed: true, actionSuccess: true });
-    // } else {
-    //   setActionState({ actionPerformed: true, actionSuccess: false });
-    // }
+    setMessage({ show: false, text: '', type: '' });
+    try {
+      await setCaseToUpdate(questionnaireName, caseId);
+      setMessage({ show: true, text: `Successfully set case with ID, ${caseDetails.primaryKey}, to update editing database overnight`, type: 'success' });
+    } catch (error: unknown) {
+      setMessage({ show: true, text: `Failed to set case with ID, ${caseDetails.primaryKey}, to update, please try again in a few seconds or contact service desk to raise a support ticket`, type: 'error' });
+    }
     setSubmitting(false);
-  };
+  }, [setMessage, questionnaireName, caseId, caseDetails.primaryKey]);
 
   return (
     <>
-      <ONSPanel status="info">
+      <ONSPanel status="info" testID="edit-case-form-panel">
         Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
       </ONSPanel>
+      <br />
       <h1 className="ons-u-mt-s">{questionnaireDisplayName(questionnaireName)}</h1>
-      <ONSTable
-        columns={[]}
-        tableID={`${caseId}-Case-details`}
-      >
-        <>
-          <tr
-            className="ons-table__row"
-            key={`${caseDetails.primaryKey}-CaseID`}
-          >
-            <td className="ons-table__cell ons-u-fs-r--b">Case ID:</td>
-            <td className="ons-table__cell">{caseDetails.primaryKey}</td>
-          </tr>
-          <tr
-            className="ons-table__row"
-            key={`${caseDetails.primaryKey}-Outcome`}
-          >
-            <td className="ons-table__cell ons-u-fs-r--b">Outcome:</td>
-            <td className="ons-table__cell">{caseDetails.outcome}</td>
-          </tr>
-          <tr
-            className="ons-table__row"
-            key={`${caseDetails.primaryKey}-Interviewer`}
-          >
-            <td className="ons-table__cell ons-u-fs-r--b">Interviewer:</td>
-            <td className="ons-table__cell">{caseDetails.interviewer}</td>
-          </tr>
-          <tr
-            className="ons-table__row"
-            key={`${caseDetails.primaryKey}-Organisation`}
-          >
-            <td className="ons-table__cell ons-u-fs-r--b">Organisation:</td>
-            <td className="ons-table__cell">{Organisation[caseDetails.organisation]}</td>
-          </tr>
-          <tr
-            className="ons-table__row"
-            key={`${caseDetails.primaryKey}-Editing-link`}
-          >
-            <td className="ons-table__cell ons-u-fs-r--b">Editing link:</td>
-            <td className="ons-table__cell ons-u-fs-r--b">
-              {role === UserRole.Survey_Support && (
-              <Link to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
-              )}
-              {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Research) && (
-              <Link to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
-              )}
-            </td>
-          </tr>
-        </>
-      </ONSTable>
-
-      {(actionState.actionPerformed && actionState.actionSuccess)
-        ? (
-          <ONSPanel status="success">
-            You have successfully set the case to sync with the editing database overnight
-          </ONSPanel>
-        ) : null}
+      <div className="ons-u-mb-l">
+        <ONSTable
+          columns={[]}
+          tableID={`${caseId}-Case-details`}
+        >
+          <>
+            <tr
+              className="ons-table__row"
+              key={`${caseDetails.primaryKey}-CaseID`}
+            >
+              <td className="ons-table__cell ons-u-fs-r--b">Case ID:</td>
+              <td className="ons-table__cell">{caseDetails.primaryKey}</td>
+            </tr>
+            <tr
+              className="ons-table__row"
+              key={`${caseDetails.primaryKey}-Outcome`}
+            >
+              <td className="ons-table__cell ons-u-fs-r--b">Outcome:</td>
+              <td className="ons-table__cell">{caseDetails.outcome}</td>
+            </tr>
+            <tr
+              className="ons-table__row"
+              key={`${caseDetails.primaryKey}-Interviewer`}
+            >
+              <td className="ons-table__cell ons-u-fs-r--b">Interviewer:</td>
+              <td className="ons-table__cell">{caseDetails.interviewer}</td>
+            </tr>
+            <tr
+              className="ons-table__row"
+              key={`${caseDetails.primaryKey}-Organisation`}
+            >
+              <td className="ons-table__cell ons-u-fs-r--b">Organisation:</td>
+              <td className="ons-table__cell">{Organisation[caseDetails.organisation]}</td>
+            </tr>
+            <tr
+              className="ons-table__row"
+              key={`${caseDetails.primaryKey}-Editing-link`}
+            >
+              <td className="ons-table__cell ons-u-fs-r--b">Editing link:</td>
+              <td className="ons-table__cell ons-u-fs-r--b">
+                {role === UserRole.Survey_Support && (
+                <Link to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
+                )}
+                {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Research) && (
+                <Link to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
+                )}
+              </td>
+            </tr>
+          </>
+        </ONSTable>
+      </div>
       {role === UserRole.Survey_Support && (
-        <>
-          <br />
-          <br />
-          <br />
-          <ONSPanel status="warn">
-            Once Editing is complete set the case to sync with the editing database overnight below.
-          </ONSPanel>
+      <>
+        <br />
+        <ONSPanel status="warn">
+          After finalizing edits, sync your changes overnight with the editing database by clicking the button below.
+        </ONSPanel>
+        <div className="ons-u-mb-l">
           <ONSButton
-            label="Set sync with editing overnight"
+            label="Update case"
             primary
             loading={submitting}
+            disabled={submitting}
             onClick={updateCase}
           />
-        </>
+        </div>
+      </>
       )}
     </>
   );

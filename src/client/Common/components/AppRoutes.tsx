@@ -9,7 +9,7 @@ import Allocate from '../../Supervisor/Pages/Allocate';
 import CaseSummary from '../../Editor/Pages/CaseSummary';
 import ResearchHome from '../../Research/Pages/ResearchHome';
 import CaseSearch from '../../Supervisor/Components/CaseSearch';
-import EditCaseForm from './EditCaseForm';
+import EditCaseContent from './EditCaseContent';
 import SupportHome from '../../Support/Pages/SupportHome';
 
 interface AppContentProps {
@@ -26,7 +26,7 @@ export default function AppContent({ user }: AppContentProps): ReactElement {
         <Route path="/questionnaires/:questionnaireName/allocate" element={<Allocate supervisorRole={UserRole.SVT_Supervisor} editorRole={UserRole.SVT_Editor} reallocate={false} />} />
         <Route path="/questionnaires/:questionnaireName/reallocate" element={<Allocate supervisorRole={UserRole.SVT_Supervisor} editorRole={UserRole.SVT_Editor} reallocate />} />
         <Route path="questionnaires/:questionnaireName/cases/search" element={<CaseSearch />} />
-        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseForm />} />
+        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent />} />
       </CreateRoutes>
 
       <CreateRoutes onConditionThat={userRole === UserRole.SVT_Editor}>
@@ -36,12 +36,12 @@ export default function AppContent({ user }: AppContentProps): ReactElement {
 
       <CreateRoutes onConditionThat={userRole === UserRole.FRS_Research}>
         <Route path="/" element={<ResearchHome user={user} />} />
-        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseForm />} />
+        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent />} />
       </CreateRoutes>
 
       <CreateRoutes onConditionThat={userRole === UserRole.Survey_Support}>
         <Route path="/" element={<SupportHome user={user} />} />
-        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseForm />} />
+        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent />} />
       </CreateRoutes>
     </>
   );
