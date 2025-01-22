@@ -11,6 +11,7 @@ import {
   updateAllocationDetails,
   getCaseSearchResults,
   setCaseToUpdate,
+  getSpecificCaseEditInformation,
 } from '../../../client/api/NodeApi';
 import { EditorInformation } from '../../../client/Interfaces/editorInterface';
 import { SupervisorInformation } from '../../../client/Interfaces/supervisorInterface';
@@ -565,6 +566,68 @@ describe('getCaseSearchResults from Blaise for FRS Research role', () => {
   });
 });
 
+describe('getSpecificCaseEditInformation from Blaise for FRS Research role', () => {
+  const questionnaireName = 'FRS2201';
+  const caseId = '10001011';
+  const role = UserRole.FRS_Research;
+
+  it('Should retrieve a single case that matches the case id with a 200 response', async () => {
+    // arrange
+    const caseEditInformationListMock: CaseEditInformation[] = [{
+      primaryKey: '10001011',
+      outcome: CaseOutcome.Completed,
+      assignedTo: 'rich',
+      interviewer: '',
+      editedStatus: EditedStatus.Finished,
+      organisation: Organisation.ONS,
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+      readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
+    },
+    {
+      primaryKey: '10001012',
+      outcome: CaseOutcome.Completed,
+      assignedTo: 'rich',
+      interviewer: '',
+      editedStatus: EditedStatus.NotStarted,
+      organisation: Organisation.ONS,
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+      readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
+    }];
+
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(200, caseEditInformationListMock);
+
+    // act
+    const result = await getSpecificCaseEditInformation(questionnaireName, caseId, role);
+
+    // assert
+    expect(result).toEqual(caseEditInformationListMock[0]);
+  });
+
+  it('Should throw the error "Unable to find case edit information, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(404, null);
+
+    // act && assert
+    expect(getSpecificCaseEditInformation(questionnaireName, caseId, role)).rejects.toThrow('Unable to find case edit information, please raise this on service desk stating the time and date of failure');
+  });
+
+  it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(500, null);
+
+    // act && assert
+    expect(getSpecificCaseEditInformation(questionnaireName, caseId, role)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+
+  it('Should throw the error "Unable to complete request, please try again in a few minutes" when there is a network error', async () => {
+    // arrange
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).networkError();
+
+    // act && assert
+    expect(getSpecificCaseEditInformation(questionnaireName, caseId, role)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+});
+
 describe('setCaseToUpdate in Blaise', () => {
   const questionnaireName = 'FRS2201';
   const caseId = '9001';
@@ -574,7 +637,7 @@ describe('setCaseToUpdate in Blaise', () => {
     // act
     const result = await setCaseToUpdate(questionnaireName, caseId);
     // assert
-    expect(result).toBeUndefined();
+    expect(result).toBe(204);
   });
   it('Should throw the error "Unable to set case to update, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
     // arrange
