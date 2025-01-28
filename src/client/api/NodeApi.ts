@@ -11,7 +11,7 @@ import { AllocationDetails } from '../../common/interfaces/allocationInterface';
 import { getDataFromNode, patchDataToNode } from './AxiosApi';
 
 export async function getSurveys(userRole: string): Promise<Survey[]> {
-  return getDataFromNode(`/api/surveys?userRole=${userRole}`, 'Unable to find surveys, please contact Richmond Rice');
+  return getDataFromNode(`/api/surveys?userRole=${userRole}`, 'Unable to find surveys, please raise this on service desk stating the time and date of failure');
 }
 
 export async function getCaseSummary(questionnaireName: string, caseId: string): Promise<CaseSummaryDetails> {
@@ -20,7 +20,7 @@ export async function getCaseSummary(questionnaireName: string, caseId: string):
 
 async function getCaseEditInformation(questionnaireName: string, userRole: string) {
   // TODO Fix the URL upper
-  return getDataFromNode<CaseEditInformation[]>(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/edit?userRole=${userRole}`, 'Unable to find case edit information, please contact Richmond Rice');
+  return getDataFromNode<CaseEditInformation[]>(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/edit?userRole=${userRole}`, 'Unable to find case edit information, please raise this on service desk stating the time and date of failure');
 }
 
 export async function getEditorInformation(questionnaireName: string, editorUsername:string, editorRole: string): Promise<EditorInformation> {
@@ -32,24 +32,38 @@ export async function getEditorInformation(questionnaireName: string, editorUser
 
 export async function getSupervisorEditorInformation(questionnaireName: string, supervisorRole: string, editorRole: string): Promise<SupervisorInformation> {
   const caseEditInformationList = await getCaseEditInformation(questionnaireName, supervisorRole);
-  const editors = await getDataFromNode<User[]>(`/api/users?userRole=${editorRole}`, 'Unable to find user information, please contact Richmond Rice');
+  const editors = await getDataFromNode<User[]>(`/api/users?userRole=${editorRole}`, 'Unable to find user information, please raise this on service desk stating the time and date of failure');
 
   return mapSupervisorInformation(caseEditInformationList, editors);
 }
 
 export async function getAllocationDetails(questionnaireName: string, supervisorRole: string, editorRole: string): Promise<AllocationDetails> {
   const caseEditInformationList = await getCaseEditInformation(questionnaireName, supervisorRole);
-  const editors = await getDataFromNode<User[]>(`/api/users?userRole=${editorRole}`, 'Unable to find user information, please contact Richmond Rice');
+  const editors = await getDataFromNode<User[]>(`/api/users?userRole=${editorRole}`, 'Unable to find user information, please raise this on service desk stating the time and date of failure');
 
   return mapCasesNotAllocated(caseEditInformationList, editors);
 }
 
 export async function updateAllocationDetails(questionnaireName: string, name:string, cases:string[]): Promise<void> {
   const payload = { name, cases };
-  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/allocate`, payload, 'Unable to allocate, please contact Richmond Rice');
+  await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/allocate`, payload, 'Unable to allocate, please raise this on service desk stating the time and date of failure');
 }
 
 export async function getCaseSearchResults(questionnaireName: string, caseId: string, role: string): Promise<CaseEditInformation[]> {
   const caseEditInformationList = await getCaseEditInformation(questionnaireName, role);
   return caseEditInformationList.filter((caseEditInformation) => caseEditInformation.primaryKey.startsWith(caseId));
+}
+
+export async function getSpecificCaseEditInformation(questionnaireName: string, caseId: string, role: string): Promise<CaseEditInformation> {
+  const caseEditInformationList = await getCaseEditInformation(questionnaireName, role);
+  const caseEditInformation = caseEditInformationList.find((caseDetails) => caseDetails.primaryKey === caseId);
+  if (!caseEditInformation) {
+    throw new Error(`Case details not found with case ID: ${caseId}`);
+  }
+  return caseEditInformation;
+}
+
+export async function setCaseToUpdate(questionnaireName: string, caseId:string): Promise<number> {
+  const responseStatus = await patchDataToNode(`/api/questionnaires/${questionnaireName.toUpperCase()}/cases/${caseId}/update`, {}, 'Unable to set case to update, please raise this on service desk stating the time and date of failure');
+  return responseStatus;
 }
