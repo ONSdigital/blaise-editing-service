@@ -47,7 +47,7 @@ export default function EditCaseForm({
       <div className="ons-u-mb-l">
         <ONSTable
           columns={[]}
-          tableID={`${caseId}-Case-details`}
+          tableID={`${caseDetails.primaryKey}-case-details`}
         >
           <>
             <tr
@@ -85,10 +85,10 @@ export default function EditCaseForm({
               <td className="ons-table__cell ons-u-fs-r--b">Editing link:</td>
               <td className="ons-table__cell ons-u-fs-r--b">
                 {role === UserRole.Survey_Support && (
-                <Link to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
+                <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
                 )}
                 {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Research) && (
-                <Link to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
+                <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
                 )}
               </td>
             </tr>
@@ -104,6 +104,7 @@ export default function EditCaseForm({
         <div className="ons-u-mb-l">
           <ONSButton
             label="Update case"
+            id="update-case-button"
             primary
             loading={submitting}
             disabled={submitting}

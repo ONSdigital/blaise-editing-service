@@ -26,7 +26,7 @@ export default function AppContent({ user }: AppContentProps): ReactElement {
         <Route path="/questionnaires/:questionnaireName/allocate" element={<Allocate supervisorRole={UserRole.SVT_Supervisor} editorRole={UserRole.SVT_Editor} reallocate={false} />} />
         <Route path="/questionnaires/:questionnaireName/reallocate" element={<Allocate supervisorRole={UserRole.SVT_Supervisor} editorRole={UserRole.SVT_Editor} reallocate />} />
         <Route path="questionnaires/:questionnaireName/cases/search" element={<CaseSearch />} />
-        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent />} />
+        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent role={userRole} />} />
       </CreateRoutes>
 
       <CreateRoutes onConditionThat={userRole === UserRole.SVT_Editor}>
@@ -36,12 +36,12 @@ export default function AppContent({ user }: AppContentProps): ReactElement {
 
       <CreateRoutes onConditionThat={userRole === UserRole.FRS_Research}>
         <Route path="/" element={<ResearchHome user={user} />} />
-        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent />} />
+        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent role={userRole} />} />
       </CreateRoutes>
 
       <CreateRoutes onConditionThat={userRole === UserRole.Survey_Support}>
         <Route path="/" element={<SupportHome user={user} />} />
-        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent />} />
+        <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent role={userRole} />} />
       </CreateRoutes>
     </>
   );
