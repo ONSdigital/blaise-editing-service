@@ -1,43 +1,33 @@
 import {
-  render, act, RenderResult, fireEvent,
+  act, fireEvent, render, RenderResult,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import userMockObject from '../../../server/mockObjects/userMockObject';
-import { getCaseSearchResults, getSupervisorEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
-import { Survey } from '../../../../common/interfaces/surveyInterface';
-import SupervisorHome from '../../../../client/Supervisor/Pages/SupervisorHome';
-import { SupervisorInformation } from '../../../../client/Interfaces/supervisorInterface';
 import UserRole from '../../../../client/Common/enums/UserTypes';
+import { getCaseSearchResults, getSurveys } from '../../../../client/api/NodeApi';
+import { Survey } from '../../../../common/interfaces/surveyInterface';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
-import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../MockObjects/SupervisorMockObjects';
+import userMockObject from '../../../server/mockObjects/userMockObject';
+import ResearchHome from '../../../../client/Research/Pages/ResearchHome';
 import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
-import CaseSearchForm from '../../../../client/Common/components/CaseSearchForm';
 
 // set global vars
-const userRole:string = UserRole.SVT_Supervisor;
+const userRole:string = UserRole.FRS_Research;
 let view:RenderResult;
 
 // set mocks
 jest.mock('../../../../client/api/NodeApi');
 const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
-const getSupervisorCaseInformationMock = getSupervisorEditorInformation as jest.Mock<Promise<SupervisorInformation>>;
 const getCaseInformationMock = getCaseSearchResults as jest.Mock<Promise<CaseEditInformation[]>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {
     getSurveysMock.mockImplementation(() => Promise.resolve(FilteredSurveyListMockObject));
-    getSupervisorCaseInformationMock.mockReturnValueOnce(Promise.resolve(SupervisorInformationMockObject1))
-      .mockReturnValueOnce(Promise.resolve(SupervisorInformationMockObject2));
+    getCaseInformationMock.mockImplementation(() => Promise.resolve(CaseEditInformationListMockObject));
   });
 
-  afterEach(() => {
-    getSurveysMock.mockReset();
-    getSupervisorCaseInformationMock.mockReset();
-  });
-
-  it('should render the supervisor page correctly when surveys are returned', async () => {
+  it('should render the Research page correctly when surveys are returned', async () => {
     // arrange
     const user = userMockObject;
     user.role = userRole;
@@ -46,7 +36,7 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupervisorHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -64,9 +54,72 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupervisorHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
+    });
+    // assert
+    FilteredSurveyListMockObject.forEach((survey, surveyIndex) => {
+      const surveyListView = view.getByTestId(`survey-accordion-${surveyIndex}-heading`);
+      expect(surveyListView).toHaveTextContent(survey.name);
+
+      const questionnaireListView = view.getByTestId(`survey-accordion-${surveyIndex}-content`);
+
+      const defaultQuestionnaire = survey.questionnaires[0];
+      if (defaultQuestionnaire === undefined) {
+        throw Error('No default questionnaire found');
+      }
+
+      const defaultQuestionnaireName = defaultQuestionnaire.questionnaireName;
+
+      expect(questionnaireListView).toHaveTextContent(defaultQuestionnaire.questionnaireName.replace('_EDIT', ''));
+
+      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Research-Content`);
+      expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.fieldPeriod));
+      expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.numberOfCases));
+    });
+  });
+
+  it('should render the Research page correctly when surveys are returned and search used', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <ResearchHome user={user} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+    expect(view).toMatchSnapshot();
+  });
+
+  it('should display the expected questionnaire and case details when search used', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <ResearchHome user={user} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
     });
 
     // assert
@@ -85,104 +138,27 @@ describe('Given there are surveys available in blaise', () => {
 
       expect(questionnaireListView).toHaveTextContent(defaultQuestionnaire.questionnaireName.replace('_EDIT', ''));
 
-      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-supervisor-Content`);
-      expect(questionnaireView).toHaveTextContent(String(SupervisorInformationMockObject1.TotalNumberOfCases));
-      expect(questionnaireView).toHaveTextContent(String(SupervisorInformationMockObject1.NumberOfCasesNotAllocated));
-      expect(questionnaireView).toHaveTextContent(String(SupervisorInformationMockObject1.NumberOfCasesAllocated));
-      expect(questionnaireView).toHaveTextContent(String(SupervisorInformationMockObject1.NumberOfCasesCompleted));
+      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Research-Content`);
+      expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.fieldPeriod));
+      expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.numberOfCases));
 
-      const editorRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Editor`);
-      const numberOfCasesAllocatedRows = view.getAllByLabelText(`${defaultQuestionnaireName}-NumberOfCasesAllocated`);
-      const numberOfCasesCompleted = view.getAllByLabelText(`${defaultQuestionnaireName}-NumberOfCasesCompleted`);
-      const numberOfCasesQueried = view.getAllByLabelText(`${defaultQuestionnaireName}-NumberOfCasesQueried`);
+      const caseIdRows = view.getAllByLabelText(`${defaultQuestionnaireName}-CaseID`);
+      const outcomeRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Outcome`);
+      const interviewerRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Interviewer`);
+      const organisationRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Organisation`);
+      const linksRows = view.getAllByLabelText(`${defaultQuestionnaireName}-Links`);
 
-      SupervisorInformationMockObject1.EditorInformation.forEach((editor, index) => {
-        expect(editorRows[index]).toHaveTextContent(editor.EditorName);
-        expect(numberOfCasesAllocatedRows[index]).toHaveTextContent(String(editor.NumberOfCasesAllocated));
-        expect(numberOfCasesCompleted[index]).toHaveTextContent(String(editor.NumberOfCasesCompleted));
-        expect(numberOfCasesQueried[index]).toHaveTextContent(String(editor.NumberOfCasesQueried));
+      CaseEditInformationListMockObject.forEach((caseDetails, index) => {
+        expect(caseIdRows[index]).toHaveTextContent(caseDetails.primaryKey);
+        expect(outcomeRows[index]).toHaveTextContent(caseDetails.outcome.toString());
+        expect(interviewerRows[index]).toHaveTextContent(caseDetails.interviewer);
+        expect(organisationRows[index]).toHaveTextContent(Organisation[caseDetails.organisation]?.toString() ?? '');
+        expect(linksRows[index]).toHaveTextContent('Edit case | View case');
       });
     });
   });
 });
 
-describe('Given that search is clicked', () => {
-  beforeEach(() => {
-    getCaseInformationMock.mockImplementation(() => Promise.resolve(CaseEditInformationListMockObject));
-  });
-
-  it('should render the search page correctly', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-
-    // act
-    await act(async () => {
-      view = render(
-        <BrowserRouter>
-          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
-        </BrowserRouter>,
-      );
-    });
-
-    // assert
-    expect(view).toMatchSnapshot();
-  });
-
-  it('should render the search page correctly when cases are searched for', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    await act(async () => {
-      view = render(
-        <BrowserRouter>
-          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
-        </BrowserRouter>,
-      );
-    });
-
-    // act
-    await act(async () => {
-      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
-      fireEvent.click(view.getByText('Search'));
-    });
-
-    // assert
-    expect(view).toMatchSnapshot();
-  });
-
-  it('should display the expected case details when cases are searched for', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    await act(async () => {
-      view = render(
-        <BrowserRouter>
-          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
-        </BrowserRouter>,
-      );
-    });
-
-    // act
-    await act(async () => {
-      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
-      fireEvent.click(view.getByText('Search'));
-    });
-
-    // assert
-
-    const caseIdRows = view.getAllByLabelText(`${questionnaireName}-CaseID`);
-    const outcomeRows = view.getAllByLabelText(`${questionnaireName}-Outcome`);
-    const interviewerRows = view.getAllByLabelText(`${questionnaireName}-Interviewer`);
-    const organisationRows = view.getAllByLabelText(`${questionnaireName}-Organisation`);
-    const linksRows = view.getAllByLabelText(`${questionnaireName}-Links`);
-
-    CaseEditInformationListMockObject.forEach((caseDetails, index) => {
-      expect(caseIdRows[index]).toHaveTextContent(caseDetails.primaryKey);
-      expect(outcomeRows[index]).toHaveTextContent(caseDetails.outcome.toString());
-      expect(interviewerRows[index]).toHaveTextContent(caseDetails.interviewer);
-      expect(organisationRows[index]).toHaveTextContent(Organisation[caseDetails.organisation]?.toString() ?? '');
-      expect(linksRows[index]).toHaveTextContent('Edit case | View case');
-    });
-  });
-});
 describe('Given there are no surveys available in blaise', () => {
   beforeEach(() => {
     getSurveysMock.mockImplementation(() => Promise.resolve([]));
@@ -201,7 +177,7 @@ describe('Given there are no surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupervisorHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -219,7 +195,7 @@ describe('Given there are no surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupervisorHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -248,7 +224,7 @@ describe('Given there the blaise rest api is not available', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupervisorHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -267,7 +243,7 @@ describe('Given there the blaise rest api is not available', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupervisorHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });

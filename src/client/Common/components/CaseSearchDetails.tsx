@@ -47,8 +47,8 @@ export default function CaseSearchDetails({ questionnaireName, caseId, role }: C
                   <td className="ons-table__cell" aria-label={`${questionnaireName}-Organisation`}>
                     {Organisation[caseDetails.organisation]}
                   </td>
-                  <td className="ons-table__cell links">
-                    <CaseSearchLinks caseDetails={caseDetails} role={role} />
+                  <td className="ons-table__cell links" aria-label={`${questionnaireName}-Links`}>
+                    <CaseSearchLinks questionnaireName={questionnaireName} caseDetails={caseDetails} role={role} />
                   </td>
                 </tr>
               ))}
