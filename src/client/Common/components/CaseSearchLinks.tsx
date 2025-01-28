@@ -15,7 +15,7 @@ export default function CaseSearchLinks({ questionnaireName, caseDetails, role }
       {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Research)
                       && (
                         <>
-                          <Link to={`/questionnaires/${questionnaireName}/cases/${caseDetails.primaryKey}/editcase`} state={{ caseDetails, role }}>Edit case</Link>
+                          <Link to={`/questionnaires/${questionnaireName}/cases/${caseDetails.primaryKey}/editcase`}>Edit case</Link>
                           {' | '}
                           <Link to={caseDetails.readOnlyUrl} target="_blank" rel="noopener noreferrer">View case</Link>
                         </>
@@ -24,7 +24,7 @@ export default function CaseSearchLinks({ questionnaireName, caseDetails, role }
       {role === UserRole.Survey_Support
                       && (
                         <>
-                          <Link to={`/questionnaires/${questionnaireName}/cases/${caseDetails.primaryKey}/editcase`} state={{ caseDetails, role }}>Edit interviewer case</Link>
+                          <Link to={`/questionnaires/${questionnaireName}/cases/${caseDetails.primaryKey}/editcase`}>Edit interviewer case</Link>
                           {' | '}
                           <Link to={caseDetails.readOnlyUrl} target="_blank" rel="noopener noreferrer">View interviewer case</Link>
                         </>
