@@ -1,5 +1,5 @@
 import { CaseEditInformation } from 'blaise-api-node-client';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { getSpecificCaseEditInformation } from '../../api/NodeApi';
 import { CaseSummaryParams } from '../types/CaseSummaryParams';
@@ -11,11 +11,10 @@ import ErrorPanel from './ErrorPanel';
 import SuccessPanel from './SuccessPanel';
 import EditCaseForm from './EditCaseForm';
 
-export default function EditCaseContent() {
+export default function EditCaseContent({ role }: { role: UserRole }) {
   const defaultMessage: Message = { show: false, text: '', type: '' };
   const [message, setMessage] = useState(defaultMessage);
   const { questionnaireName, caseId } = useParams<keyof CaseSummaryParams>() as CaseSummaryParams;
-  const { role }: { role: UserRole } = useLocation().state;
   const caseDetails = useAsyncRequestWithThreeParams<CaseEditInformation, string, string, UserRole>(getSpecificCaseEditInformation, questionnaireName, caseId, role);
 
   return (
