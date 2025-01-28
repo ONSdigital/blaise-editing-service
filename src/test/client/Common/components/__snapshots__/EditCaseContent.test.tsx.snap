@@ -428,7 +428,7 @@ exports[`Given we want to view the Edit Case page of a case should render the al
         <div
           class="ons-panel__body "
         >
-          After finalizing edits, sync your changes overnight with the editing database by clicking the button below.
+          After finalising edits, sync your changes overnight with the editing database by clicking the button below.
         </div>
       </div>
       <div
@@ -444,21 +444,6 @@ exports[`Given we want to view the Edit Case page of a case should render the al
             class="ons-btn__inner"
           >
             Update case
-          </span>
-        </button>
-      </div>
-      <div
-        class="ons-u-mb-l"
-      >
-        <button
-          class="ons-btn  ons-btn--secondary"
-          data-testid="button"
-          type="button"
-        >
-          <span
-            class="ons-btn__inner"
-          >
-            Show failed message
           </span>
         </button>
       </div>
@@ -597,7 +582,7 @@ exports[`Given we want to view the Edit Case page of a case should render the al
       <div
         class="ons-panel__body "
       >
-        After finalizing edits, sync your changes overnight with the editing database by clicking the button below.
+        After finalising edits, sync your changes overnight with the editing database by clicking the button below.
       </div>
     </div>
     <div
@@ -613,21 +598,6 @@ exports[`Given we want to view the Edit Case page of a case should render the al
           class="ons-btn__inner"
         >
           Update case
-        </span>
-      </button>
-    </div>
-    <div
-      class="ons-u-mb-l"
-    >
-      <button
-        class="ons-btn  ons-btn--secondary"
-        data-testid="button"
-        type="button"
-      >
-        <span
-          class="ons-btn__inner"
-        >
-          Show failed message
         </span>
       </button>
     </div>
