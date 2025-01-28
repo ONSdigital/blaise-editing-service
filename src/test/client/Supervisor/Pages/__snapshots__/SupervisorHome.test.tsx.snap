@@ -12,7 +12,7 @@ exports[`Given that search is clicked should render the search page correctly 1`
           class="ons-label"
           for="caseid"
         >
-          Enter case id
+          Enter case ID
         </label>
         <input
           class="ons-input ons-input--text ons-input-type__input "
@@ -46,7 +46,7 @@ exports[`Given that search is clicked should render the search page correctly 1`
         class="ons-label"
         for="caseid"
       >
-        Enter case id
+        Enter case ID
       </label>
       <input
         class="ons-input ons-input--text ons-input-type__input "
@@ -137,7 +137,7 @@ exports[`Given that search is clicked should render the search page correctly wh
           class="ons-label"
           for="caseid"
         >
-          Enter case id
+          Enter case ID
         </label>
         <input
           class="ons-input ons-input--text ons-input-type__input "
@@ -440,7 +440,7 @@ exports[`Given that search is clicked should render the search page correctly wh
         class="ons-label"
         for="caseid"
       >
-        Enter case id
+        Enter case ID
       </label>
       <input
         class="ons-input ons-input--text ons-input-type__input "
