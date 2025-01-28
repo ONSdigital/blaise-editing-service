@@ -21,10 +21,6 @@ export default function EditCaseForm({
 }: EditCaseFormProps): ReactElement {
   const [submitting, setSubmitting] = useState(false);
 
-  const testMessagePanel = () => {
-    setMessage({ show: true, text: `Failed to set case with ID, ${caseDetails.primaryKey}, to update, please try again in a few seconds or contact service desk to raise a support ticket`, type: 'error' });
-  };
-
   const updateCase = useCallback(async () => {
     setSubmitting(true);
     setMessage({ show: false, text: '', type: '' });
@@ -99,7 +95,7 @@ export default function EditCaseForm({
       <>
         <br />
         <ONSPanel status="warn">
-          After finalizing edits, sync your changes overnight with the editing database by clicking the button below.
+          After finalising edits, sync your changes overnight with the editing database by clicking the button below.
         </ONSPanel>
         <div className="ons-u-mb-l">
           <ONSButton
@@ -109,15 +105,6 @@ export default function EditCaseForm({
             loading={submitting}
             disabled={submitting}
             onClick={updateCase}
-          />
-        </div>
-        <div className="ons-u-mb-l">
-          <ONSButton
-            label="Show failed message"
-            loading={submitting}
-            disabled={submitting}
-            onClick={testMessagePanel}
-            primary={false}
           />
         </div>
       </>
