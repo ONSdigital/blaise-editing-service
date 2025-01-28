@@ -223,7 +223,9 @@ exports[`Given that search is clicked should render the search page correctly wh
               <td
                 aria-label="FRS2504A-Interviewer"
                 class="ons-table__cell"
-              />
+              >
+                rich
+              </td>
               <td
                 aria-label="FRS2504A-Organisation"
                 class="ons-table__cell"
@@ -524,7 +526,9 @@ exports[`Given that search is clicked should render the search page correctly wh
             <td
               aria-label="FRS2504A-Interviewer"
               class="ons-table__cell"
-            />
+            >
+              rich
+            </td>
             <td
               aria-label="FRS2504A-Organisation"
               class="ons-table__cell"

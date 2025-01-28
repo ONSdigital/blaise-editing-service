@@ -726,7 +726,9 @@ exports[`Given there are surveys available in blaise should render the Support p
                           <td
                             aria-label="FRS2504A_EDIT-Interviewer"
                             class="ons-table__cell"
-                          />
+                          >
+                            rich
+                          </td>
                           <td
                             aria-label="FRS2504A_EDIT-Organisation"
                             class="ons-table__cell"
@@ -1167,7 +1169,9 @@ exports[`Given there are surveys available in blaise should render the Support p
                         <td
                           aria-label="FRS2504A_EDIT-Interviewer"
                           class="ons-table__cell"
-                        />
+                        >
+                          rich
+                        </td>
                         <td
                           aria-label="FRS2504A_EDIT-Organisation"
                           class="ons-table__cell"
