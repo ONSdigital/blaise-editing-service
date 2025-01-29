@@ -20,7 +20,7 @@ export default class CaseController implements Controller {
     this.getCaseEditInformation = this.getCaseEditInformation.bind(this);
     this.getCaseSummary = this.getCaseSummary.bind(this);
     this.allocateCases = this.allocateCases.bind(this);
-    this.recodeCase = this.recodeCase.bind(this);
+    this.setCaseToUpdate = this.setCaseToUpdate.bind(this);
   }
 
   getRoutes() {
@@ -29,7 +29,7 @@ export default class CaseController implements Controller {
     router.get('/api/questionnaires/:questionnaireName/cases/:caseId/summary', auth.Middleware, this.getCaseSummary);
     router.get('/api/questionnaires/:questionnaireName/cases/edit', auth.Middleware, this.getCaseEditInformation);
     router.patch('/api/questionnaires/:questionnaireName/cases/allocate', auth.Middleware, this.allocateCases);
-    router.patch('/api/questionnaires/:questionnaireName/cases/:caseId/recode', auth.Middleware, this.recodeCase);
+    router.patch('/api/questionnaires/:questionnaireName/cases/:caseId/update', auth.Middleware, this.setCaseToUpdate);
 
     return router;
   }
@@ -42,7 +42,6 @@ export default class CaseController implements Controller {
 
     try {
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
-      console.log(`got case ${caseId}`);
       const caseSummary = mapCaseSummary(caseResponse);
 
       return response.status(200).json(caseSummary);
@@ -50,8 +49,6 @@ export default class CaseController implements Controller {
       if (notFound(error)) {
         return response.status(404).json();
       }
-
-      console.log(`error ${error}`);
       return response.status(500).json();
     }
   }
@@ -107,25 +104,17 @@ export default class CaseController implements Controller {
     }
   }
 
-  async recodeCase(request: Request<{ questionnaireName:string, caseId:string }, {}, { outcomeCode:string }, { }>, response: Response) {
+  async setCaseToUpdate(request: Request<{ questionnaireName:string, caseId:string }, {}, {}, { }>, response: Response) {
     const {
       questionnaireName,
       caseId,
     } = request.params;
-    const { outcomeCode } = request.body;
-
     try {
-      await this.blaiseApi.updateCase(questionnaireName, caseId, {
-        'qhAdmin.HOut': outcomeCode,
-      });
-
       await this.blaiseApi.updateCase(`${questionnaireName}_EDIT`, caseId, {
-        'qhAdmin.HOut': outcomeCode,
         'QEdit.AssignedTo': '',
         'QEdit.Edited': '',
         'QEdit.LastUpdated': moment('1900-01-01').format('DD-MM-YYYY_HH:mm'),
       });
-
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {

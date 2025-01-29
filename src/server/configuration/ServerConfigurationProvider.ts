@@ -58,7 +58,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
     this.SessionTimeout = getStringOrSetDefault(SESSION_TIMEOUT, this.DefaultSessionTimeout);
 
     this.RoleConfiguration = [{
-      Role: 'SVT_Supervisor',
+      Role: 'SVT Supervisor',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [Organisation.ONS],
@@ -66,7 +66,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       }],
     },
     {
-      Role: 'SVT_Editor',
+      Role: 'SVT Editor',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [Organisation.ONS],
@@ -75,7 +75,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       ],
     },
     {
-      Role: 'FRS_Research',
+      Role: 'FRS Research',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [],
@@ -84,7 +84,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       ],
     },
     {
-      Role: 'Survey_Support',
+      Role: 'Survey Support',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [],
