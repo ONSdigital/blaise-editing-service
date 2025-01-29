@@ -25,7 +25,10 @@ export default function EditCaseForm({
     setSubmitting(true);
     setMessage({ show: false, text: '', type: '' });
     try {
-      await setCaseToUpdate(questionnaireName, caseId);
+      const response = await setCaseToUpdate(questionnaireName, caseId);
+      if (response !== 204) {
+        throw new Error(`Failed to set case to update, setCaseToUpdate got response code: ${response}`);
+      }
       setMessage({ show: true, text: `Successfully set case with ID, ${caseDetails.primaryKey}, to update editing database overnight`, type: 'success' });
     } catch (error: unknown) {
       setMessage({ show: true, text: `Failed to set case with ID, ${caseDetails.primaryKey}, to update, please try again in a few seconds or contact service desk to raise a support ticket`, type: 'error' });
