@@ -44,7 +44,7 @@ export default class SurveyController implements Controller {
     const surveys = this.configuration.getSurveysForRole(userRole);
     const questionnaires = await this.blaiseApi.getQuestionnaires();
 
-    if (userRole === 'Survey_Support') {
+    if (userRole === 'Survey Support') {
       return questionnaires
         .filter((q) => surveys.includes(q.surveyTla))
         .filter((q) => !q.questionnaireName.endsWith('_EDIT'));

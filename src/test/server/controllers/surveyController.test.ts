@@ -31,7 +31,7 @@ describe('Get surveys tests', () => {
     blaiseApiMock.reset();
   });
 
-  it.each(['SVT_Supervisor', 'SVT_Editor'])('should return a 200 response with an expected list of surveys for the SVT Roles', async (userRole) => {
+  it.each(['SVT Supervisor', 'SVT Editor'])('should return a 200 response with an expected list of surveys for the SVT Roles', async (userRole) => {
     // arrange
     // mock blaise client to return a list of questionnaires with allocation
 
@@ -118,7 +118,7 @@ describe('Get surveys tests', () => {
 
   it('should return a 200 response with an expected list of surveys for the FRS Research Role', async () => {
     // arrange
-    const userRole = 'FRS_Research';
+    const userRole = 'FRS Research';
 
     // mock blaise client to return a list of questionnaires with allocation
 
@@ -205,7 +205,7 @@ describe('Get surveys tests', () => {
 
   it('should return a 200 response with an expected list of surveys for the Survey Support Role', async () => {
     // arrange
-    const userRole = 'Survey_Support';
+    const userRole = 'Survey Support';
 
     // mock blaise client to return a list of questionnaires with allocation
 
@@ -293,7 +293,7 @@ describe('Get surveys tests', () => {
   it('It should return a 500 response when a call is made to retrieve a list of surveys and the rest api is not availiable', async () => {
     // arrange
     const axiosError = createAxiosError(500);
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(() => Promise.reject(axiosError));
 
@@ -307,7 +307,7 @@ describe('Get surveys tests', () => {
   it('It should return a 500 response when the api client throws an error', async () => {
     // arrange
     const apiClientError = new Error();
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(() => Promise.reject(apiClientError));
 
@@ -321,7 +321,7 @@ describe('Get surveys tests', () => {
   it('It should return a 404 response when a call is made to retrieve a list of surveys and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(() => Promise.reject(axiosError));
 

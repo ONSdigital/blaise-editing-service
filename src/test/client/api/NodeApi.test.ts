@@ -10,7 +10,8 @@ import {
   getAllocationDetails,
   updateAllocationDetails,
   getCaseSearchResults,
-  recodeCase,
+  setCaseToUpdate,
+  getSpecificCaseEditInformation,
 } from '../../../client/api/NodeApi';
 import { EditorInformation } from '../../../client/Interfaces/editorInterface';
 import { SupervisorInformation } from '../../../client/Interfaces/supervisorInterface';
@@ -35,12 +36,12 @@ describe('GetSurveys from Blaise', () => {
     expect(result).toEqual(surveyListMockObject);
   });
 
-  it.each(validUserRoles)('Should throw the error "Unable to find surveys, please contact Richmond Rice" when a 404 response is recieved', async (userRole) => {
+  it.each(validUserRoles)('Should throw the error "Unable to find surveys, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async (userRole) => {
     // arrange
     axiosMock.onGet(`/api/surveys?userRole=${userRole}`).reply(404, null);
 
     // act && assert
-    expect(getSurveys(userRole)).rejects.toThrow('Unable to find surveys, please contact Richmond Rice');
+    expect(getSurveys(userRole)).rejects.toThrow('Unable to find surveys, please raise this on service desk stating the time and date of failure');
   });
 
   it.each(validUserRoles)('Should throw the error "Unable to retrieve surveys, please try again in a few minutes" when a 500 response is recieved', async (userRole) => {
@@ -195,12 +196,12 @@ describe('getEditorInformation from Blaise', () => {
     expect(result).toEqual(expectedEditorInformation);
   });
 
-  it('Should throw the error "Unable to find case edit information, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to find case edit information, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
     // arrange
     axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${editorRole}`).reply(404, null);
 
     // act && assert
-    expect(getEditorInformation(questionnaireName, userName, editorRole)).rejects.toThrow('Unable to find case edit information, please contact Richmond Rice');
+    expect(getEditorInformation(questionnaireName, userName, editorRole)).rejects.toThrow('Unable to find case edit information, please raise this on service desk stating the time and date of failure');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
@@ -288,12 +289,12 @@ describe('getSupervisorEditorInformation from Blaise', () => {
     expect(result).toEqual(expectedSupervisorInformation);
   });
 
-  it('Should throw the error "Unable to find supervisor information, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to find supervisor information, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
     // arrange
     axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${supervisorRole}`).reply(404, null);
 
     // act && assert
-    expect(getSupervisorEditorInformation(questionnaireName, supervisorRole, editorRole)).rejects.toThrow('Unable to find case edit information, please contact Richmond Rice');
+    expect(getSupervisorEditorInformation(questionnaireName, supervisorRole, editorRole)).rejects.toThrow('Unable to find case edit information, please raise this on service desk stating the time and date of failure');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
@@ -384,12 +385,12 @@ describe('getAllocationDetails from Blaise', () => {
     expect(result).toEqual(expectedResult);
   });
 
-  it('Should throw the error "Unable to find case edit information, please contact Richmond Rice', async () => {
+  it('Should throw the error "Unable to find case edit information, please raise this on service desk stating the time and date of failure', async () => {
     // arrange
     axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${supervisorRole}`).reply(404, null);
 
     // act && assert
-    expect(getAllocationDetails(questionnaireName, supervisorRole, editorRole)).rejects.toThrow('Unable to find case edit information, please contact Richmond Rice');
+    expect(getAllocationDetails(questionnaireName, supervisorRole, editorRole)).rejects.toThrow('Unable to find case edit information, please raise this on service desk stating the time and date of failure');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
@@ -426,12 +427,12 @@ describe('updateAllocationDetails in Blaise', () => {
     expect(result).toBeUndefined();
   });
 
-  it('Should throw the error "Unable to allocate, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to allocate, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
     // arrange
     axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/allocate`).reply(404, null);
 
     // act && assert
-    expect(updateAllocationDetails(questionnaireName, name, cases)).rejects.toThrow('Unable to allocate, please contact Richmond Rice');
+    expect(updateAllocationDetails(questionnaireName, name, cases)).rejects.toThrow('Unable to allocate, please raise this on service desk stating the time and date of failure');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
@@ -540,12 +541,12 @@ describe('getCaseSearchResults from Blaise for FRS Research role', () => {
     expect(result).toEqual([caseEditInformationListMock[0], caseEditInformationListMock[1], caseEditInformationListMock[3]]);
   });
 
-  it('Should throw the error "Unable to find case edit information, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to find case edit information, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
     // arrange
     axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(404, null);
 
     // act && assert
-    expect(getCaseSearchResults(questionnaireName, caseId, role)).rejects.toThrow('Unable to find case edit information, please contact Richmond Rice');
+    expect(getCaseSearchResults(questionnaireName, caseId, role)).rejects.toThrow('Unable to find case edit information, please raise this on service desk stating the time and date of failure');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
@@ -565,44 +566,95 @@ describe('getCaseSearchResults from Blaise for FRS Research role', () => {
   });
 });
 
-describe('recodeCase in Blaise', () => {
+describe('getSpecificCaseEditInformation from Blaise for FRS Research role', () => {
   const questionnaireName = 'FRS2201';
-  const caseId = '9001';
-  const outcomeCode = '210';
+  const caseId = '10001011';
+  const role = UserRole.FRS_Research;
 
-  it('Should recode case details with a 204 response', async () => {
+  it('Should retrieve a single case that matches the case id with a 200 response', async () => {
     // arrange
+    const caseEditInformationListMock: CaseEditInformation[] = [{
+      primaryKey: '10001011',
+      outcome: CaseOutcome.Completed,
+      assignedTo: 'rich',
+      interviewer: '',
+      editedStatus: EditedStatus.Finished,
+      organisation: Organisation.ONS,
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
+      readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
+    },
+    {
+      primaryKey: '10001012',
+      outcome: CaseOutcome.Completed,
+      assignedTo: 'rich',
+      interviewer: '',
+      editedStatus: EditedStatus.NotStarted,
+      organisation: Organisation.ONS,
+      editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
+      readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
+    }];
 
-    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).reply(204, null);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(200, caseEditInformationListMock);
 
     // act
-    const result = await recodeCase(questionnaireName, caseId, outcomeCode);
+    const result = await getSpecificCaseEditInformation(questionnaireName, caseId, role);
 
     // assert
-    expect(result).toBeUndefined();
+    expect(result).toEqual(caseEditInformationListMock[0]);
   });
 
-  it('Should throw the error "Unable to recode, please contact Richmond Rice" when a 404 response is recieved', async () => {
+  it('Should throw the error "Unable to find case edit information, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
     // arrange
-    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).reply(404, null);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(404, null);
 
     // act && assert
-    expect(recodeCase(questionnaireName, caseId, outcomeCode)).rejects.toThrow('Unable to recode, please contact Richmond Rice');
+    expect(getSpecificCaseEditInformation(questionnaireName, caseId, role)).rejects.toThrow('Unable to find case edit information, please raise this on service desk stating the time and date of failure');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
     // arrange
-    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).reply(500, null);
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).reply(500, null);
 
     // act && assert
-    expect(recodeCase(questionnaireName, caseId, outcomeCode)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+    expect(getSpecificCaseEditInformation(questionnaireName, caseId, role)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
   });
 
   it('Should throw the error "Unable to complete request, please try again in a few minutes" when there is a network error', async () => {
     // arrange
-    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).networkError();
+    axiosMock.onGet(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${role}`).networkError();
 
     // act && assert
-    expect(recodeCase(questionnaireName, caseId, outcomeCode)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+    expect(getSpecificCaseEditInformation(questionnaireName, caseId, role)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+});
+
+describe('setCaseToUpdate in Blaise', () => {
+  const questionnaireName = 'FRS2201';
+  const caseId = '9001';
+  it('Should update case details with a 204 response', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).reply(204, null);
+    // act
+    const result = await setCaseToUpdate(questionnaireName, caseId);
+    // assert
+    expect(result).toBe(204);
+  });
+  it('Should throw the error "Unable to set case to update, please raise this on service desk stating the time and date of failure" when a 404 response is recieved', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).reply(404, null);
+    // act && assert
+    expect(setCaseToUpdate(questionnaireName, caseId)).rejects.toThrow('Unable to set case to update, please raise this on service desk stating the time and date of failure');
+  });
+  it('Should throw the error "Unable to complete request, please try again in a few minutes" when a 500 response is recieved', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).reply(500, null);
+    // act && assert
+    expect(setCaseToUpdate(questionnaireName, caseId)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
+  });
+  it('Should throw the error "Unable to complete request, please try again in a few minutes" when there is a network error', async () => {
+    // arrange
+    axiosMock.onPatch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`).networkError();
+    // act && assert
+    expect(setCaseToUpdate(questionnaireName, caseId)).rejects.toThrow('Unable to complete request, please try again in a few minutes');
   });
 });

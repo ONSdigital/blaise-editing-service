@@ -28,7 +28,7 @@ describe('All expected routes are registered', () => {
       { methods: ['GET'], middlewares: ['bound ', 'bound getCaseSummary'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/summary' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getCaseEditInformation'], path: '/api/questionnaires/:questionnaireName/cases/edit' },
       { methods: ['PATCH'], middlewares: ['bound ', 'bound allocateCases'], path: '/api/questionnaires/:questionnaireName/cases/allocate' },
-      { methods: ['PATCH'], middlewares: ['bound ', 'bound recodeCase'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/recode' },
+      { methods: ['PATCH'], middlewares: ['bound ', 'bound setCaseToUpdate'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/update' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getUsers'], path: '/api/users' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/current-user' },

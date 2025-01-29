@@ -67,26 +67,54 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
               className="ons-table__row"
               key={respondent.PersonNumber}
             >
-              <td className="ons-table__cell" aria-label="RespondentNumber">
+              <td
+                className="ons-table__cell"
+                aria-label="RespondentNumber"
+                key={respondent.PersonNumber}
+              >
                 {respondent.PersonNumber}
               </td>
-              <td className="ons-table__cell status" aria-label="RespondentName">
+              <td
+                className="ons-table__cell status"
+                aria-label="RespondentName"
+                key={respondent.RespondentName}
+              >
                 {respondent.RespondentName}
               </td>
-              <td className="ons-table__cell" aria-label="BenefitUnit">
+              <td
+                className="ons-table__cell"
+                aria-label="BenefitUnit"
+                key={respondent.BenefitUnit}
+              >
                 {respondent.BenefitUnit}
               </td>
-              <td className="ons-table__cell" aria-label="Sex">
+              <td
+                className="ons-table__cell"
+                aria-label="Sex"
+                key={respondent.Sex}
+              >
                 {respondent.Sex}
               </td>
-              <td className="ons-table__cell" aria-label="DateOfBirth">
+              <td
+                className="ons-table__cell"
+                aria-label="DateOfBirth"
+                key={`${respondent.PersonNumber}-DOB`}
+              >
                 {respondent.DateOfBirth == null ? 'N/A' : respondent.DateOfBirth.toDateString() }
               </td>
-              <td className="ons-table__cell" aria-label="MaritalStatus">
+              <td
+                className="ons-table__cell"
+                aria-label="MaritalStatus"
+                key={respondent.MaritalStatus}
+              >
                 {respondent.MaritalStatus}
               </td>
               {respondent.Relationship.map((relationship) => (
-                <td className="ons-table__cell" aria-label={`Relationship-${respondent.PersonNumber}`}>
+                <td
+                  className="ons-table__cell"
+                  aria-label={`Relationship-${respondent.PersonNumber}`}
+                  key={`${relationship}`}
+                >
                   {relationship}
                 </td>
               ))}

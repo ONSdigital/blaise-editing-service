@@ -1,0 +1,657 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given we want to view the Edit Case page of a case should render the allocation page correctly for a Supervisor user: EditCaseContentSupervisor 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+        data-testid="edit-case-form-panel"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
+        </div>
+      </div>
+      <br />
+      <h1
+        class="ons-u-mt-s"
+      >
+        FRS2504A
+      </h1>
+      <div
+        class="ons-u-mb-l"
+      >
+        <table
+          class="ons-table"
+          data-testid="10001011-case-details"
+          id="10001011-case-details"
+        >
+          <thead
+            class="ons-table__head"
+          >
+            <tr
+              class="ons-table__row"
+            />
+          </thead>
+          <tbody
+            class="ons-table__body"
+          >
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Case ID:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                10001011
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Outcome:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                110
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Interviewer:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                rich
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Organisation:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                ONS
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Editing link:
+              </td>
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                <a
+                  data-testid="edit-case-link"
+                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Edit Case
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+      data-testid="edit-case-form-panel"
+    >
+      <div
+        class="ons-panel__body "
+      >
+        Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
+      </div>
+    </div>
+    <br />
+    <h1
+      class="ons-u-mt-s"
+    >
+      FRS2504A
+    </h1>
+    <div
+      class="ons-u-mb-l"
+    >
+      <table
+        class="ons-table"
+        data-testid="10001011-case-details"
+        id="10001011-case-details"
+      >
+        <thead
+          class="ons-table__head"
+        >
+          <tr
+            class="ons-table__row"
+          />
+        </thead>
+        <tbody
+          class="ons-table__body"
+        >
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Case ID:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              10001011
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Outcome:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              110
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Interviewer:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              rich
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Organisation:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              ONS
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Editing link:
+            </td>
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              <a
+                data-testid="edit-case-link"
+                href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Edit Case
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given we want to view the Edit Case page of a case should render the allocation page correctly for a Survey Support user: EditCaseContentSupport 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+        data-testid="edit-case-form-panel"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
+        </div>
+      </div>
+      <br />
+      <h1
+        class="ons-u-mt-s"
+      >
+        FRS2504A
+      </h1>
+      <div
+        class="ons-u-mb-l"
+      >
+        <table
+          class="ons-table"
+          data-testid="10001011-case-details"
+          id="10001011-case-details"
+        >
+          <thead
+            class="ons-table__head"
+          >
+            <tr
+              class="ons-table__row"
+            />
+          </thead>
+          <tbody
+            class="ons-table__body"
+          >
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Case ID:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                10001011
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Outcome:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                110
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Interviewer:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                rich
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Organisation:
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                ONS
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                Editing link:
+              </td>
+              <td
+                class="ons-table__cell ons-u-fs-r--b"
+              >
+                <a
+                  data-testid="edit-case-link"
+                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Edit interviewer Case
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <div
+        class="ons-panel ons-panel--warn ons-panel--no-title  ons-u-mt-m"
+      >
+        <span
+          aria-hidden="true"
+          class="ons-panel__icon"
+        >
+          !
+        </span>
+        <span
+          class="ons-u-vh"
+        >
+          Warning: 
+        </span>
+        <div
+          class="ons-panel__body "
+        >
+          After finalising edits, sync your changes overnight with the editing database by clicking the button below.
+        </div>
+      </div>
+      <div
+        class="ons-u-mb-l"
+      >
+        <button
+          class="ons-btn "
+          data-testid="button"
+          id="update-case-button"
+          type="button"
+        >
+          <span
+            class="ons-btn__inner"
+          >
+            Update case
+          </span>
+        </button>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+      data-testid="edit-case-form-panel"
+    >
+      <div
+        class="ons-panel__body "
+      >
+        Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
+      </div>
+    </div>
+    <br />
+    <h1
+      class="ons-u-mt-s"
+    >
+      FRS2504A
+    </h1>
+    <div
+      class="ons-u-mb-l"
+    >
+      <table
+        class="ons-table"
+        data-testid="10001011-case-details"
+        id="10001011-case-details"
+      >
+        <thead
+          class="ons-table__head"
+        >
+          <tr
+            class="ons-table__row"
+          />
+        </thead>
+        <tbody
+          class="ons-table__body"
+        >
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Case ID:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              10001011
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Outcome:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              110
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Interviewer:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              rich
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Organisation:
+            </td>
+            <td
+              class="ons-table__cell"
+            >
+              ONS
+            </td>
+          </tr>
+          <tr
+            class="ons-table__row"
+          >
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              Editing link:
+            </td>
+            <td
+              class="ons-table__cell ons-u-fs-r--b"
+            >
+              <a
+                data-testid="edit-case-link"
+                href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Edit interviewer Case
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div
+      class="ons-panel ons-panel--warn ons-panel--no-title  ons-u-mt-m"
+    >
+      <span
+        aria-hidden="true"
+        class="ons-panel__icon"
+      >
+        !
+      </span>
+      <span
+        class="ons-u-vh"
+      >
+        Warning: 
+      </span>
+      <div
+        class="ons-panel__body "
+      >
+        After finalising edits, sync your changes overnight with the editing database by clicking the button below.
+      </div>
+    </div>
+    <div
+      class="ons-u-mb-l"
+    >
+      <button
+        class="ons-btn "
+        data-testid="button"
+        id="update-case-button"
+        type="button"
+      >
+        <span
+          class="ons-btn__inner"
+        >
+          Update case
+        </span>
+      </button>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

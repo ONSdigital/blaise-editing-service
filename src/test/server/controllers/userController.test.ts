@@ -30,23 +30,23 @@ describe('Get Users information tests', () => {
     blaiseApiMock.reset();
   });
 
-  const userRole = 'SVT_Editor';
+  const userRole = 'SVT Editor';
   const userListMockObject = [
     {
       name: 'Jake Bullet',
-      role: 'SVT_Supervisor',
+      role: 'SVT Supervisor',
       serverParks: ['gusty'],
       defaultServerPark: 'gusty',
     },
     {
       name: 'Hulk Hogan',
-      role: 'SVT_Editor',
+      role: 'SVT Editor',
       serverParks: ['gusty'],
       defaultServerPark: 'gusty',
     },
     {
       name: 'Barry White',
-      role: 'SVT_Supervisor',
+      role: 'SVT Supervisor',
       serverParks: ['gusty'],
       defaultServerPark: 'gusty',
     },
@@ -54,7 +54,7 @@ describe('Get Users information tests', () => {
 
   const filteredUserListObject = [{
     name: 'Hulk Hogan',
-    role: 'SVT_Editor',
+    role: 'SVT Editor',
     serverParks: ['gusty'],
     defaultServerPark: 'gusty',
   }];

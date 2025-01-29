@@ -20,7 +20,7 @@ export default function CaseSearchForm({ questionnaireName, userRole }: CaseSear
   return (
     <>
       <ONSTextInput
-        label="Enter case id"
+        label="Enter case ID"
         id="caseid"
         autoFocus
         onChange={handleCaseIdChange}

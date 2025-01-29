@@ -29,7 +29,7 @@ const sut = supertest(server);
 // Using Node.js `assert`
 // const assert = require('assert').strict;
 
-const validUserRoles:string[] = ['SVT_Supervisor', 'SVT_Editor'];
+const validUserRoles:string[] = ['SVT Supervisor', 'SVT Editor'];
 
 describe('Get case summary tests', () => {
   beforeEach(() => {
@@ -407,7 +407,7 @@ describe('Get case edit information tests', () => {
   it('should return a 200 response with a list of all case edit details When the Outcome Filter list is empty', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_AllOutcomes';
+    const userRole = 'SVT AllOutcomes';
     const caseEditInformationListMockObject : CaseEditInformation[] = [
       {
         primaryKey: '10001011',
@@ -475,7 +475,7 @@ describe('Get case edit information tests', () => {
   it('should return a 500 response if the users role is not configured for the survey', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_NotConfigured'; // configured for LMS questionnaires only
+    const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
     const caseEditInformationListMockObject : CaseEditInformation[] = [
       {
         primaryKey: '10001011',
@@ -501,7 +501,7 @@ describe('Get case edit information tests', () => {
   it('should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     const axiosError = createAxiosError(500);
 
@@ -517,7 +517,7 @@ describe('Get case edit information tests', () => {
   it('should return a 500 response when the api client throws an error', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     const apiClientError = new Error();
 
@@ -559,7 +559,7 @@ describe('Get case edit information tests', () => {
   it('should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT_Editor';
+    const userRole = 'SVT Editor';
 
     const axiosError = createAxiosError(404);
 
@@ -650,87 +650,59 @@ describe('allocate cases tests', () => {
   });
 });
 
-describe('recode case tests', () => {
+describe('set to update case tests', () => {
   beforeEach(() => {
     blaiseApiMock.reset();
   });
-
   afterAll(() => {
     blaiseApiMock.reset();
   });
-
-  it('It should return a 204 response when cases are recoded', async () => {
+  it('It should return a 204 response when cases are set to update', async () => {
     // arrange
     const questionnaireName: string = 'TEST111A';
     const editQuestionnaireName: string = 'TEST111A_EDIT';
     const caseId: string = '9001';
-    const outcomeCode:string = '210';
-    const payload = { outcomeCode };
-    const caseFields1 = { 'qhAdmin.HOut': outcomeCode };
     const caseFields2 = {
-      'qhAdmin.HOut': outcomeCode, 'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
+      'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
     };
-
-    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId, caseFields1));
     blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
-
     // act
     const response: Response = await sut
-      .patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
-
+      .patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
     expect(response.status).toEqual(204);
-    blaiseApiMock.verify((api) => api.updateCase(questionnaireName, caseId, caseFields1), Times.once());
     blaiseApiMock.verify((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2), Times.once());
   });
-
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
     // arrange
     const axiosError = createAxiosError(500);
     const questionnaireName: string = 'TEST111A';
     const caseId: string = '9001';
-    const outcomeCode:string = '210';
-    const payload = { outcomeCode };
-
     blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-
     // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
-
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
     expect(response.status).toEqual(500);
   });
-
   it('It should return a 500 response when the api client throws an error', async () => {
     // arrange
     const clientError = new Error();
     const questionnaireName: string = 'TEST111A';
     const caseId: string = '9001';
-    const outcomeCode:string = '210';
-    const payload = { outcomeCode };
-
     blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
-
     // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
-
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
     expect(response.status).toEqual(500);
   });
-
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
     const questionnaireName: string = 'TEST111A';
     const caseId: string = '9001';
-    const outcomeCode:string = '210';
-    const payload = { outcomeCode };
-
     blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-
     // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/recode`).send(payload);
-
+    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
     expect(response.status).toEqual(404);
   });

@@ -8,7 +8,7 @@ export const caseEditInformationMockObject1: CaseEditInformation = {
   primaryKey: '10001011',
   outcome: CaseOutcome.Completed,
   assignedTo: 'Rich',
-  interviewer: '',
+  interviewer: 'rich',
   editedStatus: EditedStatus.Finished,
   organisation: Organisation.ONS,
   editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',

@@ -63,19 +63,19 @@ describe('Map cases not allocated informaiton', () => {
 
     const editors = [{
       name: 'Dave',
-      role: 'SVT_Editor',
+      role: 'SVT Editor',
       serverParks: ['gusty'],
       defaultServerPark: 'gusty',
     },
     {
       name: 'Jake',
-      role: 'SVT_Editor',
+      role: 'SVT Editor',
       serverParks: ['gusty'],
       defaultServerPark: 'gusty',
     },
     {
       name: 'Rich',
-      role: 'SVT_Editor',
+      role: 'SVT Editor',
       serverParks: ['gusty'],
       defaultServerPark: 'gusty',
     }];

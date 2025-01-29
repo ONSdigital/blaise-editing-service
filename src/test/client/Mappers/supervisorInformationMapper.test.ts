@@ -6,19 +6,19 @@ import { SupervisorInformation } from '../../../client/Interfaces/supervisorInte
 describe('Map editor informaiton', () => {
   const editors = [{
     name: 'Dave',
-    role: 'SVT_Editor',
+    role: 'SVT Editor',
     serverParks: ['gusty'],
     defaultServerPark: 'gusty',
   },
   {
     name: 'Malcom',
-    role: 'SVT_Editor',
+    role: 'SVT Editor',
     serverParks: ['gusty'],
     defaultServerPark: 'gusty',
   },
   {
     name: 'Rich',
-    role: 'SVT_Editor',
+    role: 'SVT Editor',
     serverParks: ['gusty'],
     defaultServerPark: 'gusty',
   }];
