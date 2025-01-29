@@ -49,7 +49,6 @@ export default class CaseController implements Controller {
       if (notFound(error)) {
         return response.status(404).json();
       }
-
       return response.status(500).json();
     }
   }
