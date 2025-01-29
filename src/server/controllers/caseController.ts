@@ -42,7 +42,6 @@ export default class CaseController implements Controller {
 
     try {
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
-      console.log(`got case ${caseId}`);
       const caseSummary = mapCaseSummary(caseResponse);
 
       return response.status(200).json(caseSummary);
@@ -51,7 +50,6 @@ export default class CaseController implements Controller {
         return response.status(404).json();
       }
 
-      console.log(`error ${error}`);
       return response.status(500).json();
     }
   }
