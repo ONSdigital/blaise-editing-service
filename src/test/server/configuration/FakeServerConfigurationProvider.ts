@@ -23,7 +23,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
 
   DefaultSessionTimeout: string = '12h';
 
-  DefaultRoles: string[] = ['SVT_Supervisor', 'SVT_Editor'];
+  DefaultRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
 
   RoleConfiguration: RoleConfiguration[];
 
@@ -47,7 +47,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
     this.SessionTimeout = sessionTimeout ?? this.DefaultSessionTimeout;
     this.Roles = roles ?? this.DefaultRoles;
     this.RoleConfiguration = roleConfiguration ?? [{
-      Role: 'SVT_Supervisor',
+      Role: 'SVT Supervisor',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [Organisation.ONS],
@@ -55,7 +55,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
       }],
     },
     {
-      Role: 'SVT_Editor',
+      Role: 'SVT Editor',
       Surveys: [{
         Survey: 'TEST',
         Organisations: [Organisation.ONS],
@@ -68,7 +68,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
       }],
     },
     {
-      Role: 'FRS_Research',
+      Role: 'FRS Research',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [],
@@ -77,7 +77,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
       ],
     },
     {
-      Role: 'Survey_Support',
+      Role: 'Survey Support',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [],
@@ -86,7 +86,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
       ],
     },
     {
-      Role: 'SVT_NotConfigured',
+      Role: 'SVT NotConfigured',
       Surveys: [{
         Survey: 'LMS',
         Organisations: [Organisation.ONS],
@@ -94,7 +94,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
       }],
     },
     {
-      Role: 'SVT_AllOutcomes',
+      Role: 'SVT AllOutcomes',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [Organisation.ONS],
