@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AuthManager } from 'blaise-login-react-client';
 import notFound from '../../server/helpers/axiosHelper';
 
@@ -25,9 +25,11 @@ export async function getDataFromNode<T>(url: string, notFoundError: string): Pr
   }
 }
 
-export async function patchDataToNode(url: string, payload: any, notFoundError: string): Promise<void> {
+export async function patchDataToNode(url: string, payload: unknown, notFoundError: string): Promise<number> {
   try {
-    await axios.patch(url, payload, axiosConfig());
+    const response: AxiosResponse = await axios.patch(url, payload, axiosConfig());
+
+    return response.status;
   } catch (error) {
     if (notFound(error)) {
       throw new Error(notFoundError);
