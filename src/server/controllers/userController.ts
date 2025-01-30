@@ -28,7 +28,6 @@ export default class UserController implements Controller {
       const userList = await this.blaiseApi.getUsers();
       if (request.query.userRole) {
         const { userRole } = request.query;
-        request.log.info(`Retrieved ${userList.filter((user) => user.role === userRole).length} users for role ${userRole}`);
         return response.status(200).json(userList.filter((user) => user.role === userRole));
       }
 
