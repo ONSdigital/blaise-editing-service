@@ -70,42 +70,42 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
               <td
                 className="ons-table__cell"
                 aria-label="RespondentNumber"
-                key={respondent.PersonNumber}
+                key={`RespondentNumber-${respondent.PersonNumber}`}
               >
                 {respondent.PersonNumber}
               </td>
               <td
                 className="ons-table__cell status"
                 aria-label="RespondentName"
-                key={respondent.RespondentName}
+                key={`RespondentName-${respondent.RespondentName}`}
               >
                 {respondent.RespondentName}
               </td>
               <td
                 className="ons-table__cell"
                 aria-label="BenefitUnit"
-                key={respondent.BenefitUnit}
+                key={`BenefitUnit-${respondent.BenefitUnit}`}
               >
                 {respondent.BenefitUnit}
               </td>
               <td
                 className="ons-table__cell"
                 aria-label="Sex"
-                key={respondent.Sex}
+                key={`Sex-${respondent.Sex}`}
               >
                 {respondent.Sex}
               </td>
               <td
                 className="ons-table__cell"
                 aria-label="DateOfBirth"
-                key={`${respondent.PersonNumber}-DOB`}
+                key={`DateOfBirth-${respondent.PersonNumber}`}
               >
                 {respondent.DateOfBirth == null ? 'N/A' : respondent.DateOfBirth.toDateString() }
               </td>
               <td
                 className="ons-table__cell"
                 aria-label="MaritalStatus"
-                key={respondent.MaritalStatus}
+                key={`MaritalStatus-${respondent.MaritalStatus}`}
               >
                 {respondent.MaritalStatus}
               </td>
@@ -113,7 +113,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
                 <td
                   className="ons-table__cell"
                   aria-label={`Relationship-${respondent.PersonNumber}`}
-                  key={`${relationship}`}
+                  key={`Relationship-${respondent.PersonNumber}-${relationship}`}
                 >
                   {relationship}
                 </td>
