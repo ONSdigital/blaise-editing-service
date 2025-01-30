@@ -14,7 +14,7 @@ const sessionTimeout = '12h';
 const roles = 'SVT Supervisor,SVT Editor';
 const rolesList = ['SVT Supervisor', 'SVT Editor'];
 const surveys = 'FRS';
-const projectID = 'ons-blaise';
+const ProjectId = 'ons-blaise';
 
 describe('Configuration file tests', () => {
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Configuration file tests', () => {
     process.env['PORT'] = port.toString();
     process.env['SERVER_PARK'] = serverPark;
     process.env['VM_EXTERNAL_WEB_URL'] = externalWebUrl;
-    process.env['PROJECT_ID'] = projectID;
+    process.env['PROJECT_ID'] = ProjectId;
   });
 
   afterEach(() => {
@@ -38,7 +38,7 @@ describe('Configuration file tests', () => {
     expect(sut.BuildFolder).toEqual(buildFolder);
     expect(sut.Port).toEqual(port);
     expect(sut.ServerPark).toEqual(serverPark);
-    expect(sut.ProjectID).toEqual(projectID);
+    expect(sut.ProjectId).toEqual(ProjectId);
   });
 
   it.each([undefined, '', ' ', '  '])('should throw an error if the BLAISE_API_URL is empty or does not exist', (value) => {
