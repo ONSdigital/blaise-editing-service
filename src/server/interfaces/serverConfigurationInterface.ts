@@ -4,4 +4,5 @@ export interface ServerConfiguration {
   Port: number;
   ServerPark: string;
   ExternalWebUrl: string;
+  ProjectID: string;
 }

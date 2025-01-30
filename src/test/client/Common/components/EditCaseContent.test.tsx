@@ -26,7 +26,6 @@ jest.mock('../../../../client/api/NodeApi');
 const getSpecificCaseEditInformationMock = getSpecificCaseEditInformation as jest.Mock<Promise<CaseEditInformation>>;
 const setCaseToUpdateMock = setCaseToUpdate as jest.Mock<Promise<number>>;
 
-
 describe('Given we want to view the Edit Case page of a case', () => {
   beforeEach(() => {
     getSpecificCaseEditInformationMock.mockReturnValue(Promise.resolve(caseEditInformationMockObject1));
@@ -195,7 +194,6 @@ describe('Given we want to view the Edit Case page of a case', () => {
   });
 
   it('should display success message when clicking Update case button successfully for a Survey Support user', async () => {
-    
     // arrange
     setCaseToUpdateMock.mockReturnValue(Promise.resolve(204));
     await act(async () => {
@@ -205,7 +203,7 @@ describe('Given we want to view the Edit Case page of a case', () => {
         </BrowserRouter>,
       );
     });
-    
+
     // act
     const updateCaseButton = view.getByRole('button', { name: 'Update case' });
     await act(async () => {
@@ -219,7 +217,6 @@ describe('Given we want to view the Edit Case page of a case', () => {
   });
 
   it('should display Error message when clicking Update case button fails with a 404 for a Survey Support user', async () => {
-    
     // arrange
     setCaseToUpdateMock.mockReturnValue(Promise.resolve(404));
     await act(async () => {
@@ -229,7 +226,7 @@ describe('Given we want to view the Edit Case page of a case', () => {
         </BrowserRouter>,
       );
     });
-    
+
     // act
     const updateCaseButton = view.getByRole('button', { name: 'Update case' });
     await act(async () => {
@@ -243,7 +240,6 @@ describe('Given we want to view the Edit Case page of a case', () => {
   });
 
   it('should display Error message when clicking Update case button fails with a 500 for a Survey Support user', async () => {
-    
     // arrange
     setCaseToUpdateMock.mockReturnValue(Promise.resolve(500));
     await act(async () => {
@@ -253,7 +249,7 @@ describe('Given we want to view the Edit Case page of a case', () => {
         </BrowserRouter>,
       );
     });
-    
+
     // act
     const updateCaseButton = view.getByRole('button', { name: 'Update case' });
     await act(async () => {
@@ -267,7 +263,6 @@ describe('Given we want to view the Edit Case page of a case', () => {
   });
 
   it('should display Error message when clicking Update case button throws an error for a Survey Support user', async () => {
-    
     // arrange
     setCaseToUpdateMock.mockRejectedValue(new Error('Could not Update case'));
     await act(async () => {
@@ -277,7 +272,7 @@ describe('Given we want to view the Edit Case page of a case', () => {
         </BrowserRouter>,
       );
     });
-    
+
     // act
     const updateCaseButton = view.getByRole('button', { name: 'Update case' });
     await act(async () => {

@@ -30,7 +30,7 @@ export default class SurveyController implements Controller {
     try {
       const questionnaires = await this.GetQuestionnairesForRole(userRole);
       const surveys = mapSurveys(questionnaires ?? []);
-
+      request.log.info(`Retrieved ${surveys.length} surveys for role ${userRole}`);
       return response.status(200).json(surveys);
     } catch (error: unknown) {
       if (notFound(error)) {
