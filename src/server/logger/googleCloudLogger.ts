@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Logging } from '@google-cloud/logging';
 import { HttpLogger } from 'pino-http';
 
 export function formatLogMessage(text: string): string {
@@ -13,14 +11,11 @@ export default class GoogleCloudLogger {
 
   projectId: string;
 
-  logger: Logging;
-
   logName: string;
 
   constructor(baseLogger: HttpLogger, projectId: string) {
     this.baseLogger = baseLogger;
     this.projectId = projectId;
-    this.logger = new Logging({ projectId: this.projectId });
     this.logName = `projects/${this.projectId}/logs/stdout`;
     this.info = this.info.bind(this);
     this.error = this.error.bind(this);
