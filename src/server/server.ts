@@ -7,11 +7,16 @@ import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
 import CaseController from './controllers/caseController';
 import UserController from './controllers/userController';
+import createLogger from './logger/pinoLogger';
 
 const cors = require('cors');
 
 export default function nodeServer(config: ConfigurationProvider, blaiseApi: BlaiseApi): Express {
   const server = express();
+  const pinoLogger = createLogger();
+  console.log('Project ID', config.ProjectID);
+
+  server.use(pinoLogger);
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
   server.use(cors());

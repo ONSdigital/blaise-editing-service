@@ -27,6 +27,8 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
 
   RoleConfiguration: RoleConfiguration[];
 
+  ProjectID: string;
+
   constructor(
     blaiseApiUrl?: string,
     buildFolder?: string,
@@ -37,6 +39,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
     sessionTimeout?: string,
     roles?: string[],
     roleConfiguration?: RoleConfiguration[],
+    projectID?: string,
   ) {
     this.BlaiseApiUrl = blaiseApiUrl ?? 'restapi.blaise.com';
     this.BuildFolder = buildFolder ?? 'dist';
@@ -46,6 +49,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
     this.SessionSecret = sessionSecret ?? 'richlikesricecakes';
     this.SessionTimeout = sessionTimeout ?? this.DefaultSessionTimeout;
     this.Roles = roles ?? this.DefaultRoles;
+    this.ProjectID = projectID ?? '12345';
     this.RoleConfiguration = roleConfiguration ?? [{
       Role: 'SVT Supervisor',
       Surveys: [{
