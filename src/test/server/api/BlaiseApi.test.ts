@@ -7,16 +7,17 @@ import { questionnaireListMockObject } from '../mockObjects/questionnaireListMoc
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import userMockObject from '../mockObjects/userMockObject';
 import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
+import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
 
-// mock blaise api client
-
+// mock blaise api client and Google Logger
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
+const GoogleCloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
 
 // create service under test
-const sut = new BlaiseApi(configFake, blaiseApiClientMock.object);
+const sut = new BlaiseApi(configFake, blaiseApiClientMock.object, GoogleCloudLoggerMock.object);
 
 describe('getQuestionnaires from Blaise', () => {
   beforeEach(() => {
