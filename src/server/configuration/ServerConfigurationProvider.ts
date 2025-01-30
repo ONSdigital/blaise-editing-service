@@ -32,7 +32,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
 
   RoleConfiguration: RoleConfiguration[];
 
-  ProjectID: string;
+  ProjectId: string;
 
   constructor() {
     const {
@@ -46,7 +46,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       PROJECT_ID,
     } = process.env;
 
-    this.ProjectID = getStringOrThrowError(PROJECT_ID, 'PROJECT_ID');
+    this.ProjectId = getStringOrThrowError(PROJECT_ID, 'PROJECT_ID');
 
     this.BuildFolder = '../../build';
 
