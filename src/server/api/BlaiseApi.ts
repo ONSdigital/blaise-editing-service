@@ -33,11 +33,8 @@ export default class BlaiseApi {
       questionnaires.forEach((questionnaire : Questionnaire) => {
         questionnaireDetailsList.push(mapQuestionnaireDetails(questionnaire));
       });
-
-      this.cloudLogger.info(`Retrieved ${questionnaireDetailsList.length} questionnaires`);
       return questionnaireDetailsList;
     } catch (error) {
-      this.cloudLogger.error(`Failed to get questionnaires: ${error}`);
       throw error;
     }
   }
@@ -45,10 +42,8 @@ export default class BlaiseApi {
   async getCase(questionnaireName: string, caseId: string): Promise<CaseResponse> {
     try {
       const response = await this.blaiseApiClient.getCase(this.config.ServerPark, questionnaireName, caseId);
-      this.cloudLogger.info(`Retrieved case ${caseId} for questionnaire ${questionnaireName}`);
       return response;
     } catch (error) {
-      this.cloudLogger.error(`Failed to get case ${caseId} for questionnaire ${questionnaireName}: ${error}`);
       throw error;
     }
   }
@@ -56,10 +51,8 @@ export default class BlaiseApi {
   async updateCase(questionnaireName: string, caseId: string, caseFields: CaseData): Promise<void> {
     try {
       await this.blaiseApiClient.updateCase(this.config.ServerPark, questionnaireName, caseId, caseFields);
-      this.cloudLogger.info(`Updated case ${caseId} for questionnaire ${questionnaireName}`);
       return;
     } catch (error) {
-      this.cloudLogger.error(`Failed to update case ${caseId} for questionnaire ${questionnaireName}: ${error}`);
       throw error;
     }
   }

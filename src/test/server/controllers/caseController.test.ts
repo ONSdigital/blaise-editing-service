@@ -2,7 +2,7 @@ import supertest, { Response } from 'supertest';
 import {
   IMock, It, Mock, Times,
 } from 'typemoq';
-import { CaseEditInformation, CaseOutcome, EditedStatus } from 'blaise-api-node-client';
+import BlaiseApiClient, { CaseEditInformation, CaseOutcome, EditedStatus } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import { Auth } from 'blaise-login-react-server';
 import nodeServer from '../../../server/server';
@@ -10,6 +10,7 @@ import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { caseResponseMockObject, caseSummaryDetailsMockObject } from '../mockObjects/CaseMockObject';
+import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
@@ -17,8 +18,15 @@ const configFake = new FakeServerConfigurationProvider();
 // mock auth
 Auth.prototype.ValidateToken = jest.fn().mockReturnValue(true);
 
+// mock blaise api client and cloud logger
+const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
+const cloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
+
+// create blaise api
+const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock.object);
+
 // mock blaise api client
-const blaiseApiMock: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
+const blaiseApiMock: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
 
 // need to test the endpoints through the express server
 const server = nodeServer(configFake, blaiseApiMock.object);
@@ -34,10 +42,12 @@ const validUserRoles:string[] = ['SVT Supervisor', 'SVT Editor'];
 describe('Get case summary tests', () => {
   beforeEach(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
 
   afterAll(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
 
   it('It should return a 200 response with expected case summary', async () => {
@@ -56,6 +66,20 @@ describe('Get case summary tests', () => {
     blaiseApiMock.verify((api) => api.getCase(questionnaireName, caseId), Times.once());
   });
 
+  it('It should return a 200 response with expected case summary', async () => {
+    // arrange
+    const caseId: string = '1';
+    const questionnaireName: string = 'TEST111A';
+
+    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(async () => caseResponseMockObject);
+
+    // act
+    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.info(`Retrieved case ${caseId} for questionnaire ${questionnaireName}`), Times.once());
+  });
+
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
     // arrange
     const axiosError = createAxiosError(500);
@@ -69,6 +93,21 @@ describe('Get case summary tests', () => {
 
     // assert
     expect(response.status).toEqual(500);
+  });
+
+  it('It should log a 500 response error when a call is made to retrieve a case and the rest api is not availiable', async () => {
+    // arrange
+    const axiosError = createAxiosError(500);
+    const caseId: string = '1';
+    const questionnaireName: string = 'TEST111A';
+
+    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
+
+    // act
+    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details for ${caseId} in ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -86,6 +125,21 @@ describe('Get case summary tests', () => {
     expect(response.status).toEqual(500);
   });
 
+  it('It should log a 500 response error when the api client throws an error', async () => {
+    // arrange
+    const clientError = new Error();
+    const caseId: string = '1';
+    const questionnaireName: string = 'TEST111A';
+
+    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(clientError));
+
+    // act
+    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details for ${caseId} in ${questionnaireName} with 500 error: ${clientError}`), Times.once());
+  });
+
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
@@ -100,6 +154,21 @@ describe('Get case summary tests', () => {
     // assert
     expect(response.status).toEqual(404);
   });
+
+it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
+  // arrange
+  const axiosError = createAxiosError(404);
+  const caseId: string = '1';
+  const questionnaireName: string = 'TEST111A';
+
+  blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
+
+  // act
+  await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+
+  // assert
+  cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details for ${caseId} in ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+});
 });
 
 describe('Get case edit information tests', () => {
@@ -576,10 +645,12 @@ describe('Get case edit information tests', () => {
 describe('allocate cases tests', () => {
   beforeEach(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
 
   afterAll(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
 
   it('It should return a 204 response when cases are allocated', async () => {
@@ -604,6 +675,26 @@ describe('allocate cases tests', () => {
     blaiseApiMock.verify((api) => api.updateCase(questionnaireName, caseId2, caseFields), Times.once());
   });
 
+  it('It should log when cases are successfully allocated', async () => {
+    // arrange
+    const caseId1: string = '1';
+    const caseId2: string = '2';
+    const questionnaireName: string = 'TEST111A';
+    const editor: string = 'jake';
+    const payload = { name: editor, cases: [caseId1, caseId2] };
+    const caseFields = { 'QEdit.AssignedTo': editor, 'QEdit.Edited': 1 };
+
+    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId1, caseFields));
+    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId2, caseFields));
+
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.info(`Allocated ${payload.cases.length} cases to editor: ${payload.name} for questionnaire: ${questionnaireName}`), Times.once());
+
+  });
+
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
     // arrange
     const axiosError = createAxiosError(500);
@@ -617,6 +708,21 @@ describe('allocate cases tests', () => {
 
     // assert
     expect(response.status).toEqual(500);
+  });
+
+  it('It should log a 500 response error when a call is made to retrieve a case and the rest api is not availiable', async () => {
+    // arrange
+    const axiosError = createAxiosError(500);
+    const questionnaireName: string = 'TEST111A';
+    const payload = { name: 'jake', cases: ['1'] };
+
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name} for questionnaire: ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -634,6 +740,21 @@ describe('allocate cases tests', () => {
     expect(response.status).toEqual(500);
   });
 
+  it('It should log a 500 response error when the api client throws an error', async () => {
+    // arrange
+    const clientError = new Error();
+    const questionnaireName: string = 'TEST111A';
+    const payload = { name: 'jake', cases: ['1'] };
+
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
+
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name} for questionnaire: ${questionnaireName} with 500 error: ${clientError}`), Times.once());
+  });
+
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
@@ -648,15 +769,34 @@ describe('allocate cases tests', () => {
     // assert
     expect(response.status).toEqual(404);
   });
+
+  it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
+    // arrange
+    const axiosError = createAxiosError(404);
+    const questionnaireName: string = 'TEST111A';
+    const payload = { name: 'jake', cases: ['1'] };
+
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name} for questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+  });
 });
 
 describe('set to update case tests', () => {
   beforeEach(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
+
   afterAll(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
+
   it('It should return a 204 response when cases are set to update', async () => {
     // arrange
     const questionnaireName: string = 'TEST111A';
@@ -673,6 +813,24 @@ describe('set to update case tests', () => {
     expect(response.status).toEqual(204);
     blaiseApiMock.verify((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2), Times.once());
   });
+
+  it('It should log when cases are set to update', async () => {
+    // arrange
+    const questionnaireName: string = 'TEST111A';
+    const editQuestionnaireName: string = 'TEST111A_EDIT';
+    const caseId: string = '9001';
+    const caseFields2 = {
+      'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
+    };
+    blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
+    
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    
+      // assert
+      cloudLoggerMock.verify((logger) => logger.info(`Set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName}`), Times.once());
+  });
+
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
     // arrange
     const axiosError = createAxiosError(500);
@@ -684,6 +842,19 @@ describe('set to update case tests', () => {
     // assert
     expect(response.status).toEqual(500);
   });
+
+  it('It should log a 500 response error when a call is made to retrieve a case and the rest api is not availiable', async () => {
+    // arrange
+    const axiosError = createAxiosError(500);
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
+  });
+
   it('It should return a 500 response when the api client throws an error', async () => {
     // arrange
     const clientError = new Error();
@@ -695,6 +866,19 @@ describe('set to update case tests', () => {
     // assert
     expect(response.status).toEqual(500);
   });
+
+  it('It should log a 500 response error when the api client throws an error', async () => {
+    // arrange
+    const clientError = new Error();
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName} with 500 error: ${clientError}`), Times.once());
+  });
+
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
@@ -705,5 +889,17 @@ describe('set to update case tests', () => {
     const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
     expect(response.status).toEqual(404);
+  });
+
+  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
+    // arrange
+    const axiosError = createAxiosError(404);
+    const questionnaireName: string = 'TEST111A';
+    const caseId: string = '9001';
+    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+    // act
+    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
   });
 });
