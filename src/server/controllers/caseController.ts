@@ -44,11 +44,14 @@ export default class CaseController implements Controller {
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
       const caseSummary = mapCaseSummary(caseResponse);
 
+      this.blaiseApi.cloudLogger.info(`Retrieved case ${caseId} for questionnaire ${questionnaireName}`);
       return response.status(200).json(caseSummary);
     } catch (error: unknown) {
       if (notFound(error)) {
+        this.blaiseApi.cloudLogger.error(`Failed to get case details for ${caseId} in ${questionnaireName} with 404 error: ${error}`);
         return response.status(404).json();
       }
+      this.blaiseApi.cloudLogger.error(`Failed to get case details for ${caseId} in ${questionnaireName} with 500 error: ${error}`);
       return response.status(500).json();
     }
   }
@@ -94,12 +97,14 @@ export default class CaseController implements Controller {
           });
         }),
       );
-
+      this.blaiseApi.cloudLogger.info(`Allocated ${cases.length} cases to editor: ${name} for questionnaire: ${questionnaireName}`);
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
+        this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name} for questionnaire: ${questionnaireName} with 404 error: ${error}`);
         return response.status(404).json();
       }
+      this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name} for questionnaire: ${questionnaireName} with 500 error: ${error}`);
       return response.status(500).json();
     }
   }
@@ -115,11 +120,14 @@ export default class CaseController implements Controller {
         'QEdit.Edited': '',
         'QEdit.LastUpdated': moment('1900-01-01').format('DD-MM-YYYY_HH:mm'),
       });
+      this.blaiseApi.cloudLogger.info(`Set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName}`);
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
+        this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName} with 404 error: ${error}`);
         return response.status(404).json();
       }
+      this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight for case: ${caseId} for questionnaire: ${questionnaireName} with 500 error: ${error}`);
       return response.status(500).json();
     }
   }

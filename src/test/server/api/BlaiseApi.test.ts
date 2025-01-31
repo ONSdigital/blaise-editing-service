@@ -76,11 +76,51 @@ describe('getQuestionnaires from Blaise', () => {
     expect(result[0]?.questionnaireName).toEqual('FRS2408B');
     expect(result[1]?.questionnaireName).toEqual('FRS2408B_EDIT');
   });
+
+it('Should return an expected list of questionnaires', async () => {
+  // arrange
+  const questionnaireList: Questionnaire[] = [
+    {
+      name: 'FRS2408B',
+      serverParkName: 'gusty',
+      installDate: '2021-03-15T15:26:43.4233454+00:00',
+      fieldPeriod: '2024-08-01T00:00:00',
+      surveyTla: 'FRS',
+      status: 'Active',
+      dataRecordCount: 0,
+      hasData: false,
+      active: false,
+    },
+    {
+      name: 'FRS2408B_EDIT',
+      serverParkName: 'gusty',
+      installDate: '2021-03-15T15:26:43.4233454+00:00',
+      fieldPeriod: '2024-08-01T00:00:00',
+      surveyTla: 'FRS',
+      status: 'Active',
+      dataRecordCount: 0,
+      hasData: false,
+      active: false,
+    },
+  ];
+
+  blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(async () => questionnaireList);
+
+  // act
+  const result = await sut.getQuestionnaires();
+
+  // assert
+  expect(result.length).toEqual(2);
+  expect(result[0]?.questionnaireName).toEqual('FRS2408B');
+  expect(result[1]?.questionnaireName).toEqual('FRS2408B_EDIT');
+});
+
 });
 
 describe('getCase from Blaise', () => {
   beforeEach(() => {
     blaiseApiClientMock.reset();
+    cloudLoggerMock.reset();
   });
 
   it('Should call getCase with the expected parameters', async () => {
