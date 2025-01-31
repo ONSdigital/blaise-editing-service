@@ -155,20 +155,20 @@ describe('Get case summary tests', () => {
     expect(response.status).toEqual(404);
   });
 
-it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
+  it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
   // arrange
-  const axiosError = createAxiosError(404);
-  const caseId: string = '1';
-  const questionnaireName: string = 'TEST111A';
+    const axiosError = createAxiosError(404);
+    const caseId: string = '1';
+    const questionnaireName: string = 'TEST111A';
 
-  blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
+    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
 
-  // act
-  await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+    // act
+    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
-  // assert
-  cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
-});
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+  });
 });
 
 describe('Get case edit information tests', () => {
@@ -930,7 +930,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
     const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
-    const error = `Error: No '${questionnaireName.substring(0, 3)}' survey configuration found for Role ${userRole}`
+    const error = `Error: No '${questionnaireName.substring(0, 3)}' survey configuration found for Role ${userRole}`;
     const caseEditInformationListMockObject : CaseEditInformation[] = [
       {
         primaryKey: '10001011',
@@ -1033,7 +1033,7 @@ describe('Get case edit information tests', () => {
   it('should log a 500 response error when CaseContorller is called without a userRole', async () => {
     // arrange
     const questionnaireName = 'FRS2504A';
-    const error = `Error: Role: 'undefined' not found in Role configuration`;
+    const error = 'Error: Role: \'undefined\' not found in Role configuration';
 
     blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => []);
 
@@ -1154,7 +1154,6 @@ describe('allocate cases tests', () => {
 
     // assert
     cloudLoggerMock.verify((logger) => logger.info(`Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}`), Times.once());
-
   });
 
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
@@ -1285,12 +1284,12 @@ describe('set to update case tests', () => {
       'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
     };
     blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
-    
+
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    
-      // assert
-      cloudLoggerMock.verify((logger) => logger.info(`Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}`), Times.once());
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.info(`Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {

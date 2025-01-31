@@ -29,7 +29,7 @@ export default class UserController implements Controller {
       this.blaiseApi.cloudLogger.info(`Retrieved ${userList.length} user(s)`);
       if (request.query.userRole) {
         const { userRole } = request.query;
-        const filteredUserList = userList.filter((user) => user.role === userRole)
+        const filteredUserList = userList.filter((user) => user.role === userRole);
 
         this.blaiseApi.cloudLogger.info(`Filtered down to ${filteredUserList.length} user(s), role: ${userRole}`);
         return response.status(200).json(filteredUserList);

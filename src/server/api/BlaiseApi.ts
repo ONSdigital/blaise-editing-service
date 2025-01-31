@@ -26,61 +26,39 @@ export default class BlaiseApi {
   }
 
   async getQuestionnaires(): Promise<QuestionnaireDetails[]> {
-    try {
-      const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
+    const questionnaires = await this.blaiseApiClient.getQuestionnaires(this.config.ServerPark);
 
-      const questionnaireDetailsList: QuestionnaireDetails[] = [];
-      questionnaires.forEach((questionnaire : Questionnaire) => {
-        questionnaireDetailsList.push(mapQuestionnaireDetails(questionnaire));
-      });
-      return questionnaireDetailsList;
-    } catch (error) {
-      throw error;
-    }
+    const questionnaireDetailsList: QuestionnaireDetails[] = [];
+    questionnaires.forEach((questionnaire : Questionnaire) => {
+      questionnaireDetailsList.push(mapQuestionnaireDetails(questionnaire));
+    });
+    return questionnaireDetailsList;
   }
 
   async getCase(questionnaireName: string, caseId: string): Promise<CaseResponse> {
-    try {
-      const response = await this.blaiseApiClient.getCase(this.config.ServerPark, questionnaireName, caseId);
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    const response = await this.blaiseApiClient.getCase(this.config.ServerPark, questionnaireName, caseId);
+    return response;
   }
 
   async updateCase(questionnaireName: string, caseId: string, caseFields: CaseData): Promise<void> {
-    try {
-      await this.blaiseApiClient.updateCase(this.config.ServerPark, questionnaireName, caseId, caseFields);
-      return;
-    } catch (error) {
-      throw error;
-    }
+    await this.blaiseApiClient.updateCase(this.config.ServerPark, questionnaireName, caseId, caseFields);
   }
 
   async getCaseEditInformation(questionnaireName: string): Promise<CaseEditInformation[]> {
-    try {
-      const caseEditInformationList = await this.blaiseApiClient.getCaseEditInformation(this.config.ServerPark, questionnaireName);
+    const caseEditInformationList = await this.blaiseApiClient.getCaseEditInformation(this.config.ServerPark, questionnaireName);
 
-      caseEditInformationList.forEach((caseEditInformation) => {
-        const editUrl = `https://${this.config.ExternalWebUrl}/${questionnaireName}?KeyValue=${caseEditInformation.primaryKey}`;
-        caseEditInformation.editUrl = editUrl;
-        caseEditInformation.readOnlyUrl = `${editUrl}&DataEntrySettings=ReadOnly`;
-      });
+    caseEditInformationList.forEach((caseEditInformation) => {
+      const editUrl = `https://${this.config.ExternalWebUrl}/${questionnaireName}?KeyValue=${caseEditInformation.primaryKey}`;
+      caseEditInformation.editUrl = editUrl;
+      caseEditInformation.readOnlyUrl = `${editUrl}&DataEntrySettings=ReadOnly`;
+    });
 
-      this.cloudLogger.info(`Retrieved ${caseEditInformationList.length} case edit information for questionnaire ${questionnaireName}`);
-      return caseEditInformationList;
-    } catch (error) {
-      this.cloudLogger.error(`Failed to get case edit information for questionnaire ${questionnaireName}: ${error}`);
-      throw error;
-    }
+    this.cloudLogger.info(`Retrieved ${caseEditInformationList.length} case edit information for questionnaire ${questionnaireName}`);
+    return caseEditInformationList;
   }
 
   async getUsers(): Promise<User[]> {
-    try {
-      const users = await this.blaiseApiClient.getUsers();
-      return users;
-    } catch (error) {
-      throw error;
-    }
+    const users = await this.blaiseApiClient.getUsers();
+    return users;
   }
 }
