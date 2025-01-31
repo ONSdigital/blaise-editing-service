@@ -1,4 +1,4 @@
-import { HttpLogger } from 'pino-http';
+import { Logger } from 'winston';
 
 export function formatLogMessage(text: string): string {
   const message = text.replace(/[^\x20-\x7E\r\n]+/g, '');
@@ -7,27 +7,21 @@ export function formatLogMessage(text: string): string {
 }
 
 export default class GoogleCloudLogger {
-  baseLogger: HttpLogger;
+  baseLogger: Logger;
 
-  projectId: string;
-
-  logName: string;
-
-  constructor(baseLogger: HttpLogger, projectId: string) {
+  constructor(baseLogger: Logger) {
     this.baseLogger = baseLogger;
-    this.projectId = projectId;
-    this.logName = `projects/${this.projectId}/logs/stdout`;
     this.info = this.info.bind(this);
     this.error = this.error.bind(this);
   }
 
   info(message: string): void {
     const log = formatLogMessage(message);
-    this.baseLogger.logger.info(log);
+    this.baseLogger.info(log);
   }
 
   error(message: string): void {
     const log = formatLogMessage(message);
-    this.baseLogger.logger.error(log);
+    this.baseLogger.error(log);
   }
 }

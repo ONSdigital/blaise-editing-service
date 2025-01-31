@@ -2,6 +2,7 @@ import BlaiseApiClient, { CaseEditInformationListMockObject, Questionnaire } fro
 import {
   IMock, Mock, Times,
 } from 'typemoq';
+import winston from 'winston';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import { questionnaireListMockObject } from '../mockObjects/questionnaireListMockObject';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
@@ -9,15 +10,30 @@ import userMockObject from '../mockObjects/userMockObject';
 import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
 import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 
+// polyfill for setImmediate (when testing with logger)
+global.setImmediate = global.setImmediate || ((fn: () => void) => setTimeout(fn, 0));
+
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
 
-// mock blaise api client and Google Logger
+// mock blaise api client
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
-const GoogleCloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
+
+
+// create cloud logger
+const LoggingWinstonMock = jest.fn(() => new winston.transports.Console());
+const loggingWinston = new LoggingWinstonMock();
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [
+    new winston.transports.Console(),
+    loggingWinston,
+  ],
+});
+const cloudLoggerMock = new GoogleCloudLogger(logger);
 
 // create service under test
-const sut = new BlaiseApi(configFake, blaiseApiClientMock.object, GoogleCloudLoggerMock.object);
+const sut = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock);
 
 describe('getQuestionnaires from Blaise', () => {
   beforeEach(() => {
