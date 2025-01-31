@@ -401,7 +401,7 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -429,7 +429,7 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${apiClientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 ${apiClientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a list of surveys and the client returns a 404 not found', async () => {
@@ -457,6 +457,6 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 404 ${axiosError}`), Times.once());
   });
 });

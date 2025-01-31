@@ -107,7 +107,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -137,7 +137,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 500 error: ${clientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 500 ${clientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
@@ -167,7 +167,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 404 ${axiosError}`), Times.once());
   });
 });
 
@@ -950,7 +950,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 error: ${error}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 ${error}`), Times.once());
   });
 
   it('should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
@@ -982,7 +982,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 ${axiosError}`), Times.once());
   });
 
   it('should return a 500 response when the api client throws an error', async () => {
@@ -1014,7 +1014,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 error: ${apiClientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 ${apiClientError}`), Times.once());
   });
 
   it('should return a 500 response when CaseContorller is called without a userRole', async () => {
@@ -1041,7 +1041,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 error: ${error}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 ${error}`), Times.once());
   });
 
   it.each(['', 'INVALIDROLE'])('should return a 500 response when given an unknown userRole', async (userRoleInvalid) => {
@@ -1068,7 +1068,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRoleInvalid}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 error: ${error}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 ${error}`), Times.once());
   });
 
   it('should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
@@ -1100,7 +1100,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 404 ${axiosError}`), Times.once());
   });
 });
 
@@ -1183,7 +1183,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -1213,7 +1213,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName} with 500 error: ${clientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName} with 500 ${clientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
@@ -1243,7 +1243,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName} with 404 ${axiosError}`), Times.once());
   });
 });
 
@@ -1313,7 +1313,7 @@ describe('set to update case tests', () => {
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -1337,7 +1337,7 @@ describe('set to update case tests', () => {
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 500 error: ${clientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 500 ${clientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
@@ -1361,6 +1361,6 @@ describe('set to update case tests', () => {
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 404 ${axiosError}`), Times.once());
   });
 });

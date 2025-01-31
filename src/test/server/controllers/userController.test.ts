@@ -144,7 +144,7 @@ describe('Get Users information tests', () => {
     await sut.get('/api/users');
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -170,7 +170,7 @@ describe('Get Users information tests', () => {
     await sut.get('/api/users');
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users with 500 error: ${apiClientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users with 500 ${apiClientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
@@ -196,6 +196,6 @@ describe('Get Users information tests', () => {
     await sut.get('/api/users');
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users with 404 ${axiosError}`), Times.once());
   });
 });

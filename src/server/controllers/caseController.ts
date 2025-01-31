@@ -48,10 +48,10 @@ export default class CaseController implements Controller {
       return response.status(200).json(caseSummary);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 404 error: ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 500 error: ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName} with 500 ${error}`);
       return response.status(500).json();
     }
   }
@@ -66,10 +66,10 @@ export default class CaseController implements Controller {
       return response.status(200).json(caseEditInformationList);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 404 error: ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 error: ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName} with 500 ${error}`);
       return response.status(500).json();
     }
   }
@@ -107,10 +107,10 @@ export default class CaseController implements Controller {
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName} with 404 error: ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName} with 500 error: ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName} with 500 ${error}`);
       return response.status(500).json();
     }
   }
@@ -130,10 +130,10 @@ export default class CaseController implements Controller {
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 404 error: ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 500 error: ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName} with 500 ${error}`);
       return response.status(500).json();
     }
   }
