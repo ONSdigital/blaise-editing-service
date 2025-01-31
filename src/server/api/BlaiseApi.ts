@@ -78,10 +78,8 @@ export default class BlaiseApi {
   async getUsers(): Promise<User[]> {
     try {
       const users = await this.blaiseApiClient.getUsers();
-      this.cloudLogger.info(`Retrieved ${users.length} users`);
       return users;
     } catch (error) {
-      this.cloudLogger.error(`Failed to get users: ${error}`);
       throw error;
     }
   }
