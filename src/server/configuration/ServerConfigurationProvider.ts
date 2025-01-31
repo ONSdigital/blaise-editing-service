@@ -32,8 +32,6 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
 
   RoleConfiguration: RoleConfiguration[];
 
-  ProjectId: string;
-
   constructor() {
     const {
       BLAISE_API_URL,
@@ -43,10 +41,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       SESSION_SECRET,
       SESSION_TIMEOUT,
       ROLES,
-      PROJECT_ID,
     } = process.env;
-
-    this.ProjectId = getStringOrThrowError(PROJECT_ID, 'PROJECT_ID');
 
     this.BuildFolder = '../../build';
 
