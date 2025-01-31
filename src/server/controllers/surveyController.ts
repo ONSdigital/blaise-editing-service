@@ -33,10 +33,10 @@ export default class SurveyController implements Controller {
       return response.status(200).json(surveys);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get questionnaires for ${userRole} with 404 error: ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to get questionnaires, role: ${userRole} with 404 error: ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get questionnaires for ${userRole} with 500 error: ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${error}`);
       return response.status(500).json();
     }
   }
@@ -44,20 +44,20 @@ export default class SurveyController implements Controller {
   async GetQuestionnairesForRole(userRole: string): Promise<QuestionnaireDetails[]> {
     const surveys = this.configuration.getSurveysForRole(userRole);
     const questionnaires = await this.blaiseApi.getQuestionnaires();
-    this.blaiseApi.cloudLogger.info(`Retrieved ${questionnaires.length} questionnaires`);
+    this.blaiseApi.cloudLogger.info(`Retrieved ${questionnaires.length} questionnaire(s)`);
 
     if (userRole === 'Survey Support') {
       const questionnairesList = questionnaires
       .filter((q) => surveys.includes(q.surveyTla))
       .filter((q) => !q.questionnaireName.endsWith('_EDIT'));
-      this.blaiseApi.cloudLogger.info(`Filtered down to ${questionnairesList.length} questionnaires for role: ${userRole}`);
+      this.blaiseApi.cloudLogger.info(`Filtered down to ${questionnairesList.length} questionnaire(s), role: ${userRole}`);
       return questionnairesList
     }
 
     const questionnairesList = questionnaires
     .filter((q) => surveys.includes(q.surveyTla))
     .filter((q) => q.questionnaireName.endsWith('_EDIT'));
-    this.blaiseApi.cloudLogger.info(`Filtered down to ${questionnairesList.length} questionnaires for role: ${userRole}`);
+    this.blaiseApi.cloudLogger.info(`Filtered down to ${questionnairesList.length} questionnaire(s), role: ${userRole}`);
     return questionnairesList
   }
 }
