@@ -204,8 +204,8 @@ describe('Get surveys tests', () => {
 
     // assert
     questionnaireDetailsListMockObject
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaires`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaires for role: ${userRole}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s)`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), role: ${userRole}`), Times.once());
   });
   
   it('should return a 200 response with an expected list of surveys for the Survey Support Role', async () => {
@@ -373,8 +373,8 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaires`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaires for role: ${userRole}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s)`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), role: ${userRole}`), Times.once());
 
   });
 
@@ -403,7 +403,7 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires for ${userRole} with 500 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${axiosError}`), Times.once());
 
   });
 
@@ -432,7 +432,7 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires for ${userRole} with 500 error: ${apiClientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${apiClientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a list of surveys and the client returns a 404 not found', async () => {
@@ -460,6 +460,6 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires for ${userRole} with 404 error: ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 404 error: ${axiosError}`), Times.once());
   });
 });
