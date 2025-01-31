@@ -14,7 +14,6 @@ const sessionTimeout = '12h';
 const roles = 'SVT Supervisor,SVT Editor';
 const rolesList = ['SVT Supervisor', 'SVT Editor'];
 const surveys = 'FRS';
-const ProjectId = 'ons-blaise';
 
 describe('Configuration file tests', () => {
   beforeEach(() => {
@@ -22,7 +21,6 @@ describe('Configuration file tests', () => {
     process.env['PORT'] = port.toString();
     process.env['SERVER_PARK'] = serverPark;
     process.env['VM_EXTERNAL_WEB_URL'] = externalWebUrl;
-    process.env['PROJECT_ID'] = ProjectId;
   });
 
   afterEach(() => {
@@ -38,7 +36,6 @@ describe('Configuration file tests', () => {
     expect(sut.BuildFolder).toEqual(buildFolder);
     expect(sut.Port).toEqual(port);
     expect(sut.ServerPark).toEqual(serverPark);
-    expect(sut.ProjectId).toEqual(ProjectId);
   });
 
   it.each([undefined, '', ' ', '  '])('should throw an error if the BLAISE_API_URL is empty or does not exist', (value) => {
@@ -61,17 +58,6 @@ describe('Configuration file tests', () => {
 
     // act && assert
     expect(configuration).toThrowError('PORT has not been set or is set to an empty string');
-  });
-
-  it.each([undefined, '', ' ', '  '])('should throw an error if the PROJECT_ID is empty or does not exist', (value) => {
-    // arrange
-    process.env['PROJECT_ID'] = value;
-
-    // act
-    const configuration = () => { new ServerConfigurationProvider(); };
-
-    // act && assert
-    expect(configuration).toThrowError('PROJECT_ID has not been set or is set to an empty string');
   });
 
   it.each(['NotNumber', 'eight'])('should throw an error if the PORT is not number', (value) => {
