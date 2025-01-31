@@ -48,16 +48,16 @@ export default class SurveyController implements Controller {
 
     if (userRole === 'Survey Support') {
       const questionnairesList = questionnaires
-      .filter((q) => surveys.includes(q.surveyTla))
-      .filter((q) => !q.questionnaireName.endsWith('_EDIT'));
+        .filter((q) => surveys.includes(q.surveyTla))
+        .filter((q) => !q.questionnaireName.endsWith('_EDIT'));
       this.blaiseApi.cloudLogger.info(`Filtered down to ${questionnairesList.length} questionnaire(s), role: ${userRole}`);
-      return questionnairesList
+      return questionnairesList;
     }
 
     const questionnairesList = questionnaires
-    .filter((q) => surveys.includes(q.surveyTla))
-    .filter((q) => q.questionnaireName.endsWith('_EDIT'));
+      .filter((q) => surveys.includes(q.surveyTla))
+      .filter((q) => q.questionnaireName.endsWith('_EDIT'));
     this.blaiseApi.cloudLogger.info(`Filtered down to ${questionnairesList.length} questionnaire(s), role: ${userRole}`);
-    return questionnairesList
+    return questionnairesList;
   }
 }

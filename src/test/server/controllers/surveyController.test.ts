@@ -1,12 +1,12 @@
 import supertest, { Response } from 'supertest';
 import { IMock, Mock, Times } from 'typemoq';
 import { Auth } from 'blaise-login-react-server';
+import BlaiseApiClient from 'blaise-api-node-client';
 import nodeServer from '../../../server/server';
 import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { QuestionnaireDetails, Survey } from '../../../common/interfaces/surveyInterface';
-import BlaiseApiClient from 'blaise-api-node-client';
 import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 
 // create fake config
@@ -184,18 +184,18 @@ describe('Get surveys tests', () => {
 
     const expectedFilteredQuestionnaireListMockObject: QuestionnaireDetails[] = [
       {
-          questionnaireName: 'FRS2408B_EDIT',
-          numberOfCases: 0,
-          fieldPeriod: 'August 2024',
-          surveyTla: 'FRS',
-        },
-        {
-          questionnaireName: 'FRS2504A_EDIT',
-          numberOfCases: 1,
-          fieldPeriod: 'April 2025',
-          surveyTla: 'FRS',
-        },
-        ];
+        questionnaireName: 'FRS2408B_EDIT',
+        numberOfCases: 0,
+        fieldPeriod: 'August 2024',
+        surveyTla: 'FRS',
+      },
+      {
+        questionnaireName: 'FRS2504A_EDIT',
+        numberOfCases: 1,
+        fieldPeriod: 'April 2025',
+        surveyTla: 'FRS',
+      },
+    ];
 
     blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(async () => questionnaireDetailsListMockObject);
 
@@ -203,11 +203,10 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    questionnaireDetailsListMockObject
     cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s)`), Times.once());
     cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), role: ${userRole}`), Times.once());
   });
-  
+
   it('should return a 200 response with an expected list of surveys for the Survey Support Role', async () => {
     // arrange
     const userRole = 'Survey Support';
@@ -354,17 +353,17 @@ describe('Get surveys tests', () => {
 
     const expectedFilteredQuestionnaireListMockObject: QuestionnaireDetails[] = [
       {
-          questionnaireName: 'FRS2408B',
-          numberOfCases: 0,
-          fieldPeriod: 'August 2024',
-          surveyTla: 'FRS',
-        },
-        {
-          questionnaireName: 'FRS2504A',
-          numberOfCases: 1,
-          fieldPeriod: 'April 2025',
-          surveyTla: 'FRS',
-        },
+        questionnaireName: 'FRS2408B',
+        numberOfCases: 0,
+        fieldPeriod: 'August 2024',
+        surveyTla: 'FRS',
+      },
+      {
+        questionnaireName: 'FRS2504A',
+        numberOfCases: 1,
+        fieldPeriod: 'April 2025',
+        surveyTla: 'FRS',
+      },
     ];
 
     blaiseApiMock.setup((api) => api.getQuestionnaires()).returns(async () => questionnaireDetailsListMockObject);
@@ -375,7 +374,6 @@ describe('Get surveys tests', () => {
     // assert
     cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s)`), Times.once());
     cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), role: ${userRole}`), Times.once());
-
   });
 
   it('It should return a 500 response when a call is made to retrieve a list of surveys and the rest api is not availiable', async () => {
@@ -404,7 +402,6 @@ describe('Get surveys tests', () => {
 
     // assert
     cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${axiosError}`), Times.once());
-
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {

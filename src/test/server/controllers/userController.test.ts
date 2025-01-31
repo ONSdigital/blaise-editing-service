@@ -1,11 +1,11 @@
 import supertest, { Response } from 'supertest';
 import { IMock, Mock, Times } from 'typemoq';
 import { Auth } from 'blaise-login-react-server';
+import BlaiseApiClient from 'blaise-api-node-client';
 import nodeServer from '../../../server/server';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import createAxiosError from './axiosTestHelper';
-import BlaiseApiClient from 'blaise-api-node-client';
 import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 
 // create fake config
