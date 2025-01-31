@@ -33,10 +33,10 @@ export default class SurveyController implements Controller {
       return response.status(200).json(surveys);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get questionnaires, role: ${userRole} with 404 error: ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to get questionnaires, role: ${userRole} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get questionnaires, role: ${userRole} with 500 error: ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to get questionnaires, role: ${userRole} with 500 ${error}`);
       return response.status(500).json();
     }
   }
