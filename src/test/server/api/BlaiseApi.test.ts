@@ -7,20 +7,25 @@ import { questionnaireListMockObject } from '../mockObjects/questionnaireListMoc
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import userMockObject from '../mockObjects/userMockObject';
 import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
+import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
+
+// polyfill for setImmediate (when testing with logger)
+global.setImmediate = global.setImmediate || ((fn: () => void) => setTimeout(fn, 0));
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
 
-// mock blaise api client
-
+// mock blaise api client and cloud logger
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
+const cloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
 
 // create service under test
-const sut = new BlaiseApi(configFake, blaiseApiClientMock.object);
+const sut = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock.object);
 
 describe('getQuestionnaires from Blaise', () => {
   beforeEach(() => {
     blaiseApiClientMock.reset();
+    cloudLoggerMock.reset();
   });
 
   it('Should call getQuestionnaires for the correct serverpark', async () => {
@@ -71,11 +76,50 @@ describe('getQuestionnaires from Blaise', () => {
     expect(result[0]?.questionnaireName).toEqual('FRS2408B');
     expect(result[1]?.questionnaireName).toEqual('FRS2408B_EDIT');
   });
+
+  it('Should return an expected list of questionnaires', async () => {
+  // arrange
+    const questionnaireList: Questionnaire[] = [
+      {
+        name: 'FRS2408B',
+        serverParkName: 'gusty',
+        installDate: '2021-03-15T15:26:43.4233454+00:00',
+        fieldPeriod: '2024-08-01T00:00:00',
+        surveyTla: 'FRS',
+        status: 'Active',
+        dataRecordCount: 0,
+        hasData: false,
+        active: false,
+      },
+      {
+        name: 'FRS2408B_EDIT',
+        serverParkName: 'gusty',
+        installDate: '2021-03-15T15:26:43.4233454+00:00',
+        fieldPeriod: '2024-08-01T00:00:00',
+        surveyTla: 'FRS',
+        status: 'Active',
+        dataRecordCount: 0,
+        hasData: false,
+        active: false,
+      },
+    ];
+
+    blaiseApiClientMock.setup((client) => client.getQuestionnaires(configFake.ServerPark)).returns(async () => questionnaireList);
+
+    // act
+    const result = await sut.getQuestionnaires();
+
+    // assert
+    expect(result.length).toEqual(2);
+    expect(result[0]?.questionnaireName).toEqual('FRS2408B');
+    expect(result[1]?.questionnaireName).toEqual('FRS2408B_EDIT');
+  });
 });
 
 describe('getCase from Blaise', () => {
   beforeEach(() => {
     blaiseApiClientMock.reset();
+    cloudLoggerMock.reset();
   });
 
   it('Should call getCase with the expected parameters', async () => {

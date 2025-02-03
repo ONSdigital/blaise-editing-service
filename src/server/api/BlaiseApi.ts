@@ -5,15 +5,19 @@ import BlaiseClient, {
 import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
 import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
 import mapQuestionnaireDetails from '../mappers/questionnaireMapper';
+import GoogleCloudLogger from '../logger/googleCloudLogger';
 
 export default class BlaiseApi {
   config: ServerConfiguration;
 
   blaiseApiClient: BlaiseClient;
 
-  constructor(config: ServerConfiguration, blaiseApiClient: BlaiseClient) {
+  cloudLogger: GoogleCloudLogger;
+
+  constructor(config: ServerConfiguration, blaiseApiClient: BlaiseClient, cloudLogger: GoogleCloudLogger) {
     this.config = config;
     this.blaiseApiClient = blaiseApiClient;
+    this.cloudLogger = cloudLogger;
     this.getQuestionnaires = this.getQuestionnaires.bind(this);
     this.getCase = this.getCase.bind(this);
     this.getCaseEditInformation = this.getCaseEditInformation.bind(this);
@@ -28,12 +32,12 @@ export default class BlaiseApi {
     questionnaires.forEach((questionnaire : Questionnaire) => {
       questionnaireDetailsList.push(mapQuestionnaireDetails(questionnaire));
     });
-
     return questionnaireDetailsList;
   }
 
   async getCase(questionnaireName: string, caseId: string): Promise<CaseResponse> {
-    return this.blaiseApiClient.getCase(this.config.ServerPark, questionnaireName, caseId);
+    const response = await this.blaiseApiClient.getCase(this.config.ServerPark, questionnaireName, caseId);
+    return response;
   }
 
   async updateCase(questionnaireName: string, caseId: string, caseFields: CaseData): Promise<void> {
@@ -53,6 +57,7 @@ export default class BlaiseApi {
   }
 
   async getUsers(): Promise<User[]> {
-    return this.blaiseApiClient.getUsers();
+    const users = await this.blaiseApiClient.getUsers();
+    return users;
   }
 }

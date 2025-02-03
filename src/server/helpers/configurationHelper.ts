@@ -69,7 +69,7 @@ export function getSurveyConfigForRole(roleConfiguration: RoleConfiguration[], s
   const roleConfig = roleConfiguration.find(({ Role }) => Role === userRole);
 
   if (roleConfig === undefined) {
-    throw new Error(`Role ${userRole} not found in Role configuration`);
+    throw new Error(`Role: '${userRole}' not found in Role configuration`);
   }
 
   const surveyConfig = roleConfig.Surveys.find((survey) => survey.Survey === surveyTla);

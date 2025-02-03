@@ -42,7 +42,9 @@ describe('Given there are surveys available in blaise', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'ResearchPageSurveysReturned',
+    );
   });
 
   it('should display the expected questionnaire details for the default option', async () => {
@@ -100,7 +102,9 @@ describe('Given there are surveys available in blaise', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'ResearchPageSurveysReturnedSearchUsed',
+    );
   });
 
   it('should display the expected questionnaire and case details when search used', async () => {
@@ -183,7 +187,9 @@ describe('Given there are no surveys available in blaise', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'ResearchPageNoSurveysReturned',
+    );
   });
 
   it('should display a message telling the user there are no surveys', async () => {
@@ -249,6 +255,8 @@ describe('Given there the blaise rest api is not available', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'ResearchPageError',
+    );
   });
 });
