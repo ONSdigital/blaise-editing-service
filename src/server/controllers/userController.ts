@@ -11,37 +11,40 @@ export default class UserController implements Controller {
 
   configuration: ServerConfigurationProvider;
 
-  constructor(blaiseApi: BlaiseApi, configuration: ServerConfigurationProvider) {
+  auth: Auth;
+
+  constructor(blaiseApi: BlaiseApi, configuration: ServerConfigurationProvider, auth: Auth) {
     this.blaiseApi = blaiseApi;
     this.configuration = configuration;
     this.getUsers = this.getUsers.bind(this);
+    this.auth = auth;
   }
 
   getRoutes() {
-    const auth = new Auth(this.configuration);
     const router = express.Router();
-    return router.get('/api/users', auth.Middleware, this.getUsers);
+    return router.get('/api/users', this.auth.Middleware, this.getUsers);
   }
 
   async getUsers(request: Request<{}, {}, {}, { userRole:string }>, response: Response<User[]>) {
+    const user = this.auth.GetUser(this.auth.GetToken(request));
     try {
       const userList = await this.blaiseApi.getUsers();
-      this.blaiseApi.cloudLogger.info(`Retrieved ${userList.length} user(s)`);
+      this.blaiseApi.cloudLogger.info(`Retrieved ${userList.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`);
       if (request.query.userRole) {
         const { userRole } = request.query;
-        const filteredUserList = userList.filter((user) => user.role === userRole);
+        const filteredUserList = userList.filter((filteredUser) => filteredUser.role === userRole);
 
-        this.blaiseApi.cloudLogger.info(`Filtered down to ${filteredUserList.length} user(s), role: ${userRole}`);
+        this.blaiseApi.cloudLogger.info(`Filtered down to ${filteredUserList.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`);
         return response.status(200).json(filteredUserList);
       }
 
       return response.status(200).json(userList);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get Users with 404 ${error}`);
+        this.blaiseApi.cloudLogger.error(`Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get Users with 500 ${error}`);
+      this.blaiseApi.cloudLogger.error(`Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }
