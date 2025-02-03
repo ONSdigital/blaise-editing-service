@@ -77,7 +77,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved case ${caseId}, questionnaire: ${questionnaireName}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(`Retrieved case: ${caseId}, questionnaire: ${questionnaireName}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {

@@ -44,7 +44,7 @@ export default class CaseController implements Controller {
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
       const caseSummary = mapCaseSummary(caseResponse);
 
-      this.blaiseApi.cloudLogger.info(`Retrieved case ${caseId}, questionnaire: ${questionnaireName}`);
+      this.blaiseApi.cloudLogger.info(`Retrieved case: ${caseId}, questionnaire: ${questionnaireName}`);
       return response.status(200).json(caseSummary);
     } catch (error: unknown) {
       if (notFound(error)) {
