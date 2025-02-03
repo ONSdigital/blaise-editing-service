@@ -53,7 +53,6 @@ export default class BlaiseApi {
       caseEditInformation.readOnlyUrl = `${editUrl}&DataEntrySettings=ReadOnly`;
     });
 
-    this.cloudLogger.info(`Retrieved ${caseEditInformationList.length} case edit information for questionnaire ${questionnaireName}`);
     return caseEditInformationList;
   }
 
