@@ -48,7 +48,9 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'AllocationPage',
+    );
   });
 
   it('should display an have the correct page info for allocation', async () => {
@@ -224,7 +226,9 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'ReallocationPage',
+    );
   });
 
   it('should display an have the correct page info for reallocation', async () => {

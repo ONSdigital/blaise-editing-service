@@ -148,46 +148,8 @@ describe('Given there is a case available in blaise for a questionnaire', () => 
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'CaseSummary',
+    );
   });
 });
-
-/* describe('Given there the blaise rest api is not available', () => {
-  beforeEach(() => {
-    getCaseSummaryDetailsMock.mockRejectedValue(new Error('try again in a few minutes'));
-  });
-
-  afterEach(() => {
-    getCaseSummaryDetailsMock.mockReset();
-  });
-
-  it('should display an error message telling the user to try again in a few minutes', async () => {
-    // act
-    await act(async () => {
-      view = render(
-        <BrowserRouter>
-          <CaseSummary />
-        </BrowserRouter>,
-      );
-    });
-
-    // assert
-    const summaryView = view.getByTestId('Summary');
-    expect(summaryView).toHaveTextContent('try again in a few minutes');
-  });
-
-  it('should render the page correctly when an error occurs', async () => {
-    // act
-    await act(async () => {
-      view = render(
-        <BrowserRouter>
-          <CaseSummary />
-        </BrowserRouter>,
-      );
-    });
-
-    // assert
-    expect(view).toMatchSnapshot();
-  });
-});
- */

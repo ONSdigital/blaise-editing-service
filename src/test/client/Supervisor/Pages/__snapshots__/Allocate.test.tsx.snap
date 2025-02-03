@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Given we wish to allocte cases from an Interviewer to an Editor should render the allocation page correctly 1`] = `
+exports[`Given we wish to allocte cases from an Interviewer to an Editor should render the allocation page correctly: AllocationPage 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -463,7 +463,7 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor should 
 }
 `;
 
-exports[`Given we wish to reallocte cases from an Editor to another Editor should render the allocation page correctly 1`] = `
+exports[`Given we wish to reallocte cases from an Editor to another Editor should render the allocation page correctly: ReallocationPage 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
