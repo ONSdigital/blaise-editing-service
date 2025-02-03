@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders the error screen if the users role is not in the accepted list should render the editor page correctly when given an invalid role 1`] = `
+exports[`Renders the error screen if the users role is not in the accepted list should render the editor page correctly when given an invalid role: EditorPageInvalidRole 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

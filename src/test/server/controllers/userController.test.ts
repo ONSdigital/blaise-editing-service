@@ -1,19 +1,33 @@
 import supertest, { Response } from 'supertest';
 import { IMock, Mock, Times } from 'typemoq';
 import { Auth } from 'blaise-login-react-server';
+import BlaiseApiClient, { User } from 'blaise-api-node-client';
 import nodeServer from '../../../server/server';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import createAxiosError from './axiosTestHelper';
+import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
+import userMockObject from '../mockObjects/userMockObject';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
 
+// mock User
+const user: User = userMockObject;
+
 // mock auth
 Auth.prototype.ValidateToken = jest.fn().mockReturnValue(true);
+Auth.prototype.GetUser = jest.fn().mockReturnValue({ name: user.name, role: user.role });
+
+// mock blaise api client and cloud logger
+const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
+const cloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
+
+// create blaise api
+const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock.object);
 
 // mock blaise api client
-const blaiseApiMock: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
+const blaiseApiMock: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
 
 // need to test the endpoints through the express server
 const server = nodeServer(configFake, blaiseApiMock.object);
@@ -24,10 +38,12 @@ const sut = supertest(server);
 describe('Get Users information tests', () => {
   beforeEach(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
 
   afterAll(() => {
     blaiseApiMock.reset();
+    cloudLoggerMock.reset();
   });
 
   const userRole = 'SVT Editor';
@@ -72,6 +88,18 @@ describe('Get Users information tests', () => {
     blaiseApiMock.verify((api) => api.getUsers(), Times.once());
   });
 
+  it('When given a userRole It should log the number of users retrieved', async () => {
+    // arrange
+    blaiseApiMock.setup((api) => api.getUsers()).returns(async () => userListMockObject);
+
+    // act
+    await sut.get(`/api/users?userRole=${userRole}`);
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${userListMockObject.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${filteredUserListObject.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+  });
+
   it('When not given a userRole It should return a 200 response with an expected list of users details', async () => {
     // arrange
     blaiseApiMock.setup((api) => api.getUsers()).returns(async () => userListMockObject);
@@ -83,6 +111,17 @@ describe('Get Users information tests', () => {
     expect(response.status).toEqual(200);
     expect(response.body).toEqual(userListMockObject);
     blaiseApiMock.verify((api) => api.getUsers(), Times.once());
+  });
+
+  it('When not given a userRole It should log the number of users retrieved', async () => {
+    // arrange
+    blaiseApiMock.setup((api) => api.getUsers()).returns(async () => userListMockObject);
+
+    // act
+    await sut.get('/api/users');
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${userListMockObject.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
@@ -99,6 +138,20 @@ describe('Get Users information tests', () => {
     expect(response.status).toEqual(500);
   });
 
+  it('It should log a 500 response error when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
+    // arrange
+
+    const axiosError = createAxiosError(500);
+
+    blaiseApiMock.setup((api) => api.getUsers()).returns(() => Promise.reject(axiosError));
+
+    // act
+    await sut.get('/api/users');
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+  });
+
   it('It should return a 500 response when the api client throws an error', async () => {
     // arrange
     const apiClientError = new Error();
@@ -112,6 +165,19 @@ describe('Get Users information tests', () => {
     expect(response.status).toEqual(500);
   });
 
+  it('It should log a 500 response error when the api client throws an error', async () => {
+    // arrange
+    const apiClientError = new Error();
+
+    blaiseApiMock.setup((api) => api.getUsers()).returns(() => Promise.reject(apiClientError));
+
+    // act
+    await sut.get('/api/users');
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`), Times.once());
+  });
+
   it('It should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
     // arrange
     const axiosError = createAxiosError(404);
@@ -123,5 +189,18 @@ describe('Get Users information tests', () => {
 
     // assert
     expect(response.status).toEqual(404);
+  });
+
+  it('It should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
+    // arrange
+    const axiosError = createAxiosError(404);
+
+    blaiseApiMock.setup((api) => api.getUsers()).returns(() => Promise.reject(axiosError));
+
+    // act
+    await sut.get('/api/users');
+
+    // assert
+    cloudLoggerMock.verify((logger) => logger.error(`Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });

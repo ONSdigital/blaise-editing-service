@@ -45,7 +45,9 @@ describe('Given there are surveys available in blaise', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'EditPageSurveysReturned',
+    );
   });
 
   it('should display a list of the expected surveys', async () => {
@@ -114,7 +116,9 @@ describe('Given there are no surveys available in blaise', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'EditPageNoSurveysReturned',
+    );
   });
 
   it('should display a message telling the user there are no surveys', async () => {
@@ -180,6 +184,8 @@ describe('Given there the blaise rest api is not available', () => {
     });
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'EditorPageError',
+    );
   });
 });

@@ -16,7 +16,9 @@ describe('Renders the error screen if the users role is not in the accepted list
     view = render(<QuestionnairesList questionnaires={[questionnaire]} user={user} />);
 
     // assert
-    expect(view).toMatchSnapshot();
+    expect(view).toMatchSnapshot(
+      'EditorPageInvalidRole',
+    );
   });
 
   it('Should display the expected error on the screen when given an invalid role', async () => {

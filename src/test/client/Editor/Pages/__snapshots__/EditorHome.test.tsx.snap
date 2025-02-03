@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Given there are no surveys available in blaise should render the page correctly when no surveys are returned 1`] = `
+exports[`Given there are no surveys available in blaise should render the page correctly when no surveys are returned: EditPageNoSurveysReturned 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -89,7 +89,7 @@ exports[`Given there are no surveys available in blaise should render the page c
 }
 `;
 
-exports[`Given there are surveys available in blaise should render the editor page correctly when surveys are returned 1`] = `
+exports[`Given there are surveys available in blaise should render the editor page correctly when surveys are returned: EditPageSurveysReturned 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1024,7 +1024,7 @@ exports[`Given there are surveys available in blaise should render the editor pa
 }
 `;
 
-exports[`Given there the blaise rest api is not available should render the page correctly for the user when an error occurs 1`] = `
+exports[`Given there the blaise rest api is not available should render the page correctly for the user when an error occurs: EditorPageError 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
