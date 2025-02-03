@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Given there is a case available in blaise for a questionnaire should display the summary correctly 1`] = `
+exports[`Given there is a case available in blaise for a questionnaire should display the summary correctly: CaseSummary 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

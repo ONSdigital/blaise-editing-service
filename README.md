@@ -1,19 +1,3 @@
-# To Do
-
-- Supply backend port via environment variable
-  - Other apps default of `5000`, that might be preferable by app engine
-- Add request logging
-  - Other apps use pino, I'd suggest looking at winston and express-winston (see https://www.npmjs.com/package/express-winston)
-  - Also take another look at Google Cloud Logging (see https://www.npmjs.com/package/@google-cloud/logging-winston)
-- Deployment
-  - Look at how the other apps do it, will require an App Engine template.
-  - You might also need to make some changes to the package.json
-- Ensure existing functionality is tested (frontend and backend)
-  - The creation of the backend server should be moved to a function so that it can be created for each test
-  - Use supertest to test the express app
-- Add GitHub actions to run lints and tests
-  - Steal from other repos
-
 # Blaise Editing Service
 
 This service facilitates the review and editing of Blaise questionnaire data, supporting multiple user roles with distinct permissions and functionalities. It utilises two Blaise questionnaires: the original interview questionnaire and a derived "edit" questionnaire. A cloud function manages data synchronisation between these questionnaires.
