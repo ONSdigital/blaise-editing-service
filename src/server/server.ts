@@ -12,6 +12,7 @@ const cors = require('cors');
 
 export default function nodeServer(config: ConfigurationProvider, blaiseApi: BlaiseApi): Express {
   const server = express();
+
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
   server.use(cors());
@@ -24,15 +25,15 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const auth = new Auth(config);
 
   // survey routing
-  const surveyController = new SurveyController(blaiseApi, config);
+  const surveyController = new SurveyController(blaiseApi, config, auth);
   server.use('/', surveyController.getRoutes());
 
   // case routing
-  const caseController = new CaseController(blaiseApi, config);
+  const caseController = new CaseController(blaiseApi, config, auth);
   server.use('/', caseController.getRoutes());
 
   // User routing
-  const userController = new UserController(blaiseApi, config);
+  const userController = new UserController(blaiseApi, config, auth);
   server.use('/', userController.getRoutes());
 
   // login routing
