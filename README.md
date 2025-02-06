@@ -4,10 +4,30 @@ This service facilitates the review and editing of Blaise questionnaire data, su
 
 ## User Roles
 
-* **SVT Supervisor**: Assigns cases to editors, tracks editing progress, and can directly edit cases.
-* **SVT Editor**: Reviews and edits completed cases, flagged by specific outcome codes.
-* **Researcher**: Accesses and edits any case, regardless of status or organization.
-* **Survey Support**: Works with the original questionnaire, enabling case recoding.
+The user roles case access and filtering is set in:"src\server\configuration\ServerConfigurationProvider.ts", if the filtering array is empty then all cases are accessable.
+
+The roles are as follows:
+* **SVT Supervisor**: Assigns cases to editors, tracks editing progress, and can directly edit cases in the "edit" questionnaire dataset. Filtered to cases in the "ONS" organisation with successful outcome codes
+* **SVT Editor**: Reviews and edits completed cases in the "edit" questionnaire dataset. Filtered to cases in the "ONS" organisation with successful outcome codes
+* **Researcher**: Accesses and edits any case in the "edit" questionnaire dataset, regardless of status or organization.
+* **Survey Support**: Works with the original questionnaire ("main"), enabling the interviewer cases to be updated (usually to update the outcome code) and then can set cases to be set to be resent overnight and overwrite the "edit" questionnaire dataset for the case.
+
+## Questionnaire Requirements
+
+For this service to work the questionnaire needs to be in two parts:
+
+## "Main" questionnaire
+
+the "main" questionnaire, which the interviewers complete is completed the same way as the other surveys.
+* The data in this is then copied overnight to an "edit" version of the questionnaire by the python cloud function "copy-cases-to-edit"
+
+## "Edit" questionnaire
+
+the "edit" questionnaire, is used in this application by the editors.  It needs to be named the same as the "main" questionnaire but with "_EDIT" on the end.
+
+In the edit block there are fields which are used by this appliacation to know information about the case for editing purposes.
+
+
 
 # Local Setup
 
