@@ -26,6 +26,10 @@ the "main" questionnaire, which the interviewers complete is completed the same 
 the "edit" questionnaire, is used in this application by the editors.  It needs to be named the same as the "main" questionnaire but with "_EDIT" on the end.
 
 In the edit block there are fields which are used by this appliacation to know information about the case for editing purposes.
+* **QEdit.AssignedTo**: This is popuated by the app when a supervisor assignes a case to an editor, it is used to filter when an editor logs in to only show them their assigned cases
+* **QEdit.Edited**: This is set to 1 (in the questionnaire not byt the app) when the editor fisrt starts editing the case.  It is used to stop the cases being updated overnight as this would overwrite the edits if it did.
+* **QEdit.LastUpdated**: This is updated to the current datetime in the "main" questionnaire with the value passed to the "edit" questionnaire in the overnight job.  Cases will only show in the editing serice if the lst updated matches in both.
+* **QEdit.EditedStatus**: This enum is populated by the editor to show the status of editing the case with the options: [NotStarted = 0, Started = 1, Query = 2, Finished = 3].  This is then used in the editing service by editors and supervisors so they can see the workload and where it is at, they can also filter based on this status.
 
 
 
