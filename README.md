@@ -33,7 +33,7 @@ In the edit block there are fields which are used by the editing service to know
 * **QEdit.LastUpdated**: This is updated to the current datetime in the questionnaires with the value passed to the "edit" questionnaire in the overnight job.
 * **QEdit.EditedStatus**: This enum is populated by the editor to show the status of editing the case with the options: [NotStarted = 0, Started = 1, Query = 2, Finished = 3].  This is then used in the editing service by editors and supervisors so they can see the workload and where it is at, they can also filter based on this status.
 
-Cases will only show in the editing service for allocation and editing if:
+Cases will only show in the editing service for allocation and editing if **one** of the following criteria are met:
 * QEdit.Edited is set to 1
 * QEdit.LastUpdated is the same in both the "main" and the "edit" questionnaire for the case
 
