@@ -23,15 +23,19 @@ the "main" questionnaire, which the interviewers complete is completed the same 
 
 ## "Edit" questionnaire
 
-the "edit" questionnaire, is used in this application by the editors.  It needs to be named the same as the "main" questionnaire but with "_EDIT" on the end.
+the "edit" questionnaire, is used in this service by the editors.  It needs to be named the same as the "main" questionnaire but with "_EDIT" on the end.
 
 ## Addtional Fields
 
-In the edit block there are fields which are used by this appliacation to know information about the case for editing purposes.
+In the edit block there are fields which are used by the editing service to know information about the case for editing purposes.
 * **QEdit.AssignedTo**: This is popuated by the app when a supervisor assignes a case to an editor, it is used to filter when an editor logs in to only show them their assigned cases
 * **QEdit.Edited**: This is set to 1 (in the questionnaire not by the app) when the editor fisrt starts editing the case.  It is used to stop the cases being updated overnight as this would overwrite the edits if it did.
-* **QEdit.LastUpdated**: This is updated to the current datetime in the "main" questionnaire with the value passed to the "edit" questionnaire in the overnight job.  Cases will only show in the editing serice if the lst updated matches in both.
+* **QEdit.LastUpdated**: This is updated to the current datetime in the questionnaires with the value passed to the "edit" questionnaire in the overnight job.
 * **QEdit.EditedStatus**: This enum is populated by the editor to show the status of editing the case with the options: [NotStarted = 0, Started = 1, Query = 2, Finished = 3].  This is then used in the editing service by editors and supervisors so they can see the workload and where it is at, they can also filter based on this status.
+
+Cases will only show in the editing service for allocation and editing if:
+* QEdit.Edited is set to 1
+* QEdit.LastUpdated is the same in both the "main" and the "edit" questionnaire for the case
 
 There is also the functionality in the service to update cases in the "edit" overnight after editing has started.  This option is availiable to the Survey Support role, for use when they need to update the outcome of an intervewer case.  It does this by updating the following fields in the "edit" questionnaire.
 * **Set QEdit.AssignedTo = ''**: To make sure the case is no longer assigned to an editor
