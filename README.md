@@ -47,7 +47,7 @@ There is also functionality in the service to update cases in the "edit" questio
 
 ## Data entry settings
 
-There is a data entry mode or setting in to the questionnaire called `ReadOnly`, which allows the research team to make changes in the questionnaire without saving the changes. This is so that they can determine the consequences of each change. This setting is configured in questionnaire itself and once configured, a case can be set to read-only by adding ``DataEntrySettings=ReadOnly`` to the end of the URL string.
+There is a data entry mode or setting in to the questionnaire called `ReadOnly`, which allows the research team to make changes in the questionnaire without saving the changes. This is so that they can determine the consequences of each change. This setting is configured in questionnaire itself and once configured, a case can be set to read-only by adding ``DataEntrySettings=ReadOnly`` to the end of the questionnaire case URL.
 
 # Local Setup
 
