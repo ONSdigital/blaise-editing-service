@@ -41,9 +41,9 @@ Cases will only show in the editing service for allocation and editing if **one*
 
 There is also functionality in the service to update cases in the "edit" questionnaire overnight after editing has started. This option is available to the `Survey Support` role, for use when they need to update the outcome of an interviewer case.  It does this by updating the following fields in the "edit" questionnaire. This is implemented as a simple button, accessible only to `Survey Support`.
 
-* **Set ``QEdit.AssignedT`` = ``''``**: To make sure the case is no longer assigned to an editor
-* **Set ``QEdit.Edited`` = ``''``**: To allow the case to be picked up in the overnight update process
-* **Set ``QEdit.LastUpdated`` =** ``1900-01-01``: This filters out the case in the editing service stopping it from being edited or reassigned
+* **Set ``QEdit.AssignedT`` = ``''``**: To make sure the case is no longer assigned to an editor.
+* **Set ``QEdit.Edited`` = ``''``**: To allow the case to be picked up in the overnight update process.
+* **Set ``QEdit.LastUpdated`` =** ``1900-01-01``: This filters out the case in the editing service stopping it from being edited or reassigned.
 
 ## Data entry settings
 
