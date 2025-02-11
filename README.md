@@ -39,7 +39,7 @@ Cases will only show in the editing service for allocation and editing if **one*
 * `QEdit.Edited` is set to `1`.
 * `QEdit.LastUpdated` is the same in both the "main" and the "edit" questionnaire for the case.
 
-There is also functionality in the service to update cases in the "edit" questionnaire overnight after editing has started. This option is available to the `Survey Support` role, for use when they need to update the outcome of an interviewer case.  It does this by updating the following fields in the "edit" questionnaire. This is implemented as a simple button in the UI, exclusive only to `Survey Support`.
+There is also functionality in the service to update cases in the "edit" questionnaire overnight after editing has started. This option is available to the `Survey Support` role, for use when they need to update the outcome of an interviewer case.  It does this by updating the following fields in the "edit" questionnaire. This is implemented as a simple button, accessible only to `Survey Support`.
 
 * **Set ``QEdit.AssignedT`` = ``''``**: To make sure the case is no longer assigned to an editor
 * **Set ``QEdit.Edited`` = ``''``**: To allow the case to be picked up in the overnight update process
