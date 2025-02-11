@@ -43,7 +43,7 @@ There is also functionality in the service to update cases in the "edit" questio
 
 * **Set ``QEdit.AssignedT`` = ``''``**: To make sure the case is no longer assigned to an editor
 * **Set ``QEdit.Edited`` = ``''``**: To allow the case to be picked up in the overnight update process
-* **Set ``QEdit.LastUpdated`` = ``1900-01-01``**: This filters out the case in the editing service stopping it from being edited or reassigned
+* **Set ``QEdit.LastUpdated`` =** ``1900-01-01``: This filters out the case in the editing service stopping it from being edited or reassigned
 
 ## Data entry settings
 
