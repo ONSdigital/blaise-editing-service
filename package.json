@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^6.0.0",
-    "axios": "^1.7.6",
+    "axios": "^1.7.9",
     "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#9ee85ce5f4a6d3c84733703e1637dfa58c23f3b5",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#14786b365ff2bf5cc3a393ba2ae3cd2e2dd857b6",
     "blaise-login-react-client": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?f7fc532e1938ccb45831816311c85336510383ae",
