@@ -85,3 +85,23 @@ Open a tunnel to the RESTful API in your chosen GCP environment:
 ```shell
 gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:90 --zone europe-west2-a
 ```
+
+As this service logs in GCP you will need to login before running locally, you can do this with the following command:
+```shell
+gcloud auth application-default login
+```
+
+To run the application locally run
+```shell
+yarn start-server
+```
+
+Before commiting code ensure the following pass:
+* run the linting
+```shell
+yarn lint
+```
+* run the tests
+```shell
+yarn test
+```
