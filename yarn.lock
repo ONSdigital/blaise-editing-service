@@ -4480,7 +4480,7 @@ axios@^0.21.1, axios@~0.21.0:
   dependencies:
     follow-redirects "^1.14.0"
 
-axios@^0.28.0:
+axios@^0.28.1:
   version "0.28.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.28.1.tgz#2a7bcd34a3837b71ee1a5ca3762214b86b703e70"
   integrity sha512-iUcGA5a7p0mVb4Gm/sy+FSECNkPFT4y7wt6OM/CDpO/OnNCvSs3PoMG8ibrC9jRoGYU0gUK5pXVC4NPXq6lHRQ==
@@ -4743,12 +4743,12 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#a19ca426acc3bdda6a6d31f86875d1da4944a727":
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#bf927767e4546ac935289ccb43a09bc836e7227f":
   version "1.0.0"
-  resolved "https://github.com/ONSdigital/blaise-api-node-client#a19ca426acc3bdda6a6d31f86875d1da4944a727"
+  resolved "https://github.com/ONSdigital/blaise-api-node-client#bf927767e4546ac935289ccb43a09bc836e7227f"
   dependencies:
     "@babel/preset-env" "^7.14.7"
-    axios "^0.28.0"
+    axios "^0.28.1"
     blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git"
     browserslist "^4.22.2"
     eslint-config-airbnb-base "^15.0.0"
