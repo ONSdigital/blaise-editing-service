@@ -4480,6 +4480,15 @@ axios@^0.21.1, axios@~0.21.0:
   dependencies:
     follow-redirects "^1.14.0"
 
+axios@^0.28.0:
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.28.1.tgz#2a7bcd34a3837b71ee1a5ca3762214b86b703e70"
+  integrity sha512-iUcGA5a7p0mVb4Gm/sy+FSECNkPFT4y7wt6OM/CDpO/OnNCvSs3PoMG8ibrC9jRoGYU0gUK5pXVC4NPXq6lHRQ==
+  dependencies:
+    follow-redirects "^1.15.0"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
+
 axios@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.9.tgz#d7d071380c132a24accda1b2cfc1535b79ec650a"
@@ -4734,12 +4743,12 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#9ee85ce5f4a6d3c84733703e1637dfa58c23f3b5":
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#a19ca426acc3bdda6a6d31f86875d1da4944a727":
   version "1.0.0"
-  resolved "https://github.com/ONSdigital/blaise-api-node-client#9ee85ce5f4a6d3c84733703e1637dfa58c23f3b5"
+  resolved "https://github.com/ONSdigital/blaise-api-node-client#a19ca426acc3bdda6a6d31f86875d1da4944a727"
   dependencies:
     "@babel/preset-env" "^7.14.7"
-    axios "^0.21.1"
+    axios "^0.28.0"
     blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git"
     browserslist "^4.22.2"
     eslint-config-airbnb-base "^15.0.0"
@@ -7055,7 +7064,7 @@ fn.name@1.x.x:
   resolved "https://registry.yarnpkg.com/fn.name/-/fn.name-1.1.0.tgz#26cad8017967aea8731bc42961d04a3d5988accc"
   integrity sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==
 
-follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.15.6:
+follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.15.0, follow-redirects@^1.15.6:
   version "1.15.9"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.9.tgz#a604fa10e443bf98ca94228d9eebcc2e8a2c8ee1"
   integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
