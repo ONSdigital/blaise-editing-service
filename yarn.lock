@@ -4480,16 +4480,7 @@ axios@^0.21.1, axios@~0.21.0:
   dependencies:
     follow-redirects "^1.14.0"
 
-axios@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.29.0.tgz#5eed1a0bc4c0ffe060624eb7900aff66b7881eeb"
-  integrity sha512-Kjsq1xisgO5DjjNQwZFsy0gpcU1P2j36dZeQDXVhpIU26GVgkDUnROaHLSuluhMqtDE7aKA2hbKXG5yu5DN8Tg==
-  dependencies:
-    follow-redirects "^1.15.4"
-    form-data "^4.0.0"
-    proxy-from-env "^1.1.0"
-
-axios@^1.7.9:
+axios@^1.7.4, axios@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.9.tgz#d7d071380c132a24accda1b2cfc1535b79ec650a"
   integrity sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==
@@ -4743,18 +4734,18 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#6d11f3ea2bb1297853aa9899e2e82e49a6bdc0d9":
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#fff1530e4873ed0dde976a4cc6063d3530c61054":
   version "1.0.0"
-  resolved "https://github.com/ONSdigital/blaise-api-node-client#6d11f3ea2bb1297853aa9899e2e82e49a6bdc0d9"
+  resolved "https://github.com/ONSdigital/blaise-api-node-client#fff1530e4873ed0dde976a4cc6063d3530c61054"
   dependencies:
     "@babel/preset-env" "^7.14.7"
-    axios "^0.29.0"
+    axios "^1.7.4"
     blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git"
     browserslist "^4.22.2"
     eslint-config-airbnb-base "^15.0.0"
     eslint-plugin-import "^2.29.1"
     regenerator-runtime "^0.14.1"
-    typescript "~4.2.2"
+    typescript "^4.9.5"
 
 "blaise-design-system-react-components@git+https://github.com/ONSdigital/blaise-design-system-react-components#0.14.0", "blaise-design-system-react-components@https://github.com/ONSdigital/blaise-design-system-react-components#0.15.0":
   version "1.0.0"
@@ -7064,7 +7055,7 @@ fn.name@1.x.x:
   resolved "https://registry.yarnpkg.com/fn.name/-/fn.name-1.1.0.tgz#26cad8017967aea8731bc42961d04a3d5988accc"
   integrity sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==
 
-follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.15.4, follow-redirects@^1.15.6:
+follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.15.6:
   version "1.15.9"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.9.tgz#a604fa10e443bf98ca94228d9eebcc2e8a2c8ee1"
   integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
