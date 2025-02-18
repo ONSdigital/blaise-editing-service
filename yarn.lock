@@ -4461,7 +4461,7 @@ axios@^0.21.1, axios@~0.21.0:
   dependencies:
     follow-redirects "^1.14.0"
 
-axios@^1.7.9:
+axios@^1.7.4, axios@^1.7.9:
   version "1.7.9"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.9.tgz#d7d071380c132a24accda1b2cfc1535b79ec650a"
   integrity sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==
@@ -4715,18 +4715,18 @@ binary-extensions@^2.0.0:
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#9ee85ce5f4a6d3c84733703e1637dfa58c23f3b5":
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#1.1.0", "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client#75d3ecba6893015fc506e90860acba7f9f4aa478":
   version "1.0.0"
-  resolved "https://github.com/ONSdigital/blaise-api-node-client#9ee85ce5f4a6d3c84733703e1637dfa58c23f3b5"
+  resolved "https://github.com/ONSdigital/blaise-api-node-client#75d3ecba6893015fc506e90860acba7f9f4aa478"
   dependencies:
     "@babel/preset-env" "^7.14.7"
-    axios "^0.21.1"
-    blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git"
+    axios "^1.7.4"
+    blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#1.0.0"
     browserslist "^4.22.2"
     eslint-config-airbnb-base "^15.0.0"
     eslint-plugin-import "^2.29.1"
     regenerator-runtime "^0.14.1"
-    typescript "~4.2.2"
+    typescript "^4.9.5"
 
 "blaise-design-system-react-components@git+https://github.com/ONSdigital/blaise-design-system-react-components#0.14.0", "blaise-design-system-react-components@https://github.com/ONSdigital/blaise-design-system-react-components#0.15.0":
   version "1.0.0"
@@ -4740,9 +4740,9 @@ binary-extensions@^2.0.0:
     react-loader-spinner "^4.0.0"
     storybook "^8.5.6"
 
-"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git":
+"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#1.0.0":
   version "1.0.0"
-  resolved "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#16c9937771369c6cf51dd23af24f0e8755e58e26"
+  resolved "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#3184e5c462b7ae3f6728aae78eecf8e196bb4ed2"
   dependencies:
     "@babel/preset-env" "^7.14.7"
     "@types/jsonwebtoken" "^8.5.5"
