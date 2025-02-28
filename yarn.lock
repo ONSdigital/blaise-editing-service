@@ -1964,7 +1964,7 @@
     "@babel/parser" "^7.26.9"
     "@babel/types" "^7.26.9"
 
-"@babel/traverse@^7.20.5", "@babel/traverse@^7.21.5", "@babel/traverse@^7.22.5", "@babel/traverse@^7.22.6", "@babel/traverse@^7.25.9", "@babel/traverse@^7.26.5", "@babel/traverse@^7.26.8", "@babel/traverse@^7.26.9", "@babel/traverse@^7.7.2":
+"@babel/traverse@^7.20.5", "@babel/traverse@^7.21.5", "@babel/traverse@^7.22.5", "@babel/traverse@^7.22.6", "@babel/traverse@^7.23.2", "@babel/traverse@^7.25.9", "@babel/traverse@^7.26.5", "@babel/traverse@^7.26.8", "@babel/traverse@^7.26.9", "@babel/traverse@^7.7.2":
   version "7.26.9"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.26.9.tgz#4398f2394ba66d05d988b2ad13c219a2c857461a"
   integrity sha512-ZYW7L+pL8ahU5fXmNbPF+iZFHCv5scFak7MZ9bwaRPLUhHh7QQEMjZUg0HevihoqCM5iSYHN61EyCoZvqC+bxg==
@@ -5006,9 +5006,9 @@ binary-extensions@^2.0.0:
     jsonwebtoken "^9.0.0"
     path-parse "^1.0.7"
 
-"blaise-login-react-client@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?efee732575d0f6b6a2f3e30941d60ab6383a287e":
+"blaise-login-react-client@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?563bb04ea68ccedfda4d7cc965167b8be8024d11":
   version "1.0.0"
-  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?efee732575d0f6b6a2f3e30941d60ab6383a287e#9eae0490d457ad54a7637da9a6f01f6a124cf3a7"
+  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-client?563bb04ea68ccedfda4d7cc965167b8be8024d11#2b1ed4d67dd6a17dd2d4219254a60ab8d54f2102"
   dependencies:
     axios "^1.7.9"
     blaise-api-node-client "git+https://github.com/ONSdigital/blaise-api-node-client#2.0.0"
@@ -5020,9 +5020,9 @@ binary-extensions@^2.0.0:
     react-router-dom "^6.21.3"
     universal-cookie "^4.0.4"
 
-"blaise-login-react-server@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?efee732575d0f6b6a2f3e30941d60ab6383a287e":
+"blaise-login-react-server@https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?563bb04ea68ccedfda4d7cc965167b8be8024d11":
   version "1.1.0"
-  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?efee732575d0f6b6a2f3e30941d60ab6383a287e#78a115660f3040e07710090f95d74f2a2a88f3bc"
+  resolved "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react-server?563bb04ea68ccedfda4d7cc965167b8be8024d11#5b584c995c67d4ef3e64bebc1ceda90a2af3ecbb"
   dependencies:
     "@babel/preset-env" "^7.26.9"
     axios "^1.7.9"
