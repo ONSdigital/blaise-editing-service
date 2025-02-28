@@ -1195,12 +1195,15 @@ exports[`Given there are surveys available in blaise should render the superviso
                           </a>
                         </td>
                         <td
+                          aria-label="1"
                           class="ons-table__cell"
                         />
                         <td
+                          aria-label="2"
                           class="ons-table__cell"
                         />
                         <td
+                          aria-label="3"
                           class="ons-table__cell"
                         />
                       </tr>
@@ -1528,12 +1531,15 @@ exports[`Given there are surveys available in blaise should render the superviso
                         </a>
                       </td>
                       <td
+                        aria-label="1"
                         class="ons-table__cell"
                       />
                       <td
+                        aria-label="2"
                         class="ons-table__cell"
                       />
                       <td
+                        aria-label="3"
                         class="ons-table__cell"
                       />
                     </tr>
