@@ -72,9 +72,9 @@ export default function SupervisorContent({ questionnaire, supervisorInformation
               {' | '}
               <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/search`}>Search</Link>
             </td>
-            <td className="ons-table__cell" />
-            <td className="ons-table__cell" />
-            <td className="ons-table__cell" />
+            <td className="ons-table__cell" aria-label="1" />
+            <td className="ons-table__cell" aria-label="2" />
+            <td className="ons-table__cell" aria-label="3" />
           </tr>
         </>
       </ONSTable>
