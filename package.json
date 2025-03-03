@@ -20,7 +20,7 @@
     "run-server-watch": "nodemon ./dist/server/index.js",
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
     "dev": "concurrently npm:start-client npm:start-server-watch",
-    "gcp-build": "GENERATE_SOURCEMAP=false react-scripts build && tsc --project tsconfig.server.json",
+    "gcp-build": "GENERATE_SOURCEMAP=false yarn build",
     "start": "node ./dist/server/index.js"
   },
   "proxy": "http://localhost:5000",
@@ -85,7 +85,6 @@
     "@typescript-eslint/parser": "^6.20.0",
     "@vitejs/plugin-react": "^4.3.4",
     "axios-mock-adapter": "^1.21.5",
-    "browserslist-to-esbuild": "^2.1.1",
     "eslint": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
