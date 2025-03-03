@@ -5,9 +5,9 @@
   "target": "esnext",
   "module": "esnext",
   "scripts": {
-    "start-react": "react-scripts start",
-    "build-react": "react-scripts build",
-    "eject-react": "react-scripts eject",
+    "build": "vite build && yarn build-server",
+    "preview-build": "yarn build && vite preview",
+    "start-client": "vite",
     "clean": "npx rimraf dist && npx rimraf build",
     "test-react": "yarn clean && yarn build-react && jest --coverage --watchAll=false",
     "test-server": "yarn clean && yarn build-server && jest --coverage --watchAll=false",
@@ -15,11 +15,11 @@
     "lint": "yarn eslint . --fix",
     "build-server": "tsc --project tsconfig.server.json",
     "run-server": "node ./dist/server/index.js",
-    "start-server": "yarn lint && yarn clean && yarn build-react && yarn build-server && yarn run-server",
+    "start-server": "yarn lint && yarn clean && yarn build && yarn run-server",
     "build-server-watch": "yarn build-server -w",
     "run-server-watch": "nodemon ./dist/server/index.js",
     "start-server-watch": "concurrently npm:build-server-watch npm:run-server-watch",
-    "dev": "concurrently npm:start-react npm:start-server-watch",
+    "dev": "concurrently npm:start-client npm:start-server-watch",
     "gcp-build": "GENERATE_SOURCEMAP=false react-scripts build && tsc --project tsconfig.server.json",
     "start": "node ./dist/server/index.js"
   },
@@ -64,7 +64,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
-    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0",
     "winston": "^3.17.0"
   },
@@ -84,7 +83,9 @@
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "axios-mock-adapter": "^1.21.5",
+    "browserslist-to-esbuild": "^2.1.1",
     "eslint": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -100,6 +101,10 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
     "typemoq": "^2.1.0",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vite": "^6.2.0",
+    "vite-plugin-commonjs": "^0.10.4",
+    "vite-plugin-svgr": "^4.3.0",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
