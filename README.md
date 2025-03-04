@@ -7,6 +7,7 @@ This service facilitates the review and editing of Blaise questionnaire data, su
 The user roles case access and filtering is set in: `src\server\configuration\ServerConfigurationProvider.ts`, if the filtering array is empty then all cases are accessible.
 
 The roles are as follows:
+
 * **SVT Supervisor**: Assigns cases to editors, tracks editing progress, and can directly edit cases in the "edit" questionnaire dataset. Filtered to cases in the "ONS" organisation with successful outcome codes.
 * **SVT Editor**: Reviews and edits completed cases in the "edit" questionnaire dataset. Filtered to cases in the "ONS" organisation with successful outcome codes.
 * **Researcher**: Accesses and edits any case in the "edit" questionnaire dataset, regardless of status or organization.
@@ -19,6 +20,7 @@ For this service to work, the questionnaire needs to be in two parts:
 ### "Main" questionnaire
 
 The "main" questionnaire, which the interviewers complete is completed the same way as the other surveys.
+
 * The data in this is then copied overnight to an "edit" version of the questionnaire by the [cloud function](https://github.com/ONSdigital/blaise-editing-cloud-functions), `copy-cases-to-edit`.
 
 ### "Edit" questionnaire
@@ -52,9 +54,10 @@ There is a data entry mode or setting in the questionnaire called `ReadOnly`, wh
 # Local Setup
 
 Prerequisites
-- [Node.js](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
-- [Cloud SDK](https://cloud.google.com/sdk/)
+
+* [Node.js](https://nodejs.org/)
+* [Yarn](https://yarnpkg.com/)
+* [Cloud SDK](https://cloud.google.com/sdk/)
 
 Clone the repository:
 
@@ -67,7 +70,7 @@ Create an .env file in the root of the project and add the following environment
 | Variable | Description | Example |
 | --- | --- | --- |
 | PORT | Port for the express server | 5000 |
-| BLAISE_API_URL | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on (including protocol) | http://localhost:90 |
+| BLAISE_API_URL | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on (including protocol) | <http://localhost:90> |
 | SERVER_PARK | Name of the Blaise server park | gusty |
 | VM_EXTERNAL_WEB_URL | External URL used for CATI (not including protocol) | cati.example.com |
 
@@ -82,26 +85,33 @@ VM_EXTERNAL_WEB_URL='cati.example.com'
 
 This service interacts with Blaise via our custom Blaise RESTful API.
 Open a tunnel to the RESTful API in your chosen GCP environment:
+
 ```shell
 gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:90 --zone europe-west2-a
 ```
 
-As this service logs in GCP you will need to login before running locally, you can do this with the following command:
+As this service logs in GCP you will need to login before running loca§lly, you can do this with the following command:
+
 ```shell
 gcloud auth application-default login
 ```
 
 To run the application locally run
+
 ```shell
 yarn start-server
 ```
 
 Before commiting code ensure the following pass:
+
 * run the linting
+
 ```shell
 yarn lint
 ```
+
 * run the tests
+
 ```shell
 yarn test
 ```
