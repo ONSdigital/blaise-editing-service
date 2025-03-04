@@ -65,6 +65,12 @@ Clone the repository:
 git clone https://github.com/ONSdigital/blaise-editing-service
 ```
 
+Install application dependencies locally:
+
+```shell script
+yarn install
+```
+
 Create an .env file in the root of the project and add the following environment variables:
 
 | Variable | Description | Example |
@@ -83,34 +89,42 @@ SERVER_PARK='gusty'
 VM_EXTERNAL_WEB_URL='https://cati.example.com'
 ```
 
+### GCP Setup
+
 This service interacts with Blaise via our custom Blaise RESTful API.
 Open a tunnel to the RESTful API in your chosen GCP environment:
 
-```shell
-gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:90 --zone europe-west2-a
+```shell script
+gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:<API_PORT> --zone europe-west2-a
 ```
 
-As this service logs in GCP you will need to login before running loca§lly, you can do this with the following command:
+**NB** Ensure the REST API tunnel is running on the correct address and port that you expect, i.e. the proxy address outlined in `package.json` and `vite.config.js` should both match.
 
-```shell
+As this service outputs logs to GCP, you will need to login before running the app, you can do this with the following command:
+
+```shell script
 gcloud auth application-default login
 ```
 
-To run the application locally run
+## Run App
 
-```shell
-yarn start-server
+Prequisites:
+
+* Blaise REST API access (via GCP IAP tunnel)
+* You are authenticated with GCP
+
+To run the application locally:
+
+```shell script
+yarn dev
 ```
 
-Before commiting code ensure the following pass:
+Once are running, you can interact with the app by visiting the address shown by terminal running.
+If you used the same port number as in the example `.env` file, the URL would be [localhost:5000](http://localhost:5000/).
 
-* run the linting
+## Testing
 
-```shell
-yarn lint
-```
-
-* run the tests
+Run the tests:
 
 ```shell
 yarn test
