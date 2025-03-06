@@ -9,13 +9,9 @@ export default defineConfig({
         coverage: {
             reporter: ['text', 'json', 'html'],
         },
-        maxWorkers: 1,
         poolOptions: {
-            minthreads: 1,
-            maxThreads: 1,
             forks: {
-                minForks: 1,
-                maxForks: 1,
+                singleFork: true,
             }
         },
     },
