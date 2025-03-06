@@ -41,7 +41,7 @@
   ],
   "no-param-reassign": ["error", { "props": false }]
   },
-  "ignorePatterns": [".eslintrc.js", "vite.config.ts", "vitest.config.ts", "node_modules/*", "dist/*", "build/*", "coverage/*"]
+  "ignorePatterns": [".eslintrc.js", "vite.config.ts", "vitest.config.ts", "node_modules/*","dist/*","coverage/*"]
 
 
 }
