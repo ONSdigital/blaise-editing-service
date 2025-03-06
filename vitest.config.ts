@@ -10,5 +10,9 @@ export default defineConfig({
             reporter: ['text', 'json', 'html'],
         },
         maxWorkers: 1,
+        poolOptions: {
+            minthreads: 1,
+            maxThreads: 1,
+        },
     },
 })
