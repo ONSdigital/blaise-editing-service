@@ -8,7 +8,7 @@
   "scripts": {
     "build": "yarn build-client && yarn build-server",
     "clean": "npx rimraf dist && npx rimraf build",
-    "test": "yarn clean && yarn build && vitest --coverage --no-watch",
+    "test": "vitest --coverage --no-watch",
     "test:bail": "yarn test --bail 1",
     "test:watch": "vitest -watch",
     "lint:fix": "yarn eslint . --fix",
