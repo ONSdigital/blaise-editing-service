@@ -9,4 +9,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
+  test: {
+    poolOptions: {
+      maxWorkers: 1,
+    },
+  },
 });
