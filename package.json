@@ -4,6 +4,7 @@
   "private": true,
   "target": "esnext",
   "module": "esnext",
+  "type": "module",
   "scripts": {
     "build": "yarn build-client && yarn build-server",
     "clean": "npx rimraf dist && npx rimraf build",
