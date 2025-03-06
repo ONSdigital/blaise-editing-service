@@ -13,6 +13,10 @@ export default defineConfig({
         poolOptions: {
             minthreads: 1,
             maxThreads: 1,
+            forks: {
+                minForks: 1,
+                maxForks: 1,
+            }
         },
     },
 })
