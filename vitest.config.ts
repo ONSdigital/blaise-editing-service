@@ -9,5 +9,11 @@ export default defineConfig({
         coverage: {
             reporter: ['text', 'json', 'html'],
         },
+        poolOptions: {
+            threads: {
+                minThreads: 1,
+                maxThreads: 4,
+            },
+        },
     },
 })
