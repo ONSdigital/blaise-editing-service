@@ -3,7 +3,6 @@ import {
   fireEvent,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Router from 'react-router';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import { getSpecificCaseEditInformation, setCaseToUpdate } from '../../../../client/api/NodeApi';
 import UserRole from '../../../../client/Common/enums/UserTypes';
@@ -14,17 +13,18 @@ import { caseEditInformationMockObject1 } from '../../../server/mockObjects/Case
 const supervisorRole:UserRole = UserRole.SVT_Supervisor;
 const researcherRole:UserRole = UserRole.FRS_Research;
 const supportRole:UserRole = UserRole.Survey_Support;
-const questionnaireName = 'FRS2504A';
 let view:RenderResult;
 
 // set mocks
 /* eslint import/no-extraneous-dependencies: 0 */
-jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), useParams: jest.fn() }));
-jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName, caseId: `${caseEditInformationMockObject1.primaryKey}` });
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useParams: vi.fn().mockReturnValue({ questionnaireName: 'FRS2504A', caseId: '10001011' }),
+}));
 
-jest.mock('../../../../client/api/NodeApi');
-const getSpecificCaseEditInformationMock = getSpecificCaseEditInformation as jest.Mock<Promise<CaseEditInformation>>;
-const setCaseToUpdateMock = setCaseToUpdate as jest.Mock<Promise<number>>;
+vi.mock('../../../../client/api/NodeApi');
+const getSpecificCaseEditInformationMock = getSpecificCaseEditInformation as vi.mock<Promise<CaseEditInformation>>;
+const setCaseToUpdateMock = setCaseToUpdate as vi.mock<Promise<number>>;
 
 describe('Given we want to view the Edit Case page of a case', () => {
   beforeEach(() => {
