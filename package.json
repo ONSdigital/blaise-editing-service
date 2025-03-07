@@ -12,6 +12,7 @@
     "test-vitest": "vitest --coverage --no-watch --poolOptions.forks.minForks 1",
     "test:bail": "yarn test-vitest --bail 1",
     "test:watch": "vitest -watch",
+    "test-fast": "yarn clean && yarn build && vitest --coverage --no-watch",
     "lint": "yarn eslint . --fix",
     "dev": "yarn clean && yarn build && yarn start-server",
     "dev-separate": "yarn build && concurrently npm:start-client npm:start-server",
