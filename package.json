@@ -5,6 +5,7 @@
   "target": "esnext",
   "module": "esnext",
   "scripts": {
+    "start": "node ./dist/server/index.js",
     "build": "yarn clean && yarn build-client && yarn build-server",
     "clean": "npx rimraf dist && npx rimraf build",
     "test": "yarn build && yarn test-vitest",
