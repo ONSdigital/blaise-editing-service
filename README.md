@@ -98,7 +98,7 @@ Open a tunnel to the RESTful API in your chosen GCP environment:
 gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:<API_PORT> --zone europe-west2-a
 ```
 
-**NB** Ensure the REST API tunnel is running on the correct address and port that you expect, i.e. the proxy address outlined in `package.json` and `vite.config.js` should both match.
+**NB** Ensure the REST API tunnel is running on the correct address and port that you expect, i.e. the proxy address outlined in `package.json`
 
 As this service outputs logs to GCP, you will need to login before running the app, you can do this with the following command:
 
