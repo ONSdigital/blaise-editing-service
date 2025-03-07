@@ -22,8 +22,8 @@ const configFake = new FakeServerConfigurationProvider();
 const user: User = userMockObject;
 
 // mock auth
-Auth.prototype.ValidateToken = jest.fn().mockReturnValue(true);
-Auth.prototype.GetUser = jest.fn().mockReturnValue({ name: user.name, role: user.role });
+Auth.prototype.ValidateToken = vi.fn().mockReturnValue(true);
+Auth.prototype.GetUser = vi.fn().mockReturnValue({ name: user.name, role: user.role });
 
 // mock blaise api client and cloud logger
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);

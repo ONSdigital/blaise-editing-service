@@ -1,4 +1,7 @@
 import {
+  describe, it, expect, beforeEach, afterEach,
+} from 'vitest';
+import {
   RenderResult, act, render,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
@@ -18,14 +21,18 @@ const validUserRoles:string[] = ['SVT Supervisor', 'SVT Editor'];
 let view:RenderResult;
 
 // create mocks
-jest.mock('blaise-login-react-client');
-const { MockAuthenticate } = jest.requireActual('blaise-login-react-client');
+vi.mock('blaise-login-react-client');
+const { MockAuthenticate } = await vi.importActual('blaise-login-react-client');
 Authenticate.prototype.render = MockAuthenticate.prototype.render;
 
-jest.mock('../../client/api/NodeApi');
-const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
-const getEditorInformationMock = getEditorInformation as jest.Mock<Promise<EditorInformation>>;
-const getSupervisorEditorInformationMock = getSupervisorEditorInformation as jest.Mock<Promise<SupervisorInformation>>;
+if (!MockAuthenticate || typeof MockAuthenticate.OverrideReturnValues !== 'function') {
+  throw new Error('MockAuthenticate import failed or has unexpected structure');
+}
+
+vi.mock('../../client/api/NodeApi');
+const getSurveysMock = getSurveys as vi.mock<Promise<Survey[]>>;
+const getEditorInformationMock = getEditorInformation as vi.mock<Promise<EditorInformation>>;
+const getSupervisorEditorInformationMock = getSupervisorEditorInformation as vi.mock<Promise<SupervisorInformation>>;
 
 describe('Renders the correct screen depending if the user has recently logged in', () => {
   beforeEach(() => {

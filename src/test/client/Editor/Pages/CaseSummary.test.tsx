@@ -1,10 +1,23 @@
+import {
+  describe, afterEach, it, expect,
+} from 'vitest';
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Router from 'react-router';
 import { CaseSummaryDetails } from '../../../../common/interfaces/caseInterface';
 import CaseSummary from '../../../../client/Editor/Pages/CaseSummary';
 import { getCaseSummary } from '../../../../client/api/NodeApi';
-// import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useParams: vi.fn().mockReturnValue({
+      questionnaireName: 'TEST111A',
+      caseId: '1',
+    }),
+  };
+});
+vi.mock('../../../../client/api/NodeApi');
 
 const caseSummaryDetailsMockObject: CaseSummaryDetails = {
   CaseId: '9001',
@@ -57,16 +70,8 @@ const caseSummaryDetailsMockObject: CaseSummaryDetails = {
 };
 
 // declare global vars
-const questionnaireName: string = 'TEST111A';
-const caseId: string = '1';
 let view:RenderResult;
-
-// declare mocks
-/* eslint import/no-extraneous-dependencies: 0 */
-jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), useParams: jest.fn() }));
-jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName, caseId });
-jest.mock('../../../../client/api/NodeApi');
-const getCaseSummaryDetailsMock = getCaseSummary as jest.Mock<Promise<CaseSummaryDetails>>;
+const getCaseSummaryDetailsMock = getCaseSummary as vi.mock<Promise<CaseSummaryDetails>>;
 
 describe('Given there is a case available in blaise for a questionnaire', () => {
   afterEach(() => {

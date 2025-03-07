@@ -14,9 +14,9 @@ const userRole:string = UserRole.SVT_Editor;
 let view:RenderResult;
 
 // set mocks
-jest.mock('../../../../client/api/NodeApi');
-const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
-const getEditorInformationMock = getEditorInformation as jest.Mock<Promise<EditorInformation>>;
+vi.mock('../../../../client/api/NodeApi');
+const getSurveysMock = getSurveys as vi.mock<Promise<Survey[]>>;
+const getEditorInformationMock = getEditorInformation as vi.mock<Promise<EditorInformation>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {

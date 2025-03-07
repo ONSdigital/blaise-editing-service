@@ -1,4 +1,8 @@
+import {
+  describe, beforeEach, it, vi,
+} from 'vitest';
 import { CaseResponse } from 'blaise-api-node-client';
+import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
 import { CaseSummaryDetails, HousingBenefits } from '../../../common/interfaces/caseInterface';
 import mapCaseSummary from '../../../server/mappers/caseMapper';
 
@@ -14,8 +18,8 @@ let caseResponseData: CaseResponse;
 
 describe('Map case response to case summary', () => {
   beforeEach(() => {
-    jest.resetModules();
-    caseResponseData = require('../mockObjects/CaseMockObject').caseResponseMockObject; /* eslint-disable-line */
+    vi.resetModules();
+    caseResponseData = JSON.parse(JSON.stringify(caseResponseMockObject));
   });
 
   it('It should return a correctly mapped summary with responent(s)', () => {

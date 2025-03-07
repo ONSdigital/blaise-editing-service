@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "ESNext",
+      "types": ["vite/client", "vitest/globals"],
       "outDir": "dist",
       "lib": [
         "dom",

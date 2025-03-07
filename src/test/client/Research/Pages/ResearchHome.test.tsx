@@ -17,9 +17,9 @@ const userRole:string = UserRole.FRS_Research;
 let view:RenderResult;
 
 // set mocks
-jest.mock('../../../../client/api/NodeApi');
-const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
-const getCaseInformationMock = getCaseSearchResults as jest.Mock<Promise<CaseEditInformation[]>>;
+vi.mock('../../../../client/api/NodeApi');
+const getSurveysMock = getSurveys as vi.mock<Promise<Survey[]>>;
+const getCaseInformationMock = getCaseSearchResults as vi.mock<Promise<CaseEditInformation[]>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {

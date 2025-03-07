@@ -49,7 +49,7 @@ describe('All expected routes are registered', () => {
 describe('Render react pages as default route', () => {
   it('should render the home page', async () => {
     // arrange
-    server.set('views', path.join(__dirname, '../../../build'));
+    server.set('views', path.join(__dirname, '../../../dist'));
     const sut = supertest(server);
 
     // act

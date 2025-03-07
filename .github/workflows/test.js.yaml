@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install
-      - run: yarn run test --silent --runInBand
+      - run: yarn run test --silent
       - name: Codecov
         uses: codecov/codecov-action@v2
         with:
