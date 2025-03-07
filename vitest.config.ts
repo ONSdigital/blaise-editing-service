@@ -9,10 +9,5 @@ export default defineConfig({
         coverage: {
             reporter: ['text', 'json', 'html'],
         },
-        poolOptions: {
-            forks: {
-                minForks: 1,
-            }
-        },
     },
 })
