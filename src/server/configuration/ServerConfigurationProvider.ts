@@ -43,7 +43,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       ROLES,
     } = process.env;
 
-    this.BuildFolder = '../../build';
+    this.BuildFolder = '../../dist';
 
     this.BlaiseApiUrl = fixUrl(getStringOrThrowError(BLAISE_API_URL, 'BLAISE_API_URL'));
 

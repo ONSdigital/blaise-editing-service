@@ -2,7 +2,6 @@ import {
   render, act, RenderResult, fireEvent,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Router from 'react-router';
 import { getAllocationDetails, updateAllocationDetails } from '../../../../client/api/NodeApi';
 import UserRole from '../../../../client/Common/enums/UserTypes';
 import { AllocationDetails } from '../../../../common/interfaces/allocationInterface';
@@ -12,17 +11,18 @@ import Allocate from '../../../../client/Supervisor/Pages/Allocate';
 // set global vars
 const supervisorRole:UserRole = UserRole.SVT_Supervisor;
 const editorRole:UserRole = UserRole.SVT_Editor;
-const questionnaireName = 'FRS2504A';
 let view:RenderResult;
 
 // set mocks
 /* eslint import/no-extraneous-dependencies: 0 */
-jest.mock('react-router', () => ({ ...jest.requireActual('react-router'), useParams: jest.fn() }));
-jest.spyOn(Router, 'useParams').mockReturnValue({ questionnaireName });
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useParams: vi.fn().mockReturnValue({ questionnaireName: 'FRS2504A', caseId: '10001011' }),
+}));
 
-jest.mock('../../../../client/api/NodeApi');
-const getAllocationDetailsMock = getAllocationDetails as jest.Mock<Promise<AllocationDetails>>;
-const updateAllocationDetailsMock = updateAllocationDetails as jest.Mock<Promise<void>>;
+vi.mock('../../../../client/api/NodeApi');
+const getAllocationDetailsMock = getAllocationDetails as vi.mock<Promise<AllocationDetails>>;
+const updateAllocationDetailsMock = updateAllocationDetails as vi.mock<Promise<void>>;
 
 describe('Given we wish to allocte cases from an Interviewer to an Editor', () => {
   const reallocate = false;
@@ -126,7 +126,7 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
     });
 
     // assert
-    expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Jake', ['10001013']);
+    expect(updateAllocationDetailsMock).toBeCalledWith('FRS2504A', 'Jake', ['10001013']);
   });
 
   it('should call updateAllocationDetails with the expected parameters when the allocation button is clicked is clicked and number of cases is limited to 1', async () => {
@@ -148,7 +148,7 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
     });
 
     // assert
-    expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Jake', ['10001011']);
+    expect(updateAllocationDetailsMock).toBeCalledWith('FRS2504A', 'Jake', ['10001011']);
   });
 
   it('should show a success message when allocation is successful', async () => {
@@ -170,7 +170,7 @@ describe('Given we wish to allocte cases from an Interviewer to an Editor', () =
 
     // assert
     const successMessage = view.getByTestId('SuccessMessage');
-    expect(successMessage).toHaveTextContent(`Case(s) '10001013' have been allocated to 'Jake' for '${questionnaireName}'`);
+    expect(successMessage).toHaveTextContent('Case(s) \'10001013\' have been allocated to \'Jake\' for \'FRS2504A\'');
 
     expect(view.queryByTestId('ErrorMessage')).not.toBeInTheDocument();
   });
@@ -304,7 +304,7 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
     });
 
     // assert
-    expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Rich', ['10001012', '10001015']);
+    expect(updateAllocationDetailsMock).toBeCalledWith('FRS2504A', 'Rich', ['10001012', '10001015']);
   });
 
   it('should call updateAllocationDetails with the expected parameters when the allocation button is clicked and number of cases is limited to 1', async () => {
@@ -326,7 +326,7 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
     });
 
     // assert
-    expect(updateAllocationDetailsMock).toBeCalledWith(questionnaireName, 'Rich', ['10001012']);
+    expect(updateAllocationDetailsMock).toBeCalledWith('FRS2504A', 'Rich', ['10001012']);
   });
 
   it('should show a success message when reallocation is successful', async () => {
@@ -348,7 +348,7 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
 
     // assert
     const successMessage = view.getByTestId('SuccessMessage');
-    expect(successMessage).toHaveTextContent(`Case(s) '10001012, 10001015' have been allocated to 'Rich' for '${questionnaireName}'`);
+    expect(successMessage).toHaveTextContent('Case(s) \'10001012, 10001015\' have been allocated to \'Rich\' for \'FRS2504A\'');
 
     expect(view.queryByTestId('ErrorMessage')).not.toBeInTheDocument();
   });

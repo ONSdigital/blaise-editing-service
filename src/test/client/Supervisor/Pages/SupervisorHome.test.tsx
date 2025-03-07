@@ -20,10 +20,10 @@ const userRole:string = UserRole.SVT_Supervisor;
 let view:RenderResult;
 
 // set mocks
-jest.mock('../../../../client/api/NodeApi');
-const getSurveysMock = getSurveys as jest.Mock<Promise<Survey[]>>;
-const getSupervisorCaseInformationMock = getSupervisorEditorInformation as jest.Mock<Promise<SupervisorInformation>>;
-const getCaseInformationMock = getCaseSearchResults as jest.Mock<Promise<CaseEditInformation[]>>;
+vi.mock('../../../../client/api/NodeApi');
+const getSurveysMock = getSurveys as vi.mock<Promise<Survey[]>>;
+const getSupervisorCaseInformationMock = getSupervisorEditorInformation as vi.mock<Promise<SupervisorInformation>>;
+const getCaseInformationMock = getCaseSearchResults as vi.mock<Promise<CaseEditInformation[]>>;
 
 describe('Given there are surveys available in blaise', () => {
   beforeEach(() => {
