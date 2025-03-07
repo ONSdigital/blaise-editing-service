@@ -17,10 +17,13 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   server.use(express.urlencoded({ extended: true }));
   server.use(cors());
 
-  // treat the index.html as a template and substitute the values at runtime
-  server.set('views', path.join(__dirname, config.BuildFolder));
+  // serve the entire build folder as static
+  const buildFolderPath = path.join(__dirname, config.BuildFolder);
+  server.use(express.static(buildFolderPath));
+
+  // set up views for rendering index.html
+  server.set('views', buildFolderPath);
   server.engine('html', ejs.renderFile);
-  server.use('/static', express.static(path.join(__dirname, `${config.BuildFolder}/static`)));
 
   const auth = new Auth(config);
 
