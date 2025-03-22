@@ -34,7 +34,7 @@ export default function AppContent({ user }: AppContentProps): ReactElement {
         <Route path="questionnaires/:questionnaireName/cases/:caseId/summary" element={<CaseSummary />} />
       </CreateRoutes>
 
-      <CreateRoutes onConditionThat={userRole === UserRole.FRS_Researcherer}>
+      <CreateRoutes onConditionThat={userRole === UserRole.FRS_Researcher}>
         <Route path="/" element={<ResearchHome user={user} />} />
         <Route path="/questionnaires/:questionnaireName/cases/:caseId/editcase" element={<EditCaseContent role={userRole} />} />
       </CreateRoutes>

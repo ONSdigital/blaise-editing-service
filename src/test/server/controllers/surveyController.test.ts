@@ -47,7 +47,7 @@ describe('Get surveys tests', () => {
     cloudLoggerMock.reset();
   });
 
-  it.each(['SVT Supervisor', 'SVT Editor', 'FRS Researcherer'])('should return a 200 response with an expected list of surveys for the SVT and research Roles', async (userRole) => {
+  it.each(['SVT Supervisor', 'SVT Editor', 'FRS Researcher'])('should return a 200 response with an expected list of surveys for the SVT and research Roles', async (userRole) => {
     // arrange
     // mock blaise client to return a list of questionnaires with allocation
 
@@ -132,7 +132,7 @@ describe('Get surveys tests', () => {
     blaiseApiMock.verify((api) => api.getQuestionnaires(), Times.once());
   });
 
-  it.each(['SVT Supervisor', 'SVT Editor', 'FRS Researcherer'])('should log the number of questionnaires and filtered questionnaires for the SVT and research Roles', async (userRole) => {
+  it.each(['SVT Supervisor', 'SVT Editor', 'FRS Researcher'])('should log the number of questionnaires and filtered questionnaires for the SVT and research Roles', async (userRole) => {
     // arrange
     // mock blaise client to return a list of questionnaires with allocation
 
