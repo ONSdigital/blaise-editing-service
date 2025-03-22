@@ -27,7 +27,7 @@ function RenderQuestionnaireDetails(user:User, questionnaire:QuestionnaireDetail
     return <EditorQuestionnaireDetails questionnaire={questionnaire} username={name} editorRole={UserRole.SVT_Editor} />;
   }
 
-  if (role === UserRole.FRS_Research) {
+  if (role === UserRole.FRS_Researcher) {
     return <ResearchQuestionnaireDetails questionnaire={questionnaire} />;
   }
 

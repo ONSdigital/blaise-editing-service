@@ -26,7 +26,7 @@ export default function ResearchContent({ questionnaire }: ResearchContentProps)
       </ONSPanel>
       <br />
 
-      <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.FRS_Research} />
+      <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.FRS_Researcher} />
 
     </div>
   );
