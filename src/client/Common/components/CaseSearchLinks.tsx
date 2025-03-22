@@ -12,7 +12,7 @@ interface CaseSearchDetailsProps {
 export default function CaseSearchLinks({ questionnaireName, caseDetails, role }: CaseSearchDetailsProps): ReactElement {
   return (
     <>
-      {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Research)
+      {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Researcher)
                       && (
                         <>
                           <Link to={`/questionnaires/${questionnaireName}/cases/${caseDetails.primaryKey}/editcase`}>Edit case</Link>

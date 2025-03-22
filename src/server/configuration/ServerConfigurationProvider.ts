@@ -75,7 +75,7 @@ export default class ServerConfigurationProvider implements ServerConfiguration,
       ],
     },
     {
-      Role: 'FRS Research',
+      Role: 'FRS Researcher',
       Surveys: [{
         Survey: 'FRS',
         Organisations: [],
