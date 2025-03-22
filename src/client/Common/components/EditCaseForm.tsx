@@ -86,7 +86,7 @@ export default function EditCaseForm({
                 {role === UserRole.Survey_Support && (
                 <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
                 )}
-                {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Research) && (
+                {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Researcher) && (
                 <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
                 )}
               </td>
