@@ -11,7 +11,7 @@ import { caseEditInformationMockObject1 } from '../../../server/mockObjects/Case
 
 // set global vars
 const supervisorRole:UserRole = UserRole.SVT_Supervisor;
-const researcherRole:UserRole = UserRole.FRS_Researcherer;
+const researcherRole:UserRole = UserRole.FRS_Researcher;
 const supportRole:UserRole = UserRole.Survey_Support;
 let view:RenderResult;
 

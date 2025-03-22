@@ -138,7 +138,7 @@ describe('Authentication file tests', () => {
     const sut = new ServerConfigurationProvider();
 
     // assert
-    expect(sut.Roles).toEqual(['SVT Supervisor', 'SVT Editor', 'FRS Researcherer', 'Survey Support']);
+    expect(sut.Roles).toEqual(['SVT Supervisor', 'SVT Editor', 'FRS Researcher', 'Survey Support']);
   });
 
   it.each([undefined, '', '  ', '   '])('should throw an error if BLAISE_API_URL is empty or does not exist', (value) => {
@@ -198,7 +198,7 @@ describe('Authentication file tests', () => {
     expect(result.Organisations).toEqual([Organisation.ONS]);
   });
 
-  it.each(['FRS Researcherer'])('should return the expected surveys for the FRFRS Researchererole', (role) => {
+  it.each(['FRS Researcher'])('should return the expected surveys for the FRS Researcher role', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -209,7 +209,7 @@ describe('Authentication file tests', () => {
     expect(result).toEqual(['FRS']);
   });
 
-  it.each(['FRS Researcherer'])('should return the expected outcome configuration for FRFRS Researchererole for FRS', (role) => {
+  it.each(['FRS Researcher'])('should return the expected outcome configuration for FRS Researcher role for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
@@ -221,7 +221,7 @@ describe('Authentication file tests', () => {
     expect(result.Outcomes).toEqual([]);
   });
 
-  it.each(['FRS Researcherer'])('should return the expected organisation configuration for FRFRS Researchererole for FRS', (role) => {
+  it.each(['FRS Researcher'])('should return the expected organisation configuration for FRS Researcher role for FRS', (role) => {
     // arrange
     const sut = new ServerConfigurationProvider();
 
