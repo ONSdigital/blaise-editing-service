@@ -1,7 +1,7 @@
 enum UserRole {
   SVT_Supervisor = 'SVT Supervisor',
   SVT_Editor = 'SVT Editor',
-  FRS_Research = 'FRS Research',
+  FRS_Researcher = 'FRFRS Researcher
   Survey_Support = 'Survey Support',
 }
 
