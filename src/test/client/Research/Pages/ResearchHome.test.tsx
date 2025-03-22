@@ -13,7 +13,7 @@ import ResearchHome from '../../../../client/Research/Pages/ResearchHome';
 import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
 
 // set global vars
-const userRole:string = UserRole.FRS_Researcher;
+const userRole:string = UserRole.FRS_Researcherer;
 let view:RenderResult;
 
 // set mocks

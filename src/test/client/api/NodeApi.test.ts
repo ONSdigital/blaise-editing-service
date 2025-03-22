@@ -452,10 +452,10 @@ describe('updateAllocationDetails in Blaise', () => {
   });
 });
 
-describe('getCaseSearchResults from Blaise for FRS Researcher role', () => {
+describe('getCaseSearchResults from Blaise for FRS Researcherer role', () => {
   const questionnaireName = 'FRS2201';
   const caseId = '10001011';
-  const role = UserRole.FRS_Researcher;
+  const role = UserRole.FRS_Researcherer;
 
   it('Should retrieve a single case that matches the case id with a 200 response', async () => {
     // arrange
@@ -566,10 +566,10 @@ describe('getCaseSearchResults from Blaise for FRS Researcher role', () => {
   });
 });
 
-describe('getSpecificCaseEditInformation from Blaise for FRS Researcher role', () => {
+describe('getSpecificCaseEditInformation from Blaise for FRS Researcherer role', () => {
   const questionnaireName = 'FRS2201';
   const caseId = '10001011';
-  const role = UserRole.FRS_Researcher;
+  const role = UserRole.FRS_Researcherer;
 
   it('Should retrieve a single case that matches the case id with a 200 response', async () => {
     // arrange
