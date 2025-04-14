@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Auth } from 'blaise-login-react/blaise-login-react-server';
+import { Auth } from 'blaise-login-react-server';
 import { User } from 'blaise-api-node-client';
 import { Controller } from '../interfaces/controllerInterface';
 import notFound from '../helpers/axiosHelper';
