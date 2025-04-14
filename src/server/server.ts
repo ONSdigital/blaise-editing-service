@@ -1,7 +1,7 @@
 import express, { Request, Response, Express } from 'express';
 import ejs from 'ejs';
 import path from 'path';
-import { Auth, newLoginHandler } from 'blaise-login-react/blaise-login-react-server';
+import { Auth, newLoginHandler } from 'blaise-login-react-server';
 import SurveyController from './controllers/surveyController';
 import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
