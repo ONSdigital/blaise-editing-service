@@ -6,7 +6,7 @@ import BlaiseApiClient, {
   CaseEditInformation, CaseOutcome, EditedStatus, User,
 } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { Auth } from 'blaise-login-react-server';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import nodeServer from '../../../server/server';
 import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';
@@ -44,7 +44,7 @@ const sut = supertest(server);
 // Using Node.js `assert`
 // const assert = require('assert').strict;
 
-const validUserRoles:string[] = ['SVT Supervisor', 'SVT Editor'];
+const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
 
 describe('Get case summary tests', () => {
   beforeEach(() => {
@@ -163,7 +163,7 @@ describe('Get case summary tests', () => {
   });
 
   it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-  // arrange
+    // arrange
     const axiosError = createAxiosError(404);
     const caseId: string = '1';
     const questionnaireName: string = 'TEST111A';
@@ -193,7 +193,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
 
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -246,7 +246,7 @@ describe('Get case edit information tests', () => {
       },
     ];
 
-    const filteredCaseEditInformationListMockObject : CaseEditInformation[] = [
+    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -304,7 +304,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
 
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -357,7 +357,7 @@ describe('Get case edit information tests', () => {
       },
     ];
 
-    const filteredCaseEditInformationListMockObject : CaseEditInformation[] = [
+    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -414,7 +414,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
 
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -467,7 +467,7 @@ describe('Get case edit information tests', () => {
       },
     ];
 
-    const filteredCaseEditInformationListMockObject : CaseEditInformation[] = [
+    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -515,7 +515,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
 
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -568,7 +568,7 @@ describe('Get case edit information tests', () => {
       },
     ];
 
-    const filteredCaseEditInformationListMockObject : CaseEditInformation[] = [
+    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -615,7 +615,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
 
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -668,7 +668,7 @@ describe('Get case edit information tests', () => {
       },
     ];
 
-    const filteredCaseEditInformationListMockObject : CaseEditInformation[] = [
+    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001012',
         outcome: CaseOutcome.CompletedNudge,
@@ -696,7 +696,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
 
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -749,7 +749,7 @@ describe('Get case edit information tests', () => {
       },
     ];
 
-    const filteredCaseEditInformationListMockObject : CaseEditInformation[] = [
+    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001012',
         outcome: CaseOutcome.CompletedNudge,
@@ -776,7 +776,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
     const userRole = 'SVT AllOutcomes';
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -844,7 +844,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
     const userRole = 'SVT AllOutcomes';
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -911,7 +911,7 @@ describe('Get case edit information tests', () => {
     // arrange
     const questionnaireName = 'FRS2504A';
     const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,
@@ -938,7 +938,7 @@ describe('Get case edit information tests', () => {
     const questionnaireName = 'FRS2504A';
     const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
     const error = `Error: No '${questionnaireName.substring(0, 3)}' survey configuration found for Role ${userRole}`;
-    const caseEditInformationListMockObject : CaseEditInformation[] = [
+    const caseEditInformationListMockObject: CaseEditInformation[] = [
       {
         primaryKey: '10001011',
         outcome: CaseOutcome.Completed,

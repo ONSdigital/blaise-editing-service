@@ -52,7 +52,7 @@
     "axios": "^1.8.1",
     "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#2.0.0",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.0",
-    "blaise-login-react": "https://gitpkg.now.sh/ONSdigital/blaise-login-react/blaise-login-react#1.2.1",
+    "blaise-login-react": "git+https://github.com/ONSdigital/blaise-login-react#1.1.2",
     "concurrently": "^8.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
