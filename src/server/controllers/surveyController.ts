@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Auth } from 'blaise-login-react-server';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import { User } from 'blaise-api-node-client';
 import { Controller } from '../interfaces/controllerInterface';
 import notFound from '../helpers/axiosHelper';
@@ -27,7 +27,7 @@ export default class SurveyController implements Controller {
     return router.get('/api/surveys', this.auth.Middleware, this.getSurveys);
   }
 
-  async getSurveys(request: Request<{}, {}, {}, { userRole:string }>, response: Response<Survey[]>) {
+  async getSurveys(request: Request<{}, {}, {}, { userRole: string }>, response: Response<Survey[]>) {
     const { userRole } = request.query;
     const user = this.auth.GetUser(this.auth.GetToken(request));
 

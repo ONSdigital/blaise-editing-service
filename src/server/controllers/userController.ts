@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { User } from 'blaise-api-node-client';
-import { Auth } from 'blaise-login-react-server';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import { Controller } from '../interfaces/controllerInterface';
 import notFound from '../helpers/axiosHelper';
 import BlaiseApi from '../api/BlaiseApi';
@@ -25,7 +25,7 @@ export default class UserController implements Controller {
     return router.get('/api/users', this.auth.Middleware, this.getUsers);
   }
 
-  async getUsers(request: Request<{}, {}, {}, { userRole:string }>, response: Response<User[]>) {
+  async getUsers(request: Request<{}, {}, {}, { userRole: string }>, response: Response<User[]>) {
     const user = this.auth.GetUser(this.auth.GetToken(request));
     try {
       const userList = await this.blaiseApi.getUsers();
