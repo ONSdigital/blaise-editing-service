@@ -7,6 +7,7 @@ import { setCaseToUpdate } from '../../api/NodeApi';
 import UserRole from '../enums/UserTypes';
 import questionnaireDisplayName from '../functions/QuestionnaireFunctions';
 import { Message } from '../types/MessageType';
+import Breadcrumbs from './Breadcrumbs';
 
 interface EditCaseFormProps {
   caseDetails: CaseEditInformation;
@@ -38,6 +39,11 @@ export default function EditCaseForm({
 
   return (
     <>
+      <Breadcrumbs BreadcrumbList={
+        [
+          { link: "/", title: "Home" }
+        ]
+      } />
       <ONSPanel status="info" testID="edit-case-form-panel">
         Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
       </ONSPanel>
@@ -84,10 +90,10 @@ export default function EditCaseForm({
               <td className="ons-table__cell ons-u-fs-r--b">Editing link:</td>
               <td className="ons-table__cell ons-u-fs-r--b">
                 {role === UserRole.Survey_Support && (
-                <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
+                  <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
                 )}
                 {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Researcher) && (
-                <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
+                  <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
                 )}
               </td>
             </tr>
@@ -95,22 +101,22 @@ export default function EditCaseForm({
         </ONSTable>
       </div>
       {role === UserRole.Survey_Support && (
-      <>
-        <br />
-        <ONSPanel status="warn">
-          After finalising edits, sync your changes overnight with the editing database by clicking the button below.
-        </ONSPanel>
-        <div className="ons-u-mb-l">
-          <ONSButton
-            label="Update case"
-            id="update-case-button"
-            primary
-            loading={submitting}
-            disabled={submitting}
-            onClick={updateCase}
-          />
-        </div>
-      </>
+        <>
+          <br />
+          <ONSPanel status="warn">
+            After finalising edits, sync your changes overnight with the editing database by clicking the button below.
+          </ONSPanel>
+          <div className="ons-u-mb-l">
+            <ONSButton
+              label="Update case"
+              id="update-case-button"
+              primary
+              loading={submitting}
+              disabled={submitting}
+              onClick={updateCase}
+            />
+          </div>
+        </>
       )}
     </>
   );

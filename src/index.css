@@ -10,13 +10,12 @@ code {
 }
 
 .ons-description-list__items {
-  margin: 0 0 2rem
+  margin: 0 0 2rem;
 }
 
 .ons-description-list__term {
   clear: both;
   float: left;
-  font-weight: 700
 }
 
 .ons-description-list__term:not(:first-child) {
@@ -25,7 +24,8 @@ code {
 
 .ons-description-list__value {
   float: right;
-  margin-left: 0
+  margin-left: 0;
+  font-weight: 700;
 }
 
 @media(min-width:740px) {

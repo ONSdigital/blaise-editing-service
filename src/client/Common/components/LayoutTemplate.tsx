@@ -27,20 +27,16 @@ export default function LayoutTemplate({ children, showSignOutButton, signOut }:
         noSave
         signOutButton={showSignOutButton}
         signOutFunction={() => { signOut(); navigate('/'); }}
+        navigationLinks={[
+          { id: "home-link", label: "Home", endpoint: "/" },
+        ]}
+        currentLocation={location.pathname}
+        createNavLink={(id: string, label: string, endpoint: string) => (
+          <Link to={endpoint} id={id} className="ons-navigation__link">
+            {label}
+          </Link>
+        )}
       />
-
-      <SubNavigationTemplate>
-        <Link
-          className="ons-navigation__link"
-          to=".."
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-          }}
-        >
-          <strong>{'< Back'}</strong>
-        </Link>
-      </SubNavigationTemplate>
 
       <DefaultErrorBoundary>
         <div style={divStyle} className="ons-page__container ons-container" data-testid="app-content">
