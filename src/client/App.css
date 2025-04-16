@@ -38,18 +38,6 @@
   }
 }
 
-/* .ons-input {
-  width: 40% !important;
-} */
-
-/* .ons-label {
-  margin: 0.6rem 0 0.6rem !important;
-} */
-
-.ons-summary__item {
-  border: none !important;
-}
-
 .ons-summary__item-title,
 .ons-summary__values {
   flex: 2 !important;

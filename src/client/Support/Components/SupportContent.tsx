@@ -23,6 +23,43 @@ export default function SupportContent({ questionnaire }: RSupportContentProps):
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{questionnaire.numberOfCases}</dd>
         </dl>
       </ONSPanel>
+      {/* <div className="ons-summary ons-u-mb-m">
+        <div className="ons-summary__group">
+          <table className="ons-summary__items">
+            <thead className="ons-u-vh">
+              <tr>
+                <th>Detail</th>
+                <th>Output</th>
+              </tr>
+            </thead>
+            <tbody className="ons-summary__item">
+              <tr className="ons-summary__row ons-summary__row--has-values">
+                <td className="ons-summary__item-title">
+                  <div className="ons-summary__item--text">
+                    Field Period
+                  </div>
+                </td>
+                <td className="ons-summary__values" colSpan={2}>
+                  {questionnaire.fieldPeriod}
+                </td>
+              </tr>
+            </tbody>
+            <tbody className="ons-summary__item">
+              <tr className="ons-summary__row ons-summary__row--has-values">
+                <td className="ons-summary__item-title">
+                  <div className="ons-summary__item--text">
+                    Total number of cases
+                  </div>
+                </td>
+                <td className="ons-summary__values" colSpan={2}>
+                  {questionnaire.numberOfCases}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> */}
+
       <br />
       <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.Survey_Support} />
 
