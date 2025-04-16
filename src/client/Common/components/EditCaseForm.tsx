@@ -41,9 +41,10 @@ export default function EditCaseForm({
     <>
       <Breadcrumbs BreadcrumbList={
         [
-          { link: "/", title: "Home" }
+          { link: '/', title: 'Home' },
         ]
-      } />
+      }
+      />
       <ONSPanel status="info" testID="edit-case-form-panel">
         Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
       </ONSPanel>
