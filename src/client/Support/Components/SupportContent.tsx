@@ -26,6 +26,6 @@ export default function SupportContent({ questionnaire }: RSupportContentProps):
       <br />
       <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.Survey_Support} />
 
-    </div >
+    </div>
   );
 }
