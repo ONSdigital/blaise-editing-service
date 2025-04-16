@@ -75,12 +75,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Case ID:
+                Case ID
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 10001011
               </td>
@@ -89,12 +89,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Outcome:
+                Outcome
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 110
               </td>
@@ -103,12 +103,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Interviewer:
+                Interviewer
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 rich
               </td>
@@ -117,12 +117,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Organisation:
+                Organisation
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 ONS
               </td>
@@ -131,12 +131,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Editing link:
+                Editing link
               </td>
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 <a
                   data-testid="edit-case-link"
@@ -224,12 +224,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Case ID:
+              Case ID
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               10001011
             </td>
@@ -238,12 +238,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Outcome:
+              Outcome
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               110
             </td>
@@ -252,12 +252,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Interviewer:
+              Interviewer
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               rich
             </td>
@@ -266,12 +266,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Organisation:
+              Organisation
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               ONS
             </td>
@@ -280,12 +280,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Editing link:
+              Editing link
             </td>
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               <a
                 data-testid="edit-case-link"
@@ -430,12 +430,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Case ID:
+                Case ID
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 10001011
               </td>
@@ -444,12 +444,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Outcome:
+                Outcome
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 110
               </td>
@@ -458,12 +458,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Interviewer:
+                Interviewer
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 rich
               </td>
@@ -472,12 +472,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Organisation:
+                Organisation
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 ONS
               </td>
@@ -486,12 +486,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Editing link:
+                Editing link
               </td>
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 <a
                   data-testid="edit-case-link"
@@ -579,12 +579,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Case ID:
+              Case ID
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               10001011
             </td>
@@ -593,12 +593,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Outcome:
+              Outcome
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               110
             </td>
@@ -607,12 +607,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Interviewer:
+              Interviewer
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               rich
             </td>
@@ -621,12 +621,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Organisation:
+              Organisation
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               ONS
             </td>
@@ -635,12 +635,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Editing link:
+              Editing link
             </td>
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               <a
                 data-testid="edit-case-link"
@@ -785,12 +785,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Case ID:
+                Case ID
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 10001011
               </td>
@@ -799,12 +799,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Outcome:
+                Outcome
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 110
               </td>
@@ -813,12 +813,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Interviewer:
+                Interviewer
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 rich
               </td>
@@ -827,12 +827,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Organisation:
+                Organisation
               </td>
               <td
-                class="ons-table__cell"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 ONS
               </td>
@@ -841,12 +841,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
               class="ons-table__row"
             >
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m"
               >
-                Editing link:
+                Editing link
               </td>
               <td
-                class="ons-table__cell ons-u-fs-r--b"
+                class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
               >
                 <a
                   data-testid="edit-case-link"
@@ -971,12 +971,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Case ID:
+              Case ID
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               10001011
             </td>
@@ -985,12 +985,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Outcome:
+              Outcome
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               110
             </td>
@@ -999,12 +999,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Interviewer:
+              Interviewer
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               rich
             </td>
@@ -1013,12 +1013,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Organisation:
+              Organisation
             </td>
             <td
-              class="ons-table__cell"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               ONS
             </td>
@@ -1027,12 +1027,12 @@ exports[`Given we want to view the Edit Case page of a case > should render the 
             class="ons-table__row"
           >
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m"
             >
-              Editing link:
+              Editing link
             </td>
             <td
-              class="ons-table__cell ons-u-fs-r--b"
+              class="ons-table__cell ons-col-6@m ons-u-fs-r--b"
             >
               <a
                 data-testid="edit-case-link"

@@ -60,36 +60,36 @@ export default function EditCaseForm({
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-CaseID`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Case ID:</td>
-              <td className="ons-table__cell">{caseDetails.primaryKey}</td>
+              <td className="ons-table__cell ons-col-6@m">Case ID</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{caseDetails.primaryKey}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Outcome`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Outcome:</td>
-              <td className="ons-table__cell">{caseDetails.outcome}</td>
+              <td className="ons-table__cell ons-col-6@m">Outcome</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{caseDetails.outcome}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Interviewer`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Interviewer:</td>
-              <td className="ons-table__cell">{caseDetails.interviewer}</td>
+              <td className="ons-table__cell ons-col-6@m">Interviewer</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{caseDetails.interviewer}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Organisation`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Organisation:</td>
-              <td className="ons-table__cell">{Organisation[caseDetails.organisation]}</td>
+              <td className="ons-table__cell ons-col-6@m">Organisation</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{Organisation[caseDetails.organisation]}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Editing-link`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Editing link:</td>
-              <td className="ons-table__cell ons-u-fs-r--b">
+              <td className="ons-table__cell ons-col-6@m">Editing link</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">
                 {role === UserRole.Survey_Support && (
                   <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
                 )}
