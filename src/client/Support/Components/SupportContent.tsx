@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { ONSPanel } from 'blaise-design-system-react-components';
+
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 import CaseSearchForm from '../../Common/components/CaseSearchForm';
 import UserRole from '../../Common/enums/UserTypes';
