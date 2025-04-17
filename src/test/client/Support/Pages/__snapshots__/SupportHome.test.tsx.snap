@@ -89,95 +89,6 @@ exports[`Given there are no surveys available in blaise > should render the page
 }
 `;
 
-exports[`Given there are no surveys available in blaise should render the page correctly when no surveys are returned: SupportPageNoSurveysReturned 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-testid="Surveys"
-      >
-        <div
-          class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
-        >
-          <div
-            class="ons-panel__body "
-          >
-            There are no surveys available
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      data-testid="Surveys"
-    >
-      <div
-        class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          There are no surveys available
-        </div>
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
 exports[`Given there are surveys available in blaise > should render the Support page correctly when surveys are returned > SupportPageSurveysReturned 1`] = `
 {
   "asFragment": [Function],
@@ -282,37 +193,70 @@ exports[`Given there are surveys available in blaise > should render the Support
                   class="questionnaire"
                 >
                   <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                    class="ons-summary ons-u-mb-m"
                   >
                     <div
-                      class="ons-panel__body "
+                      class="ons-summary__group"
                     >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+                      <table
+                        class="ons-summary__items"
                         data-testid="FRS2504A_EDIT-Support-Content"
-                        title="Questionnares"
                       >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
+                        <thead
+                          class="ons-u-vh"
                         >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Total number of cases
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
+                          <tr>
+                            <th>
+                              Detail
+                            </th>
+                            <th>
+                              Output
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            class="ons-summary__row ons-summary__row--has-values"
+                          >
+                            <td
+                              class="ons-summary__item-title"
+                            >
+                              <div
+                                class="ons-summary__item--text"
+                              >
+                                Field Period
+                              </div>
+                            </td>
+                            <td
+                              class="ons-summary__values"
+                              colspan="2"
+                            >
+                              April 2025
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+                          <tr
+                            class="ons-summary__row ons-summary__row--has-values"
+                          >
+                            <td
+                              class="ons-summary__item-title"
+                            >
+                              <div
+                                class="ons-summary__item--text"
+                              >
+                                Total number of cases
+                              </div>
+                            </td>
+                            <td
+                              class="ons-summary__values"
+                              colspan="2"
+                            >
+                              3
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                   <br />
@@ -455,37 +399,70 @@ exports[`Given there are surveys available in blaise > should render the Support
                 class="questionnaire"
               >
                 <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                  class="ons-summary ons-u-mb-m"
                 >
                   <div
-                    class="ons-panel__body "
+                    class="ons-summary__group"
                   >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+                    <table
+                      class="ons-summary__items"
                       data-testid="FRS2504A_EDIT-Support-Content"
-                      title="Questionnares"
                     >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
+                      <thead
+                        class="ons-u-vh"
                       >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Total number of cases
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
+                        <tr>
+                          <th>
+                            Detail
+                          </th>
+                          <th>
+                            Output
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          class="ons-summary__row ons-summary__row--has-values"
+                        >
+                          <td
+                            class="ons-summary__item-title"
+                          >
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Field Period
+                            </div>
+                          </td>
+                          <td
+                            class="ons-summary__values"
+                            colspan="2"
+                          >
+                            April 2025
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr
+                          class="ons-summary__row ons-summary__row--has-values"
+                        >
+                          <td
+                            class="ons-summary__item-title"
+                          >
+                            <div
+                              class="ons-summary__item--text"
+                            >
+                              Total number of cases
+                            </div>
+                          </td>
+                          <td
+                            class="ons-summary__values"
+                            colspan="2"
+                          >
+                            3
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
                 <br />
@@ -685,37 +662,70 @@ exports[`Given there are surveys available in blaise > should render the Support
                   class="questionnaire"
                 >
                   <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                    class="ons-summary ons-u-mb-m"
                   >
                     <div
-                      class="ons-panel__body "
+                      class="ons-summary__group"
                     >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+                      <table
+                        class="ons-summary__items"
                         data-testid="FRS2504A_EDIT-Support-Content"
-                        title="Questionnares"
                       >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
+                        <thead
+                          class="ons-u-vh"
                         >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Total number of cases
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
+                          <tr>
+                            <th>
+                              Detail
+                            </th>
+                            <th>
+                              Output
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            class="ons-summary__row ons-summary__row--has-values"
+                          >
+                            <td
+                              class="ons-summary__item-title"
+                            >
+                              <div
+                                class="ons-summary__item--text"
+                              >
+                                Field Period
+                              </div>
+                            </td>
+                            <td
+                              class="ons-summary__values"
+                              colspan="2"
+                            >
+                              April 2025
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+                          <tr
+                            class="ons-summary__row ons-summary__row--has-values"
+                          >
+                            <td
+                              class="ons-summary__item-title"
+                            >
+                              <div
+                                class="ons-summary__item--text"
+                              >
+                                Total number of cases
+                              </div>
+                            </td>
+                            <td
+                              class="ons-summary__values"
+                              colspan="2"
+                            >
+                              3
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                   <br />
@@ -1127,982 +1137,72 @@ exports[`Given there are surveys available in blaise > should render the Support
                 class="questionnaire"
               >
                 <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                  class="ons-summary ons-u-mb-m"
                 >
                   <div
-                    class="ons-panel__body "
-                  >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      title="Questionnares"
-                    >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Total number of cases
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-                <br />
-                <p
-                  class="ons-field"
-                >
-                  <label
-                    class="ons-label"
-                    for="caseid"
-                  >
-                    Enter case ID
-                  </label>
-                  <input
-                    class="ons-input ons-input--text ons-input-type__input "
-                    data-testid="text-input"
-                    id="caseid"
-                    style="z-index: 0;"
-                    type="text"
-                    value=""
-                  />
-                </p>
-                <button
-                  class="ons-btn "
-                  data-testid="button"
-                  type="button"
-                >
-                  <span
-                    class="ons-btn__inner"
-                  >
-                    Search
-                  </span>
-                </button>
-                <br />
-                <br />
-                <div
-                  class="case-search-results"
-                  data-testid="case-search-results"
-                >
-                  <table
-                    class="ons-table"
-                    data-testid="FRS2504A_EDIT-Case-results"
-                    id="FRS2504A_EDIT-Case-results"
-                  >
-                    <thead
-                      class="ons-table__head"
-                    >
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Case ID
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Outcome
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Interviewer
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Organisation
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      class="ons-table__body"
-                    >
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001011
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          110
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        >
-                          rich
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001011/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001012
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          110
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001012/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001013
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          210
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001013/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001014
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          120
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001014/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001015
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          110
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001015/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Given there are surveys available in blaise should render the Support page correctly when surveys are returned and search used: SupportPageSurveysReturnedSearchUsed 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-testid="Surveys"
-      >
-        <br />
-        <div
-          class="ons-accordion"
-          id="survey-accordion"
-        >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
-          >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
-              tabindex="0"
-            >
-              <div
-                class="ons-collapsible__controls"
-              >
-                <h2
-                  class="ons-collapsible__title"
-                >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
-            <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
-            >
-              <div>
-                <label
-                  class="ons-label"
-                  for="select-questionnaire"
-                >
-                  Select questionnaire
-                   
-                </label>
-                <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
-                  id="select-questionnaire"
-                  name="select"
-                >
-                  <option
-                    data-testid="select-select-questionnaire"
-                    disabled=""
-                    value=""
-                  >
-                    Select an option
-                  </option>
-                  <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
-                    value="FRS2504A_EDIT"
-                  >
-                    FRS2504A (April 2025)
-                  </option>
-                  <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
-                    value="FRS2505A_EDIT"
-                  >
-                    FRS2505A (May 2025)
-                  </option>
-                </select>
-              </div>
-              <div
-                class="questionnaire"
-                data-testid="questionnaire"
-              >
-                <div
-                  class="questionnaire"
-                >
-                  <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-                  >
-                    <div
-                      class="ons-panel__body "
-                    >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="FRS2504A_EDIT-Support-Content"
-                        style="padding: 0px 0px 15px 5px;"
-                        title="Questionnares"
-                      >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-5@m"
-                        >
-                          Field period:
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-7@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-5@m"
-                        >
-                          Total number of cases:
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-7@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
-                    </div>
-                  </div>
-                  <br />
-                  <p
-                    class="ons-field"
-                  >
-                    <label
-                      class="ons-label"
-                      for="caseid"
-                    >
-                      Enter case ID
-                    </label>
-                    <input
-                      class="ons-input ons-input--text ons-input-type__input "
-                      data-testid="text-input"
-                      id="caseid"
-                      style="z-index: 0;"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <button
-                    class="ons-btn "
-                    data-testid="button"
-                    type="button"
-                  >
-                    <span
-                      class="ons-btn__inner"
-                    >
-                      Search
-                    </span>
-                  </button>
-                  <br />
-                  <br />
-                  <div
-                    class="case-search-results"
-                    data-testid="case-search-results"
+                    class="ons-summary__group"
                   >
                     <table
-                      class="ons-table"
-                      data-testid="FRS2504A_EDIT-Case-results"
-                      id="FRS2504A_EDIT-Case-results"
+                      class="ons-summary__items"
+                      data-testid="FRS2504A_EDIT-Support-Content"
                     >
                       <thead
-                        class="ons-table__head"
+                        class="ons-u-vh"
                       >
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Case ID
+                        <tr>
+                          <th>
+                            Detail
                           </th>
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Outcome
-                          </th>
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Interviewer
-                          </th>
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Organisation
+                          <th>
+                            Output
                           </th>
                         </tr>
                       </thead>
-                      <tbody
-                        class="ons-table__body"
-                      >
+                      <tbody>
                         <tr
-                          class="ons-table__row"
+                          class="ons-summary__row ons-summary__row--has-values"
                         >
                           <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
+                            class="ons-summary__item-title"
                           >
-                            10001011
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            110
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          >
-                            rich
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001011/editcase"
+                            <div
+                              class="ons-summary__item--text"
                             >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
+                              Field Period
+                            </div>
+                          </td>
+                          <td
+                            class="ons-summary__values"
+                            colspan="2"
+                          >
+                            April 2025
                           </td>
                         </tr>
+                      </tbody>
+                      <tbody>
                         <tr
-                          class="ons-table__row"
+                          class="ons-summary__row ons-summary__row--has-values"
                         >
                           <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
+                            class="ons-summary__item-title"
                           >
-                            10001012
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            110
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001012/editcase"
+                            <div
+                              class="ons-summary__item--text"
                             >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001013
+                              Total number of cases
+                            </div>
                           </td>
                           <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
+                            class="ons-summary__values"
+                            colspan="2"
                           >
-                            210
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001013/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001014
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            120
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001014/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001015
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            110
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001015/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
+                            3
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-              </div>
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      data-testid="Surveys"
-    >
-      <br />
-      <div
-        class="ons-accordion"
-        id="survey-accordion"
-      >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
-        >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
-            tabindex="0"
-          >
-            <div
-              class="ons-collapsible__controls"
-            >
-              <h2
-                class="ons-collapsible__title"
-              >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
-          <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
-          >
-            <div>
-              <label
-                class="ons-label"
-                for="select-questionnaire"
-              >
-                Select questionnaire
-                 
-              </label>
-              <select
-                class="ons-input "
-                data-testid="select-questionnaire"
-                id="select-questionnaire"
-                name="select"
-              >
-                <option
-                  data-testid="select-select-questionnaire"
-                  disabled=""
-                  value=""
-                >
-                  Select an option
-                </option>
-                <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
-                  value="FRS2504A_EDIT"
-                >
-                  FRS2504A (April 2025)
-                </option>
-                <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
-                  value="FRS2505A_EDIT"
-                >
-                  FRS2505A (May 2025)
-                </option>
-              </select>
-            </div>
-            <div
-              class="questionnaire"
-              data-testid="questionnaire"
-            >
-              <div
-                class="questionnaire"
-              >
-                <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-                >
-                  <div
-                    class="ons-panel__body "
-                  >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      style="padding: 0px 0px 15px 5px;"
-                      title="Questionnares"
-                    >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-5@m"
-                      >
-                        Field period:
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-7@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-5@m"
-                      >
-                        Total number of cases:
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-7@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
                 <br />
                 <p
                   class="ons-field"
@@ -2404,411 +1504,6 @@ exports[`Given there are surveys available in blaise should render the Support p
                     </tbody>
                   </table>
                 </div>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Given there are surveys available in blaise should render the Support page correctly when surveys are returned: SupportPageSurveysReturned 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-testid="Surveys"
-      >
-        <br />
-        <div
-          class="ons-accordion"
-          id="survey-accordion"
-        >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
-          >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
-              tabindex="0"
-            >
-              <div
-                class="ons-collapsible__controls"
-              >
-                <h2
-                  class="ons-collapsible__title"
-                >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
-            <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
-            >
-              <div>
-                <label
-                  class="ons-label"
-                  for="select-questionnaire"
-                >
-                  Select questionnaire
-                   
-                </label>
-                <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
-                  id="select-questionnaire"
-                  name="select"
-                >
-                  <option
-                    data-testid="select-select-questionnaire"
-                    disabled=""
-                    value=""
-                  >
-                    Select an option
-                  </option>
-                  <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
-                    value="FRS2504A_EDIT"
-                  >
-                    FRS2504A (April 2025)
-                  </option>
-                  <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
-                    value="FRS2505A_EDIT"
-                  >
-                    FRS2505A (May 2025)
-                  </option>
-                </select>
-              </div>
-              <div
-                class="questionnaire"
-                data-testid="questionnaire"
-              >
-                <div
-                  class="questionnaire"
-                >
-                  <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-                  >
-                    <div
-                      class="ons-panel__body "
-                    >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="FRS2504A_EDIT-Support-Content"
-                        style="padding: 0px 0px 15px 5px;"
-                        title="Questionnares"
-                      >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-5@m"
-                        >
-                          Field period:
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-7@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-5@m"
-                        >
-                          Total number of cases:
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-7@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
-                    </div>
-                  </div>
-                  <br />
-                  <p
-                    class="ons-field"
-                  >
-                    <label
-                      class="ons-label"
-                      for="caseid"
-                    >
-                      Enter case ID
-                    </label>
-                    <input
-                      class="ons-input ons-input--text ons-input-type__input "
-                      data-testid="text-input"
-                      id="caseid"
-                      style="z-index: 0;"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <button
-                    class="ons-btn "
-                    data-testid="button"
-                    type="button"
-                  >
-                    <span
-                      class="ons-btn__inner"
-                    >
-                      Search
-                    </span>
-                  </button>
-                  <br />
-                  <br />
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      data-testid="Surveys"
-    >
-      <br />
-      <div
-        class="ons-accordion"
-        id="survey-accordion"
-      >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
-        >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
-            tabindex="0"
-          >
-            <div
-              class="ons-collapsible__controls"
-            >
-              <h2
-                class="ons-collapsible__title"
-              >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
-          <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
-          >
-            <div>
-              <label
-                class="ons-label"
-                for="select-questionnaire"
-              >
-                Select questionnaire
-                 
-              </label>
-              <select
-                class="ons-input "
-                data-testid="select-questionnaire"
-                id="select-questionnaire"
-                name="select"
-              >
-                <option
-                  data-testid="select-select-questionnaire"
-                  disabled=""
-                  value=""
-                >
-                  Select an option
-                </option>
-                <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
-                  value="FRS2504A_EDIT"
-                >
-                  FRS2504A (April 2025)
-                </option>
-                <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
-                  value="FRS2505A_EDIT"
-                >
-                  FRS2505A (May 2025)
-                </option>
-              </select>
-            </div>
-            <div
-              class="questionnaire"
-              data-testid="questionnaire"
-            >
-              <div
-                class="questionnaire"
-              >
-                <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-                >
-                  <div
-                    class="ons-panel__body "
-                  >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      style="padding: 0px 0px 15px 5px;"
-                      title="Questionnares"
-                    >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-5@m"
-                      >
-                        Field period:
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-7@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-5@m"
-                      >
-                        Total number of cases:
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-7@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
-                <br />
-                <p
-                  class="ons-field"
-                >
-                  <label
-                    class="ons-label"
-                    for="caseid"
-                  >
-                    Enter case ID
-                  </label>
-                  <input
-                    class="ons-input ons-input--text ons-input-type__input "
-                    data-testid="text-input"
-                    id="caseid"
-                    style="z-index: 0;"
-                    type="text"
-                    value=""
-                  />
-                </p>
-                <button
-                  class="ons-btn "
-                  data-testid="button"
-                  type="button"
-                >
-                  <span
-                    class="ons-btn__inner"
-                  >
-                    Search
-                  </span>
-                </button>
-                <br />
-                <br />
               </div>
             </div>
           </div>
