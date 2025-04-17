@@ -45,11 +45,8 @@ export default function ResearchContent({ questionnaire }: ResearchContentProps)
             </tbody>
           </table>
         </div>
-
       </div>
-
       <br />
-
       <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.FRS_Researcher} />
 
     </div>

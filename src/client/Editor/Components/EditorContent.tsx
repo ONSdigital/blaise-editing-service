@@ -1,4 +1,4 @@
-import { ONSPanel, ONSSelect, ONSTable } from 'blaise-design-system-react-components';
+import { ONSSelect, ONSTable } from 'blaise-design-system-react-components';
 import { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EditorInformation } from '../../Interfaces/editorInterface';
@@ -15,20 +15,43 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
 
   return (
     <div className="editorContent" data-testid={`${questionnaire.questionnaireName}-editorContent`}>
-      <ONSPanel status="info">
-        <dl
-          className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-          title="editorContent"
-          data-testid="editorContent-dl"
-          style={{ padding: '0 0 15px 5px' }}
-        >
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Field period:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m"><strong>{questionnaire.fieldPeriod}</strong></dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Cases assigned to me:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m"><strong>{editorInformation.numberOfCasesAllocated}</strong></dd>
+      <div className="ons-summary ons-u-mb-m">
+        <div className="ons-summary__group">
+          <table className="ons-summary__items" data-testid="editorContent-table">
+            <thead className="ons-u-vh">
+              <tr>
+                <th>Detail</th>
+                <th>Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="ons-summary__row ons-summary__row--has-values">
+                <td className="ons-summary__item-title">
+                  <div className="ons-summary__item--text">
+                    Field Period
+                  </div>
+                </td>
+                <td className="ons-summary__values" colSpan={2}>
+                  {questionnaire.fieldPeriod}
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr className="ons-summary__row ons-summary__row--has-values">
+                <td className="ons-summary__item-title">
+                  <div className="ons-summary__item--text">
+                    Cases assigned to me
+                  </div>
+                </td>
+                <td className="ons-summary__values" colSpan={2}>
+                  {editorInformation.numberOfCasesAllocated}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-        </dl>
-      </ONSPanel>
       <br />
       <ONSSelect
         defaultValue="in-progress"
@@ -74,13 +97,13 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
               className="ons-table__row"
               key={caseDetails.CaseId}
             >
-              <td className="ons-table__cell" aria-label={`${questionnaire.questionnaireName}-CaseID`}>
+              <td className="ons-col-2@m ons-table__cell" aria-label={`${questionnaire.questionnaireName}-CaseID`}>
                 {caseDetails.CaseId}
               </td>
-              <td className="ons-table__cell status" aria-label={`${questionnaire.questionnaireName}-EditStatus`}>
+              <td className="ons-col-2@m ons-table__cell status" aria-label={`${questionnaire.questionnaireName}-EditStatus`}>
                 {caseDetails.EditStatus}
               </td>
-              <td className="ons-table__cell links">
+              <td className="ons-col-8@m ons-table__cell links">
                 <DownloadCaseSummaryLink caseId={caseDetails.CaseId} />
                 {' | '}
                 <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/${caseDetails.CaseId}/summary`}>View case summary</Link>
