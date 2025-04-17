@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
-import { ONSPanel } from 'blaise-design-system-react-components';
 import CaseSearchForm from '../../Common/components/CaseSearchForm';
 import { AllocateParams } from '../Pages/Allocate';
 import UserRole from '../../Common/enums/UserTypes';
@@ -15,7 +14,7 @@ export default function CaseSearch(): ReactElement {
 
   return (
     <div className="questionnaire">
-      <ONSPanel status="info">
+      {/* <ONSPanel status="info">
         <dl
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
           title="Questionnares"
@@ -23,10 +22,11 @@ export default function CaseSearch(): ReactElement {
           style={{ padding: '0 0 15px 5px' }}
         >
           <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Questionnaire Name:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m">{questionnaireDisplayName(questionnaireName)}</dd>
+          <dd className="ons-escription-list__value ons-grid__col ons-col-7@m">{questionnaireDisplayName(questionnaireName)}</dd>
         </dl>
-      </ONSPanel>
+      </ONSPanel> */}
       <br />
+      <h1>{questionnaireDisplayName(questionnaireName)}</h1>
       <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
 
     </div>

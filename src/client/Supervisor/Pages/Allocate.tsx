@@ -18,7 +18,7 @@ export type AllocateParams = {
   questionnaireName: string
 };
 
-export default function Allocate({ supervisorRole, editorRole, reallocate } : AllocateProps): ReactElement {
+export default function Allocate({ supervisorRole, editorRole, reallocate }: AllocateProps): ReactElement {
   const { questionnaireName } = useParams<keyof AllocateParams>() as AllocateParams;
   const defaultMessage: Message = { show: false, text: '', type: '' };
   const [message, setMessage] = useState(defaultMessage);
@@ -33,11 +33,11 @@ export default function Allocate({ supervisorRole, editorRole, reallocate } : Al
         }
       </ONSPanel>
 
-      {message.show && message.type === 'error' && <ErrorPanel message={message.text} setMessage={setMessage} /> }
-      {message.show && message.type === 'success' && <SuccessPanel message={message.text} setMessage={setMessage} /> }
+      {message.show && message.type === 'error' && <ErrorPanel message={message.text} setMessage={setMessage} />}
+      {message.show && message.type === 'success' && <SuccessPanel message={message.text} setMessage={setMessage} />}
 
       <br />
-      <h3>{questionnaireDisplayName(questionnaireName)}</h3>
+      <h1>{questionnaireDisplayName(questionnaireName)}</h1>
 
       <AllocateContent questionnaireName={questionnaireName} supervisorRole={supervisorRole} editorRole={editorRole} reallocate={reallocate} setMessage={setMessage} />
     </>
