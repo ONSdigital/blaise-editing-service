@@ -20,13 +20,13 @@ export default function SupervisorContent({ questionnaire, supervisorInformation
         >
           <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Field period</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{questionnaire.fieldPeriod}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Total number of cases</dt>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Total cases</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.TotalNumberOfCases}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Number of cases not allocated</dt>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Unallocated cases</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.NumberOfCasesNotAllocated}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Number of cases allocated</dt>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Allocated cases</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.NumberOfCasesAllocated}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Number of cases completed</dt>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Completed cases</dt>
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.NumberOfCasesCompleted}</dd>
         </dl>
       </ONSPanel>

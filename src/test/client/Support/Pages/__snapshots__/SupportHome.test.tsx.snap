@@ -245,7 +245,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                               <div
                                 class="ons-summary__item--text"
                               >
-                                Total number of cases
+                                Total cases
                               </div>
                             </td>
                             <td
@@ -451,7 +451,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                             <div
                               class="ons-summary__item--text"
                             >
-                              Total number of cases
+                              Total cases
                             </div>
                           </td>
                           <td
@@ -714,7 +714,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                               <div
                                 class="ons-summary__item--text"
                               >
-                                Total number of cases
+                                Total cases
                               </div>
                             </td>
                             <td
@@ -1189,7 +1189,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                             <div
                               class="ons-summary__item--text"
                             >
-                              Total number of cases
+                              Total cases
                             </div>
                           </td>
                           <td
