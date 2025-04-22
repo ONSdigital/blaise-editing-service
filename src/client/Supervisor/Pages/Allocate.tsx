@@ -7,6 +7,7 @@ import SuccessPanel from '../../Common/components/SuccessPanel';
 import AllocateContent from '../Components/AllocateContent';
 import { Message } from '../../Common/types/MessageType';
 import questionnaireDisplayName from '../../Common/functions/QuestionnaireFunctions';
+import Breadcrumbs from '../../Common/components/Breadcrumbs';
 
 interface AllocateProps {
   supervisorRole: UserRole;
@@ -25,6 +26,12 @@ export default function Allocate({ supervisorRole, editorRole, reallocate }: All
 
   return (
     <>
+      <Breadcrumbs BreadcrumbList={
+        [
+          { link: '/', title: 'Home' },
+        ]
+      }
+      />
       <ONSPanel status="info" testID="allocation-page-panel">
         {
           reallocate === false
