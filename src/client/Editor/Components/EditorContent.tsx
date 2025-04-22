@@ -15,7 +15,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
 
   return (
     <div className="editorContent" data-testid={`${questionnaire.questionnaireName}-editorContent`}>
-      <div className="ons-summary ons-u-mb-m">
+      <div className="ons-summary">
         <div className="ons-summary__group">
           <table className="ons-summary__items" data-testid="editorContent-table">
             <thead className="ons-u-vh">
