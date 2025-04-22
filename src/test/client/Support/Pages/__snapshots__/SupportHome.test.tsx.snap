@@ -193,7 +193,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                   class="questionnaire"
                 >
                   <div
-                    class="ons-summary ons-u-mb-m"
+                    class="ons-summary"
                   >
                     <div
                       class="ons-summary__group"
@@ -399,7 +399,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                 class="questionnaire"
               >
                 <div
-                  class="ons-summary ons-u-mb-m"
+                  class="ons-summary"
                 >
                   <div
                     class="ons-summary__group"
@@ -662,7 +662,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                   class="questionnaire"
                 >
                   <div
-                    class="ons-summary ons-u-mb-m"
+                    class="ons-summary"
                   >
                     <div
                       class="ons-summary__group"
@@ -1137,7 +1137,7 @@ exports[`Given there are surveys available in blaise > should render the Support
                 class="questionnaire"
               >
                 <div
-                  class="ons-summary ons-u-mb-m"
+                  class="ons-summary"
                 >
                   <div
                     class="ons-summary__group"

@@ -10,7 +10,7 @@ interface ResearchContentProps {
 export default function ResearchContent({ questionnaire }: ResearchContentProps): ReactElement {
   return (
     <div className="questionnaire">
-      <div className="ons-summary ons-u-mb-m">
+      <div className="ons-summary">
         <div className="ons-summary__group">
           <table className="ons-summary__items" data-testid={`${questionnaire.questionnaireName}-Research-Content`}>
             <thead className="ons-u-vh">
