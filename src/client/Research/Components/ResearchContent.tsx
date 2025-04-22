@@ -35,7 +35,7 @@ export default function ResearchContent({ questionnaire }: ResearchContentProps)
               <tr className="ons-summary__row ons-summary__row--has-values">
                 <td className="ons-summary__item-title">
                   <div className="ons-summary__item--text">
-                    Total number of cases
+                    Total cases
                   </div>
                 </td>
                 <td className="ons-summary__values" colSpan={2}>

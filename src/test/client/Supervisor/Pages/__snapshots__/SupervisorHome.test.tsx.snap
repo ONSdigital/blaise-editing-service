@@ -1004,7 +1004,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                         <dt
                           class="ons-description-list__term ons-grid__col ons-col-6@m"
                         >
-                          Total number of cases
+                          Total cases
                         </dt>
                         <dd
                           class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1014,7 +1014,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                         <dt
                           class="ons-description-list__term ons-grid__col ons-col-6@m"
                         >
-                          Number of cases not allocated
+                          Unallocated cases
                         </dt>
                         <dd
                           class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1024,7 +1024,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                         <dt
                           class="ons-description-list__term ons-grid__col ons-col-6@m"
                         >
-                          Number of cases allocated
+                          Allocated cases
                         </dt>
                         <dd
                           class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1034,7 +1034,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                         <dt
                           class="ons-description-list__term ons-grid__col ons-col-6@m"
                         >
-                          Number of cases completed
+                          Completed cases
                         </dt>
                         <dd
                           class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1339,7 +1339,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                       <dt
                         class="ons-description-list__term ons-grid__col ons-col-6@m"
                       >
-                        Total number of cases
+                        Total cases
                       </dt>
                       <dd
                         class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1349,7 +1349,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                       <dt
                         class="ons-description-list__term ons-grid__col ons-col-6@m"
                       >
-                        Number of cases not allocated
+                        Unallocated cases
                       </dt>
                       <dd
                         class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1359,7 +1359,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                       <dt
                         class="ons-description-list__term ons-grid__col ons-col-6@m"
                       >
-                        Number of cases allocated
+                        Allocated cases
                       </dt>
                       <dd
                         class="ons-description-list__value ons-grid__col ons-col-6@m"
@@ -1369,7 +1369,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                       <dt
                         class="ons-description-list__term ons-grid__col ons-col-6@m"
                       >
-                        Number of cases completed
+                        Completed cases
                       </dt>
                       <dd
                         class="ons-description-list__value ons-grid__col ons-col-6@m"
