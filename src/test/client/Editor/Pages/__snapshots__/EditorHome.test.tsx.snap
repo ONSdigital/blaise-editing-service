@@ -194,70 +194,41 @@ exports[`Given there are surveys available in blaise > should render the editor 
                   data-testid="FRS2504A_EDIT-editorContent"
                 >
                   <div
-                    class="ons-summary"
+                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
                   >
                     <div
-                      class="ons-summary__group"
+                      class="ons-panel__body "
                     >
-                      <table
-                        class="ons-summary__items"
-                        data-testid="editorContent-table"
+                      <dl
+                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+                        data-testid="editorContent-dl"
+                        title="editorContent"
                       >
-                        <thead
-                          class="ons-u-vh"
+                        <dt
+                          class="ons-description-list__term ons-grid__col ons-col-6@m"
                         >
-                          <tr>
-                            <th>
-                              Detail
-                            </th>
-                            <th>
-                              Output
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr
-                            class="ons-summary__row ons-summary__row--has-values"
-                          >
-                            <td
-                              class="ons-summary__item-title"
-                            >
-                              <div
-                                class="ons-summary__item--text"
-                              >
-                                Field Period
-                              </div>
-                            </td>
-                            <td
-                              class="ons-summary__values"
-                              colspan="2"
-                            >
-                              April 2025
-                            </td>
-                          </tr>
-                        </tbody>
-                        <tbody>
-                          <tr
-                            class="ons-summary__row ons-summary__row--has-values"
-                          >
-                            <td
-                              class="ons-summary__item-title"
-                            >
-                              <div
-                                class="ons-summary__item--text"
-                              >
-                                Cases assigned to me
-                              </div>
-                            </td>
-                            <td
-                              class="ons-summary__values"
-                              colspan="2"
-                            >
-                              5
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                          Field period
+                        </dt>
+                        <dd
+                          class="ons-description-list__value ons-grid__col ons-col-6@m"
+                        >
+                          <strong>
+                            April 2025
+                          </strong>
+                        </dd>
+                        <dt
+                          class="ons-description-list__term ons-grid__col ons-col-6@m"
+                        >
+                          Cases assigned to me
+                        </dt>
+                        <dd
+                          class="ons-description-list__value ons-grid__col ons-col-6@m"
+                        >
+                          <strong>
+                            5
+                          </strong>
+                        </dd>
+                      </dl>
                     </div>
                   </div>
                   <br />
@@ -313,6 +284,7 @@ exports[`Given there are surveys available in blaise > should render the editor 
                       </option>
                     </select>
                   </div>
+                  <br />
                   <table
                     class="ons-table"
                     data-testid="FRS2504A_EDIT-Case-table"
@@ -661,70 +633,41 @@ exports[`Given there are surveys available in blaise > should render the editor 
                 data-testid="FRS2504A_EDIT-editorContent"
               >
                 <div
-                  class="ons-summary"
+                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
                 >
                   <div
-                    class="ons-summary__group"
+                    class="ons-panel__body "
                   >
-                    <table
-                      class="ons-summary__items"
-                      data-testid="editorContent-table"
+                    <dl
+                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+                      data-testid="editorContent-dl"
+                      title="editorContent"
                     >
-                      <thead
-                        class="ons-u-vh"
+                      <dt
+                        class="ons-description-list__term ons-grid__col ons-col-6@m"
                       >
-                        <tr>
-                          <th>
-                            Detail
-                          </th>
-                          <th>
-                            Output
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          class="ons-summary__row ons-summary__row--has-values"
-                        >
-                          <td
-                            class="ons-summary__item-title"
-                          >
-                            <div
-                              class="ons-summary__item--text"
-                            >
-                              Field Period
-                            </div>
-                          </td>
-                          <td
-                            class="ons-summary__values"
-                            colspan="2"
-                          >
-                            April 2025
-                          </td>
-                        </tr>
-                      </tbody>
-                      <tbody>
-                        <tr
-                          class="ons-summary__row ons-summary__row--has-values"
-                        >
-                          <td
-                            class="ons-summary__item-title"
-                          >
-                            <div
-                              class="ons-summary__item--text"
-                            >
-                              Cases assigned to me
-                            </div>
-                          </td>
-                          <td
-                            class="ons-summary__values"
-                            colspan="2"
-                          >
-                            5
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                        Field period
+                      </dt>
+                      <dd
+                        class="ons-description-list__value ons-grid__col ons-col-6@m"
+                      >
+                        <strong>
+                          April 2025
+                        </strong>
+                      </dd>
+                      <dt
+                        class="ons-description-list__term ons-grid__col ons-col-6@m"
+                      >
+                        Cases assigned to me
+                      </dt>
+                      <dd
+                        class="ons-description-list__value ons-grid__col ons-col-6@m"
+                      >
+                        <strong>
+                          5
+                        </strong>
+                      </dd>
+                    </dl>
                   </div>
                 </div>
                 <br />
@@ -780,6 +723,7 @@ exports[`Given there are surveys available in blaise > should render the editor 
                     </option>
                   </select>
                 </div>
+                <br />
                 <table
                   class="ons-table"
                   data-testid="FRS2504A_EDIT-Case-table"

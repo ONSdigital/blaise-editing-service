@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { ONSPanel } from 'blaise-design-system-react-components';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 import CaseSearchForm from '../../Common/components/CaseSearchForm';
 import UserRole from '../../Common/enums/UserTypes';
@@ -10,42 +11,18 @@ interface ResearchContentProps {
 export default function ResearchContent({ questionnaire }: ResearchContentProps): ReactElement {
   return (
     <div className="questionnaire">
-      <div className="ons-summary">
-        <div className="ons-summary__group">
-          <table className="ons-summary__items" data-testid={`${questionnaire.questionnaireName}-Research-Content`}>
-            <thead className="ons-u-vh">
-              <tr>
-                <th>Detail</th>
-                <th>Output</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="ons-summary__row ons-summary__row--has-values">
-                <td className="ons-summary__item-title">
-                  <div className="ons-summary__item--text">
-                    Field Period
-                  </div>
-                </td>
-                <td className="ons-summary__values" colSpan={2}>
-                  {questionnaire.fieldPeriod}
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr className="ons-summary__row ons-summary__row--has-values">
-                <td className="ons-summary__item-title">
-                  <div className="ons-summary__item--text">
-                    Total cases
-                  </div>
-                </td>
-                <td className="ons-summary__values" colSpan={2}>
-                  {questionnaire.numberOfCases}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <ONSPanel status="info">
+        <dl
+          className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+          title="Questionnares"
+          data-testid={`${questionnaire.questionnaireName}-Research-Content`}
+        >
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Field period</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{questionnaire.fieldPeriod}</dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Total cases</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{questionnaire.numberOfCases}</dd>
+        </dl>
+      </ONSPanel>
       <br />
       <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.FRS_Researcher} />
 

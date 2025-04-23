@@ -1,4 +1,4 @@
-import { ONSSelect, ONSTable } from 'blaise-design-system-react-components';
+import { ONSPanel, ONSSelect, ONSTable } from 'blaise-design-system-react-components';
 import { ReactElement, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EditorInformation } from '../../Interfaces/editorInterface';
@@ -15,43 +15,19 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
 
   return (
     <div className="editorContent" data-testid={`${questionnaire.questionnaireName}-editorContent`}>
-      <div className="ons-summary">
-        <div className="ons-summary__group">
-          <table className="ons-summary__items" data-testid="editorContent-table">
-            <thead className="ons-u-vh">
-              <tr>
-                <th>Detail</th>
-                <th>Output</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="ons-summary__row ons-summary__row--has-values">
-                <td className="ons-summary__item-title">
-                  <div className="ons-summary__item--text">
-                    Field Period
-                  </div>
-                </td>
-                <td className="ons-summary__values" colSpan={2}>
-                  {questionnaire.fieldPeriod}
-                </td>
-              </tr>
-            </tbody>
-            <tbody>
-              <tr className="ons-summary__row ons-summary__row--has-values">
-                <td className="ons-summary__item-title">
-                  <div className="ons-summary__item--text">
-                    Cases assigned to me
-                  </div>
-                </td>
-                <td className="ons-summary__values" colSpan={2}>
-                  {editorInformation.numberOfCasesAllocated}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <ONSPanel status="info">
+        <dl
+          className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
+          title="editorContent"
+          data-testid="editorContent-dl"
+        >
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Field period</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m"><strong>{questionnaire.fieldPeriod}</strong></dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Cases assigned to me</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m"><strong>{editorInformation.numberOfCasesAllocated}</strong></dd>
 
+        </dl>
+      </ONSPanel>
       <br />
       <ONSSelect
         defaultValue="in-progress"
@@ -82,7 +58,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
         ]}
         value=""
       />
-
+      <br />
       <ONSTable
         columns={[
           'Case ID',
