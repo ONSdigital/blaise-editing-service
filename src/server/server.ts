@@ -21,7 +21,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const buildFolderPath = path.join(__dirname, config.BuildFolder);
   server.use(express.static(buildFolderPath, {
     setHeaders: (res, addressPath) => {
-      if (addressPath.endsWith('.js')) {
+      if (addressPath.endsWith('.js') || addressPath.endsWith('.mjs')) {
         res.setHeader('Content-Type', 'application/javascript');
       }
       if (addressPath.endsWith('.json')) {
