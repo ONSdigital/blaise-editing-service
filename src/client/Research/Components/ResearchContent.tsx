@@ -23,6 +23,7 @@ export default function ResearchContent({ questionnaire }: ResearchContentProps)
           <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{questionnaire.numberOfCases}</dd>
         </dl>
       </ONSPanel>
+      <p>Testing cache issue :/</p>
       <br />
       <CaseSearchForm questionnaireName={questionnaire.questionnaireName} userRole={UserRole.FRS_Researcher} />
 
