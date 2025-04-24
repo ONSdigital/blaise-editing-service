@@ -45,7 +45,9 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
-    response.render('index.html');
+    response.sendFile(path.join(buildFolderPath, 'index.html'), {
+      headers: { 'Cache-Control': 'no-cache' }
+    })
   });
 
   return server;
