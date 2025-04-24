@@ -8,6 +8,38 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
       <div
         data-testid="Summary"
       >
+        <nav
+          aria-label="Breadcrumb"
+          class="ons-breadcrumb"
+        >
+          <ol
+            class="ons-breadcrumb__items u-fs-s"
+          >
+            <li
+              class="ons-breadcrumb__item"
+              data-testid="breadcrumb-0"
+              id="breadcrumb-0"
+            >
+              <a
+                class="ons-breadcrumb__link"
+                href="/"
+              >
+                Home
+              </a>
+              <svg
+                class="ons-svg-icon"
+                focusable="false"
+                viewBox="0 0 8 13"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                  transform="translate(-5.02 -1.59)"
+                />
+              </svg>
+            </li>
+          </ol>
+        </nav>
         <div
           class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
         >
@@ -33,52 +65,52 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
           title="summary"
         >
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
-            Serial Number
+            Serial number
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             9001
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Outcome code
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             110
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Interview date
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Sat May 11 2024
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             District
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Gwent
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Interviewer name
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Rich
           </dd>
@@ -263,52 +295,52 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
           style="margin: 2% 5% 2% 5%;"
         >
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Accommodation type
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Main: House/Bungalow - Type: Detached
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Floor number
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             2
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
-            Household Status
+            Household status
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Conventional
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Number of bedrooms
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             2
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Receipt of housing benefit
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             <span>
               amount: 380, period: One week
@@ -316,52 +348,52 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
             </span>
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Council tax band
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Band A
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Business room
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Yes
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Self employed
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Yes - H/H members: 1, 2
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Income support
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Yes - H/H members: 1
           </dd>
           <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
+            class="ons-metadata__term ons-grid__col ons-col-5@m"
           >
             Income based JA support
           </dt>
           <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
+            class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             Yes - H/H members: 1
           </dd>
@@ -373,793 +405,38 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
     <div
       data-testid="Summary"
     >
-      <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+      <nav
+        aria-label="Breadcrumb"
+        class="ons-breadcrumb"
       >
-        <div
-          class="ons-panel__body "
+        <ol
+          class="ons-breadcrumb__items u-fs-s"
         >
-          Case summary for
-           
-          <strong>
-            9001
-          </strong>
-           
-          completed by
-           
-          <strong>
-            Rich
-          </strong>
-        </div>
-      </div>
-      <dl
-        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-        style="margin: 2% 5% 2% 5%;"
-        title="summary"
-      >
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Serial Number
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          9001
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Outcome code
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          110
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Interview date
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Sat May 11 2024
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          District
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Gwent
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Interviewer name
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Rich
-        </dd>
-      </dl>
-      <br />
-      <table
-        class="ons-table"
-        data-testid="Respondents-table"
-        id="Respondents-table"
-      >
-        <caption
-          class="table__caption"
-        >
-          Relationship Grid
-        </caption>
-        <thead
-          class="ons-table__head"
-        >
-          <tr
-            class="ons-table__row"
+          <li
+            class="ons-breadcrumb__item"
+            data-testid="breadcrumb-0"
+            id="breadcrumb-0"
           >
-            <th
-              class="ons-table__header"
-              scope="col"
-            />
-            <th
-              class="ons-table__header"
-              scope="col"
+            <a
+              class="ons-breadcrumb__link"
+              href="/"
             >
-              Name
-            </th>
-            <th
-              class="ons-table__header"
-              scope="col"
+              Home
+            </a>
+            <svg
+              class="ons-svg-icon"
+              focusable="false"
+              viewBox="0 0 8 13"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              BU
-            </th>
-            <th
-              class="ons-table__header"
-              scope="col"
-            >
-              Sex
-            </th>
-            <th
-              class="ons-table__header"
-              scope="col"
-            >
-              DOB
-            </th>
-            <th
-              class="ons-table__header"
-              scope="col"
-            >
-              Marital status
-            </th>
-            <th
-              class="ons-table__header"
-              scope="col"
-            >
-              1
-            </th>
-            <th
-              class="ons-table__header"
-              scope="col"
-            >
-              2
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="ons-table__body"
-        >
-          <tr
-            class="ons-table__row"
-          >
-            <td
-              aria-label="RespondentNumber"
-              class="ons-table__cell"
-            >
-              1
-            </td>
-            <td
-              aria-label="RespondentName"
-              class="ons-table__cell status"
-            >
-              Richmond Ricecake
-            </td>
-            <td
-              aria-label="BenefitUnit"
-              class="ons-table__cell"
-            >
-              1
-            </td>
-            <td
-              aria-label="Sex"
-              class="ons-table__cell"
-            >
-              M
-            </td>
-            <td
-              aria-label="DateOfBirth"
-              class="ons-table__cell"
-            >
-              Tue Jan 15 1980
-            </td>
-            <td
-              aria-label="MaritalStatus"
-              class="ons-table__cell"
-            >
-              COH
-            </td>
-            <td
-              aria-label="Relationship-1"
-              class="ons-table__cell"
-            >
-              *
-            </td>
-            <td
-              aria-label="Relationship-1"
-              class="ons-table__cell"
-            >
-              1
-            </td>
-          </tr>
-          <tr
-            class="ons-table__row"
-          >
-            <td
-              aria-label="RespondentNumber"
-              class="ons-table__cell"
-            >
-              2
-            </td>
-            <td
-              aria-label="RespondentName"
-              class="ons-table__cell status"
-            >
-              Betty Bettison
-            </td>
-            <td
-              aria-label="BenefitUnit"
-              class="ons-table__cell"
-            >
-              1
-            </td>
-            <td
-              aria-label="Sex"
-              class="ons-table__cell"
-            >
-              F
-            </td>
-            <td
-              aria-label="DateOfBirth"
-              class="ons-table__cell"
-            >
-              Sun Jun 11 1995
-            </td>
-            <td
-              aria-label="MaritalStatus"
-              class="ons-table__cell"
-            >
-              COH
-            </td>
-            <td
-              aria-label="Relationship-2"
-              class="ons-table__cell"
-            >
-              1
-            </td>
-            <td
-              aria-label="Relationship-2"
-              class="ons-table__cell"
-            >
-              *
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <dl
-        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-        style="margin: 2% 5% 2% 5%;"
-      >
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Accommodation type
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Main: House/Bungalow - Type: Detached
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Floor number
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          2
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Household Status
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Conventional
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Number of bedrooms
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          2
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Receipt of housing benefit
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          <span>
-            amount: 380, period: One week
-            <br />
-          </span>
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Council tax band
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Band A
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Business room
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Yes
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Self employed
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Yes - H/H members: 1, 2
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Income support
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Yes - H/H members: 1
-        </dd>
-        <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
-        >
-          Income based JA support
-        </dt>
-        <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
-        >
-          Yes - H/H members: 1
-        </dd>
-      </dl>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Given there is a case available in blaise for a questionnaire should display the summary correctly: CaseSummary 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        data-testid="Summary"
-      >
-        <div
-          class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-        >
-          <div
-            class="ons-panel__body "
-          >
-            Case summary for
-             
-            <strong>
-              9001
-            </strong>
-             
-            completed by
-             
-            <strong>
-              Rich
-            </strong>
-          </div>
-        </div>
-        <dl
-          class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-          style="margin: 2% 5% 2% 5%;"
-          title="summary"
-        >
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Serial Number
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            9001
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Outcome code
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            110
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Interview date
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Sat May 11 2024
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            District
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Gwent
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Interviewer name
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Rich
-          </dd>
-        </dl>
-        <br />
-        <table
-          class="ons-table"
-          data-testid="Respondents-table"
-          id="Respondents-table"
-        >
-          <caption
-            class="table__caption"
-          >
-            Relationship Grid
-          </caption>
-          <thead
-            class="ons-table__head"
-          >
-            <tr
-              class="ons-table__row"
-            >
-              <th
-                class="ons-table__header"
-                scope="col"
+              <path
+                d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                transform="translate(-5.02 -1.59)"
               />
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                Name
-              </th>
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                BU
-              </th>
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                Sex
-              </th>
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                DOB
-              </th>
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                Marital status
-              </th>
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                1
-              </th>
-              <th
-                class="ons-table__header"
-                scope="col"
-              >
-                2
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class="ons-table__body"
-          >
-            <tr
-              class="ons-table__row"
-            >
-              <td
-                aria-label="RespondentNumber"
-                class="ons-table__cell"
-              >
-                1
-              </td>
-              <td
-                aria-label="RespondentName"
-                class="ons-table__cell status"
-              >
-                Richmond Ricecake
-              </td>
-              <td
-                aria-label="BenefitUnit"
-                class="ons-table__cell"
-              >
-                1
-              </td>
-              <td
-                aria-label="Sex"
-                class="ons-table__cell"
-              >
-                M
-              </td>
-              <td
-                aria-label="DateOfBirth"
-                class="ons-table__cell"
-              >
-                Tue Jan 15 1980
-              </td>
-              <td
-                aria-label="MaritalStatus"
-                class="ons-table__cell"
-              >
-                COH
-              </td>
-              <td
-                aria-label="Relationship-1"
-                class="ons-table__cell"
-              >
-                *
-              </td>
-              <td
-                aria-label="Relationship-1"
-                class="ons-table__cell"
-              >
-                1
-              </td>
-            </tr>
-            <tr
-              class="ons-table__row"
-            >
-              <td
-                aria-label="RespondentNumber"
-                class="ons-table__cell"
-              >
-                2
-              </td>
-              <td
-                aria-label="RespondentName"
-                class="ons-table__cell status"
-              >
-                Betty Bettison
-              </td>
-              <td
-                aria-label="BenefitUnit"
-                class="ons-table__cell"
-              >
-                1
-              </td>
-              <td
-                aria-label="Sex"
-                class="ons-table__cell"
-              >
-                F
-              </td>
-              <td
-                aria-label="DateOfBirth"
-                class="ons-table__cell"
-              >
-                Sun Jun 11 1995
-              </td>
-              <td
-                aria-label="MaritalStatus"
-                class="ons-table__cell"
-              >
-                COH
-              </td>
-              <td
-                aria-label="Relationship-2"
-                class="ons-table__cell"
-              >
-                1
-              </td>
-              <td
-                aria-label="Relationship-2"
-                class="ons-table__cell"
-              >
-                *
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
-        <dl
-          class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-          style="margin: 2% 5% 2% 5%;"
-        >
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Accommodation type
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Main: House/Bungalow - Type: Detached
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Floor number
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            2
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Household Status
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Conventional
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Number of bedrooms
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            2
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Receipt of housing benefit
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            <span>
-              amount: 380, period: One week
-              <br />
-            </span>
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Council tax band
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Band A
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Business room
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Yes
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Self employed
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Yes - H/H members: 1, 2
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Income support
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Yes - H/H members: 1
-          </dd>
-          <dt
-            class="ons-metadata__term ons-grid__col ons-col-3@m"
-          >
-            Income based JA support
-          </dt>
-          <dd
-            class="ons-metadata__value ons-grid__col ons-col-9@m"
-          >
-            Yes - H/H members: 1
-          </dd>
-        </dl>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      data-testid="Summary"
-    >
+            </svg>
+          </li>
+        </ol>
+      </nav>
       <div
         class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
       >
@@ -1185,52 +462,52 @@ exports[`Given there is a case available in blaise for a questionnaire should di
         title="summary"
       >
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
-          Serial Number
+          Serial number
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           9001
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Outcome code
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           110
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Interview date
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Sat May 11 2024
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           District
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Gwent
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Interviewer name
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Rich
         </dd>
@@ -1415,52 +692,52 @@ exports[`Given there is a case available in blaise for a questionnaire should di
         style="margin: 2% 5% 2% 5%;"
       >
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Accommodation type
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Main: House/Bungalow - Type: Detached
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Floor number
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           2
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
-          Household Status
+          Household status
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Conventional
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Number of bedrooms
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           2
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Receipt of housing benefit
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           <span>
             amount: 380, period: One week
@@ -1468,52 +745,52 @@ exports[`Given there is a case available in blaise for a questionnaire should di
           </span>
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Council tax band
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Band A
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Business room
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Yes
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Self employed
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Yes - H/H members: 1, 2
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Income support
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Yes - H/H members: 1
         </dd>
         <dt
-          class="ons-metadata__term ons-grid__col ons-col-3@m"
+          class="ons-metadata__term ons-grid__col ons-col-5@m"
         >
           Income based JA support
         </dt>
         <dd
-          class="ons-metadata__value ons-grid__col ons-col-9@m"
+          class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           Yes - H/H members: 1
         </dd>

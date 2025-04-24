@@ -20,12 +20,11 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
           title="editorContent"
           data-testid="editorContent-dl"
-          style={{ padding: '0 0 15px 5px' }}
         >
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Field period:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m"><strong>{questionnaire.fieldPeriod}</strong></dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Cases assigned to me:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m"><strong>{editorInformation.numberOfCasesAllocated}</strong></dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Field period</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m"><strong>{questionnaire.fieldPeriod}</strong></dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Cases assigned to me</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m"><strong>{editorInformation.numberOfCasesAllocated}</strong></dd>
 
         </dl>
       </ONSPanel>
@@ -59,7 +58,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
         ]}
         value=""
       />
-
+      <br />
       <ONSTable
         columns={[
           'Case ID',
@@ -74,13 +73,13 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
               className="ons-table__row"
               key={caseDetails.CaseId}
             >
-              <td className="ons-table__cell" aria-label={`${questionnaire.questionnaireName}-CaseID`}>
+              <td className="ons-col-2@m ons-table__cell" aria-label={`${questionnaire.questionnaireName}-CaseID`}>
                 {caseDetails.CaseId}
               </td>
-              <td className="ons-table__cell status" aria-label={`${questionnaire.questionnaireName}-EditStatus`}>
+              <td className="ons-col-2@m ons-table__cell status" aria-label={`${questionnaire.questionnaireName}-EditStatus`}>
                 {caseDetails.EditStatus}
               </td>
-              <td className="ons-table__cell links">
+              <td className="ons-col-8@m ons-table__cell links">
                 <DownloadCaseSummaryLink caseId={caseDetails.CaseId} />
                 {' | '}
                 <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/${caseDetails.CaseId}/summary`}>View case summary</Link>
