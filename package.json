@@ -100,7 +100,7 @@
     "supertest": "^6.3.3",
     "typemoq": "^2.1.0",
     "typescript": "^4.9.5",
-    "vite": "^6.2.0",
+    "vite": "^6.2.6",
     "vitest": "^3.0.7"
   }
 }
