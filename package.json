@@ -4,6 +4,7 @@
   "private": true,
   "target": "esnext",
   "module": "esnext",
+  "main": "index.ts",
   "scripts": {
     "start": "yarn start-server",
     "build": "yarn build-client && yarn build-server",
