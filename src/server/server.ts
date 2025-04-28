@@ -19,7 +19,15 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // serve the entire build folder as static
   const buildFolderPath = path.join(__dirname, config.BuildFolder);
-  server.use("/static", express.static(buildFolderPath));
+  server.use("/static", express.static(buildFolderPath, {
+    setHeaders: (res, path) => {
+      if (path.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+    }
+  }));
 
   // set up views for rendering index.html
   server.set('views', buildFolderPath);
