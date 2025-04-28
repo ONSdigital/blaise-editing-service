@@ -1,8 +1,5 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,36 +8,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.ons-description-list__items{
-  margin:0 0 2rem
+
+.ons-description-list__items {
+  margin: 0 0 2rem;
 }
-.ons-description-list__term{
-  clear:both;
-  float:left;
-  font-weight:700
+
+.ons-description-list__term {
+  clear: both;
+  float: left;
 }
-.ons-description-list__term:not(:first-child){
-  margin-top:.5rem
+
+.ons-description-list__term:not(:first-child) {
+  margin-top: .5rem
 }
-.ons-description-list__value{
-  float:right;
-  margin-left:0
+
+.ons-description-list__value {
+  float: right;
+  margin-left: 0;
+  font-weight: 700;
 }
-@media(min-width:740px){
-  .ons-description-list__value:not(:nth-of-type(1)){
-      margin-top:.5rem
+
+@media(min-width:740px) {
+  .ons-description-list__value:not(:nth-of-type(1)) {
+    margin-top: .5rem
   }
 }
-@media(min-width:740px){
-  .ons-description-list__value+.ons-description-list__value{
-      margin-top:0
+
+@media(min-width:740px) {
+  .ons-description-list__value+.ons-description-list__value {
+    margin-top: 0
   }
 }
 
 .link {
-  cursor:pointer;
-  color:#206095;
-  text-decoration:underline;
+  cursor: pointer;
+  color: #206095;
+  text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-position: under;
 }
@@ -48,5 +51,5 @@ code {
 .link:hover {
   color: #206095;
   -webkit-text-decoration: underline solid #206095 2px;
-  text-decoration: underline solid #206095  2px
+  text-decoration: underline solid #206095 2px
 }
