@@ -45,12 +45,6 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
-    if (_request.path.startsWith('/assets/')) {
-      // It's an asset — don't fallback to index.html
-      response.status(404).end();
-      return;
-    }
-
     response.sendFile(path.join(buildFolderPath, 'index.html'), {
       headers: { 'Cache-Control': 'no-cache' }
     })
