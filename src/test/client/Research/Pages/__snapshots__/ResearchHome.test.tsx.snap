@@ -315,9 +315,6 @@ exports[`Given there are surveys available in blaise > should render the Researc
                       </dl>
                     </div>
                   </div>
-                  <p>
-                    Testing cache issue :/
-                  </p>
                   <br />
                   <p
                     class="ons-field"
@@ -491,9 +488,6 @@ exports[`Given there are surveys available in blaise > should render the Researc
                     </dl>
                   </div>
                 </div>
-                <p>
-                  Testing cache issue :/
-                </p>
                 <br />
                 <p
                   class="ons-field"
@@ -724,9 +718,6 @@ exports[`Given there are surveys available in blaise > should render the Researc
                       </dl>
                     </div>
                   </div>
-                  <p>
-                    Testing cache issue :/
-                  </p>
                   <br />
                   <p
                     class="ons-field"
@@ -1169,9 +1160,6 @@ exports[`Given there are surveys available in blaise > should render the Researc
                     </dl>
                   </div>
                 </div>
-                <p>
-                  Testing cache issue :/
-                </p>
                 <br />
                 <p
                   class="ons-field"
