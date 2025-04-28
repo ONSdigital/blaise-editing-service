@@ -23,7 +23,7 @@ export default function LayoutTemplate({ children, showSignOutButton, signOut }:
     <>
       <NotProductionWarning />
       <Header
-        title="Blaise Editing Service"
+        title="Blaise Editing Service 22"
         noSave
         signOutButton={showSignOutButton}
         signOutFunction={() => { signOut(); navigate('/'); }}
