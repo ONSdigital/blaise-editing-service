@@ -19,7 +19,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // serve the entire build folder as static
   const buildFolderPath = path.join(__dirname, config.BuildFolder);
-  server.use(express.static(buildFolderPath));
+  server.use("/static", express.static(buildFolderPath));
 
   // set up views for rendering index.html
   server.set('views', buildFolderPath);
