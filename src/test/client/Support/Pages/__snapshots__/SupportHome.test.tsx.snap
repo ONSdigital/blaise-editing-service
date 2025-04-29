@@ -290,7 +290,6 @@ exports[`Given there are surveys available in blaise > should render the Support
                       <dl
                         class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
                         data-testid="FRS2504A_EDIT-Support-Content"
-                        style="padding: 0px 0px 15px 5px;"
                         title="Questionnares"
                       >
                         <dt
@@ -464,7 +463,6 @@ exports[`Given there are surveys available in blaise > should render the Support
                     <dl
                       class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
                       data-testid="FRS2504A_EDIT-Support-Content"
-                      style="padding: 0px 0px 15px 5px;"
                       title="Questionnares"
                     >
                       <dt
@@ -695,7 +693,6 @@ exports[`Given there are surveys available in blaise > should render the Support
                       <dl
                         class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
                         data-testid="FRS2504A_EDIT-Support-Content"
-                        style="padding: 0px 0px 15px 5px;"
                         title="Questionnares"
                       >
                         <dt
@@ -1138,7 +1135,6 @@ exports[`Given there are surveys available in blaise > should render the Support
                     <dl
                       class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
                       data-testid="FRS2504A_EDIT-Support-Content"
-                      style="padding: 0px 0px 15px 5px;"
                       title="Questionnares"
                     >
                       <dt
