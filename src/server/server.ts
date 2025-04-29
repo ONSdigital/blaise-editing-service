@@ -19,15 +19,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // serve the entire build folder as static
   const buildFolderPath = path.join(__dirname, config.BuildFolder);
-  server.use("/assets", express.static(buildFolderPath, {
-    setHeaders: (res, path) => {
-      if (path.endsWith('.html')) {
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      } else {
-        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-      }
-    }
-  }));
+  server.use(express.static(buildFolderPath));
 
   // set up views for rendering index.html
   server.set('views', buildFolderPath);
@@ -53,9 +45,8 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
-    response.sendFile(path.join(buildFolderPath, 'index.html'), {
-      headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
-    });
+    response.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    response.render('index.html');
   });
 
   return server;
