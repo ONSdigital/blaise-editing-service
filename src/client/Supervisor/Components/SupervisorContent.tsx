@@ -17,18 +17,17 @@ export default function SupervisorContent({ questionnaire, supervisorInformation
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
           title="Questionnares"
           data-testid={`${questionnaire.questionnaireName}-supervisor-Content`}
-          style={{ padding: '0 0 15px 5px' }}
         >
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Field period:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m">{questionnaire.fieldPeriod}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Total number of cases:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m">{supervisorInformation.TotalNumberOfCases}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Number of cases not allocated:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m">{supervisorInformation.NumberOfCasesNotAllocated}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Number of cases allocated:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m">{supervisorInformation.NumberOfCasesAllocated}</dd>
-          <dt className="ons-description-list__term ons-grid__col ons-col-5@m">Number of cases completed:</dt>
-          <dd className="ons-description-list__value ons-grid__col ons-col-7@m">{supervisorInformation.NumberOfCasesCompleted}</dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Field period</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{questionnaire.fieldPeriod}</dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Total cases</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.TotalNumberOfCases}</dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Unallocated cases</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.NumberOfCasesNotAllocated}</dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Allocated cases</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.NumberOfCasesAllocated}</dd>
+          <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Completed cases</dt>
+          <dd className="ons-description-list__value ons-grid__col ons-col-6@m">{supervisorInformation.NumberOfCasesCompleted}</dd>
         </dl>
       </ONSPanel>
       <br />
