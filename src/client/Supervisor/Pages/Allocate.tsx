@@ -7,6 +7,7 @@ import SuccessPanel from '../../Common/components/SuccessPanel';
 import AllocateContent from '../Components/AllocateContent';
 import { Message } from '../../Common/types/MessageType';
 import questionnaireDisplayName from '../../Common/functions/QuestionnaireFunctions';
+import Breadcrumbs from '../../Common/components/Breadcrumbs';
 
 interface AllocateProps {
   supervisorRole: UserRole;
@@ -18,13 +19,19 @@ export type AllocateParams = {
   questionnaireName: string
 };
 
-export default function Allocate({ supervisorRole, editorRole, reallocate } : AllocateProps): ReactElement {
+export default function Allocate({ supervisorRole, editorRole, reallocate }: AllocateProps): ReactElement {
   const { questionnaireName } = useParams<keyof AllocateParams>() as AllocateParams;
   const defaultMessage: Message = { show: false, text: '', type: '' };
   const [message, setMessage] = useState(defaultMessage);
 
   return (
     <>
+      <Breadcrumbs BreadcrumbList={
+        [
+          { link: '/', title: 'Home' },
+        ]
+      }
+      />
       <ONSPanel status="info" testID="allocation-page-panel">
         {
           reallocate === false
@@ -33,11 +40,11 @@ export default function Allocate({ supervisorRole, editorRole, reallocate } : Al
         }
       </ONSPanel>
 
-      {message.show && message.type === 'error' && <ErrorPanel message={message.text} setMessage={setMessage} /> }
-      {message.show && message.type === 'success' && <SuccessPanel message={message.text} setMessage={setMessage} /> }
+      {message.show && message.type === 'error' && <ErrorPanel message={message.text} setMessage={setMessage} />}
+      {message.show && message.type === 'success' && <SuccessPanel message={message.text} setMessage={setMessage} />}
 
       <br />
-      <h3>{questionnaireDisplayName(questionnaireName)}</h3>
+      <h1>{questionnaireDisplayName(questionnaireName)}</h1>
 
       <AllocateContent questionnaireName={questionnaireName} supervisorRole={supervisorRole} editorRole={editorRole} reallocate={reallocate} setMessage={setMessage} />
     </>

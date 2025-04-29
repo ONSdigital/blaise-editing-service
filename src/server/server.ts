@@ -45,6 +45,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
+    response.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     response.render('index.html');
   });
 

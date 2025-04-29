@@ -36,7 +36,7 @@ export default class CaseController implements Controller {
     return router;
   }
 
-  async getCaseSummary(request: Request<{ questionnaireName:string, caseId:string }>, response: Response<CaseSummaryDetails>) {
+  async getCaseSummary(request: Request<{ questionnaireName: string, caseId: string }>, response: Response<CaseSummaryDetails>) {
     const {
       questionnaireName,
       caseId,
@@ -60,7 +60,7 @@ export default class CaseController implements Controller {
     }
   }
 
-  async getCaseEditInformation(request: Request<{ questionnaireName:string }, {}, {}, { userRole:string }>, response: Response<CaseEditInformation[]>) {
+  async getCaseEditInformation(request: Request<{ questionnaireName: string }, {}, {}, { userRole: string }>, response: Response<CaseEditInformation[]>) {
     const { questionnaireName } = request.params;
     const { userRole } = request.query;
 
@@ -80,7 +80,7 @@ export default class CaseController implements Controller {
     }
   }
 
-  async GetCaseEditInformationForRole(questionnaireName:string, userRole: string, user: User): Promise<CaseEditInformation[]> {
+  async GetCaseEditInformationForRole(questionnaireName: string, userRole: string, user: User): Promise<CaseEditInformation[]> {
     const cases = await this.blaiseApi.getCaseEditInformation(questionnaireName);
     this.blaiseApi.cloudLogger.info(`Retrieved ${cases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
 
@@ -96,7 +96,7 @@ export default class CaseController implements Controller {
     return filteredcases;
   }
 
-  async allocateCases(request: Request<{ questionnaireName:string }, {}, { name:string, cases: string[] }, { }>, response: Response) {
+  async allocateCases(request: Request<{ questionnaireName: string }, {}, { name: string, cases: string[] }, {}>, response: Response) {
     const { questionnaireName } = request.params;
     const { name, cases } = request.body;
 
@@ -123,7 +123,7 @@ export default class CaseController implements Controller {
     }
   }
 
-  async setCaseToUpdate(request: Request<{ questionnaireName:string, caseId:string }, {}, {}, { }>, response: Response) {
+  async setCaseToUpdate(request: Request<{ questionnaireName: string, caseId: string }, {}, {}, {}>, response: Response) {
     const {
       questionnaireName,
       caseId,

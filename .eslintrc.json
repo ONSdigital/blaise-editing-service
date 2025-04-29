@@ -3,45 +3,66 @@
     "browser": true,
     "es2021": true,
     "node": true
-},
-"extends": [
-  "plugin:react/recommended",
-  "airbnb",
-  "airbnb-typescript",
-  "plugin:react-hooks/recommended"
-],
-"overrides": [
-],
-"parser": "@typescript-eslint/parser",
-"parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": "./tsconfig.json"
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:react-hooks/recommended"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-  ], 
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
     "react/react-in-jsx-scope": "off",
+    "react/no-unstable-nested-components": [
+      "error",
+      {
+        "allowAsProps": true
+      }
+    ],
     "react/require-default-props": "off",
     "no-constant-condition": "error",
     "no-unused-vars": "error",
     "no-unreachable": "error",
     "no-spaced-func": "off",
-    "max-len": ["off", { "code": 200 }],
-    "import/no-extraneous-dependencies": [
-      "error", {
-         "devDependencies": true
+    "max-len": [
+      "off",
+      {
+        "code": 200
       }
-  ],
-  "no-param-reassign": ["error", { "props": false }]
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ]
   },
-  "ignorePatterns": [".eslintrc.js", "vite.config.ts", "vitest.config.ts", "node_modules/*","dist/*","coverage/*"]
-
-
+  "ignorePatterns": [
+    ".eslintrc.js",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "node_modules/*",
+    "dist/*",
+    "coverage/*"
+  ]
 }

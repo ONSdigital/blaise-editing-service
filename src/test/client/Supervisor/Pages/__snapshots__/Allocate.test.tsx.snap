@@ -5,6 +5,38 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor > shoul
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <nav
+        aria-label="Breadcrumb"
+        class="ons-breadcrumb"
+      >
+        <ol
+          class="ons-breadcrumb__items u-fs-s"
+        >
+          <li
+            class="ons-breadcrumb__item"
+            data-testid="breadcrumb-0"
+            id="breadcrumb-0"
+          >
+            <a
+              class="ons-breadcrumb__link"
+              href="/"
+            >
+              Home
+            </a>
+            <svg
+              class="ons-svg-icon"
+              focusable="false"
+              viewBox="0 0 8 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                transform="translate(-5.02 -1.59)"
+              />
+            </svg>
+          </li>
+        </ol>
+      </nav>
       <div
         class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
         data-testid="allocation-page-panel"
@@ -16,9 +48,9 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor > shoul
         </div>
       </div>
       <br />
-      <h3>
+      <h1>
         FRS2504A
-      </h3>
+      </h1>
       <div>
         <label
           class="ons-label"
@@ -208,6 +240,38 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor > shoul
     </div>
   </body>,
   "container": <div>
+    <nav
+      aria-label="Breadcrumb"
+      class="ons-breadcrumb"
+    >
+      <ol
+        class="ons-breadcrumb__items u-fs-s"
+      >
+        <li
+          class="ons-breadcrumb__item"
+          data-testid="breadcrumb-0"
+          id="breadcrumb-0"
+        >
+          <a
+            class="ons-breadcrumb__link"
+            href="/"
+          >
+            Home
+          </a>
+          <svg
+            class="ons-svg-icon"
+            focusable="false"
+            viewBox="0 0 8 13"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+              transform="translate(-5.02 -1.59)"
+            />
+          </svg>
+        </li>
+      </ol>
+    </nav>
     <div
       class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
       data-testid="allocation-page-panel"
@@ -219,472 +283,9 @@ exports[`Given we wish to allocte cases from an Interviewer to an Editor > shoul
       </div>
     </div>
     <br />
-    <h3>
+    <h1>
       FRS2504A
-    </h3>
-    <div>
-      <label
-        class="ons-label"
-        for="select-from"
-      >
-        Allocate cases from interviewer
-         
-      </label>
-      <select
-        class="ons-input "
-        data-testid="select-from"
-        id="select-from"
-        name="select"
-      >
-        <option
-          data-testid="select-select-from"
-          disabled=""
-          selected=""
-          value=""
-        >
-          Select an option
-        </option>
-        <option
-          data-testid="option-select-from-bob"
-          value="bob"
-        >
-          bob (2 case(s))
-        </option>
-        <option
-          data-testid="option-select-from-jamester"
-          value="jamester"
-        >
-          jamester (1 case(s))
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        class="ons-label"
-        for="select-to"
-      >
-        To editor
-         
-      </label>
-      <select
-        class="ons-input "
-        data-testid="select-to"
-        id="select-to"
-        name="select"
-      >
-        <option
-          data-testid="select-select-to"
-          disabled=""
-          selected=""
-          value=""
-        >
-          Select an option
-        </option>
-        <option
-          data-testid="option-select-to-Dave"
-          value="Dave"
-        >
-          Dave (0 case(s))
-        </option>
-        <option
-          data-testid="option-select-to-Jake"
-          value="Jake"
-        >
-          Jake (2 case(s))
-        </option>
-        <option
-          data-testid="option-select-to-Rich"
-          value="Rich"
-        >
-          Rich (0 case(s))
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        class="ons-label"
-        for="number-of-cases"
-      >
-        Number of cases
-         
-      </label>
-      <select
-        class="ons-input "
-        data-testid="number-of-cases"
-        id="number-of-cases"
-        name="select"
-      >
-        <option
-          data-testid="select-number-of-cases"
-          disabled=""
-          value=""
-        >
-          Select an option
-        </option>
-        <option
-          data-testid="option-number-of-cases--1"
-          selected=""
-          value="-1"
-        >
-          All
-        </option>
-        <option
-          data-testid="option-number-of-cases-50"
-          value="50"
-        >
-          50
-        </option>
-        <option
-          data-testid="option-number-of-cases-45"
-          value="45"
-        >
-          45
-        </option>
-        <option
-          data-testid="option-number-of-cases-40"
-          value="40"
-        >
-          40
-        </option>
-        <option
-          data-testid="option-number-of-cases-35"
-          value="35"
-        >
-          35
-        </option>
-        <option
-          data-testid="option-number-of-cases-30"
-          value="30"
-        >
-          30
-        </option>
-        <option
-          data-testid="option-number-of-cases-25"
-          value="25"
-        >
-          25
-        </option>
-        <option
-          data-testid="option-number-of-cases-20"
-          value="20"
-        >
-          20
-        </option>
-        <option
-          data-testid="option-number-of-cases-15"
-          value="15"
-        >
-          15
-        </option>
-        <option
-          data-testid="option-number-of-cases-10"
-          value="10"
-        >
-          10
-        </option>
-        <option
-          data-testid="option-number-of-cases-5"
-          value="5"
-        >
-          5
-        </option>
-        <option
-          data-testid="option-number-of-cases-1"
-          value="1"
-        >
-          1
-        </option>
-      </select>
-    </div>
-    <br />
-    <button
-      class="ons-btn "
-      data-testid="button"
-      type="button"
-    >
-      <span
-        class="ons-btn__inner"
-      >
-        Allocate
-      </span>
-    </button>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Given we wish to allocte cases from an Interviewer to an Editor should render the allocation page correctly: AllocationPage 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-        data-testid="allocation-page-panel"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          Allocate cases from an interviewer to an editor. All cases conducted by that interviewer will be allocated to the editor
-        </div>
-      </div>
-      <br />
-      <h3>
-        FRS2504A
-      </h3>
-      <div>
-        <label
-          class="ons-label"
-          for="select-from"
-        >
-          Allocate cases from interviewer
-           
-        </label>
-        <select
-          class="ons-input "
-          data-testid="select-from"
-          id="select-from"
-          name="select"
-        >
-          <option
-            data-testid="select-select-from"
-            disabled=""
-            selected=""
-            value=""
-          >
-            Select an option
-          </option>
-          <option
-            data-testid="option-select-from-bob"
-            value="bob"
-          >
-            bob (2 case(s))
-          </option>
-          <option
-            data-testid="option-select-from-jamester"
-            value="jamester"
-          >
-            jamester (1 case(s))
-          </option>
-        </select>
-      </div>
-      <div>
-        <label
-          class="ons-label"
-          for="select-to"
-        >
-          To editor
-           
-        </label>
-        <select
-          class="ons-input "
-          data-testid="select-to"
-          id="select-to"
-          name="select"
-        >
-          <option
-            data-testid="select-select-to"
-            disabled=""
-            selected=""
-            value=""
-          >
-            Select an option
-          </option>
-          <option
-            data-testid="option-select-to-Dave"
-            value="Dave"
-          >
-            Dave (0 case(s))
-          </option>
-          <option
-            data-testid="option-select-to-Jake"
-            value="Jake"
-          >
-            Jake (2 case(s))
-          </option>
-          <option
-            data-testid="option-select-to-Rich"
-            value="Rich"
-          >
-            Rich (0 case(s))
-          </option>
-        </select>
-      </div>
-      <div>
-        <label
-          class="ons-label"
-          for="number-of-cases"
-        >
-          Number of cases
-           
-        </label>
-        <select
-          class="ons-input "
-          data-testid="number-of-cases"
-          id="number-of-cases"
-          name="select"
-        >
-          <option
-            data-testid="select-number-of-cases"
-            disabled=""
-            value=""
-          >
-            Select an option
-          </option>
-          <option
-            data-testid="option-number-of-cases--1"
-            selected=""
-            value="-1"
-          >
-            All
-          </option>
-          <option
-            data-testid="option-number-of-cases-50"
-            value="50"
-          >
-            50
-          </option>
-          <option
-            data-testid="option-number-of-cases-45"
-            value="45"
-          >
-            45
-          </option>
-          <option
-            data-testid="option-number-of-cases-40"
-            value="40"
-          >
-            40
-          </option>
-          <option
-            data-testid="option-number-of-cases-35"
-            value="35"
-          >
-            35
-          </option>
-          <option
-            data-testid="option-number-of-cases-30"
-            value="30"
-          >
-            30
-          </option>
-          <option
-            data-testid="option-number-of-cases-25"
-            value="25"
-          >
-            25
-          </option>
-          <option
-            data-testid="option-number-of-cases-20"
-            value="20"
-          >
-            20
-          </option>
-          <option
-            data-testid="option-number-of-cases-15"
-            value="15"
-          >
-            15
-          </option>
-          <option
-            data-testid="option-number-of-cases-10"
-            value="10"
-          >
-            10
-          </option>
-          <option
-            data-testid="option-number-of-cases-5"
-            value="5"
-          >
-            5
-          </option>
-          <option
-            data-testid="option-number-of-cases-1"
-            value="1"
-          >
-            1
-          </option>
-        </select>
-      </div>
-      <br />
-      <button
-        class="ons-btn "
-        data-testid="button"
-        type="button"
-      >
-        <span
-          class="ons-btn__inner"
-        >
-          Allocate
-        </span>
-      </button>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-      data-testid="allocation-page-panel"
-    >
-      <div
-        class="ons-panel__body "
-      >
-        Allocate cases from an interviewer to an editor. All cases conducted by that interviewer will be allocated to the editor
-      </div>
-    </div>
-    <br />
-    <h3>
-      FRS2504A
-    </h3>
+    </h1>
     <div>
       <label
         class="ons-label"
@@ -931,6 +532,38 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor > sho
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <nav
+        aria-label="Breadcrumb"
+        class="ons-breadcrumb"
+      >
+        <ol
+          class="ons-breadcrumb__items u-fs-s"
+        >
+          <li
+            class="ons-breadcrumb__item"
+            data-testid="breadcrumb-0"
+            id="breadcrumb-0"
+          >
+            <a
+              class="ons-breadcrumb__link"
+              href="/"
+            >
+              Home
+            </a>
+            <svg
+              class="ons-svg-icon"
+              focusable="false"
+              viewBox="0 0 8 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                transform="translate(-5.02 -1.59)"
+              />
+            </svg>
+          </li>
+        </ol>
+      </nav>
       <div
         class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
         data-testid="allocation-page-panel"
@@ -942,9 +575,9 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor > sho
         </div>
       </div>
       <br />
-      <h3>
+      <h1>
         FRS2504A
-      </h3>
+      </h1>
       <div>
         <label
           class="ons-label"
@@ -1140,6 +773,38 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor > sho
     </div>
   </body>,
   "container": <div>
+    <nav
+      aria-label="Breadcrumb"
+      class="ons-breadcrumb"
+    >
+      <ol
+        class="ons-breadcrumb__items u-fs-s"
+      >
+        <li
+          class="ons-breadcrumb__item"
+          data-testid="breadcrumb-0"
+          id="breadcrumb-0"
+        >
+          <a
+            class="ons-breadcrumb__link"
+            href="/"
+          >
+            Home
+          </a>
+          <svg
+            class="ons-svg-icon"
+            focusable="false"
+            viewBox="0 0 8 13"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+              transform="translate(-5.02 -1.59)"
+            />
+          </svg>
+        </li>
+      </ol>
+    </nav>
     <div
       class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
       data-testid="allocation-page-panel"
@@ -1151,484 +816,9 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor > sho
       </div>
     </div>
     <br />
-    <h3>
+    <h1>
       FRS2504A
-    </h3>
-    <div>
-      <label
-        class="ons-label"
-        for="select-from"
-      >
-        Reallocate cases from editor
-         
-      </label>
-      <select
-        class="ons-input "
-        data-testid="select-from"
-        id="select-from"
-        name="select"
-      >
-        <option
-          data-testid="select-select-from"
-          disabled=""
-          selected=""
-          value=""
-        >
-          Select an option
-        </option>
-        <option
-          data-testid="option-select-from-Dave"
-          value="Dave"
-        >
-          Dave (0 case(s))
-        </option>
-        <option
-          data-testid="option-select-from-Jake"
-          value="Jake"
-        >
-          Jake (2 case(s))
-        </option>
-        <option
-          data-testid="option-select-from-Rich"
-          value="Rich"
-        >
-          Rich (0 case(s))
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        class="ons-label"
-        for="select-to"
-      >
-        To editor
-         
-      </label>
-      <select
-        class="ons-input "
-        data-testid="select-to"
-        id="select-to"
-        name="select"
-      >
-        <option
-          data-testid="select-select-to"
-          disabled=""
-          selected=""
-          value=""
-        >
-          Select an option
-        </option>
-        <option
-          data-testid="option-select-to-Dave"
-          value="Dave"
-        >
-          Dave (0 case(s))
-        </option>
-        <option
-          data-testid="option-select-to-Jake"
-          value="Jake"
-        >
-          Jake (2 case(s))
-        </option>
-        <option
-          data-testid="option-select-to-Rich"
-          value="Rich"
-        >
-          Rich (0 case(s))
-        </option>
-      </select>
-    </div>
-    <div>
-      <label
-        class="ons-label"
-        for="number-of-cases"
-      >
-        Number of cases
-         
-      </label>
-      <select
-        class="ons-input "
-        data-testid="number-of-cases"
-        id="number-of-cases"
-        name="select"
-      >
-        <option
-          data-testid="select-number-of-cases"
-          disabled=""
-          value=""
-        >
-          Select an option
-        </option>
-        <option
-          data-testid="option-number-of-cases--1"
-          selected=""
-          value="-1"
-        >
-          All
-        </option>
-        <option
-          data-testid="option-number-of-cases-50"
-          value="50"
-        >
-          50
-        </option>
-        <option
-          data-testid="option-number-of-cases-45"
-          value="45"
-        >
-          45
-        </option>
-        <option
-          data-testid="option-number-of-cases-40"
-          value="40"
-        >
-          40
-        </option>
-        <option
-          data-testid="option-number-of-cases-35"
-          value="35"
-        >
-          35
-        </option>
-        <option
-          data-testid="option-number-of-cases-30"
-          value="30"
-        >
-          30
-        </option>
-        <option
-          data-testid="option-number-of-cases-25"
-          value="25"
-        >
-          25
-        </option>
-        <option
-          data-testid="option-number-of-cases-20"
-          value="20"
-        >
-          20
-        </option>
-        <option
-          data-testid="option-number-of-cases-15"
-          value="15"
-        >
-          15
-        </option>
-        <option
-          data-testid="option-number-of-cases-10"
-          value="10"
-        >
-          10
-        </option>
-        <option
-          data-testid="option-number-of-cases-5"
-          value="5"
-        >
-          5
-        </option>
-        <option
-          data-testid="option-number-of-cases-1"
-          value="1"
-        >
-          1
-        </option>
-      </select>
-    </div>
-    <br />
-    <button
-      class="ons-btn "
-      data-testid="button"
-      type="button"
-    >
-      <span
-        class="ons-btn__inner"
-      >
-        Reallocate
-      </span>
-    </button>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Given we wish to reallocte cases from an Editor to another Editor should render the allocation page correctly: ReallocationPage 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-        data-testid="allocation-page-panel"
-      >
-        <div
-          class="ons-panel__body "
-        >
-          Reallocate cases from one editor to another editor. All non-completed cases will be transfered
-        </div>
-      </div>
-      <br />
-      <h3>
-        FRS2504A
-      </h3>
-      <div>
-        <label
-          class="ons-label"
-          for="select-from"
-        >
-          Reallocate cases from editor
-           
-        </label>
-        <select
-          class="ons-input "
-          data-testid="select-from"
-          id="select-from"
-          name="select"
-        >
-          <option
-            data-testid="select-select-from"
-            disabled=""
-            selected=""
-            value=""
-          >
-            Select an option
-          </option>
-          <option
-            data-testid="option-select-from-Dave"
-            value="Dave"
-          >
-            Dave (0 case(s))
-          </option>
-          <option
-            data-testid="option-select-from-Jake"
-            value="Jake"
-          >
-            Jake (2 case(s))
-          </option>
-          <option
-            data-testid="option-select-from-Rich"
-            value="Rich"
-          >
-            Rich (0 case(s))
-          </option>
-        </select>
-      </div>
-      <div>
-        <label
-          class="ons-label"
-          for="select-to"
-        >
-          To editor
-           
-        </label>
-        <select
-          class="ons-input "
-          data-testid="select-to"
-          id="select-to"
-          name="select"
-        >
-          <option
-            data-testid="select-select-to"
-            disabled=""
-            selected=""
-            value=""
-          >
-            Select an option
-          </option>
-          <option
-            data-testid="option-select-to-Dave"
-            value="Dave"
-          >
-            Dave (0 case(s))
-          </option>
-          <option
-            data-testid="option-select-to-Jake"
-            value="Jake"
-          >
-            Jake (2 case(s))
-          </option>
-          <option
-            data-testid="option-select-to-Rich"
-            value="Rich"
-          >
-            Rich (0 case(s))
-          </option>
-        </select>
-      </div>
-      <div>
-        <label
-          class="ons-label"
-          for="number-of-cases"
-        >
-          Number of cases
-           
-        </label>
-        <select
-          class="ons-input "
-          data-testid="number-of-cases"
-          id="number-of-cases"
-          name="select"
-        >
-          <option
-            data-testid="select-number-of-cases"
-            disabled=""
-            value=""
-          >
-            Select an option
-          </option>
-          <option
-            data-testid="option-number-of-cases--1"
-            selected=""
-            value="-1"
-          >
-            All
-          </option>
-          <option
-            data-testid="option-number-of-cases-50"
-            value="50"
-          >
-            50
-          </option>
-          <option
-            data-testid="option-number-of-cases-45"
-            value="45"
-          >
-            45
-          </option>
-          <option
-            data-testid="option-number-of-cases-40"
-            value="40"
-          >
-            40
-          </option>
-          <option
-            data-testid="option-number-of-cases-35"
-            value="35"
-          >
-            35
-          </option>
-          <option
-            data-testid="option-number-of-cases-30"
-            value="30"
-          >
-            30
-          </option>
-          <option
-            data-testid="option-number-of-cases-25"
-            value="25"
-          >
-            25
-          </option>
-          <option
-            data-testid="option-number-of-cases-20"
-            value="20"
-          >
-            20
-          </option>
-          <option
-            data-testid="option-number-of-cases-15"
-            value="15"
-          >
-            15
-          </option>
-          <option
-            data-testid="option-number-of-cases-10"
-            value="10"
-          >
-            10
-          </option>
-          <option
-            data-testid="option-number-of-cases-5"
-            value="5"
-          >
-            5
-          </option>
-          <option
-            data-testid="option-number-of-cases-1"
-            value="1"
-          >
-            1
-          </option>
-        </select>
-      </div>
-      <br />
-      <button
-        class="ons-btn "
-        data-testid="button"
-        type="button"
-      >
-        <span
-          class="ons-btn__inner"
-        >
-          Reallocate
-        </span>
-      </button>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-      data-testid="allocation-page-panel"
-    >
-      <div
-        class="ons-panel__body "
-      >
-        Reallocate cases from one editor to another editor. All non-completed cases will be transfered
-      </div>
-    </div>
-    <br />
-    <h3>
-      FRS2504A
-    </h3>
+    </h1>
     <div>
       <label
         class="ons-label"

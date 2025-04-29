@@ -20,7 +20,7 @@ interface AllocateProps {
 
 export default function AllocateCases({
   questionnaireName, supervisorRole, editorRole, reallocate, setMessage,
-} : AllocateProps): ReactElement {
+}: AllocateProps): ReactElement {
   let [refresh, setRefresh] = useState(0); /* eslint-disable-line */
   const allocationInformation = useAsyncRequestWithThreeParamsWithRefresh<AllocationDetails, string, UserRole, UserRole, number>(getAllocationDetails, questionnaireName, supervisorRole, editorRole, refresh);
 
@@ -56,7 +56,7 @@ export default function AllocateCases({
   async function allocateCases(name: string, cases: string[]) {
     setMessage({ show: false, text: '', type: '' });
 
-    if (name === undefined || name === '' || cases.length === 0) {
+    if (name === undefined || name === '' || cases.length === 0 || (Array.isArray(cases) && cases.length === 1 && cases[0] === '')) {
       setMessage({ show: true, text: 'Please select valid options', type: 'error' });
       return;
     }
@@ -74,8 +74,8 @@ export default function AllocateCases({
     <AsyncContent content={allocationInformation}>
       {(allocationDetails) => (
         <>
-        { !reallocate && <AllocateContentForm allocationDetails={allocationDetails.Interviewers} allocateCases={allocateCases} fromOptions={getInterviewerOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate} /* eslint-disable-line *//>} 
-        { reallocate && <AllocateContentForm allocationDetails={allocationDetails.Editors} allocateCases={allocateCases} fromOptions={getEditorOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate} /* eslint-disable-line */ />}
+          {!reallocate && <AllocateContentForm allocationDetails={allocationDetails.Interviewers} allocateCases={allocateCases} fromOptions={getInterviewerOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate} /* eslint-disable-line */ />}
+          {reallocate && <AllocateContentForm allocationDetails={allocationDetails.Editors} allocateCases={allocateCases} fromOptions={getEditorOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate} /* eslint-disable-line */ />}
         </>
       )}
     </AsyncContent>
