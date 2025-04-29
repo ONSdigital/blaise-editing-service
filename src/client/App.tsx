@@ -6,7 +6,7 @@ import LayoutTemplate from './Common/components/LayoutTemplate';
 
 function App(): ReactElement {
   return (
-    <Authenticate title="Blaise editing service">
+    <Authenticate title="Blaise Editing Service">
       {(user, loggedIn, logOutFunction) => (
         <LayoutTemplate showSignOutButton={loggedIn} signOut={() => logOutFunction()}>
           <AppRoutes user={user} />

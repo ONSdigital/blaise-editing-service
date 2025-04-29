@@ -7,6 +7,7 @@ import { setCaseToUpdate } from '../../api/NodeApi';
 import UserRole from '../enums/UserTypes';
 import questionnaireDisplayName from '../functions/QuestionnaireFunctions';
 import { Message } from '../types/MessageType';
+import Breadcrumbs from './Breadcrumbs';
 
 interface EditCaseFormProps {
   caseDetails: CaseEditInformation;
@@ -38,6 +39,12 @@ export default function EditCaseForm({
 
   return (
     <>
+      <Breadcrumbs BreadcrumbList={
+        [
+          { link: '/', title: 'Home' },
+        ]
+      }
+      />
       <ONSPanel status="info" testID="edit-case-form-panel">
         Please check that the case details are correct before editing the case, once you have made changes to the case you will not be able to undo them.
       </ONSPanel>
@@ -53,41 +60,41 @@ export default function EditCaseForm({
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-CaseID`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Case ID:</td>
-              <td className="ons-table__cell">{caseDetails.primaryKey}</td>
+              <td className="ons-table__cell ons-col-6@m">Case ID</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{caseDetails.primaryKey}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Outcome`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Outcome:</td>
-              <td className="ons-table__cell">{caseDetails.outcome}</td>
+              <td className="ons-table__cell ons-col-6@m">Outcome</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{caseDetails.outcome}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Interviewer`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Interviewer:</td>
-              <td className="ons-table__cell">{caseDetails.interviewer}</td>
+              <td className="ons-table__cell ons-col-6@m">Interviewer</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{caseDetails.interviewer}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Organisation`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Organisation:</td>
-              <td className="ons-table__cell">{Organisation[caseDetails.organisation]}</td>
+              <td className="ons-table__cell ons-col-6@m">Organisation</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">{Organisation[caseDetails.organisation]}</td>
             </tr>
             <tr
               className="ons-table__row"
               key={`${caseDetails.primaryKey}-Editing-link`}
             >
-              <td className="ons-table__cell ons-u-fs-r--b">Editing link:</td>
-              <td className="ons-table__cell ons-u-fs-r--b">
+              <td className="ons-table__cell ons-col-6@m">Editing link</td>
+              <td className="ons-table__cell ons-col-6@m ons-u-fs-r--b">
                 {role === UserRole.Survey_Support && (
-                <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
+                  <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit interviewer Case</Link>
                 )}
                 {(role === UserRole.SVT_Supervisor || role === UserRole.FRS_Researcher) && (
-                <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
+                  <Link data-testid="edit-case-link" to={caseDetails.editUrl} target="_blank" rel="noopener noreferrer">Edit Case</Link>
                 )}
               </td>
             </tr>
@@ -95,22 +102,22 @@ export default function EditCaseForm({
         </ONSTable>
       </div>
       {role === UserRole.Survey_Support && (
-      <>
-        <br />
-        <ONSPanel status="warn">
-          After finalising edits, sync your changes overnight with the editing database by clicking the button below.
-        </ONSPanel>
-        <div className="ons-u-mb-l">
-          <ONSButton
-            label="Update case"
-            id="update-case-button"
-            primary
-            loading={submitting}
-            disabled={submitting}
-            onClick={updateCase}
-          />
-        </div>
-      </>
+        <>
+          <br />
+          <ONSPanel status="warn">
+            After finalising edits, sync your changes overnight with the editing database by clicking the button below.
+          </ONSPanel>
+          <div className="ons-u-mb-l">
+            <ONSButton
+              label="Update case"
+              id="update-case-button"
+              primary
+              loading={submitting}
+              disabled={submitting}
+              onClick={updateCase}
+            />
+          </div>
+        </>
       )}
     </>
   );

@@ -39,7 +39,7 @@ export default class FakeServerConfigurationProvider implements ServerConfigurat
     roleConfiguration?: RoleConfiguration[],
   ) {
     this.BlaiseApiUrl = blaiseApiUrl ?? 'restapi.blaise.com';
-    this.BuildFolder = buildFolder ?? 'dist';
+    this.BuildFolder = buildFolder ?? '../../dist';
     this.Port = port ?? 5000;
     this.ServerPark = serverPark ?? 'gusty';
     this.ExternalWebUrl = externalWebUrl ?? 'cati.blaise.com';
