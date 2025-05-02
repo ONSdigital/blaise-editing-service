@@ -16,7 +16,7 @@
     "lint": "yarn eslint . --fix",
     "dev": "yarn clean && yarn build && yarn start-server",
     "dev-separate": "yarn build && concurrently npm:start-client npm:start-server",
-    "gcp-build": "GENERATE_SOURCEMAP=false rm -rf dist && vite build && tsc --project tsconfig.server.json",
+    "gcp-build": "GENERATE_SOURCEMAP=false yarn build",
     "preview-build": "yarn build && vite preview",
     "build-client": "vite build",
     "start-client": "vite",
