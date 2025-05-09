@@ -55,5 +55,9 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
     response.render('index.html');
   });
 
+  server.use(function (_request: Request, response: Response) {
+    response.render("../src/views/500.html", {});
+  });
+
   return server;
 }
