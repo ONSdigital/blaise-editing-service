@@ -1,4 +1,4 @@
-import express, { Request, Response, Express } from 'express';
+import express, { Request, Response, Express, NextFunction } from 'express';
 import ejs from 'ejs';
 import path from 'path';
 import { Auth, newLoginHandler } from 'blaise-login-react-server';
@@ -45,6 +45,10 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const userController = new UserController(blaiseApi, config, auth);
   server.use('/', userController.getRoutes());
 
+  server.get('/trigger-500', (_req: Request, _res: Response) => {
+    throw new Error('Test 500 error');
+  });
+
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
@@ -55,8 +59,8 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
     response.render('index.html');
   });
 
-  server.use(function (_request: Request, response: Response) {
-    response.render("../src/views/500.html", {});
+  server.use(function (_error: Error, _request: Request, response: Response, _next: NextFunction) {
+    response.render("500.html", {});
   });
 
   return server;
