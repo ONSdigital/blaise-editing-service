@@ -45,10 +45,6 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const userController = new UserController(blaiseApi, config, auth);
   server.use('/', userController.getRoutes());
 
-  server.get('/trigger-500', (_req: Request, _res: Response) => {
-    throw new Error('Test 500 error');
-  });
-
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
@@ -60,7 +56,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   });
 
   server.use(function (_error: Error, _request: Request, response: Response, _next: NextFunction) {
-    response.render("500.html", {});
+    response.status(500).render("500.html", {});
   });
 
   return server;

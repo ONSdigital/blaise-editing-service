@@ -8,6 +8,8 @@ import path from 'path';
 import NodeServer from '../../server/server';
 import BlaiseApi from '../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from './configuration/FakeServerConfigurationProvider';
+import express, { Request, Response, NextFunction } from 'express';
+import ejs from 'ejs';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
@@ -30,7 +32,6 @@ describe('All expected routes are registered', () => {
       { methods: ['PATCH'], middlewares: ['bound ', 'bound allocateCases'], path: '/api/questionnaires/:questionnaireName/cases/allocate' },
       { methods: ['PATCH'], middlewares: ['bound ', 'bound setCaseToUpdate'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/update' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getUsers'], path: '/api/users' },
-      { methods: ['GET'], middlewares: ['anonymous'], path: '/trigger-500' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/current-user' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username/authorised' },
@@ -62,5 +63,34 @@ describe('Render react pages as default route', () => {
     expect(result.statusCode).toEqual(200);
     expect(result.type).toEqual('text/html');
     expect(result.text).toContain('Edit interview data and view statistics on editing progress');
+  });
+});
+
+describe("500 Error Handling Middleware", () => {
+  it('should render the 500 error page', async () => {
+    // Arrange
+    const app = express();
+
+    app.set('views', path.join(__dirname, '../../../dist'));
+    app.engine('html', ejs.renderFile);
+
+    app.get('/test-error', (_req, _res, next) => {
+      next(new Error('Test error'));
+    });
+
+    app.use(function (_error: Error, _request: Request, response: Response, _next: NextFunction) {
+      response.status(500).render("500.html", {});
+    });
+
+    const sut = supertest(app);
+
+    // Act
+    const result = await sut.get('/test-error');
+
+    // Assert
+    expect(result.error).toBeTruthy();
+    expect(result.statusCode).toEqual(500);
+    expect(result.type).toEqual('text/html');
+    expect(result.text).toContain('Sorry, there is a problem with the service');
   });
 });
