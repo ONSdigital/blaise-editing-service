@@ -30,12 +30,14 @@ describe('All expected routes are registered', () => {
       { methods: ['PATCH'], middlewares: ['bound ', 'bound allocateCases'], path: '/api/questionnaires/:questionnaireName/cases/allocate' },
       { methods: ['PATCH'], middlewares: ['bound ', 'bound setCaseToUpdate'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/update' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getUsers'], path: '/api/users' },
+      { methods: ['GET'], middlewares: ['anonymous'], path: '/trigger-500' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/current-user' },
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username/authorised' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/token/validate' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/users/password/validate' },
       { methods: ['GET'], middlewares: ['anonymous'], path: '*' },
+      
     ];
 
     // act
