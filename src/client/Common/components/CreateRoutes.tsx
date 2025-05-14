@@ -12,17 +12,9 @@ function DefaultNotFound(): JSX.Element {
     <div className="ons-grid">
       <div className="ons-grid__col ons-col-8@m">
         <main id="page-main-content" className="ons-page__main ">
-          <h1>Sorry, there is a problem with the service</h1>
-          <p>Try again later.</p>
+          <h1>404 Not Found</h1>
           <p>
-            If you are still experiencing problems
-            <a href="https://ons.service-now.com/">report this issue</a>
-            {' '}
-            to Service Desk
-          </p>
-          <p>
-            Or try to navigate to the Editing Service
-            <a href="/">homepage</a>
+            <a href="/">Back to the homepage</a>
             .
           </p>
         </main>
