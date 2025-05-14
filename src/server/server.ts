@@ -24,7 +24,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
       if (filePath.endsWith('index.html')) {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       }
-    }
+    },
   }));
 
   // set up views for rendering index.html
@@ -48,6 +48,11 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
+
+  // fallback for any API endpoints that are not found
+  server.use('/api/*', (_request: Request, response: Response) => {
+    response.status(404).json({ error: 'API endpoint not found' });
+  });
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
