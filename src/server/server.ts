@@ -1,4 +1,6 @@
-import express, { Request, Response, Express, NextFunction } from 'express';
+import express, {
+  Request, Response, Express, NextFunction,
+} from 'express';
 import ejs from 'ejs';
 import path from 'path';
 import { Auth, newLoginHandler } from 'blaise-login-react-server';
@@ -24,7 +26,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
       if (filePath.endsWith('index.html')) {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       }
-    }
+    },
   }));
 
   // set up views for rendering index.html
@@ -55,8 +57,8 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
     response.render('index.html');
   });
 
-  server.use(function (_error: Error, _request: Request, response: Response, _next: NextFunction) {
-    response.status(500).render("500.html", {});
+  server.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
+    response.status(500).render('500.html', {});
   });
 
   return server;
