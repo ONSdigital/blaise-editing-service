@@ -5,11 +5,11 @@ import listEndpoints, { Endpoint } from 'express-list-endpoints';
 import { IMock, Mock } from 'typemoq';
 import supertest from 'supertest';
 import path from 'path';
+import express, { Request, Response, NextFunction } from 'express';
+import ejs from 'ejs';
 import NodeServer from '../../server/server';
 import BlaiseApi from '../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from './configuration/FakeServerConfigurationProvider';
-import express, { Request, Response, NextFunction } from 'express';
-import ejs from 'ejs';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
@@ -38,7 +38,7 @@ describe('All expected routes are registered', () => {
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/token/validate' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/users/password/validate' },
       { methods: ['GET'], middlewares: ['anonymous'], path: '*' },
-      
+
     ];
 
     // act
@@ -66,7 +66,7 @@ describe('Render react pages as default route', () => {
   });
 });
 
-describe("500 Error Handling Middleware", () => {
+describe('500 Error Handling Middleware', () => {
   it('should render the 500 error page', async () => {
     // Arrange
     const app = express();
@@ -78,8 +78,8 @@ describe("500 Error Handling Middleware", () => {
       next(new Error('Test error'));
     });
 
-    app.use(function (_error: Error, _request: Request, response: Response, _next: NextFunction) {
-      response.status(500).render("500.html", {});
+    app.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
+      response.status(500).render('500.html', {});
     });
 
     const sut = supertest(app);
