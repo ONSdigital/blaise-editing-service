@@ -6,7 +6,6 @@ import { Routes, Route } from 'react-router-dom';
  * Otherwise, it redirects to a different specified route.
  */
 
-// Simple default 404 component
 function DefaultNotFound(): JSX.Element {
   return (
     <div className="ons-grid">
@@ -25,12 +24,12 @@ function DefaultNotFound(): JSX.Element {
 
 /* eslint-disable react/jsx-no-useless-fragment */
 export default function CreateRoutes({ onConditionThat, children }: CreateRoutesProps): JSX.Element {
-  return onConditionThat ? (
+  return (
     <Routes>
-      {children}
+      {onConditionThat ? children : null}
       <Route path="*" element={<DefaultNotFound />} />
     </Routes>
-  ) : <></>;
+  );
 }
 
 export type CreateRoutesProps = {
