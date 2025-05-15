@@ -80,7 +80,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
                 {caseDetails.EditStatus}
               </td>
               <td className="ons-col-8@m ons-table__cell links">
-                <DownloadCaseSummaryLink caseId={caseDetails.CaseId} />
+                <DownloadCaseSummaryLink caseId={caseDetails.CaseId} questionnaireName={questionnaire.questionnaireName} />
                 {' | '}
                 <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/${caseDetails.CaseId}/summary`}>View case summary</Link>
                 {' | '}
