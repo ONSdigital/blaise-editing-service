@@ -336,9 +336,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                           class="ons-col-8@m ons-table__cell links"
                         >
                           <span
+                            aria-disabled="false"
+                            aria-label="Download case summary"
                             class="link"
                             id="download-10001011-summary"
-                            role="presentation"
+                            role="link"
+                            style="cursor: pointer; opacity: 1;"
+                            tabindex="0"
                           >
                             Download case summary
                           </span>
@@ -377,9 +381,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                           class="ons-col-8@m ons-table__cell links"
                         >
                           <span
+                            aria-disabled="false"
+                            aria-label="Download case summary"
                             class="link"
                             id="download-10001012-summary"
-                            role="presentation"
+                            role="link"
+                            style="cursor: pointer; opacity: 1;"
+                            tabindex="0"
                           >
                             Download case summary
                           </span>
@@ -418,9 +426,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                           class="ons-col-8@m ons-table__cell links"
                         >
                           <span
+                            aria-disabled="false"
+                            aria-label="Download case summary"
                             class="link"
                             id="download-10001013-summary"
-                            role="presentation"
+                            role="link"
+                            style="cursor: pointer; opacity: 1;"
+                            tabindex="0"
                           >
                             Download case summary
                           </span>
@@ -459,9 +471,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                           class="ons-col-8@m ons-table__cell links"
                         >
                           <span
+                            aria-disabled="false"
+                            aria-label="Download case summary"
                             class="link"
                             id="download-10001014-summary"
-                            role="presentation"
+                            role="link"
+                            style="cursor: pointer; opacity: 1;"
+                            tabindex="0"
                           >
                             Download case summary
                           </span>
@@ -500,9 +516,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                           class="ons-col-8@m ons-table__cell links"
                         >
                           <span
+                            aria-disabled="false"
+                            aria-label="Download case summary"
                             class="link"
                             id="download-10001015-summary"
-                            role="presentation"
+                            role="link"
+                            style="cursor: pointer; opacity: 1;"
+                            tabindex="0"
                           >
                             Download case summary
                           </span>
@@ -775,9 +795,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                         class="ons-col-8@m ons-table__cell links"
                       >
                         <span
+                          aria-disabled="false"
+                          aria-label="Download case summary"
                           class="link"
                           id="download-10001011-summary"
-                          role="presentation"
+                          role="link"
+                          style="cursor: pointer; opacity: 1;"
+                          tabindex="0"
                         >
                           Download case summary
                         </span>
@@ -816,9 +840,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                         class="ons-col-8@m ons-table__cell links"
                       >
                         <span
+                          aria-disabled="false"
+                          aria-label="Download case summary"
                           class="link"
                           id="download-10001012-summary"
-                          role="presentation"
+                          role="link"
+                          style="cursor: pointer; opacity: 1;"
+                          tabindex="0"
                         >
                           Download case summary
                         </span>
@@ -857,9 +885,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                         class="ons-col-8@m ons-table__cell links"
                       >
                         <span
+                          aria-disabled="false"
+                          aria-label="Download case summary"
                           class="link"
                           id="download-10001013-summary"
-                          role="presentation"
+                          role="link"
+                          style="cursor: pointer; opacity: 1;"
+                          tabindex="0"
                         >
                           Download case summary
                         </span>
@@ -898,9 +930,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                         class="ons-col-8@m ons-table__cell links"
                       >
                         <span
+                          aria-disabled="false"
+                          aria-label="Download case summary"
                           class="link"
                           id="download-10001014-summary"
-                          role="presentation"
+                          role="link"
+                          style="cursor: pointer; opacity: 1;"
+                          tabindex="0"
                         >
                           Download case summary
                         </span>
@@ -939,9 +975,13 @@ exports[`Given there are surveys available in blaise > should render the editor 
                         class="ons-col-8@m ons-table__cell links"
                       >
                         <span
+                          aria-disabled="false"
+                          aria-label="Download case summary"
                           class="link"
                           id="download-10001015-summary"
-                          role="presentation"
+                          role="link"
+                          style="cursor: pointer; opacity: 1;"
+                          tabindex="0"
                         >
                           Download case summary
                         </span>
