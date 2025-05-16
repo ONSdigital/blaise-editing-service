@@ -51,7 +51,7 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
 
   caseSummaryText += '\n';
 
-  caseSummaryText += `Accommodation type: Main:    ${caseSummary.Household.Accommodation.Main ? caseSummary.Household.Accommodation.Main : ''}  -  Type: ${caseSummary.Household.Accommodation.Type ? caseSummary.Household.Accommodation.Type : null}\n`;
+  caseSummaryText += `Accommodation type: Main:    ${caseSummary.Household.Accommodation.Main ? caseSummary.Household.Accommodation.Main : ''}  -  Type: ${caseSummary.Household.Accommodation.Type ? caseSummary.Household.Accommodation.Type : ''}\n`;
   caseSummaryText += `Floor number:                ${caseSummary.Household.FloorNumber ? caseSummary.Household.FloorNumber : ''}\n`;
   caseSummaryText += `Household status:            ${caseSummary.Household.Status ? caseSummary.Household.Status : ''}\n`;
   caseSummaryText += `Number of bedrooms:          ${caseSummary.Household.NumberOfBedrooms ? caseSummary.Household.NumberOfBedrooms : ''}\n`;
