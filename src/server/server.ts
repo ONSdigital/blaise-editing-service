@@ -24,7 +24,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
       if (filePath.endsWith('index.html')) {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       }
-    }
+    },
   }));
 
   // set up views for rendering index.html

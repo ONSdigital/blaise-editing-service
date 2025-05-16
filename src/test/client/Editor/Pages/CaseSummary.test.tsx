@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { CaseSummaryDetails } from '../../../../common/interfaces/caseInterface';
 import CaseSummary from '../../../../client/Editor/Pages/CaseSummary';
 import { getCaseSummary } from '../../../../client/api/NodeApi';
+import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
@@ -18,56 +19,6 @@ vi.mock('react-router-dom', async () => {
   };
 });
 vi.mock('../../../../client/api/NodeApi');
-
-const caseSummaryDetailsMockObject: CaseSummaryDetails = {
-  CaseId: '9001',
-  OutcomeCode: '110',
-  InterviewDate: new Date('2024-05-11'),
-  District: 'Gwent',
-  InterviewerName: 'Rich',
-  NumberOfRespondents: '2',
-  Household: {
-    Accommodation: {
-      Main: 'House/Bungalow',
-      Type: 'Detached',
-    },
-    FloorNumber: '2',
-    Status: 'Conventional',
-    NumberOfBedrooms: '2',
-    ReceiptOfHousingBenefit: [{
-      Amount: '380',
-      PeriodCode: 'One week',
-    }],
-    CouncilTaxBand: 'Band A',
-    BusinessRoom: true,
-    SelfEmployed: true,
-    SelfEmployedMembers: ['1', '2'],
-    IncomeSupport: true,
-    IncomeSupportMembers: ['1'],
-    IncomeBasedJaSupport: true,
-    IncomeBasedJaSupportMembers: ['1'],
-  },
-  Respondents: [
-    {
-      PersonNumber: '1',
-      RespondentName: 'Richmond Ricecake',
-      BenefitUnit: '1',
-      Sex: 'M',
-      DateOfBirth: new Date('1980-01-15'),
-      MaritalStatus: 'COH',
-      Relationship: ['*', '1'],
-    },
-    {
-      PersonNumber: '2',
-      RespondentName: 'Betty Bettison',
-      BenefitUnit: '1',
-      Sex: 'F',
-      DateOfBirth: new Date('1995-06-11'),
-      MaritalStatus: 'COH',
-      Relationship: ['1', '*'],
-    },
-  ],
-};
 
 // declare global vars
 let view:RenderResult;
