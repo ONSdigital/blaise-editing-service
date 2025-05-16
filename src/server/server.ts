@@ -47,9 +47,18 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const userController = new UserController(blaiseApi, config, auth);
   server.use('/', userController.getRoutes());
 
+  server.get('/trigger-500', (_req: Request, _res: Response) => {
+    throw new Error('Test 500 error');
+  });
+
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
+
+  // fallback for any API endpoints that are not found
+  server.use('/api/*', (_request: Request, response: Response) => {
+    response.redirect('/?error=API endpoint not found');  
+  });
 
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
@@ -58,7 +67,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   });
 
   server.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
-    response.status(500).render('500.html', {});
+    response.redirect('/?error=Server Error Occurred');
   });
 
   return server;
