@@ -18,11 +18,11 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
   caseSummaryText += 'Fact Sheet\n';
   caseSummaryText += '\n';
   caseSummaryText += '\n';
-  caseSummaryText += `Case ID:            ${caseSummary.CaseId ? caseSummary.CaseId : ''}\n`;
-  caseSummaryText += `Outcome:            ${caseSummary.OutcomeCode ? caseSummary.OutcomeCode : ''}\n`;
-  caseSummaryText += `Interview date:     ${caseSummary.InterviewDate ? caseSummary.InterviewDate.toDateString() : ''}\n`;
-  caseSummaryText += `District:           ${caseSummary.District ? caseSummary.District : ''}\n`;
-  caseSummaryText += `Interviewer:        ${caseSummary.InterviewerName ? caseSummary.InterviewerName : ''}\n`;
+  caseSummaryText += `Case ID:            ${caseSummary.CaseId || ''}\n`;
+  caseSummaryText += `Outcome:            ${caseSummary.OutcomeCode || ''}\n`;
+  caseSummaryText += `Interview date:     ${caseSummary.InterviewDate?.toDateString() || ''}\n`;
+  caseSummaryText += `District:           ${caseSummary.District || ''}\n`;
+  caseSummaryText += `Interviewer:        ${caseSummary.InterviewerName || ''}\n`;
   caseSummaryText += '\n';
 
   caseSummaryText += `${PadString('', 4)}|`;
@@ -37,12 +37,12 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
   caseSummaryText += '\n';
 
   caseSummary.Respondents.forEach((respondent) => {
-    caseSummaryText += `${PadString((respondent.PersonNumber ? respondent.PersonNumber : ''), 4)}|`;
-    caseSummaryText += `${PadString(respondent.RespondentName ? respondent.RespondentName : '', nameColumnWidth)}|`;
-    caseSummaryText += `${PadString(respondent.BenefitUnit ? respondent.BenefitUnit : '', 4)}|`;
-    caseSummaryText += `${PadString(respondent.Sex ? respondent.Sex : '', 5)}|`;
-    caseSummaryText += `${PadString(respondent.DateOfBirth ? respondent.DateOfBirth.toDateString() : '', 17)}|`;
-    caseSummaryText += `${PadString(respondent.MaritalStatus ? respondent.MaritalStatus : '', 10)}|`;
+    caseSummaryText += `${PadString(respondent.PersonNumber || '', 4)}|`;
+    caseSummaryText += `${PadString(respondent.RespondentName || '', nameColumnWidth)}|`;
+    caseSummaryText += `${PadString(respondent.BenefitUnit || '', 4)}|`;
+    caseSummaryText += `${PadString(respondent.Sex || '', 5)}|`;
+    caseSummaryText += `${PadString(respondent.DateOfBirth?.toDateString() || '', 17)}|`;
+    caseSummaryText += `${PadString(respondent.MaritalStatus || '', 10)}|`;
     respondent.Relationship.forEach((relationship) => {
       caseSummaryText += `${PadString(relationship || '', 4)}|`;
     });
@@ -51,17 +51,17 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
 
   caseSummaryText += '\n';
 
-  caseSummaryText += `Accommodation type: Main:    ${caseSummary.Household.Accommodation.Main ? caseSummary.Household.Accommodation.Main : ''}  -  Type: ${caseSummary.Household.Accommodation.Type ? caseSummary.Household.Accommodation.Type : ''}\n`;
-  caseSummaryText += `Floor number:                ${caseSummary.Household.FloorNumber ? caseSummary.Household.FloorNumber : ''}\n`;
-  caseSummaryText += `Household status:            ${caseSummary.Household.Status ? caseSummary.Household.Status : ''}\n`;
-  caseSummaryText += `Number of bedrooms:          ${caseSummary.Household.NumberOfBedrooms ? caseSummary.Household.NumberOfBedrooms : ''}\n`;
+  caseSummaryText += `Accommodation type: Main:    ${caseSummary.Household.Accommodation.Main || ''}  -  Type: ${caseSummary.Household.Accommodation.Type || ''}\n`;
+  caseSummaryText += `Floor number:                ${caseSummary.Household.FloorNumber || ''}\n`;
+  caseSummaryText += `Household status:            ${caseSummary.Household.Status || ''}\n`;
+  caseSummaryText += `Number of bedrooms:          ${caseSummary.Household.NumberOfBedrooms || ''}\n`;
 
   caseSummary.Household.ReceiptOfHousingBenefit.forEach((housingBenefit, index) => {
     if (index === 0) {
-      caseSummaryText += `Receipt of housing benefits: amount: ${housingBenefit.Amount ? housingBenefit.Amount : ''}, Period: ${housingBenefit.PeriodCode ? housingBenefit.PeriodCode : ''}\n`;
+      caseSummaryText += `Receipt of housing benefits: amount: ${housingBenefit.Amount || ''}, Period: ${housingBenefit.PeriodCode || ''}\n`;
     }
     if (index > 0) {
-      caseSummaryText += `                             amount: ${housingBenefit.Amount ? housingBenefit.Amount : ''}, Period: ${housingBenefit.PeriodCode ? housingBenefit.PeriodCode : ''}\n`;
+      caseSummaryText += `                             amount: ${housingBenefit.Amount || ''}, Period: ${housingBenefit.PeriodCode || ''}\n`;
     }
   });
 
