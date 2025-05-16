@@ -24,12 +24,12 @@ function DefaultNotFound(): JSX.Element {
 
 /* eslint-disable react/jsx-no-useless-fragment */
 export default function CreateRoutes({ onConditionThat, children }: CreateRoutesProps): JSX.Element {
-  return (
+  return onConditionThat ? (
     <Routes>
-      {onConditionThat ? children : null}
+      {children}
       <Route path="*" element={<DefaultNotFound />} />
     </Routes>
-  );
+  ) : <></>;
 }
 
 export type CreateRoutesProps = {
