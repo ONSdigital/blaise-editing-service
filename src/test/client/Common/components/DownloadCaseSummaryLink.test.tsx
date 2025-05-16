@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import {
+  render, screen, fireEvent, waitFor,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 import { DownloadCaseSummaryLink, Props } from '../../../../client/Common/components/DownloadCaseSummaryLink';
@@ -11,7 +13,7 @@ vi.mock('../../../../client/api/NodeApi', () => ({
   getCaseSummary: vi.fn(),
 }));
 
-vi.mock('../../../../client/Mappers/caseSummaryTextMapper', () => ({default: vi.fn()}));
+vi.mock('../../../../client/Mappers/caseSummaryTextMapper', () => ({ default: vi.fn() }));
 
 const mockGetCaseSummary = getCaseSummary as vi.Mock;
 const mockMapCaseSummaryText = mapCaseSummaryText as vi.Mock;
@@ -35,7 +37,6 @@ describe('DownloadCaseSummaryLink', () => {
     mockCreateElement = vi.spyOn(document, 'createElement');
     mockCreateElement.mockImplementation((tagName: string, options?: ElementCreationOptions) => {
       if (tagName.toLowerCase() === 'a') {
-
         return {
           href: '',
           download: '',
@@ -45,6 +46,7 @@ describe('DownloadCaseSummaryLink', () => {
       return originalCreateElement.call(document, tagName, options);
     });
 
+    // eslint-disable-next-line no-console
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
@@ -59,7 +61,7 @@ describe('DownloadCaseSummaryLink', () => {
 
   it('renders correctly with default props', () => {
     // act
-    render(<DownloadCaseSummaryLink {...defaultProps} />);
+    render(<DownloadCaseSummaryLink caseId={defaultProps.caseId} questionnaireName={defaultProps.questionnaireName} />);
 
     // assert
     const linkElement = screen.getByText('Download case summary');
@@ -71,7 +73,7 @@ describe('DownloadCaseSummaryLink', () => {
     mockGetCaseSummary.mockResolvedValue(mockCaseSummaryDetails);
     mockMapCaseSummaryText.mockReturnValue(mockFileContent);
 
-    render(<DownloadCaseSummaryLink {...defaultProps} />);
+    render(<DownloadCaseSummaryLink caseId={defaultProps.caseId} questionnaireName={defaultProps.questionnaireName} />);
     const linkElement = screen.getByText('Download case summary');
 
     // act
@@ -96,7 +98,7 @@ describe('DownloadCaseSummaryLink', () => {
     // arrange
     mockGetCaseSummary.mockResolvedValue(mockCaseSummaryDetails);
     mockMapCaseSummaryText.mockReturnValue(mockFileContent);
-    render(<DownloadCaseSummaryLink {...defaultProps} />);
+    render(<DownloadCaseSummaryLink caseId={defaultProps.caseId} questionnaireName={defaultProps.questionnaireName} />);
     const linkElement = screen.getByText('Download case summary');
 
     // act
@@ -119,9 +121,9 @@ describe('DownloadCaseSummaryLink', () => {
     mockGetCaseSummary.mockRejectedValue(new Error(errorMessage));
     const mockOnError = vi.fn();
     const propsWithOnError = { ...defaultProps, onError: mockOnError };
-    render(<DownloadCaseSummaryLink {...propsWithOnError} />);
+    render(<DownloadCaseSummaryLink caseId={propsWithOnError.caseId} questionnaireName={propsWithOnError.questionnaireName} onError={propsWithOnError.onError} />);
     const linkElement = screen.getByText('Download case summary');
-    
+
     // act
     fireEvent.click(linkElement);
 
@@ -135,7 +137,7 @@ describe('DownloadCaseSummaryLink', () => {
 
     expect(console.error).toHaveBeenCalledWith(
       `Failed to export summary for caseId: ${defaultProps.caseId}:`,
-      expect.any(Error)
+      expect.any(Error),
     );
     await waitFor(() => expect(screen.getByText('Download case summary')).toBeInTheDocument());
     expect(linkElement).toHaveAttribute('aria-disabled', 'false');
@@ -143,10 +145,10 @@ describe('DownloadCaseSummaryLink', () => {
 
   it('does not trigger download if already downloading', async () => {
     // arrange
-    mockGetCaseSummary.mockImplementation(() => new Promise(resolve => setTimeout(() => resolve(mockCaseSummaryDetails), 50)));
+    mockGetCaseSummary.mockImplementation(() => new Promise((resolve) => { setTimeout(() => resolve(mockCaseSummaryDetails), 50); }));
     mockMapCaseSummaryText.mockReturnValue(mockFileContent);
 
-    render(<DownloadCaseSummaryLink {...defaultProps} />);
+    render(<DownloadCaseSummaryLink caseId={defaultProps.caseId} questionnaireName={defaultProps.questionnaireName} />);
     const linkElement = screen.getByText('Download case summary');
 
     // act

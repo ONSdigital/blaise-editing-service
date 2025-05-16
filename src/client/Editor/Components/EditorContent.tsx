@@ -27,7 +27,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
       {errorPanelMessage && (
         <ONSPanel status="error">
           <p>{errorPanelMessage}</p>
-          <button className="ons-btn ons-btn--small ons-btn--secondary ons-u-mt-s" onClick={dismissErrorPanel}>Dismiss</button>
+          <button type="button" className="ons-btn ons-btn--small ons-btn--secondary ons-u-mt-s" onClick={dismissErrorPanel}>Dismiss</button>
         </ONSPanel>
       )}
       <ONSPanel status="info" className="ons-u-mt-m">
@@ -95,7 +95,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
                 {caseDetails.EditStatus}
               </td>
               <td className="ons-col-8@m ons-table__cell links">
-                <DownloadCaseSummaryLink caseId={caseDetails.CaseId} questionnaireName={questionnaire.questionnaireName} onError={handleDownloadError}/>
+                <DownloadCaseSummaryLink caseId={caseDetails.CaseId} questionnaireName={questionnaire.questionnaireName} onError={handleDownloadError} />
                 {' | '}
                 <Link to={`/questionnaires/${questionnaire.questionnaireName}/cases/${caseDetails.CaseId}/summary`}>View case summary</Link>
                 {' | '}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { CaseSummaryDetails } from '../../../common/interfaces/caseInterface';
 import mapCaseSummaryText from '../../Mappers/caseSummaryTextMapper';
 import { getCaseSummary } from '../../api/NodeApi';
 
@@ -21,15 +20,15 @@ async function exportSummary(caseId: string, questionnaireName: string) {
     link.download = fileName;
 
     fileContent = fileContent.replace(/\r\n?|\n/g, '\r\n');
-    
+
     const encodedFileContent = encodeURIComponent(fileContent);
     link.href = `data:text/plain;charset=utf-8,${encodedFileContent}`;
-    
+
     link.click();
     console.log(`Successfully triggered download for case-summary-${caseId}.txt`);
   } catch (error) {
     console.error(`Failed to export summary for caseId: ${caseId}:`, error);
-    throw error; 
+    throw error;
   }
 }
 

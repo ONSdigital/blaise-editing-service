@@ -44,7 +44,7 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
     caseSummaryText += `${PadString(respondent.DateOfBirth ? respondent.DateOfBirth.toDateString() : '', 17)}|`;
     caseSummaryText += `${PadString(respondent.MaritalStatus ? respondent.MaritalStatus : '', 10)}|`;
     respondent.Relationship.forEach((relationship) => {
-      caseSummaryText += `${PadString(relationship ? relationship : '', 4)}|`;
+      caseSummaryText += `${PadString(relationship || '', 4)}|`;
     });
     caseSummaryText += '\n';
   });
@@ -61,7 +61,7 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
       caseSummaryText += `Receipt of housing benefits: amount: ${housingBenefit.Amount ? housingBenefit.Amount : ''}, Period: ${housingBenefit.PeriodCode ? housingBenefit.PeriodCode : ''}\n`;
     }
     if (index > 0) {
-      caseSummaryText += `                             amount: ${housingBenefit.Amount ? housingBenefit.Amount : ''}, Period: ${housingBenefit.PeriodCode ? housingBenefit.PeriodCode : '' }\n`;
+      caseSummaryText += `                             amount: ${housingBenefit.Amount ? housingBenefit.Amount : ''}, Period: ${housingBenefit.PeriodCode ? housingBenefit.PeriodCode : ''}\n`;
     }
   });
 
