@@ -1,71 +1,96 @@
 # Blaise Editing Service
 
-This service facilitates the review and editing of Blaise questionnaire data, supporting multiple user roles with distinct permissions and functionalities. It utilises two Blaise questionnaires: the original "main" interview questionnaire and a derived "edit" questionnaire. A [cloud function](https://github.com/ONSdigital/blaise-editing-cloud-functions) manages data synchronisation between these questionnaires.
+The Blaise Editing Service enables the review and editing of Blaise questionnaire data through a web interface, supporting various user roles with specific access and permissions. It utilises two Blaise questionnaires, the original "main" interview questionnaire and a derived "edit" questionnaire. A [cloud function](https://github.com/ONSdigital/blaise-editing-cloud-functions) manages data synchronisation between these questionnaires.
 
 ## User Roles
 
-The user roles case access and filtering is set in: `src\server\configuration\ServerConfigurationProvider.ts`, if the filtering array is empty then all cases are accessible.
+Case access and filtering are defined in `src\server\configuration\ServerConfigurationProvider.ts`, if the filtering array is empty then all cases are accessible.
 
-The roles are as follows:
+### Roles Overview
 
-* **SVT Supervisor**: Assigns cases to editors, tracks editing progress, and can directly edit cases in the "edit" questionnaire dataset. Filtered to cases in the "ONS" organisation with successful outcome codes.
-* **SVT Editor**: Reviews and edits completed cases in the "edit" questionnaire dataset. Filtered to cases in the "ONS" organisation with successful outcome codes.
-* **Researcher**: Accesses and edits any case in the "edit" questionnaire dataset, regardless of status or organization.
-* **Survey Support**: Works with the original questionnaire ("main"), enabling the interviewer cases to be updated (usually to update the outcome code) and then can set cases to be set to be resent overnight overwriting the "edit" questionnaire dataset for the case. This synchronisation process is handled separately by a [cloud function](https://github.com/ONSdigital/blaise-editing-cloud-functions), which is scheduled to run overnight on a daily basis.
+- **SVT Supervisor**
+  - Assigns cases to editors and tracks progress.
+  - Can edit cases in the "edit" questionnaire.
+  - Access limited to cases in the "ONS" organisation with successful outcome codes.
 
-# Questionnaire Requirements
+- **SVT Editor**
+  - Reviews and edits cases in the "edit" questionnaire assigned to them.
+  - Access limited to cases in the "ONS" organisation with successful outcome codes.
 
-For this service to work, the questionnaire needs to be in two parts:
+- **Researcher**
+  - Full access to all cases in the "edit" questionnaire.
+  - No filters applied.
 
-### "Main" questionnaire
+- **Survey Support**
+  - Works with the "main" questionnaire.
+  - Can update interviewer cases (e.g., outcome code).
+  - Has the ability to set a case to be re-synced during the nightly sync.
+  - No filters applied.
 
-The "main" questionnaire, which the interviewers complete is completed the same way as the other surveys.
+## Questionnaire Requirements
 
-* The data in this is then copied overnight to an "edit" version of the questionnaire by the [cloud function](https://github.com/ONSdigital/blaise-editing-cloud-functions), `copy-cases-to-edit`.
+Each questionnaire must exist in two versions:
 
-### "Edit" questionnaire
+### "Main" Version Questionnaire
 
-The "edit" questionnaire, is used in this service by the editors. It is initially a duplicate of the "main" questionnaire with the same name but modified and distinguished with an `_EDIT` suffix.  
+- Completed by interviewers.
+- Sample data should only be loaded here.
+- Copied nightly to the "edit" version using the [`copy-cases-to-edit`](https://github.com/ONSdigital/blaise-editing-cloud-functions) Cloud Function.
 
-### Addtional Fields
+### "Edit" Version Questionnaire
 
-In the edit block there are fields which are used by the editing service to know information about the case for editing purposes.
+- Used exclusively for editing.
+- Duplicate of the "main" questionnaire, but with some modifications and an `_EDIT` suffix.
+- A PowerShell script to generate this version is available on the [FRS questionnaire respository](https://github.com/ONSdigital/FRS-Questionnaire).
 
-* **``QEdit.AssignedTo``**: This is populated by the app when a supervisor assigns a case to an editor, it is used to filter when an editor logs in to only show them their assigned cases.
-* **``QEdit.Edited``**: This is set to 1 (in the questionnaire not by the app) when the editor first starts editing the case.  It is used to stop the cases being updated overnight as this would overwrite the edits if it did.
-* **``QEdit.LastUpdated``**: This is updated to the current datetime in the questionnaires with the value passed to the "edit" questionnaire in the overnight job.
-* **``QEdit.EditedStatus``**: This enum is populated by the editor to show the status of editing the case with the options: ``[NotStarted = 0, Started = 1, Query = 2, Finished = 3]``.  This is then used in the editing service by editors and supervisors so they can see the workload and where it is at, they can also filter based on this status.
+### Fields
 
-Cases will only show in the editing service for allocation and editing if **one** of the following criteria are met:
+These fields help the service manage case assignment and editing state:
 
-* `QEdit.Edited` is set to `1`.
-* `QEdit.LastUpdated` is the same in both the "main" and the "edit" questionnaire for the case.
+| Field | Purpose |
+|---|---|
+| `QEdit.AssignedTo` | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them. |
+| `QEdit.Edited` | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten. |
+| `QEdit.LastUpdated` | Timestamp of last edit set by the questionnaire. Used to determine sync status. |
+| `QEdit.EditedStatus` | An enum (``[NotStarted = 0, Started = 1, Query = 2, Finished = 3]``) indicating the case's editing stage. While triggered by editor actions, this field is updated by the questionnaire's internal logic, not directly by the editing service. The service uses this status for workload visibility and filtering. |
 
-There is also functionality in the service to update cases in the "edit" questionnaire overnight after editing has started. This option is available to the `Survey Support` role, for use when they need to update the outcome of an interviewer case.  It does this by updating the following fields in the "edit" questionnaire. This is implemented as a simple button, accessible only to `Survey Support`.
+### Data Entry Settings
 
-* **Set ``QEdit.AssignedT`` = ``''``**: To make sure the case is no longer assigned to an editor.
-* **Set ``QEdit.Edited`` = ``''``**: To allow the case to be picked up in the overnight update process.
-* **Set ``QEdit.LastUpdated`` =** ``1900-01-01``: This filters out the case in the editing service stopping it from being edited or reassigned.
+The questionnaire must include a `Data Entry Settings` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behavior and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
 
-## Data entry settings
+## Case Visibility
 
-There is a data entry mode or setting in the questionnaire called `ReadOnly`, which allows the research team to make changes in the questionnaire without saving the changes. This is so that they can determine the consequences of each change. This setting is configured in questionnaire itself and once configured, a case can be set to read-only by adding ``DataEntrySettings=ReadOnly`` to the end of the questionnaire case URL.
+Cases appear in the editing service for allocation and editing if **one** of the following is true:
 
-# Local Setup
+- `QEdit.Edited` is set to `1`.
+- `QEdit.LastUpdated` matches in both the "main" and "edit" questionnaires.
+
+## Survey Support – Re-enabling Sync
+
+The `Survey Support` role can set a case for re-sync, allowing it to be overwritten by the "main" version questionnaire during the next nightly sync. This is performed via a dedicated button within the editing service UI. Activating this button resets the following fields in the "edit" questionnaire:
+
+- `QEdit.AssignedTo = ''` (unassigns the case)
+- `QEdit.Edited = ''` (flags the case as not edited, allowing updates during nightly sync)
+- `QEdit.LastUpdated = 1900-01-01` (this specific date also temporarily removes the case from active editing lists and prevents reassignment until synced)
+
+This feature is typically used to ensure changes made to a case in the "main" questionnaire (e.g., an updated outcome code) are mirrored in its "edit" version, even if editing has already started on that case.
+
+## Local Setup
 
 Prerequisites
 
+* [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/)
 * [Yarn](https://yarnpkg.com/)
 * [Cloud SDK](https://cloud.google.com/sdk/)
 
-Clone the repository:
+Clone down the repository:
 
 ```shell script
 git clone https://github.com/ONSdigital/blaise-editing-service
 ```
 
-Install application dependencies locally:
+Install service dependencies:
 
 ```shell script
 yarn install
@@ -75,9 +100,9 @@ Create an .env file in the root of the project and add the following environment
 
 | Variable | Description | Example |
 | --- | --- | --- |
-| PORT | Port for the express server | 5000 |
+| PORT | Port for the Express server | 5000 |
 | BLAISE_API_URL | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on (including protocol) | <http://localhost:90> |
-| SERVER_PARK | Name of the Blaise server park | gusty |
+| SERVER_PARK | Name of the Blaise server park the questionnaires are installed on | gusty |
 | VM_EXTERNAL_WEB_URL | External URL used for CATI (not including protocol) | https://cati.example.com |
 
 Example `.env` file:
@@ -89,38 +114,31 @@ SERVER_PARK='gusty'
 VM_EXTERNAL_WEB_URL='https://cati.example.com'
 ```
 
-### GCP Setup
+Ensure `PORT` matches the port configured in the `proxy` setting of the `package.json` file.
 
-This service interacts with Blaise via our custom Blaise RESTful API.
-Open a tunnel to the RESTful API in your chosen GCP environment:
+For this service to connect to the custom Blaise RESTful API, open a tunnel in your GCP environment to the REST API VM:
 
 ```shell script
 gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:<API_PORT> --zone europe-west2-a
 ```
 
-**NB** Ensure the REST API tunnel is running on the correct address and port that you expect, i.e. the proxy address outlined in `package.json`
+Ensure `API_PORT` matches the port configured in the `BLAISE_API_URL` environment variable in your `.env` file.
 
-As this service outputs logs to GCP, you will need to login before running the app, you can do this with the following command:
+This service logs to GCP. Authenticate your local environment before running the service with the following command:
 
 ```shell script
 gcloud auth application-default login
 ```
 
-## Run App
+## Running Service
 
-Prequisites:
-
-* Blaise REST API access (via GCP IAP tunnel)
-* You are authenticated with GCP
-
-To run the application locally:
+Run the service:
 
 ```shell script
 yarn dev
 ```
 
-Once are running, you can interact with the app by visiting the address shown by terminal running.
-If you used the same port number as in the example `.env` file, the URL would be [localhost:5000](http://localhost:5000/).
+Once the service is running, you can access it by visiting the URL displayed in the terminal. If you're using the example `.env` configuration, the service will be available at [localhost:5000](http://localhost:5000/).
 
 ## Testing
 
