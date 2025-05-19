@@ -18,7 +18,7 @@ vi.mock('../../../../client/Mappers/caseSummaryTextMapper', () => ({ default: vi
 const mockGetCaseSummary = getCaseSummary as vi.Mock;
 const mockMapCaseSummaryText = mapCaseSummaryText as vi.Mock;
 
-describe('DownloadCaseSummaryLink', () => {
+describe('Given a user needs to download a case summary', () => {
   const defaultProps: Props = {
     caseId: '12345',
     questionnaireName: 'FRS1337',
