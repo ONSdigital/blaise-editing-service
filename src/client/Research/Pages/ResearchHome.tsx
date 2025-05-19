@@ -13,7 +13,7 @@ interface SurveyProps {
 export default function ResearchHome({ user }: SurveyProps) {
   const surveys = useAsyncRequestWithParam<Survey[], string>(getSurveys, user.role);
   const params = new URLSearchParams(window.location.search);
-  const error = params.get('error') ?? ""; 
+  const error = params.get('error') ?? '';
 
   return (
     <div data-testid="Surveys">
