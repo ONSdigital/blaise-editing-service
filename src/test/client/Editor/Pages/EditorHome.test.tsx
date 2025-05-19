@@ -1,4 +1,6 @@
-import { render, act, RenderResult } from '@testing-library/react';
+import {
+  render, act, RenderResult, screen,
+} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import userMockObject from '../../../server/mockObjects/userMockObject';
 import { getEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
@@ -14,7 +16,19 @@ const userRole:string = UserRole.SVT_Editor;
 let view:RenderResult;
 
 // set mocks
-vi.mock('../../../../client/api/NodeApi');
+vi.mock('../../../../client/api/NodeApi', async () => {
+  const actual = await vi.importActual<typeof import('../../../../client/api/NodeApi')>(
+    '../../../../client/api/NodeApi');
+
+  return {
+    ...actual,
+    getSurveys: vi.fn(() => Promise.resolve([])),
+    getEditorInformation: vi.fn(() => Promise.resolve({
+      info: 'mock info',
+      timestamp: '2024-01-01T00:00:00Z',
+    })),
+  };
+});
 const getSurveysMock = getSurveys as vi.mock<Promise<Survey[]>>;
 const getEditorInformationMock = getEditorInformation as vi.mock<Promise<EditorInformation>>;
 
@@ -187,5 +201,29 @@ describe('Given there the blaise rest api is not available', () => {
     expect(view).toMatchSnapshot(
       'EditorPageError',
     );
+  });
+});
+
+describe('Given there is an error that triggered a catch all 404 or 500 response', () => {
+  beforeEach(() => {
+    Object.defineProperty(window, 'location', {
+      value: {
+        ...window.location,
+        search: '?error=Something%20went%20wrong',
+      },
+      writable: true,
+    });
+  });
+
+  it('an error message will be displayed with the parameters contents', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    // act
+    render(<EditorHome user={user} />);
+
+    // assert
+    expect(await screen.findByTestId('ErrorMessage')).toHaveTextContent('Something went wrong');
   });
 });

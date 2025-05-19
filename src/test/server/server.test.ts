@@ -5,6 +5,8 @@ import listEndpoints, { Endpoint } from 'express-list-endpoints';
 import { IMock, Mock } from 'typemoq';
 import supertest from 'supertest';
 import path from 'path';
+import express, { Request, Response, NextFunction } from 'express';
+import ejs from 'ejs';
 import NodeServer from '../../server/server';
 import BlaiseApi from '../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from './configuration/FakeServerConfigurationProvider';
@@ -36,6 +38,7 @@ describe('All expected routes are registered', () => {
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/token/validate' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/users/password/validate' },
       { methods: ['GET'], middlewares: ['anonymous'], path: '*' },
+
     ];
 
     // act
@@ -60,5 +63,33 @@ describe('Render react pages as default route', () => {
     expect(result.statusCode).toEqual(200);
     expect(result.type).toEqual('text/html');
     expect(result.text).toContain('Edit interview data and view statistics on editing progress');
+  });
+});
+
+describe('500 Error Handling Middleware', () => {
+  it('should render the 500 error page', async () => {
+    // Arrange
+    const app = express();
+
+    app.set('views', path.join(__dirname, '../../../dist'));
+    app.engine('html', ejs.renderFile);
+
+    app.get('/test-error', (_req, _res, next) => {
+      next(new Error('Test error'));
+    });
+
+    app.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
+      response.status(200).render('/?error=Page not found', {});
+    });
+
+    const sut = supertest(app);
+
+    // Act
+    const result = await sut.get('/test-error');
+
+    // Assert
+    expect(result.error).toBeTruthy();
+    expect(result.statusCode).toEqual(500);
+    expect(result.type).toEqual('text/html');
   });
 });
