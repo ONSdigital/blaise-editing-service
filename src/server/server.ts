@@ -1,4 +1,6 @@
-import express, { Request, Response, Express } from 'express';
+import express, {
+  Request, Response, Express, NextFunction,
+} from 'express';
 import ejs from 'ejs';
 import path from 'path';
 import { Auth, newLoginHandler } from 'blaise-login-react-server';
@@ -49,10 +51,19 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
 
+  // fallback for any API endpoints that are not found
+  server.use('/api/*', (_request: Request, response: Response) => {
+    response.redirect('/?error=API endpoint not found');
+  });
+
   // catch all other routes renders react pages
   server.get('*', (_request: Request, response: Response) => {
     response.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     response.render('index.html');
+  });
+
+  server.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
+    response.redirect('/?error=Server Error Occurred');
   });
 
   return server;
