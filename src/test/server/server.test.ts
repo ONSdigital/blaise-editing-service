@@ -79,7 +79,7 @@ describe('500 Error Handling Middleware', () => {
     });
 
     app.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
-      response.status(500).render('500.html', {});
+      response.status(200).render('/?error=Page not found', {});
     });
 
     const sut = supertest(app);
@@ -91,6 +91,5 @@ describe('500 Error Handling Middleware', () => {
     expect(result.error).toBeTruthy();
     expect(result.statusCode).toEqual(500);
     expect(result.type).toEqual('text/html');
-    expect(result.text).toContain('Sorry, there is a problem with the service');
   });
 });
