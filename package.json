@@ -4,6 +4,9 @@
   "private": true,
   "target": "esnext",
   "module": "esnext",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "start": "yarn start-server",
     "build": "yarn build-client && yarn build-server",
