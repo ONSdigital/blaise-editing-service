@@ -62,8 +62,10 @@ The questionnaire must include a `Data Entry Settings` specifically named `ReadO
 
 Cases appear in the editing service for allocation and editing if **one** of the following is true:
 
-- `QEdit.Edited` is set to `1`.
-- `QEdit.LastUpdated` matches in both the "main" and "edit" questionnaires.
+- `QEdit.Edited` is set to `1` (shown as `TRUE` or `TR` in the database).
+- `QEdit.LastUpdated` matches in both the "main" and "edit" questionnaires, given they're not null.
+
+This [query](https://github.com/ONSdigital/blaise-nuget-api/blob/a554517244478526677608796f66f2bf2a7c7b16/Blaise.Nuget.Api.Core/Services/SqlService.cs#L37) determines which cases are fetched from the datasets.
 
 ## Survey Support – Re-enabling Sync
 
@@ -79,10 +81,10 @@ This feature is typically used to ensure changes made to a case in the "main" qu
 
 Prerequisites
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
-* [Yarn](https://yarnpkg.com/)
-* [Cloud SDK](https://cloud.google.com/sdk/)
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/)
+- [Yarn](https://yarnpkg.com/)
+- [Cloud SDK](https://cloud.google.com/sdk/)
 
 Clone down the repository:
 
