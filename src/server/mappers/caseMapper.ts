@@ -214,7 +214,7 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   const numberOfRespondents = +caseSummary.NumberOfRespondents;
 
   if (Number.isNaN(numberOfRespondents) || numberOfRespondents === 0) {
-    throw new Error('Number of responents not specified');
+    throw new Error('Number of respondents not specified');
   }
 
   for (let respondentNumber = 1; respondentNumber <= numberOfRespondents; respondentNumber += 1) {
