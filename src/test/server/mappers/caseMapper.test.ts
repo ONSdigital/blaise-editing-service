@@ -24,11 +24,11 @@ describe('Map case response to case summary', () => {
 
   it('It should return a correctly mapped summary with responent(s)', () => {
     // arrange
-    const inputCaseResponseData:CaseResponse = {
+    const inputCaseResponseData: CaseResponse = {
       caseId: '9001',
       fieldData: {
         'qiD.Serial_Number': '9001',
-        'QSignIn.StartDat': '2024-05-11',
+        'qSignIn.StartDat': '2024-05-11',
         'qDataBag.District': 'Gwent',
         'qhAdmin.HOut': '110',
         'qhAdmin.QObsSheet.MainAcD': '1',
@@ -67,7 +67,7 @@ describe('Map case response to case summary', () => {
       },
     };
 
-    const expectedSummaryDetails:CaseSummaryDetails = {
+    const expectedSummaryDetails: CaseSummaryDetails = {
       CaseId: '9001',
       OutcomeCode: '110',
       InterviewDate: new Date('2024-05-11'),
@@ -648,16 +648,16 @@ describe('Map case response to case summary', () => {
     '3',
     '6',
     '10'])('It should a respondents array of the the correct size for all Respondents', (numberOfRespondents) => {
-    // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
-    caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
+      // arrange
+      SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+      caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
 
-    // act
-    const result = mapCaseSummary(caseResponseData);
+      // act
+      const result = mapCaseSummary(caseResponseData);
 
-    // assert
-    expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
-  });
+      // assert
+      expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
+    });
 
   it('It should return the person number when there is only one reposndent', () => {
     // arrange
@@ -689,7 +689,7 @@ describe('Map case response to case summary', () => {
     ['1', 'M'],
     ['2', 'F'],
   ])('It should return the expected sex when given valid inputs', (inputValue: string, expectedOutputValue: string) => {
-  // arrange
+    // arrange
     SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
     SetFieldsToValue(caseResponseData, '].Sex', '');
 
@@ -709,7 +709,7 @@ describe('Map case response to case summary', () => {
     ['', ''],
     ['test', ''],
   ])('It should return the expected sex when given invalid inputs', (inputValue: string, expectedOutputValue: string) => {
-  // arrange
+    // arrange
     SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
     SetFieldsToValue(caseResponseData, '].Sex', '');
 

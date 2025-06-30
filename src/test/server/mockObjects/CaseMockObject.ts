@@ -67,7 +67,7 @@ export const caseResponseMockObject: CaseResponse = {
   caseId: '9001',
   fieldData: {
     'qiD.Serial_Number': '9001',
-    'QSignIn.StartDat': '2024-05-11',
+    'qSignIn.StartDat': '2024-05-11',
     'qDataBag.District': 'Gwent',
     'qhAdmin.HOut': '110',
     'qhAdmin.QObsSheet.MainAcD': '1',
