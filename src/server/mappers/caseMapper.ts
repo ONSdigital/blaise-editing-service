@@ -186,7 +186,7 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   const caseSummary: CaseSummaryDetails = {
     CaseId: caseResponse.caseId,
     OutcomeCode: caseResponse.fieldData['qhAdmin.HOut'],
-    InterviewDate: new Date(caseResponse.fieldData['QSignIn.StartDat']),
+    InterviewDate: new Date(caseResponse.fieldData['qSignIn.StartDat']),
     District: caseResponse.fieldData['qDataBag.District'],
     InterviewerName: caseResponse.fieldData['qhAdmin.Interviewer[1]'],
     NumberOfRespondents: caseResponse.fieldData['dmhSize'],
