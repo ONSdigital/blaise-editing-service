@@ -183,10 +183,15 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   const selfEmployedMembers = GetSelfEmployedMembers(caseResponse);
   const jsaPeople = GetJsaPeople(caseResponse);
   const incomeSupportPeople = GetIncomeSupportPeople(caseResponse);
+
+  const interviewStartDate = caseResponse.fieldData['qSignIn.StartDat'];
+  const [day, month, year] = interviewStartDate.split('-');
+  const interviewDate = new Date(`${year}-${month}-${day}`);
+
   const caseSummary: CaseSummaryDetails = {
     CaseId: caseResponse.caseId,
     OutcomeCode: caseResponse.fieldData['qhAdmin.HOut'],
-    InterviewDate: new Date(caseResponse.fieldData['qSignIn.StartDat']),
+    InterviewDate: interviewDate,
     District: caseResponse.fieldData['qDataBag.District'],
     InterviewerName: caseResponse.fieldData['qhAdmin.Interviewer[1]'],
     NumberOfRespondents: caseResponse.fieldData['dmhSize'],

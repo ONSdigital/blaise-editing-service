@@ -70,7 +70,7 @@ describe('Map case response to case summary', () => {
     const expectedSummaryDetails: CaseSummaryDetails = {
       CaseId: '9001',
       OutcomeCode: '110',
-      InterviewDate: new Date('2024-05-11'),
+      InterviewDate: new Date('11-05-2024'),
       District: 'Gwent',
       InterviewerName: 'Rich',
       NumberOfRespondents: '2',
@@ -648,16 +648,16 @@ describe('Map case response to case summary', () => {
     '3',
     '6',
     '10'])('It should a respondents array of the the correct size for all Respondents', (numberOfRespondents) => {
-      // arrange
-      SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
-      caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
+    // arrange
+    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
 
-      // act
-      const result = mapCaseSummary(caseResponseData);
+    // act
+    const result = mapCaseSummary(caseResponseData);
 
-      // assert
-      expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
-    });
+    // assert
+    expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
+  });
 
   it('It should return the person number when there is only one reposndent', () => {
     // arrange
