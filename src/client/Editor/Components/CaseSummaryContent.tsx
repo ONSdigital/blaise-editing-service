@@ -53,7 +53,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.OutcomeCode}</dd>
 
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">Interview date</dt>
-        <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.InterviewDate == null ? 'N/A' : caseSummary.InterviewDate.toDateString()}</dd>
+        <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.InterviewDate == null ? 'N/A' : (new Date(caseSummary.InterviewDate)).toDateString()}</dd>
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">District</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.District}</dd>
 
