@@ -23,7 +23,7 @@ const AccommodationType: Record<number, string> = {
 const HouseStatus: Record<number, string> = {
   1: 'Conventional',
   2: 'Shared',
-  3: 'n/a',
+  3: 'N/A',
 };
 
 const BenefitPeriod: Record<number, string> = {
@@ -79,8 +79,8 @@ function GetHousingBenefitArray(caseResponse: CaseResponse): HousingBenefits[] {
   const housingBenefit: HousingBenefits[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
     for (let person = 1; person <= 2; person += 1) {
-      const benefitAmount: string = caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenAmt`];
-      const benefitPeriod: string = BenefitPeriod[Number(caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenPd`])] ?? '';
+      const benefitAmount: string = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenAmt`];
+      const benefitPeriod: string = BenefitPeriod[Number(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenPd`])] ?? '';
       if (Number(benefitAmount) > 0) {
         housingBenefit.push({
           Amount: benefitAmount.substring(0, 6),
@@ -90,7 +90,7 @@ function GetHousingBenefitArray(caseResponse: CaseResponse): HousingBenefits[] {
     }
   }
 
-  return (housingBenefit.length === 0) ? [{ Amount: 'n/a', PeriodCode: 'n/a' }] : housingBenefit;
+  return (housingBenefit.length === 0) ? [{ Amount: 'N/A', PeriodCode: 'N/A' }] : housingBenefit;
 }
 
 function HasBusinessRoom(caseResponse: CaseResponse): boolean {
@@ -158,16 +158,16 @@ function GetJsaPeople(caseResponse: CaseResponse): string[] {
 }
 
 function GetMaritalStatus(caseResponse: CaseResponse, respondentNumber: number): string {
-  if (caseResponse.fieldData[`hhg.p[${respondentNumber}].livewith`] === '1') {
+  if (caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].livewith`] === '1') {
     return 'COH';
   }
-  return MartitalStatus[Number(caseResponse.fieldData[`hhg.p[${respondentNumber}].ms`])] ?? '-';
+  return MartitalStatus[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].ms`])] ?? '-';
 }
 
 function GetRelationshipMatrix(caseResponse: CaseResponse, respondentNumber: number, numberOfRespondents: number): string[] {
   const relationshipMatrix: string[] = [];
   for (let person = 1; person <= numberOfRespondents; person += 1) {
-    let relationship: string = caseResponse.fieldData[`hhg.P[${respondentNumber}].QRel[${person}].R`];
+    let relationship: string = caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].QRel[${person}].R`];
     if (relationship === '97') {
       relationship = '*';
     }
@@ -197,12 +197,12 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
     NumberOfRespondents: caseResponse.fieldData['dmhSize'],
     Household: {
       Accommodation: {
-        Main: Accommodation[Number(caseResponse.fieldData['qhAdmin.QObsSheet.MainAcD'])] ?? '',
-        Type: AccommodationType[Number(caseResponse.fieldData['qhAdmin.QObsSheet.TypAcDV'])] ?? '',
+        Main: Accommodation[Number(caseResponse.fieldData['qhAdmin.QObsSheet.MainAcD'])] ?? '-',
+        Type: AccommodationType[Number(caseResponse.fieldData['qhAdmin.QObsSheet.TypAcDV'])] ?? '-',
       },
       FloorNumber: caseResponse.fieldData['qhAdmin.QObsSheet.FloorN'],
-      Status: HouseStatus[Number(caseResponse.fieldData['QAccomdat.HHStat'])] ?? '',
-      NumberOfBedrooms: caseResponse.fieldData['QAccomdat.Bedroom'],
+      Status: HouseStatus[Number(caseResponse.fieldData['qAccomdat.HHStat'])] ?? '',
+      NumberOfBedrooms: caseResponse.fieldData['qAccomdat.Bedroom'],
       ReceiptOfHousingBenefit: housingBenefitArray,
       CouncilTaxBand: CouncilTaxBand[Number(caseResponse.fieldData['QCounTax.CTBand'])] ?? 'Blank',
       BusinessRoom: businessRoom,
@@ -226,9 +226,9 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
     caseSummary.Respondents.push({
       PersonNumber: `${respondentNumber}`,
       RespondentName: caseResponse.fieldData[`dmName[${respondentNumber}]`], // `QNames.M[${respondentNumber}].Name` in B4, check with BDSS?
-      BenefitUnit: caseResponse.fieldData[`hhg.P[${respondentNumber}].BenUnit`],
-      Sex: Sex[Number(caseResponse.fieldData[`hhg.P[${respondentNumber}].Sex`])] ?? '',
-      DateOfBirth: new Date(caseResponse.fieldData[`dmDteOfBth[${respondentNumber}]`]), // `hhg.P[${respondentNumber}].DoB` in B4, check with BDSS?
+      BenefitUnit: caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].BenUnit`],
+      Sex: Sex[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].Sex`])] ?? '',
+      DateOfBirth: new Date(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].DoB`]), // `hhg.P[${respondentNumber}].DoB` in B4, check with BDSS?
       MaritalStatus: GetMaritalStatus(caseResponse, respondentNumber),
       Relationship: GetRelationshipMatrix(caseResponse, respondentNumber, numberOfRespondents),
     });
