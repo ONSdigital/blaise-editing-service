@@ -78,7 +78,7 @@ export const caseResponseMockObject: CaseResponse = {
     'qAccomdat.Bedroom': '2',
     'bU[1].QBenefit.QBenef2[1].HBenAmt': '380',
     'bU[1].QBenefit.QBenef2[1].HBenPd': '1',
-    'QCounTax.CTBand': '1',
+    'qCounTax.CTBand': '1',
     'BU[1].QBUId.BUNum': '1',
     'BU[1].QSelfJob[1].Adult[1].BusRoom': '1',
     'BU[1].QCurst1.Adult[1].EmpStat': '2',
@@ -88,18 +88,18 @@ export const caseResponseMockObject: CaseResponse = {
     'BU[1].QBenefit.QWageBen.Adult[1].WageBen[1]': '5',
     'BU[1].QBenefit.QWageBen.Adult[1].Persid': '1',
     'BU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
-    dmhSize: '2', // 'hhsize' in B4, check with BDSS?
-    'dmName[1]': 'Richmond Ricecake', // `QNames.M[1].Name` in B4, check with BDSS?
+    'dmhSize': '2',
+    'dmName[1]': 'Richmond Ricecake',
     'qHousehold.QHHold.Person[1].BenUnit': '1',
     'qHousehold.QHHold.Person[1].Sex': '1',
-    'qHousehold.QHHold.Person[1].DoB': '1980-01-15', // 'hhg.P[1].DoB' in B4, check with BDSS?
+    'qHousehold.QHHold.Person[1].DoB': '15-01-1980',
     'qHousehold.QHHold.Person[1].livewith': '1',
     'qHousehold.QHHold.Person[1].QRel[1].R': '97',
     'qHousehold.QHHold.Person[1].QRel[2].R': '1',
-    'dmName[2]': 'Betty Bettison', // `QNames.M[2].Name` in B4, check with BDSS?
+    'dmName[2]': 'Betty Bettison',
     'qHousehold.QHHold.Person[2].BenUnit': '1',
     'qHousehold.QHHold.Person[2].Sex': '2',
-    'qHousehold.QHHold.Person[2].DoB': '1995-06-11', // 'hhg.P[2].DoB' in B4, check with BDSS?
+    'qHousehold.QHHold.Person[2].DoB': '11-06-1995',
     'qHousehold.QHHold.Person[2].livewith': '1',
     'qHousehold.QHHold.Person[2].QRel[1].R': '1',
     'qHousehold.QHHold.Person[2].QRel[2].R': '97',
