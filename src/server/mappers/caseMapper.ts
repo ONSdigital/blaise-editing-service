@@ -204,7 +204,7 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
       Status: HouseStatus[Number(caseResponse.fieldData['qAccomdat.HHStat'])] ?? '',
       NumberOfBedrooms: caseResponse.fieldData['qAccomdat.Bedroom'],
       ReceiptOfHousingBenefit: housingBenefitArray,
-      CouncilTaxBand: CouncilTaxBand[Number(caseResponse.fieldData['QCounTax.CTBand'])] ?? 'Blank',
+      CouncilTaxBand: CouncilTaxBand[Number(caseResponse.fieldData['qCounTax.CTBand'])] ?? 'Blank',
       BusinessRoom: businessRoom,
       SelfEmployed: selfEmployedMembers.length > 0,
       SelfEmployedMembers: selfEmployedMembers,
@@ -223,12 +223,21 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   }
 
   for (let respondentNumber = 1; respondentNumber <= numberOfRespondents; respondentNumber += 1) {
+
+    const dateOfBirth = caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].DoB`];
+    let dob = "";
+    if (dateOfBirth) {
+      const [day, month, year] = dateOfBirth.split('-');
+      dob = `${year}-${month}-${day}`;
+    }
+
+
     caseSummary.Respondents.push({
       PersonNumber: `${respondentNumber}`,
-      RespondentName: caseResponse.fieldData[`dmName[${respondentNumber}]`], // `QNames.M[${respondentNumber}].Name` in B4, check with BDSS?
+      RespondentName: caseResponse.fieldData[`dmName[${respondentNumber}]`],
       BenefitUnit: caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].BenUnit`],
       Sex: Sex[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].Sex`])] ?? '',
-      DateOfBirth: new Date(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].DoB`]), // `hhg.P[${respondentNumber}].DoB` in B4, check with BDSS?
+      DateOfBirth: new Date(dob),
       MaritalStatus: GetMaritalStatus(caseResponse, respondentNumber),
       Relationship: GetRelationshipMatrix(caseResponse, respondentNumber, numberOfRespondents),
     });

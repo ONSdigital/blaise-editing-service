@@ -39,7 +39,7 @@ describe('Map case response to case summary', () => {
         'qAccomdat.Bedroom': '2',
         'bU[1].QBenefit.QBenef2[1].HBenAmt': '380',
         'bU[1].QBenefit.QBenef2[1].HBenPd': '1',
-        'QCounTax.CTBand': '1',
+        'qCounTax.CTBand': '1',
         'BU[1].QBUId.BUNum': '1',
         'BU[1].QSelfJob[1].Adult[1].BusRoom': '1',
         'BU[1].QCurst1.Adult[1].EmpStat': '2',
@@ -49,18 +49,18 @@ describe('Map case response to case summary', () => {
         'BU[1].QBenefit.QWageBen.Adult[1].WageBen[1]': '5',
         'BU[1].QBenefit.QWageBen.Adult[1].Persid': '1',
         'BU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
-        dmhSize: '2', // 'hhsize' in B4, check with BDSS?
-        'dmName[1]': 'Richmond Ricecake', // `QNames.M[1].Name` in B4, check with BDSS?
+        'dmhSize': '2',
+        'dmName[1]': 'Richmond Ricecake',
         'qHousehold.QHHold.Person[1].BenUnit': '1',
         'qHousehold.QHHold.Person[1].Sex': '1',
-        'qHousehold.QHHold.Person[1].DoB': '1980-01-15', // 'hhg.P[1].DoB' in B4, check with BDSS?
+        'qHousehold.QHHold.Person[1].DoB': '1980-01-15',
         'qHousehold.QHHold.Person[1].livewith': '1',
         'qHousehold.QHHold.Person[1].QRel[1].R': '97',
         'qHousehold.QHHold.Person[1].QRel[2].R': '1',
-        'dmName[2]': 'Betty Bettison', // `QNames.M[2].Name` in B4, check with BDSS?
+        'dmName[2]': 'Betty Bettison',
         'qHousehold.QHHold.Person[2].BenUnit': '1',
         'qHousehold.QHHold.Person[2].Sex': '2',
-        'qHousehold.QHHold.Person[2].DoB': '1995-06-11', // 'hhg.P[2].DoB' in B4, check with BDSS?
+        'qHousehold.QHHold.Person[2].DoB': '1995-06-11',
         'qHousehold.QHHold.Person[2].livewith': '1',
         'qHousehold.QHHold.Person[2].QRel[1].R': '1',
         'qHousehold.QHHold.Person[2].QRel[2].R': '97',
@@ -101,7 +101,7 @@ describe('Map case response to case summary', () => {
           RespondentName: 'Richmond Ricecake',
           BenefitUnit: '1',
           Sex: 'M',
-          DateOfBirth: new Date('1980-01-15'),
+          DateOfBirth: new Date('15-01-1980'),
           MaritalStatus: 'COH',
           Relationship: ['*', '1'],
         },
@@ -110,7 +110,7 @@ describe('Map case response to case summary', () => {
           RespondentName: 'Betty Bettison',
           BenefitUnit: '1',
           Sex: 'F',
-          DateOfBirth: new Date('1995-06-11'),
+          DateOfBirth: new Date('11-06-1995'),
           MaritalStatus: 'COH',
           Relationship: ['1', '*'],
         },
@@ -126,7 +126,7 @@ describe('Map case response to case summary', () => {
 
   it.each(['one', 'dyhzjsgfkb'])('It should error when household size can not be converted into a number', (value) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     caseResponseData.fieldData[''] = value;
 
     // act && assert
@@ -135,7 +135,7 @@ describe('Map case response to case summary', () => {
 
   it.each(['0', '', ' '])('It should error when household Size is missing or zero', (value) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     caseResponseData.fieldData['dmhSize'] = value;
 
     // act && assert
@@ -261,8 +261,8 @@ describe('Map case response to case summary', () => {
     ['10', 'Band J'],
   ])('It should return the expected CouncilTaxBand when given valid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'QCounTax.CTBand', '');
-    caseResponseData.fieldData['QCounTax.CTBand'] = inputValue;
+    SetFieldsToValue(caseResponseData, 'qCounTax.CTBand', '');
+    caseResponseData.fieldData['qCounTax.CTBand'] = inputValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -278,8 +278,8 @@ describe('Map case response to case summary', () => {
     ['test', 'Blank'],
   ])('It should return the expected CouncilTaxBand when given invalid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'QCounTax.CTBand', '');
-    caseResponseData.fieldData['QCounTax.CTBand'] = inputValue;
+    SetFieldsToValue(caseResponseData, 'qCounTax.CTBand', '');
+    caseResponseData.fieldData['qCounTax.CTBand'] = inputValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -649,7 +649,7 @@ describe('Map case response to case summary', () => {
     '6',
     '10'])('It should a respondents array of the the correct size for all Respondents', (numberOfRespondents) => {
       // arrange
-      SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+      SetFieldsToValue(caseResponseData, 'dmhSize', '');
       caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
 
       // act
@@ -661,7 +661,7 @@ describe('Map case response to case summary', () => {
 
   it('It should return the person number when there is only one reposndent', () => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     caseResponseData.fieldData['dmhSize'] = '1';
 
     // act
@@ -673,7 +673,7 @@ describe('Map case response to case summary', () => {
 
   it('It should return the person number for all when there are multiple reposndents', () => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     caseResponseData.fieldData['dmhSize'] = '3';
 
     // act
@@ -690,7 +690,7 @@ describe('Map case response to case summary', () => {
     ['2', 'F'],
   ])('It should return the expected sex when given valid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].Sex', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
@@ -710,7 +710,7 @@ describe('Map case response to case summary', () => {
     ['test', ''],
   ])('It should return the expected sex when given invalid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].Sex', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
@@ -725,7 +725,7 @@ describe('Map case response to case summary', () => {
 
   it('It should return the expected sex for all respondents when given valid inputs for multiple responent', () => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].Sex', '');
 
     caseResponseData.fieldData['dmhSize'] = '4';
@@ -758,7 +758,7 @@ describe('Map case response to case summary', () => {
     ['2', '9', 'CPW'],
   ])('It should return the expected marital status when given valid inputs', (inputLivesWithValue: string, inputMaritalStatusValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].livewith', '');
     SetFieldsToValue(caseResponseData, '].ms', '');
 
@@ -784,7 +784,7 @@ describe('Map case response to case summary', () => {
     ['2', 'test', '-'],
   ])('It should return the expected marital status when given invalid inputs', (inputLivesWithValue: string, inputMaritalStatusValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].livewith', '');
     SetFieldsToValue(caseResponseData, '].ms', '');
 
@@ -801,7 +801,7 @@ describe('Map case response to case summary', () => {
 
   it('It should return the expected marital status for all respondents when given valid inputs for multiple responent', () => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].livewith', '');
     SetFieldsToValue(caseResponseData, '].ms', '');
 
@@ -831,7 +831,7 @@ describe('Map case response to case summary', () => {
 
   it('It should return the expected Relationship array when there is only one resident', () => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].R', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
@@ -846,7 +846,7 @@ describe('Map case response to case summary', () => {
 
   it('It should return the expected Relationship array for all residents when there are multiple resident', () => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].R', '');
 
     caseResponseData.fieldData['dmhSize'] = '4';

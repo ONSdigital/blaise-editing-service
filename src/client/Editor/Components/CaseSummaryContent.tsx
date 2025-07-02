@@ -107,7 +107,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
                 aria-label="DateOfBirth"
                 key={`DateOfBirth-${respondent.PersonNumber}`}
               >
-                {respondent.DateOfBirth == null ? 'N/A' : respondent.DateOfBirth.toDateString()}
+                {respondent.DateOfBirth == null ? 'N/A' : (new Date(respondent.DateOfBirth)).toDateString()}
               </td>
               <td
                 className="ons-table__cell"
