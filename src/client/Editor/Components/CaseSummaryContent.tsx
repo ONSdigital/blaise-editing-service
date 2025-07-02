@@ -137,7 +137,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
       >
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">Accommodation type</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">
-          {`Main: ${caseSummary.Household.Accommodation.Main} - Type: ${caseSummary.Household.Accommodation.Type}`}
+          {`Main: ${caseSummary.Household.Accommodation.Main}  Type: ${caseSummary.Household.Accommodation.Type}`}
         </dd>
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">Floor number</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.Household.FloorNumber}</dd>
@@ -149,7 +149,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">
           {caseSummary.Household.ReceiptOfHousingBenefit.map((housingBenefit) => (
             <span key={housingBenefit.Amount}>
-              {`amount: ${housingBenefit.Amount}, period: ${housingBenefit.PeriodCode}`}
+              {`Amount: ${housingBenefit.Amount}, Period: ${housingBenefit.PeriodCode}`}
               <br />
             </span>
           ))}

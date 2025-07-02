@@ -35,10 +35,10 @@ describe('Map case response to case summary', () => {
         'qhAdmin.QObsSheet.TypAcDV': '1',
         'qhAdmin.QObsSheet.FloorN': '2',
         'qhAdmin.Interviewer[1]': 'Rich',
-        'QAccomdat.HHStat': '1',
-        'QAccomdat.Bedroom': '2',
-        'BU[1].QBenefit.QBenef2[1].HBenAmt': '380',
-        'BU[1].QBenefit.QBenef2[1].HBenPd': '1',
+        'qAccomdat.HHStat': '1',
+        'qAccomdat.Bedroom': '2',
+        'bU[1].QBenefit.QBenef2[1].HBenAmt': '380',
+        'bU[1].QBenefit.QBenef2[1].HBenPd': '1',
         'QCounTax.CTBand': '1',
         'BU[1].QBUId.BUNum': '1',
         'BU[1].QSelfJob[1].Adult[1].BusRoom': '1',
@@ -51,19 +51,19 @@ describe('Map case response to case summary', () => {
         'BU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
         dmhSize: '2', // 'hhsize' in B4, check with BDSS?
         'dmName[1]': 'Richmond Ricecake', // `QNames.M[1].Name` in B4, check with BDSS?
-        'hhg.P[1].BenUnit': '1',
-        'hhg.P[1].Sex': '1',
-        'dmDteOfBth[1]': '1980-01-15', // 'hhg.P[1].DoB' in B4, check with BDSS?
-        'hhg.p[1].livewith': '1',
-        'hhg.P[1].QRel[1].R': '97',
-        'hhg.P[1].QRel[2].R': '1',
+        'qHousehold.QHHold.Person[1].BenUnit': '1',
+        'qHousehold.QHHold.Person[1].Sex': '1',
+        'qHousehold.QHHold.Person[1].DoB': '1980-01-15', // 'hhg.P[1].DoB' in B4, check with BDSS?
+        'qHousehold.QHHold.Person[1].livewith': '1',
+        'qHousehold.QHHold.Person[1].QRel[1].R': '97',
+        'qHousehold.QHHold.Person[1].QRel[2].R': '1',
         'dmName[2]': 'Betty Bettison', // `QNames.M[2].Name` in B4, check with BDSS?
-        'hhg.P[2].BenUnit': '1',
-        'hhg.P[2].Sex': '2',
-        'dmDteOfBth[2]': '1995-06-11', // 'hhg.P[2].DoB' in B4, check with BDSS?
-        'hhg.p[2].livewith': '1',
-        'hhg.P[2].QRel[1].R': '1',
-        'hhg.P[2].QRel[2].R': '97',
+        'qHousehold.QHHold.Person[2].BenUnit': '1',
+        'qHousehold.QHHold.Person[2].Sex': '2',
+        'qHousehold.QHHold.Person[2].DoB': '1995-06-11', // 'hhg.P[2].DoB' in B4, check with BDSS?
+        'qHousehold.QHHold.Person[2].livewith': '1',
+        'qHousehold.QHHold.Person[2].QRel[1].R': '1',
+        'qHousehold.QHHold.Person[2].QRel[2].R': '97',
       },
     };
 
@@ -161,10 +161,10 @@ describe('Map case response to case summary', () => {
   });
 
   it.each([
-    ['0', ''],
-    ['6', ''],
-    ['', ''],
-    ['test', ''],
+    ['0', '-'],
+    ['6', '-'],
+    ['', '-'],
+    ['test', '-'],
   ])('It should return the expected Accomadation Main when given invalid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
     SetFieldsToValue(caseResponseData, 'qhAdmin.QObsSheet.MainAcD', '');
@@ -199,10 +199,10 @@ describe('Map case response to case summary', () => {
   });
 
   it.each([
-    ['0', ''],
-    ['9', ''],
-    ['', ''],
-    ['test', ''],
+    ['0', '-'],
+    ['9', '-'],
+    ['', '-'],
+    ['test', '-'],
   ])('It should return the expected Accomadation Type when given invalid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
     SetFieldsToValue(caseResponseData, 'qhAdmin.QObsSheet.TypAcDV', '');
@@ -218,11 +218,11 @@ describe('Map case response to case summary', () => {
   it.each([
     ['1', 'Conventional'],
     ['2', 'Shared'],
-    ['3', 'n/a'],
+    ['3', 'N/A'],
   ])('It should return the expected HouseStatus when given valid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'QAccomdat.HHStat', '');
-    caseResponseData.fieldData['QAccomdat.HHStat'] = inputValue;
+    SetFieldsToValue(caseResponseData, 'qAccomdat.HHStat', '');
+    caseResponseData.fieldData['qAccomdat.HHStat'] = inputValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -238,8 +238,8 @@ describe('Map case response to case summary', () => {
     ['test', ''],
   ])('It should return the expected HouseStatus when given invalid inputs', (inputValue: string, expectedOutputValue: string) => {
     // arrange
-    SetFieldsToValue(caseResponseData, 'QAccomdat.HHStat', '');
-    caseResponseData.fieldData['QAccomdat.HHStat'] = inputValue;
+    SetFieldsToValue(caseResponseData, 'qAccomdat.HHStat', '');
+    caseResponseData.fieldData['qAccomdat.HHStat'] = inputValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -312,8 +312,8 @@ describe('Map case response to case summary', () => {
 
     const expectedHousingBenefit = '400';
 
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenAmt'] = expectedHousingBenefit;
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenPd'] = PeriodCodeInput;
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenAmt'] = expectedHousingBenefit;
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenPd'] = PeriodCodeInput;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -331,8 +331,8 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '.HBenPd', '');
 
     const expectedHousingBenefit: HousingBenefits[] = [{
-      Amount: 'n/a',
-      PeriodCode: 'n/a',
+      Amount: 'N/A',
+      PeriodCode: 'N/A',
     }];
 
     // act
@@ -352,8 +352,8 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '.HBenAmt', '');
     SetFieldsToValue(caseResponseData, '.HBenPd', '');
 
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenAmt'] = '380';
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenPd'] = PeriodCodeInput;
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenAmt'] = '380';
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenPd'] = PeriodCodeInput;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -370,14 +370,14 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '.HBenAmt', '');
     SetFieldsToValue(caseResponseData, '.HBenPd', '');
 
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenAmt'] = '380';
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenPd'] = '1';
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenAmt'] = '380';
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenPd'] = '1';
 
-    caseResponseData.fieldData['BU[2].QBenefit.QBenef2[2].HBenAmt'] = '390';
-    caseResponseData.fieldData['BU[2].QBenefit.QBenef2[2].HBenPd'] = '5';
+    caseResponseData.fieldData['bU[2].QBenefit.QBenef2[2].HBenAmt'] = '390';
+    caseResponseData.fieldData['bU[2].QBenefit.QBenef2[2].HBenPd'] = '5';
 
-    caseResponseData.fieldData['BU[3].QBenefit.QBenef2[1].HBenAmt'] = '400';
-    caseResponseData.fieldData['BU[3].QBenefit.QBenef2[1].HBenPd'] = '26';
+    caseResponseData.fieldData['bU[3].QBenefit.QBenef2[1].HBenAmt'] = '400';
+    caseResponseData.fieldData['bU[3].QBenefit.QBenef2[1].HBenPd'] = '26';
 
     const expectedHousingBenefit: HousingBenefits[] = [{
       Amount: '380',
@@ -407,8 +407,8 @@ describe('Map case response to case summary', () => {
     const inputHousingBenefit = '1234567';
     const expectedHousingBenefit = '123456';
 
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenAmt'] = inputHousingBenefit;
-    caseResponseData.fieldData['BU[1].QBenefit.QBenef2[1].HBenPd'] = '1';
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenAmt'] = inputHousingBenefit;
+    caseResponseData.fieldData['bU[1].QBenefit.QBenef2[1].HBenPd'] = '1';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -648,16 +648,16 @@ describe('Map case response to case summary', () => {
     '3',
     '6',
     '10'])('It should a respondents array of the the correct size for all Respondents', (numberOfRespondents) => {
-    // arrange
-    SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
-    caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
+      // arrange
+      SetFieldsToValue(caseResponseData, 'dmhSize', ''); // 'hhsize' in B4, check with BDSS?
+      caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
 
-    // act
-    const result = mapCaseSummary(caseResponseData);
+      // act
+      const result = mapCaseSummary(caseResponseData);
 
-    // assert
-    expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
-  });
+      // assert
+      expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
+    });
 
   it('It should return the person number when there is only one reposndent', () => {
     // arrange
@@ -694,7 +694,7 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '].Sex', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
-    caseResponseData.fieldData['hhg.P[1].Sex'] = inputValue;
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].Sex'] = inputValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -714,7 +714,7 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '].Sex', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
-    caseResponseData.fieldData['hhg.P[1].Sex'] = inputValue;
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].Sex'] = inputValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -730,10 +730,10 @@ describe('Map case response to case summary', () => {
 
     caseResponseData.fieldData['dmhSize'] = '4';
 
-    caseResponseData.fieldData['hhg.P[1].Sex'] = '1';
-    caseResponseData.fieldData['hhg.P[2].Sex'] = '2';
-    caseResponseData.fieldData['hhg.P[3].Sex'] = '2';
-    caseResponseData.fieldData['hhg.P[4].Sex'] = '1';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].Sex'] = '1';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].Sex'] = '2';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].Sex'] = '2';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].Sex'] = '1';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -763,8 +763,8 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '].ms', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
-    caseResponseData.fieldData['hhg.p[1].livewith'] = inputLivesWithValue;
-    caseResponseData.fieldData['hhg.p[1].ms'] = inputMaritalStatusValue;
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].livewith'] = inputLivesWithValue;
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].ms'] = inputMaritalStatusValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -789,8 +789,8 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '].ms', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
-    caseResponseData.fieldData['hhg.p[1].livewith'] = inputLivesWithValue;
-    caseResponseData.fieldData['hhg.p[1].ms'] = inputMaritalStatusValue;
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].livewith'] = inputLivesWithValue;
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].ms'] = inputMaritalStatusValue;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -807,17 +807,17 @@ describe('Map case response to case summary', () => {
 
     caseResponseData.fieldData['dmhSize'] = '4';
 
-    caseResponseData.fieldData['hhg.p[1].livewith'] = '1';
-    caseResponseData.fieldData['hhg.p[1].ms'] = '';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].livewith'] = '1';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].ms'] = '';
 
-    caseResponseData.fieldData['hhg.p[2].livewith'] = '2';
-    caseResponseData.fieldData['hhg.p[2].ms'] = '1';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].livewith'] = '2';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].ms'] = '1';
 
-    caseResponseData.fieldData['hhg.p[3].livewith'] = '2';
-    caseResponseData.fieldData['hhg.p[3].ms'] = '3';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].livewith'] = '2';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].ms'] = '3';
 
-    caseResponseData.fieldData['hhg.p[4].livewith'] = '2';
-    caseResponseData.fieldData['hhg.p[4].ms'] = '6';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].livewith'] = '2';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].ms'] = '6';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -835,7 +835,7 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '].R', '');
 
     caseResponseData.fieldData['dmhSize'] = '1';
-    caseResponseData.fieldData['hhg.P[1].QRel[1].R'] = '97';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].QRel[1].R'] = '97';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -850,25 +850,25 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '].R', '');
 
     caseResponseData.fieldData['dmhSize'] = '4';
-    caseResponseData.fieldData['hhg.P[1].QRel[1].R'] = '97';
-    caseResponseData.fieldData['hhg.P[1].QRel[2].R'] = '1';
-    caseResponseData.fieldData['hhg.P[1].QRel[3].R'] = '7';
-    caseResponseData.fieldData['hhg.P[1].QRel[4].R'] = '16';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].QRel[1].R'] = '97';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].QRel[2].R'] = '1';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].QRel[3].R'] = '7';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[1].QRel[4].R'] = '16';
 
-    caseResponseData.fieldData['hhg.P[2].QRel[1].R'] = '1';
-    caseResponseData.fieldData['hhg.P[2].QRel[2].R'] = '97';
-    caseResponseData.fieldData['hhg.P[2].QRel[3].R'] = '7';
-    caseResponseData.fieldData['hhg.P[2].QRel[4].R'] = '16';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].QRel[1].R'] = '1';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].QRel[2].R'] = '97';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].QRel[3].R'] = '7';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[2].QRel[4].R'] = '16';
 
-    caseResponseData.fieldData['hhg.P[3].QRel[1].R'] = '3';
-    caseResponseData.fieldData['hhg.P[3].QRel[2].R'] = '3';
-    caseResponseData.fieldData['hhg.P[3].QRel[3].R'] = '97';
-    caseResponseData.fieldData['hhg.P[3].QRel[4].R'] = '7';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].QRel[1].R'] = '3';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].QRel[2].R'] = '3';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].QRel[3].R'] = '97';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[3].QRel[4].R'] = '7';
 
-    caseResponseData.fieldData['hhg.P[4].QRel[1].R'] = '15';
-    caseResponseData.fieldData['hhg.P[4].QRel[2].R'] = '15';
-    caseResponseData.fieldData['hhg.P[4].QRel[3].R'] = '3';
-    caseResponseData.fieldData['hhg.P[4].QRel[4].R'] = '97';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].QRel[1].R'] = '15';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].QRel[2].R'] = '15';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].QRel[3].R'] = '3';
+    caseResponseData.fieldData['qHousehold.QHHold.Person[4].QRel[4].R'] = '97';
 
     // act
     const result = mapCaseSummary(caseResponseData);
