@@ -302,7 +302,7 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
           <dd
             class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
-            Main: House/Bungalow - Type: Detached
+            Main: House/Bungalow  Type: Detached
           </dd>
           <dt
             class="ons-metadata__term ons-grid__col ons-col-5@m"
@@ -343,7 +343,7 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
             class="ons-metadata__value ons-grid__col ons-col-7@m"
           >
             <span>
-              amount: 380, period: One week
+              Amount: 380, Period: One week
               <br />
             </span>
           </dd>
@@ -699,7 +699,7 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
         <dd
           class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
-          Main: House/Bungalow - Type: Detached
+          Main: House/Bungalow  Type: Detached
         </dd>
         <dt
           class="ons-metadata__term ons-grid__col ons-col-5@m"
@@ -740,7 +740,7 @@ exports[`Given there is a case available in blaise for a questionnaire > should 
           class="ons-metadata__value ons-grid__col ons-col-7@m"
         >
           <span>
-            amount: 380, period: One week
+            Amount: 380, Period: One week
             <br />
           </span>
         </dd>
