@@ -95,10 +95,10 @@ function GetHousingBenefitArray(caseResponse: CaseResponse): HousingBenefits[] {
 
 function HasBusinessRoom(caseResponse: CaseResponse): boolean {
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
         for (let selfJob = 1; selfJob <= 5; selfJob += 1) {
-          if (caseResponse.fieldData[`BU[${benefitUnit}].QSelfJob[${selfJob}].Adult[${person}].BusRoom`] === '1') {
+          if (caseResponse.fieldData[`bU[${benefitUnit}].QSelfJob[${selfJob}].Adult[${person}].BusRoom`] === '1') {
             return true;
           }
         }
@@ -112,10 +112,10 @@ function HasBusinessRoom(caseResponse: CaseResponse): boolean {
 function GetSelfEmployedMembers(caseResponse: CaseResponse): string[] {
   const selfEmployedMembers: string[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        if (caseResponse.fieldData[`BU[${benefitUnit}].QCurst1.Adult[${person}].EmpStat`] === '2') {
-          selfEmployedMembers.push(caseResponse.fieldData[`BU[${benefitUnit}].QCurst1.Adult[${person}].Persid`]);
+        if (caseResponse.fieldData[`bU[${benefitUnit}].QCurSt1.Adult[${person}].EmpStat`] === '2') {
+          selfEmployedMembers.push(caseResponse.fieldData[`bU[${benefitUnit}].QCurSt1.Adult[${person}].PersId`]);
         }
       }
     }
@@ -127,12 +127,11 @@ function GetSelfEmployedMembers(caseResponse: CaseResponse): string[] {
 function GetIncomeSupportPeople(caseResponse: CaseResponse): string[] {
   const incomeSupportPeople: string[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        for (let wageBenefit = 1; wageBenefit <= 10; wageBenefit += 1) {
-          if (caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].WageBen[${wageBenefit}]`] === '5') {
-            incomeSupportPeople.push(caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].Persid`]);
-          }
+        let wageBen = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].WageBen`];
+        if (wageBen && wageBen.includes('5')) {
+          incomeSupportPeople.push(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].PersId`]);
         }
       }
     }
@@ -144,11 +143,11 @@ function GetIncomeSupportPeople(caseResponse: CaseResponse): string[] {
 function GetJsaPeople(caseResponse: CaseResponse): string[] {
   const jsaPeople: string[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        if (caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`] === '2'
-          || caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`] === '3') {
-          jsaPeople.push(caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].Persid`]);
+        if (caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`] === '2'
+          || caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`] === '3') {
+          jsaPeople.push(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].PersId`]);
         }
       }
     }
