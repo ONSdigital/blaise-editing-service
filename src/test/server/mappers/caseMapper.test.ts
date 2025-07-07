@@ -40,15 +40,15 @@ describe('Map case response to case summary', () => {
         'bU[1].QBenefit.QBenef2[1].HBenAmt': '380',
         'bU[1].QBenefit.QBenef2[1].HBenPd': '1',
         'qCounTax.CTBand': '1',
-        'BU[1].QBUId.BUNum': '1',
-        'BU[1].QSelfJob[1].Adult[1].BusRoom': '1',
-        'BU[1].QCurst1.Adult[1].EmpStat': '2',
-        'BU[1].QCurst1.Adult[1].Persid': '1',
-        'BU[1].QCurst1.Adult[2].EmpStat': '2',
-        'BU[1].QCurst1.Adult[2].Persid': '2',
-        'BU[1].QBenefit.QWageBen.Adult[1].WageBen[1]': '5',
-        'BU[1].QBenefit.QWageBen.Adult[1].Persid': '1',
-        'BU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
+        'bU[1].QBUId.BUNum': '1',
+        'bU[1].QSelfJob[1].Adult[1].BusRoom': '1',
+        'bU[1].QCurSt1.Adult[1].EmpStat': '2',
+        'bU[1].QCurSt1.Adult[1].PersId': '1',
+        'bU[1].QCurSt1.Adult[2].EmpStat': '2',
+        'bU[1].QCurSt1.Adult[2].PersId': '2',
+        'bU[1].QBenefit.QWageBen.Adult[1].WageBen': '1-5-6',
+        'bU[1].QBenefit.QWageBen.Adult[1].PersId': '1',
+        'bU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
         'dmhSize': '2',
         'dmName[1]': 'Richmond Ricecake',
         'qHousehold.QHHold.Person[1].BenUnit': '1',
@@ -430,8 +430,8 @@ describe('Map case response to case summary', () => {
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
     SetFieldsToValue(caseResponseData, '.BusRoom', '');
 
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QSelfJob[${selfEmployedToSet}].Adult[${adultToSet}].BusRoom`] = '1';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QSelfJob[${selfEmployedToSet}].Adult[${adultToSet}].BusRoom`] = '1';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -461,11 +461,11 @@ describe('Map case response to case summary', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
     SetFieldsToValue(caseResponseData, '.EmpStat', '');
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QCurst1.Adult[${adultToSet}].EmpStat`] = '2';
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QCurst1.Adult[${adultToSet}].Persid`] = `${personIdToSet}`;
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QCurSt1.Adult[${adultToSet}].EmpStat`] = '2';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QCurSt1.Adult[${adultToSet}].PersId`] = `${personIdToSet}`;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -479,19 +479,19 @@ describe('Map case response to case summary', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
     SetFieldsToValue(caseResponseData, '.EmpStat', '');
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
-    caseResponseData.fieldData['BU[1].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[1].QCurst1.Adult[1].EmpStat'] = '2';
-    caseResponseData.fieldData['BU[1].QCurst1.Adult[1].Persid'] = '1';
+    caseResponseData.fieldData['bU[1].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[1].QCurSt1.Adult[1].EmpStat'] = '2';
+    caseResponseData.fieldData['bU[1].QCurSt1.Adult[1].PersId'] = '1';
 
-    caseResponseData.fieldData['BU[4].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[4].QCurst1.Adult[2].EmpStat'] = '2';
-    caseResponseData.fieldData['BU[4].QCurst1.Adult[2].Persid'] = '8';
+    caseResponseData.fieldData['bU[4].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[4].QCurSt1.Adult[2].EmpStat'] = '2';
+    caseResponseData.fieldData['bU[4].QCurSt1.Adult[2].PersId'] = '8';
 
-    caseResponseData.fieldData['BU[7].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[7].QCurst1.Adult[1].EmpStat'] = '2';
-    caseResponseData.fieldData['BU[7].QCurst1.Adult[1].Persid'] = '13';
+    caseResponseData.fieldData['bU[7].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[7].QCurSt1.Adult[1].EmpStat'] = '2';
+    caseResponseData.fieldData['bU[7].QCurSt1.Adult[1].PersId'] = '13';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -505,7 +505,7 @@ describe('Map case response to case summary', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
     SetFieldsToValue(caseResponseData, '.EmpStat', '');
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -516,20 +516,18 @@ describe('Map case response to case summary', () => {
   });
 
   it.each([
-    ['1', '1', '1', '1'],
-    ['4', '2', '6', '8'],
-    ['7', '1', '10', '13'],
-  ])('It should return true for IncomeSupport with a list of income support members when there is only one set', (benefitUnitToSet: string, adultToSet: string, wageBenefitToSet: string, personIdToSet: string) => {
+    ['1', '1', '1'],
+    ['4', '2', '8'],
+    ['7', '1', '13'],
+  ])('It should return true for IncomeSupport with a list of income support members when there is only one set', (benefitUnitToSet: string, adultToSet: string, personIdToSet: string) => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
-    for (let wageBenefit = 1; wageBenefit <= 10; wageBenefit += 1) {
-      SetFieldsToValue(caseResponseData, `.WageBen[${wageBenefit}]`, '');
-    }
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, `.WageBen`, '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].WageBen[${wageBenefitToSet}]`] = '5';
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].Persid`] = `${personIdToSet}`;
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].WageBen`] = '5';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].PersId`] = `${personIdToSet}`;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -542,22 +540,20 @@ describe('Map case response to case summary', () => {
   it('It should return true for IncomeSupport with a list of income support members when there are multiple set', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
-    for (let wageBenefit = 1; wageBenefit <= 10; wageBenefit += 1) {
-      SetFieldsToValue(caseResponseData, `.WageBen[${wageBenefit}]`, '');
-    }
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, `.WageBen`, '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
-    caseResponseData.fieldData['BU[1].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[1].QBenefit.QWageBen.Adult[1].WageBen[1]'] = '5';
-    caseResponseData.fieldData['BU[1].QBenefit.QWageBen.Adult[1].Persid'] = '1';
+    caseResponseData.fieldData['bU[1].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[1].QBenefit.QWageBen.Adult[1].WageBen'] = '5';
+    caseResponseData.fieldData['bU[1].QBenefit.QWageBen.Adult[1].PersId'] = '1';
 
-    caseResponseData.fieldData['BU[4].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[4].QBenefit.QWageBen.Adult[2].WageBen[6]'] = '5';
-    caseResponseData.fieldData['BU[4].QBenefit.QWageBen.Adult[2].Persid'] = '8';
+    caseResponseData.fieldData['bU[4].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[4].QBenefit.QWageBen.Adult[2].WageBen'] = '5';
+    caseResponseData.fieldData['bU[4].QBenefit.QWageBen.Adult[2].PersId'] = '8';
 
-    caseResponseData.fieldData['BU[7].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[7].QBenefit.QWageBen.Adult[1].WageBen[10]'] = '5';
-    caseResponseData.fieldData['BU[7].QBenefit.QWageBen.Adult[1].Persid'] = '13';
+    caseResponseData.fieldData['bU[7].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[7].QBenefit.QWageBen.Adult[1].WageBen'] = '5';
+    caseResponseData.fieldData['bU[7].QBenefit.QWageBen.Adult[1].PersId'] = '13';
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -573,7 +569,7 @@ describe('Map case response to case summary', () => {
     for (let wageBenefit = 1; wageBenefit <= 10; wageBenefit += 1) {
       SetFieldsToValue(caseResponseData, `.WageBen[${wageBenefit}]`, '');
     }
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -591,11 +587,11 @@ describe('Map case response to case summary', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
     SetFieldsToValue(caseResponseData, '.JSAType', '');
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].JSAType`] = `${JsaTypeToSet}`;
-    caseResponseData.fieldData[`BU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].Persid`] = `${personIdToSet}`;
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].JSAType`] = `${JsaTypeToSet}`;
+    caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBenefit.QWageBen.Adult[${adultToSet}].PersId`] = `${personIdToSet}`;
 
     // act
     const result = mapCaseSummary(caseResponseData);
@@ -609,19 +605,19 @@ describe('Map case response to case summary', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
     SetFieldsToValue(caseResponseData, '.JSAType', '');
-    SetFieldsToValue(caseResponseData, '.Persid', '');
+    SetFieldsToValue(caseResponseData, '.PersId', '');
 
-    caseResponseData.fieldData['BU[1].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[1].QBenefit.QWageBen.Adult[1].JSAType'] = '2';
-    caseResponseData.fieldData['BU[1].QBenefit.QWageBen.Adult[1].Persid'] = '1';
+    caseResponseData.fieldData['bU[1].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[1].QBenefit.QWageBen.Adult[1].JSAType'] = '2';
+    caseResponseData.fieldData['bU[1].QBenefit.QWageBen.Adult[1].PersId'] = '1';
 
-    caseResponseData.fieldData['BU[4].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[4].QBenefit.QWageBen.Adult[2].JSAType'] = '3';
-    caseResponseData.fieldData['BU[4].QBenefit.QWageBen.Adult[2].Persid'] = '8';
+    caseResponseData.fieldData['bU[4].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[4].QBenefit.QWageBen.Adult[2].JSAType'] = '3';
+    caseResponseData.fieldData['bU[4].QBenefit.QWageBen.Adult[2].PersId'] = '8';
 
-    caseResponseData.fieldData['BU[7].QBUId.BUNum'] = '1';
-    caseResponseData.fieldData['BU[7].QBenefit.QWageBen.Adult[1].JSAType'] = '2';
-    caseResponseData.fieldData['BU[7].QBenefit.QWageBen.Adult[1].Persid'] = '13';
+    caseResponseData.fieldData['bU[7].QBUId.BUNum'] = '1';
+    caseResponseData.fieldData['bU[7].QBenefit.QWageBen.Adult[1].JSAType'] = '2';
+    caseResponseData.fieldData['bU[7].QBenefit.QWageBen.Adult[1].PersId'] = '13';
 
     // act
     const result = mapCaseSummary(caseResponseData);
