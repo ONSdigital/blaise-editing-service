@@ -129,7 +129,7 @@ function GetIncomeSupportPeople(caseResponse: CaseResponse): string[] {
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
     if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        let wageBen = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].WageBen`];
+        const wageBen = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].WageBen`];
         if (wageBen && wageBen.includes('5')) {
           incomeSupportPeople.push(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].PersId`]);
         }
@@ -222,14 +222,12 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   }
 
   for (let respondentNumber = 1; respondentNumber <= numberOfRespondents; respondentNumber += 1) {
-
     const dateOfBirth = caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].DoB`];
-    let dob = "";
+    let dob = '';
     if (dateOfBirth) {
-      const [day, month, year] = dateOfBirth.split('-');
-      dob = `${year}-${month}-${day}`;
+      const [dayOfBirth, monthOfBirth, yearOfBirth] = dateOfBirth.split('-');
+      dob = `${yearOfBirth}-${monthOfBirth}-${dayOfBirth}`;
     }
-
 
     caseSummary.Respondents.push({
       PersonNumber: `${respondentNumber}`,

@@ -88,7 +88,7 @@ export const caseResponseMockObject: CaseResponse = {
     'bU[1].QBenefit.QWageBen.Adult[1].WageBen': '5-6',
     'bU[1].QBenefit.QWageBen.Adult[1].PersId': '1',
     'bU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
-    'dmhSize': '2',
+    dmhSize: '2',
     'dmName[1]': 'Richmond Ricecake',
     'qHousehold.QHHold.Person[1].BenUnit': '1',
     'qHousehold.QHHold.Person[1].Sex': '1',

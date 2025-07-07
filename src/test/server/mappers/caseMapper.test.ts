@@ -49,7 +49,7 @@ describe('Map case response to case summary', () => {
         'bU[1].QBenefit.QWageBen.Adult[1].WageBen': '1-5-6',
         'bU[1].QBenefit.QWageBen.Adult[1].PersId': '1',
         'bU[1].QBenefit.QWageBen.Adult[1].JSAType': '2',
-        'dmhSize': '2',
+        dmhSize: '2',
         'dmName[1]': 'Richmond Ricecake',
         'qHousehold.QHHold.Person[1].BenUnit': '1',
         'qHousehold.QHHold.Person[1].Sex': '1',
@@ -522,7 +522,7 @@ describe('Map case response to case summary', () => {
   ])('It should return true for IncomeSupport with a list of income support members when there is only one set', (benefitUnitToSet: string, adultToSet: string, personIdToSet: string) => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
-    SetFieldsToValue(caseResponseData, `.WageBen`, '');
+    SetFieldsToValue(caseResponseData, '.WageBen', '');
     SetFieldsToValue(caseResponseData, '.PersId', '');
 
     caseResponseData.fieldData[`bU[${benefitUnitToSet}].QBUId.BUNum`] = '1';
@@ -540,7 +540,7 @@ describe('Map case response to case summary', () => {
   it('It should return true for IncomeSupport with a list of income support members when there are multiple set', () => {
     // arrange
     SetFieldsToValue(caseResponseData, '.QBUId.BUNum', '');
-    SetFieldsToValue(caseResponseData, `.WageBen`, '');
+    SetFieldsToValue(caseResponseData, '.WageBen', '');
     SetFieldsToValue(caseResponseData, '.PersId', '');
 
     caseResponseData.fieldData['bU[1].QBUId.BUNum'] = '1';
