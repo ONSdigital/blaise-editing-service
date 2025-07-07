@@ -644,16 +644,16 @@ describe('Map case response to case summary', () => {
     '3',
     '6',
     '10'])('It should a respondents array of the the correct size for all Respondents', (numberOfRespondents) => {
-      // arrange
-      SetFieldsToValue(caseResponseData, 'dmhSize', '');
-      caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
+    // arrange
+    SetFieldsToValue(caseResponseData, 'dmhSize', '');
+    caseResponseData.fieldData['dmhSize'] = numberOfRespondents;
 
-      // act
-      const result = mapCaseSummary(caseResponseData);
+    // act
+    const result = mapCaseSummary(caseResponseData);
 
-      // assert
-      expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
-    });
+    // assert
+    expect(result.Respondents.length).toEqual(Number(numberOfRespondents));
+  });
 
   it('It should return the person number when there is only one reposndent', () => {
     // arrange
