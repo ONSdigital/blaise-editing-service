@@ -22,7 +22,7 @@ describe('Map case response to case summary', () => {
     caseResponseData = JSON.parse(JSON.stringify(caseResponseMockObject));
   });
 
-  it('It should return a correctly mapped summary with responent(s)', () => {
+  it('It should return a correctly mapped summary with respondent(s)', () => {
     // arrange
     const inputCaseResponseData: CaseResponse = {
       caseId: '9001',
@@ -130,7 +130,7 @@ describe('Map case response to case summary', () => {
     caseResponseData.fieldData[''] = value;
 
     // act && assert
-    expect(() => mapCaseSummary(caseResponseData)).toThrowError('Number of responents not specified');
+    expect(() => mapCaseSummary(caseResponseData)).toThrowError('Number of respondents not specified');
   });
 
   it.each(['0', '', ' '])('It should error when household Size is missing or zero', (value) => {
@@ -139,7 +139,7 @@ describe('Map case response to case summary', () => {
     caseResponseData.fieldData['dmhSize'] = value;
 
     // act && assert
-    expect(() => mapCaseSummary(caseResponseData)).toThrowError('Number of responents not specified');
+    expect(() => mapCaseSummary(caseResponseData)).toThrowError('Number of respondents not specified');
   });
 
   it.each([
@@ -719,7 +719,7 @@ describe('Map case response to case summary', () => {
     expect(result.Respondents[0]?.Sex).toEqual(expectedOutputValue);
   });
 
-  it('It should return the expected sex for all respondents when given valid inputs for multiple responent', () => {
+  it('It should return the expected sex for all respondents when given valid inputs for multiple respondents', () => {
     // arrange
     SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].Sex', '');
@@ -795,7 +795,7 @@ describe('Map case response to case summary', () => {
     expect(result.Respondents[0]?.MaritalStatus).toEqual(expectedOutputValue);
   });
 
-  it('It should return the expected marital status for all respondents when given valid inputs for multiple responent', () => {
+  it('It should return the expected marital status for all respondents when given valid inputs for multiple respondents', () => {
     // arrange
     SetFieldsToValue(caseResponseData, 'dmhSize', '');
     SetFieldsToValue(caseResponseData, '].livewith', '');
