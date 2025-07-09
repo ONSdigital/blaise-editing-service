@@ -21,7 +21,7 @@ vi.mock('react-router-dom', async () => {
 vi.mock('../../../../client/api/NodeApi');
 
 // declare global vars
-let view:RenderResult;
+let view: RenderResult;
 const getCaseSummaryDetailsMock = getCaseSummary as vi.mock<Promise<CaseSummaryDetails>>;
 
 describe('Given there is a case available in blaise for a questionnaire', () => {
@@ -57,7 +57,7 @@ describe('Given there is a case available in blaise for a questionnaire', () => 
     expect(caseSummaryView).toHaveTextContent(expectedCaseSummaryDetails.Household.Status);
     expect(caseSummaryView).toHaveTextContent(expectedCaseSummaryDetails.Household.NumberOfBedrooms);
     expectedCaseSummaryDetails.Household.ReceiptOfHousingBenefit.forEach((housingBenefit) => {
-      expect(caseSummaryView).toHaveTextContent(`amount: ${housingBenefit.Amount}, period: ${housingBenefit.PeriodCode}`);
+      expect(caseSummaryView).toHaveTextContent(`Amount: ${housingBenefit.Amount}, Period: ${housingBenefit.PeriodCode}`);
     });
     expect(caseSummaryView).toHaveTextContent(expectedCaseSummaryDetails.Household.CouncilTaxBand);
     expect(caseSummaryView).toHaveTextContent('Yes');
