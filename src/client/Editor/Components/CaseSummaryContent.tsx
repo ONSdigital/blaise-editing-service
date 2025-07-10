@@ -53,7 +53,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.OutcomeCode}</dd>
 
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">Interview date</dt>
-        <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.InterviewDate == null ? 'N/A' : caseSummary.InterviewDate.toDateString()}</dd>
+        <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.InterviewDate == null ? 'N/A' : (new Date(caseSummary.InterviewDate)).toDateString()}</dd>
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">District</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.District}</dd>
 
@@ -107,7 +107,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
                 aria-label="DateOfBirth"
                 key={`DateOfBirth-${respondent.PersonNumber}`}
               >
-                {respondent.DateOfBirth == null ? 'N/A' : respondent.DateOfBirth.toDateString()}
+                {respondent.DateOfBirth == null ? 'N/A' : (new Date(respondent.DateOfBirth)).toDateString()}
               </td>
               <td
                 className="ons-table__cell"
@@ -137,7 +137,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
       >
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">Accommodation type</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">
-          {`Main: ${caseSummary.Household.Accommodation.Main} - Type: ${caseSummary.Household.Accommodation.Type}`}
+          {`Main: ${caseSummary.Household.Accommodation.Main}  Type: ${caseSummary.Household.Accommodation.Type}`}
         </dd>
         <dt className="ons-metadata__term ons-grid__col ons-col-5@m">Floor number</dt>
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">{caseSummary.Household.FloorNumber}</dd>
@@ -149,7 +149,7 @@ export default function CaseSummaryContent({ caseSummary }: CaseSummaryContentPr
         <dd className="ons-metadata__value ons-grid__col ons-col-7@m">
           {caseSummary.Household.ReceiptOfHousingBenefit.map((housingBenefit) => (
             <span key={housingBenefit.Amount}>
-              {`amount: ${housingBenefit.Amount}, period: ${housingBenefit.PeriodCode}`}
+              {`Amount: ${housingBenefit.Amount}, Period: ${housingBenefit.PeriodCode}`}
               <br />
             </span>
           ))}
