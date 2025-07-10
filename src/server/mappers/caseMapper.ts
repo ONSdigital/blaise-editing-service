@@ -23,7 +23,7 @@ const AccommodationType: Record<number, string> = {
 const HouseStatus: Record<number, string> = {
   1: 'Conventional',
   2: 'Shared',
-  3: 'n/a',
+  3: 'N/A',
 };
 
 const BenefitPeriod: Record<number, string> = {
@@ -79,8 +79,8 @@ function GetHousingBenefitArray(caseResponse: CaseResponse): HousingBenefits[] {
   const housingBenefit: HousingBenefits[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
     for (let person = 1; person <= 2; person += 1) {
-      const benefitAmount: string = caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenAmt`];
-      const benefitPeriod: string = BenefitPeriod[Number(caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenPd`])] ?? '';
+      const benefitAmount: string = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenAmt`];
+      const benefitPeriod: string = BenefitPeriod[Number(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QBenef2[${person}].HBenPd`])] ?? '';
       if (Number(benefitAmount) > 0) {
         housingBenefit.push({
           Amount: benefitAmount.substring(0, 6),
@@ -90,15 +90,15 @@ function GetHousingBenefitArray(caseResponse: CaseResponse): HousingBenefits[] {
     }
   }
 
-  return (housingBenefit.length === 0) ? [{ Amount: 'n/a', PeriodCode: 'n/a' }] : housingBenefit;
+  return (housingBenefit.length === 0) ? [{ Amount: 'N/A', PeriodCode: 'N/A' }] : housingBenefit;
 }
 
 function HasBusinessRoom(caseResponse: CaseResponse): boolean {
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
         for (let selfJob = 1; selfJob <= 5; selfJob += 1) {
-          if (caseResponse.fieldData[`BU[${benefitUnit}].QSelfJob[${selfJob}].Adult[${person}].BusRoom`] === '1') {
+          if (caseResponse.fieldData[`bU[${benefitUnit}].QSelfJob[${selfJob}].Adult[${person}].BusRoom`] === '1') {
             return true;
           }
         }
@@ -112,10 +112,10 @@ function HasBusinessRoom(caseResponse: CaseResponse): boolean {
 function GetSelfEmployedMembers(caseResponse: CaseResponse): string[] {
   const selfEmployedMembers: string[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        if (caseResponse.fieldData[`BU[${benefitUnit}].QCurst1.Adult[${person}].EmpStat`] === '2') {
-          selfEmployedMembers.push(caseResponse.fieldData[`BU[${benefitUnit}].QCurst1.Adult[${person}].Persid`]);
+        if (caseResponse.fieldData[`bU[${benefitUnit}].QCurSt1.Adult[${person}].EmpStat`] === '2') {
+          selfEmployedMembers.push(caseResponse.fieldData[`bU[${benefitUnit}].QCurSt1.Adult[${person}].PersId`]);
         }
       }
     }
@@ -127,12 +127,11 @@ function GetSelfEmployedMembers(caseResponse: CaseResponse): string[] {
 function GetIncomeSupportPeople(caseResponse: CaseResponse): string[] {
   const incomeSupportPeople: string[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        for (let wageBenefit = 1; wageBenefit <= 10; wageBenefit += 1) {
-          if (caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].WageBen[${wageBenefit}]`] === '5') {
-            incomeSupportPeople.push(caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].Persid`]);
-          }
+        const wageBen = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].WageBen`];
+        if (wageBen && wageBen.includes('5')) {
+          incomeSupportPeople.push(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].PersId`]);
         }
       }
     }
@@ -144,11 +143,11 @@ function GetIncomeSupportPeople(caseResponse: CaseResponse): string[] {
 function GetJsaPeople(caseResponse: CaseResponse): string[] {
   const jsaPeople: string[] = [];
   for (let benefitUnit = 1; benefitUnit <= 7; benefitUnit += 1) {
-    if (caseResponse.fieldData[`BU[${benefitUnit}].QBUId.BUNum`] !== '') {
+    if (caseResponse.fieldData[`bU[${benefitUnit}].QBUId.BUNum`] !== '') {
       for (let person = 1; person <= 2; person += 1) {
-        if (caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`] === '2'
-          || caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`] === '3') {
-          jsaPeople.push(caseResponse.fieldData[`BU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].Persid`]);
+        const jsaType = caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].JSAType`];
+        if (jsaType === '2' || jsaType === '3') {
+          jsaPeople.push(caseResponse.fieldData[`bU[${benefitUnit}].QBenefit.QWageBen.Adult[${person}].PersId`]);
         }
       }
     }
@@ -158,16 +157,16 @@ function GetJsaPeople(caseResponse: CaseResponse): string[] {
 }
 
 function GetMaritalStatus(caseResponse: CaseResponse, respondentNumber: number): string {
-  if (caseResponse.fieldData[`hhg.p[${respondentNumber}].livewith`] === '1') {
+  if (caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].livewith`] === '1') {
     return 'COH';
   }
-  return MartitalStatus[Number(caseResponse.fieldData[`hhg.p[${respondentNumber}].ms`])] ?? '-';
+  return MartitalStatus[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].ms`])] ?? '-';
 }
 
 function GetRelationshipMatrix(caseResponse: CaseResponse, respondentNumber: number, numberOfRespondents: number): string[] {
   const relationshipMatrix: string[] = [];
   for (let person = 1; person <= numberOfRespondents; person += 1) {
-    let relationship: string = caseResponse.fieldData[`hhg.P[${respondentNumber}].QRel[${person}].R`];
+    let relationship: string = caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].QRel[${person}].R`];
     if (relationship === '97') {
       relationship = '*';
     }
@@ -183,23 +182,28 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   const selfEmployedMembers = GetSelfEmployedMembers(caseResponse);
   const jsaPeople = GetJsaPeople(caseResponse);
   const incomeSupportPeople = GetIncomeSupportPeople(caseResponse);
+
+  const interviewStartDate = caseResponse.fieldData['qSignIn.StartDat'];
+  const [day, month, year] = interviewStartDate.split('-');
+  const interviewDate = new Date(`${year}-${month}-${day}`);
+
   const caseSummary: CaseSummaryDetails = {
     CaseId: caseResponse.caseId,
     OutcomeCode: caseResponse.fieldData['qhAdmin.HOut'],
-    InterviewDate: new Date(caseResponse.fieldData['QSignIn.StartDat']),
+    InterviewDate: interviewDate,
     District: caseResponse.fieldData['qDataBag.District'],
     InterviewerName: caseResponse.fieldData['qhAdmin.Interviewer[1]'],
     NumberOfRespondents: caseResponse.fieldData['dmhSize'],
     Household: {
       Accommodation: {
-        Main: Accommodation[Number(caseResponse.fieldData['qhAdmin.QObsSheet.MainAcD'])] ?? '',
-        Type: AccommodationType[Number(caseResponse.fieldData['qhAdmin.QObsSheet.TypAcDV'])] ?? '',
+        Main: Accommodation[Number(caseResponse.fieldData['qhAdmin.QObsSheet.MainAcD'])] ?? '-',
+        Type: AccommodationType[Number(caseResponse.fieldData['qhAdmin.QObsSheet.TypAcDV'])] ?? '-',
       },
       FloorNumber: caseResponse.fieldData['qhAdmin.QObsSheet.FloorN'],
-      Status: HouseStatus[Number(caseResponse.fieldData['QAccomdat.HHStat'])] ?? '',
-      NumberOfBedrooms: caseResponse.fieldData['QAccomdat.Bedroom'],
+      Status: HouseStatus[Number(caseResponse.fieldData['qAccomdat.HHStat'])] ?? '',
+      NumberOfBedrooms: caseResponse.fieldData['qAccomdat.Bedroom'],
       ReceiptOfHousingBenefit: housingBenefitArray,
-      CouncilTaxBand: CouncilTaxBand[Number(caseResponse.fieldData['QCounTax.CTBand'])] ?? 'Blank',
+      CouncilTaxBand: CouncilTaxBand[Number(caseResponse.fieldData['qCounTax.CTBand'])] ?? 'Blank',
       BusinessRoom: businessRoom,
       SelfEmployed: selfEmployedMembers.length > 0,
       SelfEmployedMembers: selfEmployedMembers,
@@ -214,16 +218,23 @@ export default function mapCaseSummary(caseResponse: CaseResponse): CaseSummaryD
   const numberOfRespondents = +caseSummary.NumberOfRespondents;
 
   if (Number.isNaN(numberOfRespondents) || numberOfRespondents === 0) {
-    throw new Error('Number of responents not specified');
+    throw new Error('Number of respondents not specified');
   }
 
   for (let respondentNumber = 1; respondentNumber <= numberOfRespondents; respondentNumber += 1) {
+    const dateOfBirth = caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].DoB`];
+    let dob = '';
+    if (dateOfBirth) {
+      const [dayOfBirth, monthOfBirth, yearOfBirth] = dateOfBirth.split('-');
+      dob = `${yearOfBirth}-${monthOfBirth}-${dayOfBirth}`;
+    }
+
     caseSummary.Respondents.push({
       PersonNumber: `${respondentNumber}`,
-      RespondentName: caseResponse.fieldData[`dmName[${respondentNumber}]`], // `QNames.M[${respondentNumber}].Name` in B4, check with BDSS?
-      BenefitUnit: caseResponse.fieldData[`hhg.P[${respondentNumber}].BenUnit`],
-      Sex: Sex[Number(caseResponse.fieldData[`hhg.P[${respondentNumber}].Sex`])] ?? '',
-      DateOfBirth: new Date(caseResponse.fieldData[`dmDteOfBth[${respondentNumber}]`]), // `hhg.P[${respondentNumber}].DoB` in B4, check with BDSS?
+      RespondentName: caseResponse.fieldData[`dmName[${respondentNumber}]`],
+      BenefitUnit: caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].BenUnit`],
+      Sex: Sex[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].Sex`])] ?? '',
+      DateOfBirth: new Date(dob),
       MaritalStatus: GetMaritalStatus(caseResponse, respondentNumber),
       Relationship: GetRelationshipMatrix(caseResponse, respondentNumber, numberOfRespondents),
     });
