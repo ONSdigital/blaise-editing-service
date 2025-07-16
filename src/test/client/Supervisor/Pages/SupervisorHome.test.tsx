@@ -13,6 +13,7 @@ import UserRole from '../../../../client/Common/enums/UserTypes';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../MockObjects/SupervisorMockObjects';
 import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
+import { CaseEditInformationEmptyListMockObject } from '../../../server/mockObjects/CaseMockObject';
 import CaseSearchForm from '../../../../client/Common/components/CaseSearchForm';
 
 // set global vars
@@ -204,7 +205,101 @@ describe('Given that search is clicked', () => {
       expect(linksRows[index]).toHaveTextContent('Edit case | View case');
     });
   });
+  
 });
+
+describe('Given that search is clicked', () => {
+  beforeEach(() => {
+    getCaseInformationMock.mockImplementation(() => Promise.resolve(CaseEditInformationEmptyListMockObject));
+  });
+
+  it('should render the search page correctly', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+
+    // act
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // assert
+    expect(view).toMatchSnapshot(
+      'SupervisorSearchPageInitial',
+    );
+  });
+
+  it('should render the search page correctly and Search button enabled after search text entered', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+    });
+
+    // assert
+    expect(view).toMatchSnapshot(
+      'SupervisorSerachPageSearchTextEntered',
+    );
+  });
+
+  it('should render the search page correctly when cases are searched for', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+    expect(view).toMatchSnapshot(
+      'SupervisorSerachPageSearchUsed',
+    );
+  });
+
+  it('should display error message when cases are searched for using a filter that returns no results', async () => {
+    // arrange
+    const questionnaireName = 'FRS2504A';
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <CaseSearchForm questionnaireName={questionnaireName} userRole={UserRole.SVT_Supervisor} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+      fireEvent.click(view.getByText('Search'));
+    });
+
+    // assert
+    expect(screen.getByText('No results found for this case ID.')).toBeInTheDocument();
+  });
+  
+});
+
 describe('Given there are no surveys available in blaise', () => {
   beforeEach(() => {
     getSurveysMock.mockImplementation(() => Promise.resolve([]));
