@@ -20,40 +20,44 @@ export default function CaseSearchDetails({ questionnaireName, caseId, role }: C
     <div className="case-search-results" data-testid="case-search-results">
       <AsyncContent content={caseSearchResults}>
         {(loadedCaseSearchResults) => (
-          <ONSTable
-            columns={[
-              'Case ID',
-              'Outcome',
-              'Interviewer',
-              'Organisation',
-            ]}
-            tableID={`${questionnaireName}-Case-results`}
-          >
-            <>
-              {loadedCaseSearchResults.map((caseDetails) => (
-                <tr
-                  className="ons-table__row"
-                  key={caseDetails.primaryKey}
-                >
-                  <td className="ons-table__cell" aria-label={`${questionnaireName}-CaseID`}>
-                    {caseDetails.primaryKey}
-                  </td>
-                  <td className="ons-table__cell" aria-label={`${questionnaireName}-Outcome`}>
-                    {caseDetails.outcome}
-                  </td>
-                  <td className="ons-table__cell" aria-label={`${questionnaireName}-Interviewer`}>
-                    {caseDetails.interviewer}
-                  </td>
-                  <td className="ons-table__cell" aria-label={`${questionnaireName}-Organisation`}>
-                    {Organisation[caseDetails.organisation]}
-                  </td>
-                  <td className="ons-table__cell links" aria-label={`${questionnaireName}-Links`}>
-                    <CaseSearchLinks questionnaireName={questionnaireName} caseDetails={caseDetails} role={role} />
-                  </td>
-                </tr>
-              ))}
-            </>
-          </ONSTable>
+          loadedCaseSearchResults.length > 0 ? (
+            <ONSTable
+              columns={[
+                'Case ID',
+                'Outcome',
+                'Interviewer',
+                'Organisation',
+              ]}
+              tableID={`${questionnaireName}-Case-results`}
+            >
+              <>
+                {loadedCaseSearchResults.map((caseDetails) => (
+                  <tr
+                    className="ons-table__row"
+                    key={caseDetails.primaryKey}
+                  >
+                    <td className="ons-table__cell" aria-label={`${questionnaireName}-CaseID`}>
+                      {caseDetails.primaryKey}
+                    </td>
+                    <td className="ons-table__cell" aria-label={`${questionnaireName}-Outcome`}>
+                      {caseDetails.outcome}
+                    </td>
+                    <td className="ons-table__cell" aria-label={`${questionnaireName}-Interviewer`}>
+                      {caseDetails.interviewer}
+                    </td>
+                    <td className="ons-table__cell" aria-label={`${questionnaireName}-Organisation`}>
+                      {Organisation[caseDetails.organisation]}
+                    </td>
+                    <td className="ons-table__cell links" aria-label={`${questionnaireName}-Links`}>
+                      <CaseSearchLinks questionnaireName={questionnaireName} caseDetails={caseDetails} role={role} />
+                    </td>
+                  </tr>
+                ))}
+              </>
+            </ONSTable>
+          ) : (
+            <p>No results found for this case ID.</p>
+          )
         )}
       </AsyncContent>
     </div>
