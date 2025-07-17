@@ -29,6 +29,7 @@ export default function CaseSearchForm({ questionnaireName, userRole }: CaseSear
         label="Search"
         primary
         loading={submitting}
+        disabled={caseIdValue.trim().length === 0}
         onClick={async () => { setSubmitting(true); setSearchValue(caseIdValue); setSubmitting(false); }}
       />
       <br />
