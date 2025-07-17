@@ -63,6 +63,9 @@ export const CaseEditInformationListMockObject: CaseEditInformation[] = [
   caseEditInformationMockObject5,
 ];
 
+export const CaseEditInformationEmptyListMockObject: CaseEditInformation[] = [
+];
+
 export const caseResponseMockObject: CaseResponse = {
   caseId: '9001',
   fieldData: {

@@ -1,6 +1,260 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Given that search is clicked > should render the search page correctly > SupervisorSearchPageInitial 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <p
+        class="ons-field"
+      >
+        <label
+          class="ons-label"
+          for="caseid"
+        >
+          Enter case ID
+        </label>
+        <input
+          class="ons-input ons-input--text ons-input-type__input "
+          data-testid="text-input"
+          id="caseid"
+          style="z-index: 0;"
+          type="text"
+          value=""
+        />
+      </p>
+      <button
+        class="ons-btn  ons-btn--disabled"
+        data-testid="button"
+        disabled=""
+        type="button"
+      >
+        <span
+          class="ons-btn__inner"
+        >
+          Search
+        </span>
+      </button>
+      <br />
+      <br />
+    </div>
+  </body>,
+  "container": <div>
+    <p
+      class="ons-field"
+    >
+      <label
+        class="ons-label"
+        for="caseid"
+      >
+        Enter case ID
+      </label>
+      <input
+        class="ons-input ons-input--text ons-input-type__input "
+        data-testid="text-input"
+        id="caseid"
+        style="z-index: 0;"
+        type="text"
+        value=""
+      />
+    </p>
+    <button
+      class="ons-btn  ons-btn--disabled"
+      data-testid="button"
+      disabled=""
+      type="button"
+    >
+      <span
+        class="ons-btn__inner"
+      >
+        Search
+      </span>
+    </button>
+    <br />
+    <br />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
 exports[`Given that search is clicked > should render the search page correctly > SupervisorSerachPage 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <p
+        class="ons-field"
+      >
+        <label
+          class="ons-label"
+          for="caseid"
+        >
+          Enter case ID
+        </label>
+        <input
+          class="ons-input ons-input--text ons-input-type__input "
+          data-testid="text-input"
+          id="caseid"
+          style="z-index: 0;"
+          type="text"
+          value=""
+        />
+      </p>
+      <button
+        class="ons-btn  ons-btn--disabled"
+        data-testid="button"
+        disabled=""
+        type="button"
+      >
+        <span
+          class="ons-btn__inner"
+        >
+          Search
+        </span>
+      </button>
+      <br />
+      <br />
+    </div>
+  </body>,
+  "container": <div>
+    <p
+      class="ons-field"
+    >
+      <label
+        class="ons-label"
+        for="caseid"
+      >
+        Enter case ID
+      </label>
+      <input
+        class="ons-input ons-input--text ons-input-type__input "
+        data-testid="text-input"
+        id="caseid"
+        style="z-index: 0;"
+        type="text"
+        value=""
+      />
+    </p>
+    <button
+      class="ons-btn  ons-btn--disabled"
+      data-testid="button"
+      disabled=""
+      type="button"
+    >
+      <span
+        class="ons-btn__inner"
+      >
+        Search
+      </span>
+    </button>
+    <br />
+    <br />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given that search is clicked > should render the search page correctly and Search button enabled after search text entered > SupervisorSerachPageSearchTextEntered 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -732,6 +986,163 @@ exports[`Given that search is clicked > should render the search page correctly 
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Given that search is clicked > should render the search page correctly when cases are searched for > SupervisorSerachPageSearchUsed 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <p
+        class="ons-field"
+      >
+        <label
+          class="ons-label"
+          for="caseid"
+        >
+          Enter case ID
+        </label>
+        <input
+          class="ons-input ons-input--text ons-input-type__input "
+          data-testid="text-input"
+          id="caseid"
+          style="z-index: 0;"
+          type="text"
+          value=""
+        />
+      </p>
+      <button
+        class="ons-btn "
+        data-testid="button"
+        type="button"
+      >
+        <span
+          class="ons-btn__inner"
+        >
+          Search
+        </span>
+      </button>
+      <br />
+      <br />
+      <div
+        class="case-search-results"
+        data-testid="case-search-results"
+      >
+        <div
+          class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+        >
+          <div
+            class="ons-panel__body "
+          >
+            <p>
+              No results found for this case ID.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <p
+      class="ons-field"
+    >
+      <label
+        class="ons-label"
+        for="caseid"
+      >
+        Enter case ID
+      </label>
+      <input
+        class="ons-input ons-input--text ons-input-type__input "
+        data-testid="text-input"
+        id="caseid"
+        style="z-index: 0;"
+        type="text"
+        value=""
+      />
+    </p>
+    <button
+      class="ons-btn "
+      data-testid="button"
+      type="button"
+    >
+      <span
+        class="ons-btn__inner"
+      >
+        Search
+      </span>
+    </button>
+    <br />
+    <br />
+    <div
+      class="case-search-results"
+      data-testid="case-search-results"
+    >
+      <div
+        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          <p>
+            No results found for this case ID.
+          </p>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

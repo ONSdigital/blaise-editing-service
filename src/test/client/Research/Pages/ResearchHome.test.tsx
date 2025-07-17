@@ -94,6 +94,52 @@ describe('Given there are surveys available in blaise', () => {
     });
   });
 
+  it('should render the Research page correctly and Search button disabled because search text not entered', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <ResearchHome user={user} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    // Don't do anything to check if the button is disabled
+
+    // assert
+    expect(view).toMatchSnapshot(
+      'ResearchPageSurveysReturnedSearchInitial',
+    );
+  });
+
+  it('should render the Research page correctly and Search button enabled after search text entered', async () => {
+    // arrange
+    const user = userMockObject;
+    user.role = userRole;
+
+    await act(async () => {
+      view = render(
+        <BrowserRouter>
+          <ResearchHome user={user} />
+        </BrowserRouter>,
+      );
+    });
+
+    // act
+    await act(async () => {
+      fireEvent.change(view.getByTestId('text-input'), { target: { value: '900' } });
+    });
+
+    // assert
+    expect(view).toMatchSnapshot(
+      'ResearchPageSurveysReturnedSearchTextEntered',
+    );
+  });
+
   it('should render the Research page correctly when surveys are returned and search used', async () => {
     // arrange
     const user = userMockObject;
