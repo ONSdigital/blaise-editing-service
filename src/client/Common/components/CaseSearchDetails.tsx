@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { CaseEditInformation } from 'blaise-api-node-client';
-import { ONSTable } from 'blaise-design-system-react-components';
+import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import { useAsyncRequestWithThreeParams } from '../hooks/useAsyncRequest';
 import UserRole from '../enums/UserTypes';
@@ -56,7 +56,9 @@ export default function CaseSearchDetails({ questionnaireName, caseId, role }: C
               </>
             </ONSTable>
           ) : (
-            <p>No results found for this case ID.</p>
+            <ONSPanel status="info">
+              <p>No results found for this case ID.</p>
+            </ONSPanel>
           )
         )}
       </AsyncContent>

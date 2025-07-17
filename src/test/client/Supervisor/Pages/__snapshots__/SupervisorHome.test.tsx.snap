@@ -1082,9 +1082,17 @@ exports[`Given that search is clicked > should render the search page correctly 
         class="case-search-results"
         data-testid="case-search-results"
       >
-        <p>
-          No results found for this case ID.
-        </p>
+        <div
+          class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+        >
+          <div
+            class="ons-panel__body "
+          >
+            <p>
+              No results found for this case ID.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </body>,
@@ -1124,9 +1132,17 @@ exports[`Given that search is clicked > should render the search page correctly 
       class="case-search-results"
       data-testid="case-search-results"
     >
-      <p>
-        No results found for this case ID.
-      </p>
+      <div
+        class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+      >
+        <div
+          class="ons-panel__body "
+        >
+          <p>
+            No results found for this case ID.
+          </p>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],
