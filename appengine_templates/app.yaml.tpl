@@ -1,4 +1,4 @@
-service: editing-ui
+service: bes-ui
 runtime: nodejs20
 
 vpc_access_connector:
