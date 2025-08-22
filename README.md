@@ -105,7 +105,7 @@ Create an .env file in the root of the project and add the following environment
 | PORT | Port for the Express server | 5000 |
 | BLAISE_API_URL | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on (including protocol) | <http://localhost:90> |
 | SERVER_PARK | Name of the Blaise server park the questionnaires are installed on | gusty |
-| VM_EXTERNAL_WEB_URL | External URL used for CATI (not including protocol) | https://cati.example.com |
+| VM_EXTERNAL_WEB_URL | External URL used for CATI (not including protocol) | cati.example.com |
 
 Example `.env` file:
 
@@ -113,7 +113,7 @@ Example `.env` file:
 PORT='5000'
 BLAISE_API_URL='http://localhost:90'
 SERVER_PARK='gusty'
-VM_EXTERNAL_WEB_URL='https://cati.example.com'
+VM_EXTERNAL_WEB_URL='cati.example.com'
 ```
 
 Ensure `PORT` matches the port configured in the `proxy` setting of the `package.json` file.
