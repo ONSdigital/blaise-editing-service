@@ -9,6 +9,7 @@ import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
 import CaseController from './controllers/caseController';
 import UserController from './controllers/userController';
+import HealthController from './controllers/healthController';
 
 const cors = require('cors');
 
@@ -46,6 +47,10 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   // User routing
   const userController = new UserController(blaiseApi, config, auth);
   server.use('/', userController.getRoutes());
+
+    // Health routing
+  const healthController = new HealthController();
+  server.use('/', healthController.getRoutes());
 
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
