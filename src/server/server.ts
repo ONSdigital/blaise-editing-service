@@ -51,10 +51,6 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   const userController = new UserController(blaiseApi, config, auth);
   server.use('/', userController.getRoutes());
 
-    // Health routing
-  const healthController = new HealthController();
-  server.use('/', healthController.getRoutes());
-
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
