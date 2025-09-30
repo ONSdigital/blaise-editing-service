@@ -9,7 +9,6 @@ import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
 import CaseController from './controllers/caseController';
 import UserController from './controllers/userController';
-import HealthController from './controllers/healthController';
 
 const cors = require('cors');
 
@@ -19,6 +18,10 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
   server.use(cors());
+
+  server.get('/bes-ui/:version/health', (_req: Request, res: Response) => {
+    return res.status(200).json({ healthy: true });
+  });
 
   // serve the entire build folder as static
   const buildFolderPath = path.join(__dirname, config.BuildFolder);
