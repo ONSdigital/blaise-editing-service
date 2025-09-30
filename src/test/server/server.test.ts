@@ -26,6 +26,7 @@ describe('All expected routes are registered', () => {
 
     const expectedEndpoints:Endpoint[] = [
       // needs to be in the same order they are added to the server
+      { methods: ['GET'], middlewares: ['anonymous'], path: '/bes-ui/:version/health' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getSurveys'], path: '/api/surveys' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getCaseSummary'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/summary' },
       { methods: ['GET'], middlewares: ['bound ', 'bound getCaseEditInformation'], path: '/api/questionnaires/:questionnaireName/cases/edit' },
@@ -38,7 +39,6 @@ describe('All expected routes are registered', () => {
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/token/validate' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/users/password/validate' },
       { methods: ['GET'], middlewares: ['anonymous'], path: '*' },
-
     ];
 
     // act
