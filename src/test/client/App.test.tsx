@@ -5,7 +5,7 @@ import {
   RenderResult, act, render,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Authenticate } from 'blaise-login-react-client';
+import { Authenticate } from 'blaise-login-react/blaise-login-react-client';
 import { getEditorInformation, getSupervisorEditorInformation, getSurveys } from '../../client/api/NodeApi';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import userMockObject from '../server/mockObjects/userMockObject';
@@ -21,8 +21,8 @@ const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
 let view: RenderResult;
 
 // create mocks
-vi.mock('blaise-login-react-client');
-const { MockAuthenticate } = await vi.importActual('blaise-login-react-client');
+vi.mock('blaise-login-react/blaise-login-react-client');
+const { MockAuthenticate } = await vi.importActual('blaise-login-react/blaise-login-react-client');
 Authenticate.prototype.render = MockAuthenticate.prototype.render;
 
 if (!MockAuthenticate || typeof MockAuthenticate.OverrideReturnValues !== 'function') {

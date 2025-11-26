@@ -1,6 +1,6 @@
 import supertest, { Response } from 'supertest';
 import { IMock, Mock, Times } from 'typemoq';
-import { Auth } from 'blaise-login-react-server';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import BlaiseApiClient, { User } from 'blaise-api-node-client';
 import nodeServer from '../../../server/server';
 import BlaiseApi from '../../../server/api/BlaiseApi';
