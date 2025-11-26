@@ -6,7 +6,7 @@ import BlaiseApiClient, {
   CaseEditInformation, CaseOutcome, EditedStatus, User,
 } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { Auth } from 'blaise-login-react-server';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import nodeServer from '../../../server/server';
 import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';

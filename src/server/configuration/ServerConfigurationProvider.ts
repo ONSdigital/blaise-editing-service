@@ -1,4 +1,4 @@
-import { AuthConfig } from 'blaise-login-react-server';
+import { AuthConfig } from 'blaise-login-react/blaise-login-react-server';
 import { CaseOutcome } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
