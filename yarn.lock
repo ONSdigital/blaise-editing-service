@@ -2700,9 +2700,9 @@ bignumber.js@^9.0.0:
     jsonwebtoken "^9.0.0"
     path-parse "^1.0.7"
 
-"blaise-login-react@git+https://github.com/ONSdigital/blaise-login-react#migrate-from-gitpkg":
+"blaise-login-react@git+https://github.com/ONSdigital/blaise-login-react#1.1.5":
   version "1.1.5"
-  resolved "git+https://github.com/ONSdigital/blaise-login-react#14bd686e889c3a8a120ccc674aea489b8d6b512a"
+  resolved "git+https://github.com/ONSdigital/blaise-login-react#967383e1a59cf94cc2aa6ada0ba68adc9c654537"
 
 body-parser@1.20.3:
   version "1.20.3"
