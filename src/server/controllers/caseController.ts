@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { CaseEditInformation, User } from 'blaise-api-node-client';
-import { Auth } from 'blaise-login-react-server';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import moment from 'moment';
 import { Controller } from '../interfaces/controllerInterface';
 import notFound from '../helpers/axiosHelper';

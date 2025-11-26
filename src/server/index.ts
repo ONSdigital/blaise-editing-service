@@ -15,13 +15,17 @@ const config = new ServerConfigurationProvider();
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
 // create logger
-const loggingWinston = new LoggingWinston();
+const transports: winston.transport[] = [
+  new winston.transports.Console(),
+];
+
+if (process.env['NODE_ENV'] === 'production') {
+  transports.push(new LoggingWinston());
+}
+
 const logger = winston.createLogger({
   level: 'info',
-  transports: [
-    new winston.transports.Console(),
-    loggingWinston,
-  ],
+  transports,
 });
 const cloudLogger = new GoogleCloudLogger(logger);
 

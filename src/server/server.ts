@@ -3,7 +3,7 @@ import express, {
 } from 'express';
 import ejs from 'ejs';
 import path from 'path';
-import { Auth, newLoginHandler } from 'blaise-login-react-server';
+import { Auth, newLoginHandler } from 'blaise-login-react/blaise-login-react-server';
 import SurveyController from './controllers/surveyController';
 import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
@@ -19,9 +19,7 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
   server.use(express.urlencoded({ extended: true }));
   server.use(cors());
 
-  server.get('/bes-ui/:version/health', (_req: Request, res: Response) => {
-    return res.status(200).json({ healthy: true });
-  });
+  server.get('/bes-ui/:version/health', (_req: Request, res: Response) => res.status(200).json({ healthy: true }));
 
   // serve the entire build folder as static
   const buildFolderPath = path.join(__dirname, config.BuildFolder);

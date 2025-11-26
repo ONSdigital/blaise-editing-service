@@ -12,8 +12,7 @@ import { SupervisorInformation } from '../../../../client/Interfaces/supervisorI
 import UserRole from '../../../../client/Common/enums/UserTypes';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../MockObjects/SupervisorMockObjects';
-import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
-import { CaseEditInformationEmptyListMockObject } from '../../../server/mockObjects/CaseMockObject';
+import { CaseEditInformationListMockObject, CaseEditInformationEmptyListMockObject } from '../../../server/mockObjects/CaseMockObject';
 import CaseSearchForm from '../../../../client/Common/components/CaseSearchForm';
 
 // set global vars
@@ -205,7 +204,6 @@ describe('Given that search is clicked', () => {
       expect(linksRows[index]).toHaveTextContent('Edit case | View case');
     });
   });
-  
 });
 
 describe('Given that search is clicked', () => {
@@ -297,7 +295,6 @@ describe('Given that search is clicked', () => {
     // assert
     expect(screen.getByText('No results found for this case ID.')).toBeInTheDocument();
   });
-  
 });
 
 describe('Given there are no surveys available in blaise', () => {

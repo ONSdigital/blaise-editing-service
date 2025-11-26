@@ -73,4 +73,3 @@ export default function mapCaseSummaryText(caseSummary: CaseSummaryDetails): str
 
   return caseSummaryText;
 }
-
