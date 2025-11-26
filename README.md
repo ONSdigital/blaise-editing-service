@@ -102,18 +102,20 @@ Create an .env file in the root of the project and add the following environment
 
 | Variable | Description | Example |
 | --- | --- | --- |
-| PORT | Port for the Express server | 5000 |
+| PORT | Port for the Express server | 5001 |
 | BLAISE_API_URL | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on (including protocol) | <http://localhost:90> |
 | SERVER_PARK | Name of the Blaise server park the questionnaires are installed on | gusty |
 | VM_EXTERNAL_WEB_URL | External URL used for CATI (not including protocol) | cati.example.com |
+| NODE_ENV | Type of environment. Set to `production` if you want to connect the logger to GCP | local |
 
 Example `.env` file:
 
 ```.env
-PORT='5000'
+PORT='5001'
 BLAISE_API_URL='http://localhost:90'
 SERVER_PARK='gusty'
 VM_EXTERNAL_WEB_URL='cati.example.com'
+NODE_ENV='local'
 ```
 
 Ensure `PORT` matches the port configured in the `proxy` setting of the `package.json` file.
@@ -126,7 +128,11 @@ gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:<API_PO
 
 Ensure `API_PORT` matches the port configured in the `BLAISE_API_URL` environment variable in your `.env` file.
 
-This service logs to GCP. Authenticate your local environment before running the service with the following command:
+If you need to connect the service logger to GCP. You'll need to:
+
+1. Set the env var, `NODE_ENV` to `production`
+2. Authenticate with GCP and select your project.
+3. Afterwards, run the following to authenticate your local application:
 
 ```shell script
 gcloud auth application-default login
@@ -140,7 +146,7 @@ Run the service:
 yarn dev
 ```
 
-Once the service is running, you can access it by visiting the URL displayed in the terminal. If you're using the example `.env` configuration, the service will be available at [localhost:5000](http://localhost:5000/).
+Once the service is running, you can access it by visiting the URL displayed in the terminal. If you're using the example `.env` configuration, the service will be available at [localhost:5001](http://localhost:5001/).
 
 ## Testing
 
