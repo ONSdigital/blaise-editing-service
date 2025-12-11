@@ -5,7 +5,7 @@
   "target": "esnext",
   "module": "esnext",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "start": "yarn start-server",
