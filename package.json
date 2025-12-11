@@ -46,14 +46,14 @@
     ]
   },
   "resolutions": {
-    "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#2.0.0",
+    "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#d84f9fd501cc5ad1be31af70b1d143c362761850",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.0",
     "@babel/traverse": "^7.23.2"
   },
   "dependencies": {
-    "@google-cloud/logging-winston": "^6.0.0",
+    "@google-cloud/logging-winston": "^6.0.1",
     "axios": "^1.8.1",
-    "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#2.0.0",
+    "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#d84f9fd501cc5ad1be31af70b1d143c362761850",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.0",
     "blaise-login-react": "git+https://github.com/ONSdigital/blaise-login-react#1.1.5", 
     "concurrently": "^8.1.0",
@@ -85,8 +85,8 @@
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "@vitest/coverage-v8": "3.0.7",
-    "@vitest/ui": "^3.0.7",
+    "@vitest/coverage-v8": "4.0.15",
+    "@vitest/ui": "^4.0.15",
     "axios-mock-adapter": "^1.21.5",
     "eslint": "^8.8.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -103,6 +103,6 @@
     "typemoq": "^2.1.0",
     "typescript": "^4.9.5",
     "vite": "^6.2.0",
-    "vitest": "^3.0.7"
+    "vitest": "^4.0.15"
   }
 }
