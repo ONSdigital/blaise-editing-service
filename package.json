@@ -12,7 +12,7 @@
     "build": "yarn build-client && yarn build-server",
     "clean": "npx rimraf dist",
     "test": "yarn clean && yarn build && yarn test-vitest",
-    "test-vitest": "vitest --coverage --no-watch --maxWorkers=1",
+    "test-vitest": "vitest --coverage --no-watch",
     "test:bail": "yarn test-vitest --bail 1",
     "test:watch": "vitest -watch",
     "test-fast": "yarn clean && yarn build && vitest --coverage --no-watch",
