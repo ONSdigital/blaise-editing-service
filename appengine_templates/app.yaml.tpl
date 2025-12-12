@@ -1,5 +1,5 @@
 service: bes-ui
-runtime: nodejs22
+runtime: nodejs20
 
 vpc_access_connector:
   name: projects/_PROJECT_ID/locations/europe-west2/connectors/vpcconnect
