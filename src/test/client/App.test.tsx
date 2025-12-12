@@ -1,11 +1,11 @@
 import {
-  describe, it, expect, beforeEach, afterEach,
+  describe, it, expect, beforeEach, afterEach, vi, type Mock
 } from 'vitest';
 import {
-  RenderResult, act, render,
+  RenderResult, render, screen // Removed act, added screen
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Authenticate } from 'blaise-login-react/blaise-login-react-client';
+// We don't import Authenticate here anymore because we are mocking the module below
 import { getEditorInformation, getSupervisorEditorInformation, getSurveys } from '../../client/api/NodeApi';
 import { Survey } from '../../common/interfaces/surveyInterface';
 import userMockObject from '../server/mockObjects/userMockObject';
@@ -18,35 +18,41 @@ import { EditorInformationMockObject1, EditorInformationMockObject2 } from './Mo
 
 // set global variables
 const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
-let view: RenderResult;
 
-// create mocks
-vi.mock('blaise-login-react/blaise-login-react-client');
-const { MockAuthenticate } = await vi.importActual('blaise-login-react/blaise-login-react-client');
-Authenticate.prototype.render = MockAuthenticate.prototype.render;
+// --- FIX STARTS HERE ---
+// 1. Define the mock factory to explicitly swap 'Authenticate' with 'MockAuthenticate'
+vi.mock('blaise-login-react/blaise-login-react-client', async () => {
+  const actual = await vi.importActual<any>('blaise-login-react/blaise-login-react-client');
+  return {
+    ...actual,
+    // This tells App.tsx: "When you import Authenticate, use this Mock class instead"
+    Authenticate: actual.MockAuthenticate
+  };
+});
 
-if (!MockAuthenticate || typeof MockAuthenticate.OverrideReturnValues !== 'function') {
-  throw new Error('MockAuthenticate import failed or has unexpected structure');
-}
+// 2. Import MockAuthenticate to control it in our tests
+//    (We use importActual to get access to the helper methods like OverrideReturnValues)
+const { MockAuthenticate } = await vi.importActual<any>('blaise-login-react/blaise-login-react-client');
+
+// 3. REMOVED the fragile prototype patching:
+// Authenticate.prototype.render = MockAuthenticate.prototype.render; (DELETED)
+
+// --- FIX ENDS HERE ---
 
 vi.mock('../../client/api/NodeApi');
-const getSurveysMock = getSurveys as vi.mock<Promise<Survey[]>>;
-const getEditorInformationMock = getEditorInformation as vi.mock<Promise<EditorInformation>>;
-const getSupervisorEditorInformationMock = getSupervisorEditorInformation as vi.mock<Promise<SupervisorInformation>>;
+const getSurveysMock = getSurveys as Mock;
+const getEditorInformationMock = getEditorInformation as Mock;
+const getSupervisorEditorInformationMock = getSupervisorEditorInformation as Mock;
 
 describe('Renders the correct screen depending if the user has recently logged in', () => {
   beforeEach(() => {
-    getSurveysMock.mockImplementation(() => Promise.resolve(FilteredSurveyListMockObject));
-    getEditorInformationMock.mockReturnValueOnce(Promise.resolve(EditorInformationMockObject1))
-      .mockReturnValueOnce(Promise.resolve(EditorInformationMockObject2));
-    getSupervisorEditorInformationMock.mockReturnValueOnce(Promise.resolve(SupervisorInformationMockObject1))
-      .mockReturnValueOnce(Promise.resolve(SupervisorInformationMockObject2));
+    getSurveysMock.mockResolvedValue(FilteredSurveyListMockObject);
+    getEditorInformationMock.mockResolvedValue(EditorInformationMockObject1);
+    getSupervisorEditorInformationMock.mockResolvedValue(SupervisorInformationMockObject1);
   });
 
   afterEach(() => {
-    getSurveysMock.mockReset();
-    getEditorInformationMock.mockReset();
-    getSupervisorEditorInformationMock.mockReset();
+    vi.clearAllMocks();
   });
 
   it('Should display a message asking the user to enter their Blaise user credentials if they are not logged in', async () => {
@@ -55,16 +61,15 @@ describe('Renders the correct screen depending if the user has recently logged i
     MockAuthenticate.OverrideReturnValues(user, false);
 
     // act
-    await act(async () => {
-      view = render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>,
-      );
-    });
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>,
+    );
 
     // assert
-    const appView = view.getByTestId('login-page');
+    // Keep findByTestId to be safe
+    const appView = await screen.findByTestId('login-page');
     expect(appView).toHaveTextContent('Enter your Blaise username and password');
   });
 
@@ -76,12 +81,10 @@ describe('Renders the correct screen depending if the user has recently logged i
     MockAuthenticate.OverrideReturnValues(user, true);
 
     // act
-    await act(async () => {
-      view = render(<BrowserRouter><App /></BrowserRouter>);
-    });
+    render(<BrowserRouter><App /></BrowserRouter>);
 
     // assert
-    const appView = view.getByTestId('app-content');
+    const appView = await screen.findByTestId('app-content');
     expect(appView).toHaveTextContent('Select questionnaire');
   });
 });
