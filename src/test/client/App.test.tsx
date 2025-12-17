@@ -12,28 +12,17 @@ import { SupervisorInformationMockObject1 } from './MockObjects/SupervisorMockOb
 import FilteredSurveyListMockObject from './MockObjects/SurveyMockObjects';
 import { EditorInformationMockObject1 } from './MockObjects/EditorMockObjects';
 
-// set global variables
 const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
 
-// --- FIX STARTS HERE ---
-// 1. Define the mock factory to explicitly swap 'Authenticate' with 'MockAuthenticate'
 vi.mock('blaise-login-react/blaise-login-react-client', async () => {
   const actual = await vi.importActual<typeof import('blaise-login-react/blaise-login-react-client')>('blaise-login-react/blaise-login-react-client');
   return {
     ...actual,
-    // This tells App.tsx: "When you import Authenticate, use this Mock class instead"
     Authenticate: actual.MockAuthenticate
   };
 });
 
-// 2. Import MockAuthenticate to control it in our tests
-//    (We use importActual to get access to the helper methods like OverrideReturnValues)
 const { MockAuthenticate } = await vi.importActual<typeof import('blaise-login-react/blaise-login-react-client')>('blaise-login-react/blaise-login-react-client');
-
-// 3. REMOVED the fragile prototype patching:
-// Authenticate.prototype.render = MockAuthenticate.prototype.render; (DELETED)
-
-// --- FIX ENDS HERE ---
 
 vi.mock('../../client/api/NodeApi');
 const getSurveysMock = getSurveys as Mock;
@@ -64,7 +53,6 @@ describe('Renders the correct screen depending if the user has recently logged i
     );
 
     // assert
-    // Keep findByTestId to be safe
     const appView = await screen.findByTestId('login-page');
     expect(appView).toHaveTextContent('Enter your Blaise username and password');
   });
