@@ -46,7 +46,7 @@ describe('Given a user needs to download a case summary', () => {
       return originalCreateElement.call(document, tagName, options);
     });
 
-    // eslint-disable-next-line no-console
+     
     vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 

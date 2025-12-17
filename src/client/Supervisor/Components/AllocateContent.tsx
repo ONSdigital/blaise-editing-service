@@ -74,8 +74,8 @@ export default function AllocateCases({
     <AsyncContent content={allocationInformation}>
       {(allocationDetails) => (
         <>
-          {!reallocate && <AllocateContentForm allocationDetails={allocationDetails.Interviewers} allocateCases={allocateCases} fromOptions={getInterviewerOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate} /* eslint-disable-line */ />}
-          {reallocate && <AllocateContentForm allocationDetails={allocationDetails.Editors} allocateCases={allocateCases} fromOptions={getEditorOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate} /* eslint-disable-line */ />}
+          {!reallocate && <AllocateContentForm allocationDetails={allocationDetails.Interviewers} allocateCases={allocateCases} fromOptions={getInterviewerOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate}   />}
+          {reallocate && <AllocateContentForm allocationDetails={allocationDetails.Editors} allocateCases={allocateCases} fromOptions={getEditorOptions(allocationDetails)} toOptions={getEditorOptions(allocationDetails)} reallocate={reallocate}   />}
         </>
       )}
     </AsyncContent>
