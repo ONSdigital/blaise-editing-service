@@ -2,19 +2,15 @@ import {
   describe, it, expect, beforeEach, afterEach, vi, type Mock
 } from 'vitest';
 import {
-  RenderResult, render, screen // Removed act, added screen
+  render, screen
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-// We don't import Authenticate here anymore because we are mocking the module below
 import { getEditorInformation, getSupervisorEditorInformation, getSurveys } from '../../client/api/NodeApi';
-import { Survey } from '../../common/interfaces/surveyInterface';
 import userMockObject from '../server/mockObjects/userMockObject';
 import App from '../../client/App';
-import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from './MockObjects/SupervisorMockObjects';
-import { EditorInformation } from '../../client/Interfaces/editorInterface';
-import { SupervisorInformation } from '../../client/Interfaces/supervisorInterface';
+import { SupervisorInformationMockObject1 } from './MockObjects/SupervisorMockObjects';
 import FilteredSurveyListMockObject from './MockObjects/SurveyMockObjects';
-import { EditorInformationMockObject1, EditorInformationMockObject2 } from './MockObjects/EditorMockObjects';
+import { EditorInformationMockObject1 } from './MockObjects/EditorMockObjects';
 
 // set global variables
 const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
@@ -22,7 +18,7 @@ const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
 // --- FIX STARTS HERE ---
 // 1. Define the mock factory to explicitly swap 'Authenticate' with 'MockAuthenticate'
 vi.mock('blaise-login-react/blaise-login-react-client', async () => {
-  const actual = await vi.importActual<any>('blaise-login-react/blaise-login-react-client');
+  const actual = await vi.importActual<typeof import('blaise-login-react/blaise-login-react-client')>('blaise-login-react/blaise-login-react-client');
   return {
     ...actual,
     // This tells App.tsx: "When you import Authenticate, use this Mock class instead"
@@ -32,7 +28,7 @@ vi.mock('blaise-login-react/blaise-login-react-client', async () => {
 
 // 2. Import MockAuthenticate to control it in our tests
 //    (We use importActual to get access to the helper methods like OverrideReturnValues)
-const { MockAuthenticate } = await vi.importActual<any>('blaise-login-react/blaise-login-react-client');
+const { MockAuthenticate } = await vi.importActual<typeof import('blaise-login-react/blaise-login-react-client')>('blaise-login-react/blaise-login-react-client');
 
 // 3. REMOVED the fragile prototype patching:
 // Authenticate.prototype.render = MockAuthenticate.prototype.render; (DELETED)

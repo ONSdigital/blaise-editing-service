@@ -25,7 +25,7 @@ export default function AllocateCases({
   const allocationInformation = useAsyncRequestWithThreeParamsWithRefresh<AllocationDetails, string, UserRole, UserRole, number>(getAllocationDetails, questionnaireName, supervisorRole, editorRole, refresh);
 
   function refreshContent() {
-    setRefresh(refresh += 1);
+    setRefresh(prev => prev + 1);
   }
 
   function getInterviewerOptions(allocation: AllocationDetails): Option[] {
@@ -65,7 +65,7 @@ export default function AllocateCases({
       await updateAllocationDetails(questionnaireName, name, cases);
       setMessage({ show: true, text: `Case(s) '${cases.join(', ')}' have been allocated to '${name}' for '${questionnaireName}'`, type: 'success' });
       refreshContent();
-    } catch (error: unknown) {
+    } catch {
       setMessage({ show: true, text: 'Case(s) could not be allocated, please try again in a few seconds', type: 'error' });
     }
   }

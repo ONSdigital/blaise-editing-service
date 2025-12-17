@@ -60,7 +60,7 @@ export default class CaseController implements Controller {
     }
   }
 
-  async getCaseEditInformation(request: Request<{ questionnaireName: string }, {}, {}, { userRole: string }>, response: Response<CaseEditInformation[]>) {
+  async getCaseEditInformation(request: Request<{ questionnaireName: string }, Record<string, never>, Record<string, never>, { userRole: string }>, response: Response<CaseEditInformation[]>) {
     const { questionnaireName } = request.params;
     const { userRole } = request.query;
 
@@ -96,7 +96,7 @@ export default class CaseController implements Controller {
     return filteredcases;
   }
 
-  async allocateCases(request: Request<{ questionnaireName: string }, {}, { name: string, cases: string[] }, {}>, response: Response) {
+  async allocateCases(request: Request<{ questionnaireName: string }, Record<string, never>, { name: string, cases: string[] }, Record<string, never>>, response: Response) {
     const { questionnaireName } = request.params;
     const { name, cases } = request.body;
 
@@ -123,7 +123,7 @@ export default class CaseController implements Controller {
     }
   }
 
-  async setCaseToUpdate(request: Request<{ questionnaireName: string, caseId: string }, {}, {}, {}>, response: Response) {
+  async setCaseToUpdate(request: Request<{ questionnaireName: string, caseId: string }, Record<string, never>, Record<string, never>, Record<string, never>>, response: Response) {
     const {
       questionnaireName,
       caseId,

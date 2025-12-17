@@ -40,10 +40,23 @@ export function useAsyncRequest<T>(request: () => Promise<T>) {
   const [state, setState] = useState<AsyncState<T>>(loading());
 
   useEffect(() => {
-    setState(loading());
+    let ignore = false;
+
     request()
-      .then((response) => setState(succeeded(response)))
-      .catch((error) => setState(errored(error.message)));
+      .then((response) => {
+        if (!ignore) {
+          setState(succeeded(response));
+        }
+      })
+      .catch((error) => {
+        if (!ignore) {
+          setState(errored(error.message));
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, [request]);
 
   return state;
@@ -53,10 +66,23 @@ export function useAsyncRequestWithParam<T1, T2>(request:(param: T2) => Promise<
   const [state, setState] = useState<AsyncState<T1>>(loading());
 
   useEffect(() => {
-    setState(loading());
+    let ignore = false;
+    
     request(param)
-      .then((response) => setState(succeeded(response)))
-      .catch((error) => setState(errored(error.message)));
+      .then((response) => {
+        if (!ignore) {
+          setState(succeeded(response));
+        }
+      })
+      .catch((error) => {
+        if (!ignore) {
+          setState(errored(error.message));
+        }
+      });
+  
+    return () => {
+      ignore = true;
+    };
   }, [request, param]);
 
   return state;
@@ -66,10 +92,23 @@ export function useAsyncRequestWithTwoParams<T1, T2, T3>(request:(param1: T2, pa
   const [state, setState] = useState<AsyncState<T1>>(loading());
 
   useEffect(() => {
-    setState(loading());
+    let ignore = false;
+    
     request(param1, param2)
-      .then((response) => setState(succeeded(response)))
-      .catch((error) => setState(errored(error.message)));
+      .then((response) => {
+        if (!ignore) {
+          setState(succeeded(response));
+        }
+      })
+      .catch((error) => {
+        if (!ignore) {
+          setState(errored(error.message));
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, [request, param1, param2]);
 
   return state;
@@ -79,10 +118,23 @@ export function useAsyncRequestWithThreeParams<T1, T2, T3, T4>(request:(param1: 
   const [state, setState] = useState<AsyncState<T1>>(loading());
 
   useEffect(() => {
-    setState(loading());
+    let ignore = false;
+
     request(param1, param2, param3)
-      .then((response) => setState(succeeded(response)))
-      .catch((error) => setState(errored(error.message)));
+      .then((response) => {
+        if (!ignore) {
+          setState(succeeded(response));
+        }
+      })
+      .catch((error) => {
+        if (!ignore) {
+          setState(errored(error.message));
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, [request, param1, param2, param3]);
 
   return state;
@@ -92,10 +144,23 @@ export function useAsyncRequestWithThreeParamsWithRefresh<T1, T2, T3, T4, T5>(re
   const [state, setState] = useState<AsyncState<T1>>(loading());
 
   useEffect(() => {
-    setState(loading());
+    let ignore = false;
+
     request(param1, param2, param3, refreshParam)
-      .then((response) => setState(succeeded(response)))
-      .catch((error) => setState(errored(error.message)));
+      .then((response) => {
+        if (!ignore) {
+          setState(succeeded(response));
+        }
+      })
+      .catch((error) => {
+        if (!ignore) {
+          setState(errored(error.message));
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
   }, [request, param1, param2, param3, refreshParam]);
 
   return state;
