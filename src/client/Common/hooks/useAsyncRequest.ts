@@ -36,6 +36,18 @@ function succeeded<T>(data: T): Succeeded<T> {
   return { state: 'succeeded', data };
 }
 
+export function useAsyncRequest<T>(request: () => Promise<T>) {
+   const [state, setState] = useState<AsyncState<T>>(loading());
+   useEffect(() => {
+    let ignore = false;
+    request()
+      .then((response) => { if (!ignore) { setState(succeeded(response)); }})
+      .catch((error) => { if (!ignore) { setState(errored(error.message)); }});
+    return () => { ignore = true; };
+   }, [request]);
+   return state;
+ }
+
 export function useAsyncRequestWithParam<T1, T2>(request:(param: T2) => Promise<T1>, param: T2) {
   const [state, setState] = useState<AsyncState<T1>>(loading());
   useEffect(() => {
