@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, {
   Request, Response, Express, NextFunction,
 } from 'express';
@@ -9,8 +10,6 @@ import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
 import CaseController from './controllers/caseController';
 import UserController from './controllers/userController';
-
-const cors = require('cors');
 
 export default function nodeServer(config: ConfigurationProvider, blaiseApi: BlaiseApi): Express {
   const server = express();
