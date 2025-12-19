@@ -3115,19 +3115,19 @@ bignumber.js@^9.0.0:
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.1.tgz#c4df7dc496bd849d4c9464344c1aa74228b4dac6"
   integrity sha512-pHm4LsMJ6lzgNGVfZHjMoO8sdoRhOzOH4MLmY65Jg70bpxCKu5iOHNJyfF6OyvYw7t8Fpf35RuzUyqnQsj8Vig==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#7628c0203661d96ab212fc2de54160feddb88f2a":
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#2.0.1":
   version "2.0.1-4894"
-  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#7628c0203661d96ab212fc2de54160feddb88f2a"
+  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#fcd0cc3f34fb86b9b3927fd464768cb516be89e9"
   dependencies:
     "@babel/preset-env" "^7.26.9"
     axios "^1.7.9"
-    blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#6b01fd961794c17fb2162c0520ab79878059c57c"
+    blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2.0.2"
     browserslist "^4.22.2"
     eslint-config-airbnb-base "^15.0.0"
     eslint-plugin-import "^2.29.1"
     regenerator-runtime "^0.14.1"
 
-"blaise-design-system-react-components@git+https://github.com/ONSdigital/blaise-design-system-react-components#6ddbb40a3d3996d0a90cb8ff68ab0f2a333ad480":
+"blaise-design-system-react-components@git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.3":
   version "1.0.0"
   resolved "git+https://github.com/ONSdigital/blaise-design-system-react-components#6ddbb40a3d3996d0a90cb8ff68ab0f2a333ad480"
   dependencies:
@@ -3139,7 +3139,7 @@ bignumber.js@^9.0.0:
     react-loader-spinner "^4.0.0"
     storybook "^10.1.6"
 
-"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#6b01fd961794c17fb2162c0520ab79878059c57c":
+"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2.0.2":
   version "2.0.2-4894"
   resolved "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#6b01fd961794c17fb2162c0520ab79878059c57c"
   dependencies:
