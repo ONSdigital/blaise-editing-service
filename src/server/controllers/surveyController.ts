@@ -27,7 +27,7 @@ export default class SurveyController implements Controller {
     return router.get('/api/surveys', this.auth.Middleware, this.getSurveys);
   }
 
-  async getSurveys(request: Request<{}, {}, {}, { userRole: string }>, response: Response<Survey[]>) {
+  async getSurveys(request: Request<Record<string, never>, Record<string, never>, Record<string, never>, { userRole: string }>, response: Response<Survey[]>) {
     const { userRole } = request.query;
     const user = this.auth.GetUser(this.auth.GetToken(request));
 

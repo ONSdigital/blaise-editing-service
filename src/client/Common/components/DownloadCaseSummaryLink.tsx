@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import mapCaseSummaryText from '../../Mappers/caseSummaryTextMapper';
 import { getCaseSummary } from '../../api/NodeApi';
 
@@ -41,7 +41,7 @@ export function DownloadCaseSummaryLink({ caseId, questionnaireName, onError }: 
     setIsDownloading(true);
     try {
       await exportSummary(caseId, questionnaireName);
-    } catch (error) {
+    } catch {
       onError?.('Failed to download case summary. Please try again later or contact support for assistance.');
     } finally {
       setIsDownloading(false);

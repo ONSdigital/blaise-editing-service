@@ -16,7 +16,7 @@ function DefaultNotFound(): JSX.Element {
   return <Navigate to={`/?error=Page not found: ${currentPath}`} replace />;
 }
 
-/* eslint-disable react/jsx-no-useless-fragment */
+ 
 export default function CreateRoutes({ onConditionThat, children }: CreateRoutesProps): JSX.Element {
   return onConditionThat ? (
     <Routes>
