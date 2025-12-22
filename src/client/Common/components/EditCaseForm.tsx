@@ -31,7 +31,7 @@ export default function EditCaseForm({
         throw new Error(`Failed to set case to update, setCaseToUpdate got response code: ${response}`);
       }
       setMessage({ show: true, text: `Successfully set case with ID, ${caseDetails.primaryKey}, to update editing database overnight`, type: 'success' });
-    } catch (error: unknown) {
+    } catch {
       setMessage({ show: true, text: `Failed to set case with ID, ${caseDetails.primaryKey}, to update, please try again in a few seconds or contact service desk to raise a support ticket`, type: 'error' });
     }
     setSubmitting(false);

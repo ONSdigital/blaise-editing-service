@@ -2,7 +2,7 @@ import { CaseOutcome } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import ServerConfigurationProvider from '../../../server/configuration/ServerConfigurationProvider';
 
-/* eslint-disable no-new */
+ 
 const emptyEnv = process.env;
 const blaiseApiUrl = 'rest.api.blaise.com';
 const buildFolder = '../../dist';
