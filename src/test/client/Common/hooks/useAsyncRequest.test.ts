@@ -25,9 +25,9 @@ describe('AsyncState Utilities', () => {
 
 describe('useAsyncRequest Coverage Suite', () => {
   it('covers all branch logic for type guards', () => {
-    const load: any = { state: 'loading' };
-    const err: any = { state: 'errored', error: 'fail' };
-    const succ: any = { state: 'succeeded', data: 'win' };
+    const load = { state: 'loading' } as const;
+    const err = { state: 'errored', error: 'fail' } as const;
+    const succ = { state: 'succeeded', data: 'win' } as const;
 
     expect(isLoading(load)).toBe(true);
     expect(isLoading(err)).toBe(false);
@@ -68,24 +68,24 @@ describe('useAsyncRequest Coverage Suite', () => {
   });
 
   it('should NOT update state if unmounted before resolve (Branch Coverage)', async () => {
-    let resolvePromise: any;
+    let resolvePromise: (value: unknown) => void;
     const mockReq = vi.fn().mockImplementation(() => 
       new Promise((res) => { resolvePromise = res; })
     );
     const { result, unmount } = renderHook(() => useAsyncRequest(mockReq));
     unmount();
-    resolvePromise('data');
+    resolvePromise!('data');
     expect(result.current.state).toBe('loading');
   });
 
   it('should NOT update state if unmounted before reject', async () => {
-    let rejectPromise: any;
+    let rejectPromise: (reason: Error) => void;
     const mockReq = vi.fn().mockImplementation(() => 
       new Promise((_, rej) => { rejectPromise = rej; })
     );
     const { result, unmount } = renderHook(() => useAsyncRequest(mockReq));
     unmount(); 
-    rejectPromise(new Error('silent error')); 
+    rejectPromise!(new Error('silent error')); 
     expect(result.current.state).toBe('loading');
   });
 });
@@ -132,7 +132,7 @@ describe('useAsyncRequest Hooks', () => {
   });
 
   it('should ignore results if the component unmounts', async () => {
-    let resolvePromise: (value: any) => void;
+    let resolvePromise: (value: unknown) => void;
     const mockRequest = vi.fn().mockImplementation(() => 
       new Promise((resolve) => { resolvePromise = resolve; })
     );
@@ -220,7 +220,7 @@ describe('useAsyncRequest Hooks - Error Handling', () => {
   });
 
   it('covers the "ignore" branch (False branch of if !ignore)', async () => {
-    let resolvePromise: (value: any) => void;
+    let resolvePromise: (value: unknown) => void;
     const mockRequest = vi.fn().mockImplementation(() => 
       new Promise((resolve) => { resolvePromise = resolve; })
     );
