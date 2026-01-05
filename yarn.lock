@@ -3062,15 +3062,6 @@ axios@^1.12.0, axios@^1.13.2:
     form-data "^4.0.4"
     proxy-from-env "^1.1.0"
 
-axios@^1.7.9:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.8.1.tgz#7c118d2146e9ebac512b7d1128771cdd738d11e3"
-  integrity sha512-NN+fvwH/kV01dYUQ3PTOZns4LWtWhOFCAhQ/pHb88WQ1hNe5V/dvFwc4VJcDL11LT9xSX0QtsR8sWUuyOuOq7g==
-  dependencies:
-    follow-redirects "^1.15.6"
-    form-data "^4.0.0"
-    proxy-from-env "^1.1.0"
-
 axobject-query@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-4.1.0.tgz#28768c76d0e3cff21bc62a9e2d0b6ac30042a1ee"
@@ -3115,12 +3106,12 @@ bignumber.js@^9.0.0:
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.1.tgz#c4df7dc496bd849d4c9464344c1aa74228b4dac6"
   integrity sha512-pHm4LsMJ6lzgNGVfZHjMoO8sdoRhOzOH4MLmY65Jg70bpxCKu5iOHNJyfF6OyvYw7t8Fpf35RuzUyqnQsj8Vig==
 
-"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#2.0.1":
-  version "2.0.1-4894"
-  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#fcd0cc3f34fb86b9b3927fd464768cb516be89e9"
+"blaise-api-node-client@git+https://github.com/ONSdigital/blaise-api-node-client#2.0.2":
+  version "1.0.0"
+  resolved "git+https://github.com/ONSdigital/blaise-api-node-client#7a77c7ea76131b15019692c5b82b8633e8f39431"
   dependencies:
     "@babel/preset-env" "^7.26.9"
-    axios "^1.7.9"
+    axios "^1.12.0"
     blaise-iap-node-provider "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2.0.2"
     browserslist "^4.22.2"
     eslint-config-airbnb-base "^15.0.0"
@@ -4852,7 +4843,7 @@ foreground-child@^3.1.0:
     cross-spawn "^7.0.6"
     signal-exit "^4.0.1"
 
-form-data@^2.5.0, form-data@^2.5.4, form-data@^4.0.0, form-data@^4.0.1, form-data@^4.0.4:
+form-data@^2.5.0, form-data@^2.5.4, form-data@^4.0.1, form-data@^4.0.4:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.5.5.tgz#a5f6364ad7e4e67e95b4a07e2d8c6f711c74f624"
   integrity sha512-jqdObeR2rxZZbPSGL+3VckHMYtu+f9//KXBsVny6JSX/pa38Fy+bGjuG8eW/H6USNQWhLi8Num++cU2yOCNz4A==
