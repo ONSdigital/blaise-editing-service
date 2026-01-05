@@ -51,8 +51,9 @@
     "@babel/traverse": "^7.23.2",
     "form-data": "^2.5.4",
     "qs": "^6.14.1",
-    "jws": "^4.0.0",
-    "brace-expansion": "^2.0.2"
+    "jws": "^4.0.1",
+    "brace-expansion": "^2.0.2",
+    "storybook": "10.1.10"
   },
   "dependencies": {
     "@google-cloud/logging-winston": "^6.0.1",
