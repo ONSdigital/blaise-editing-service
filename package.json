@@ -47,7 +47,7 @@
   },
   "resolutions": {
     "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#2.0.1",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.3",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.4",
     "@babel/traverse": "^7.23.2",
     "form-data": "^2.5.4",
     "qs": "^6.14.1",
@@ -59,7 +59,7 @@
     "@google-cloud/logging-winston": "^6.0.1",
     "axios": "^1.12.0",
     "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#2.0.1",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.3",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#1.0.4",
     "blaise-login-react": "git+https://github.com/ONSdigital/blaise-login-react#1.1.5",
     "concurrently": "^9.2.1",
     "cors": "^2.8.5",
