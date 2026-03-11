@@ -76,7 +76,7 @@ export default class CaseController implements Controller {
         this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }

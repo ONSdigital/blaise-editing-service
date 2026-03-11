@@ -11,9 +11,7 @@ import ServerConfigurationProvider from '../configuration/ServerConfigurationPro
 
 export default class SurveyController implements Controller {
   blaiseApi: BlaiseApi;
-
   configuration: ServerConfigurationProvider;
-
   auth: Auth;
   auditLogger: AuditLogger;
 

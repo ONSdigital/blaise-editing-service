@@ -55,15 +55,22 @@ export default function clientLogHandler(auth: Auth): Router {
             return res.status(400).json({ error: "Missing message" });
         }
 
+        const args = Array.isArray(body.args) ? body.args.slice(0, 20).map((a) => clamp(String(a), 1000)) : undefined;
+        const pathname = typeof body.pathname === "string" ? clamp(body.pathname, 500) : undefined;
+        const href = typeof body.href === "string" ? clamp(body.href, 1000) : undefined;
+        const userAgent = typeof body.userAgent === "string" ? clamp(body.userAgent, 500) : req.header("user-agent");
+        const timestamp = typeof body.timestamp === "string" ? clamp(body.timestamp, 100) : undefined;
+        const stack = typeof body.stack === "string" ? clamp(body.stack, 8000) : undefined;
+
         const clientLog: ClientLogPayload = {
             level: body.level as ClientLogLevel,
             message: clamp(body.message, 2000),
-            args: Array.isArray(body.args) ? body.args.slice(0, 20).map((a) => clamp(String(a), 1000)) : undefined,
-            pathname: typeof body.pathname === "string" ? clamp(body.pathname, 500) : undefined,
-            href: typeof body.href === "string" ? clamp(body.href, 1000) : undefined,
-            userAgent: typeof body.userAgent === "string" ? clamp(body.userAgent, 500) : req.header("user-agent") || undefined,
-            timestamp: typeof body.timestamp === "string" ? clamp(body.timestamp, 100) : undefined,
-            stack: typeof body.stack === "string" ? clamp(body.stack, 8000) : undefined,
+            ...(args !== undefined ? { args } : {}),
+            ...(pathname !== undefined ? { pathname } : {}),
+            ...(href !== undefined ? { href } : {}),
+            ...(userAgent !== undefined ? { userAgent } : {}),
+            ...(timestamp !== undefined ? { timestamp } : {}),
+            ...(stack !== undefined ? { stack } : {}),
         };
 
         (req.log as any)[level]({ clientLog }, `CLIENT_LOG: ${clientLog.message}`);

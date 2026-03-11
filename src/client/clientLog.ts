@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosConfig from "./api/axiosConfig";
+import axiosConfig from "./api/AxiosApi";
 
 export type ClientLogLevel = "log" | "info" | "warn" | "error" | "debug";
 
@@ -30,15 +30,21 @@ function safeStringify(value: unknown): string {
 
 export async function sendClientLog(level: ClientLogLevel, ...args: unknown[]): Promise<void> {
     const message = args.length > 0 ? safeStringify(args[0]) : "";
+    const pathname = typeof window !== "undefined" ? window.location.pathname : undefined;
+    const href = typeof window !== "undefined" ? window.location.href : undefined;
+    const userAgent = typeof navigator !== "undefined" ? navigator.userAgent : undefined;
+    const errorArg = args.find((a) => a instanceof Error);
+    const stack = errorArg instanceof Error ? errorArg.stack : undefined;
+
     const payload: ClientLogPayload = {
         level,
         message,
         args: args.slice(1, 21).map(safeStringify),
-        pathname: typeof window !== "undefined" ? window.location.pathname : undefined,
-        href: typeof window !== "undefined" ? window.location.href : undefined,
-        userAgent: typeof navigator !== "undefined" ? navigator.userAgent : undefined,
         timestamp: new Date().toISOString(),
-        stack: args.find((a) => a instanceof Error) instanceof Error ? (args.find((a) => a instanceof Error) as Error).stack : undefined,
+        ...(pathname !== undefined ? { pathname } : {}),
+        ...(href !== undefined ? { href } : {}),
+        ...(userAgent !== undefined ? { userAgent } : {}),
+        ...(stack !== undefined ? { stack } : {}),
     };
 
     try {

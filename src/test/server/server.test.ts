@@ -1,6 +1,4 @@
-/*
-* @jest-environment node
-*/
+/* @vitest-environment node */
 import listEndpoints, { Endpoint } from 'express-list-endpoints';
 import { IMock, Mock } from 'typemoq';
 import supertest from 'supertest';
@@ -18,7 +16,7 @@ const configFake = new FakeServerConfigurationProvider();
 const blaiseApiMock: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
 
 // create service to test
-const server = NodeServer(configFake, blaiseApiMock.object);
+const server = NodeServer(configFake, undefined as any, { blaiseApi: blaiseApiMock.object });
 
 describe('All expected routes are registered', () => {
   it('should contain expected routes', async () => {
@@ -38,6 +36,7 @@ describe('All expected routes are registered', () => {
       { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username/authorised' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/token/validate' },
       { methods: ['POST'], middlewares: ['bound '], path: '/api/login/users/password/validate' },
+      { methods: ['POST'], middlewares: ['bound ', 'anonymous'], path: '/api/client-log' },
       { methods: ['GET'], middlewares: ['anonymous'], path: '*' },
     ];
 

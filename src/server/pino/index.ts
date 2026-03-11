@@ -36,8 +36,6 @@ const defaultPinoConf = {
 
 export default function createLogger(options: any = { autoLogging: false }): HttpLogger {
     let pinoConfig = {};
-    if (process.env.NODE_ENV === "production") {
-        pinoConfig = defaultPinoConf;
-    }
+    pinoConfig = defaultPinoConf;
     return logger(Object.assign({}, options, pinoConfig));
 }

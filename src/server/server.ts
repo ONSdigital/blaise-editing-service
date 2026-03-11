@@ -17,13 +17,22 @@ import newClientLogHandler from "./handlers/clientLogHandler";
 import UserController from './controllers/userController';
 
 
-export default function nodeServer(config: ConfigurationProvider, logger: HttpLogger = createLogger()): Express {
+export interface NodeServerDependencies {
+  blaiseApiClient?: BlaiseApiClient;
+  blaiseApi?: BlaiseApi;
+  auth?: Auth;
+  auditLogger?: AuditLogger;
+}
 
-  // create client
-  const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
-  // create Blaise API
-  const blaiseApi = new BlaiseApi(config, blaiseApiClient);
+export default function nodeServer(
+  config: ConfigurationProvider,
+  logger: HttpLogger = createLogger(),
+  dependencies: NodeServerDependencies = {},
+): Express {
+
+  const blaiseApiClient = dependencies.blaiseApiClient ?? new BlaiseApiClient(config.BlaiseApiUrl);
+  const blaiseApi = dependencies.blaiseApi ?? new BlaiseApi(config, blaiseApiClient);
 
   const server = express();
   server.use(logger);
@@ -48,10 +57,8 @@ export default function nodeServer(config: ConfigurationProvider, logger: HttpLo
   server.set('views', buildFolderPath);
   server.engine('html', ejs.renderFile);
 
-  const auth = new Auth(config);
-
-  // Create audit logger
-  const auditLogger = new AuditLogger("BES");
+  const auth = dependencies.auth ?? new Auth(config);
+  const auditLogger = dependencies.auditLogger ?? new AuditLogger("BES");
 
   // survey routing
   const surveyController = new SurveyController(blaiseApi, config, auth, auditLogger);

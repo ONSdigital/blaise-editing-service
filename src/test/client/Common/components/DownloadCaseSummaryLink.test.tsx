@@ -1,9 +1,8 @@
-import React from 'react';
 import {
   render, screen, fireEvent, waitFor,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import { vi, type MockInstance } from 'vitest';
 import { DownloadCaseSummaryLink, Props } from '../../../../client/Common/components/DownloadCaseSummaryLink';
 import { getCaseSummary } from '../../../../client/api/NodeApi';
 import mapCaseSummaryText from '../../../../client/Mappers/caseSummaryTextMapper';
@@ -16,8 +15,17 @@ vi.mock('../../../../client/api/NodeApi', () => ({
 
 vi.mock('../../../../client/Mappers/caseSummaryTextMapper', () => ({ default: vi.fn() }));
 
-const mockGetCaseSummary = getCaseSummary as vi.Mock;
-const mockMapCaseSummaryText = mapCaseSummaryText as vi.Mock;
+vi.mock('../../../../client/logger', () => ({
+  clientLogger: {
+    debug: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
+  },
+}));
+
+const mockGetCaseSummary = vi.mocked(getCaseSummary);
+const mockMapCaseSummaryText = vi.mocked(mapCaseSummaryText);
 
 describe('Given a user needs to download a case summary', () => {
   const defaultProps: Props = {
@@ -25,8 +33,8 @@ describe('Given a user needs to download a case summary', () => {
     questionnaireName: 'FRS1337',
   };
 
-  let mockLinkClick: vi.Mock;
-  let mockCreateElement: vi.SpyInstance;
+  let mockLinkClick: ReturnType<typeof vi.fn>;
+  let mockCreateElement: MockInstance;
 
   const originalCreateElement = document.createElement;
 
