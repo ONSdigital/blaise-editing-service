@@ -8,6 +8,7 @@ import { DownloadCaseSummaryLink, Props } from '../../../../client/Common/compon
 import { getCaseSummary } from '../../../../client/api/NodeApi';
 import mapCaseSummaryText from '../../../../client/Mappers/caseSummaryTextMapper';
 import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';
+import { clientLogger } from "../../../../client/logger";
 
 vi.mock('../../../../client/api/NodeApi', () => ({
   getCaseSummary: vi.fn(),
@@ -135,7 +136,7 @@ describe('Given a user needs to download a case summary', () => {
     });
     expect(mockOnError).toHaveBeenCalledWith('Failed to download case summary. Please try again later or contact support for assistance.');
 
-    expect(console.error).toHaveBeenCalledWith(
+    expect(clientLogger.error).toHaveBeenCalledWith(
       `Failed to export summary for caseId: ${defaultProps.caseId}:`,
       expect.any(Error),
     );

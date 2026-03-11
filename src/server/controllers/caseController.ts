@@ -5,18 +5,18 @@ import moment from 'moment';
 import { Controller } from '../interfaces/controllerInterface';
 import notFound from '../helpers/axiosHelper';
 import BlaiseApi from '../api/BlaiseApi';
+import AuditLogger from "../logger/auditLogger";
 import ServerConfigurationProvider from '../configuration/ServerConfigurationProvider';
 import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
 import mapCaseSummary from '../mappers/caseMapper';
 
 export default class CaseController implements Controller {
   blaiseApi: BlaiseApi;
-
   configuration: ServerConfigurationProvider;
-
   auth: Auth;
+  auditLogger: AuditLogger;
 
-  constructor(blaiseApi: BlaiseApi, configuration: ServerConfigurationProvider, auth: Auth) {
+  constructor(blaiseApi: BlaiseApi, configuration: ServerConfigurationProvider, auth: Auth, auditLogger: AuditLogger) {
     this.blaiseApi = blaiseApi;
     this.configuration = configuration;
     this.getCaseEditInformation = this.getCaseEditInformation.bind(this);
@@ -24,6 +24,7 @@ export default class CaseController implements Controller {
     this.allocateCases = this.allocateCases.bind(this);
     this.setCaseToUpdate = this.setCaseToUpdate.bind(this);
     this.auth = auth;
+    this.auditLogger = auditLogger;
   }
 
   getRoutes() {
@@ -48,14 +49,14 @@ export default class CaseController implements Controller {
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
       const caseSummary = mapCaseSummary(caseResponse);
 
-      this.blaiseApi.cloudLogger.info(`Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      this.auditLogger.info(request.log, `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
       return response.status(200).json(caseSummary);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }
@@ -67,12 +68,12 @@ export default class CaseController implements Controller {
     const user = this.auth.GetUser(this.auth.GetToken(request));
 
     try {
-      const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName, userRole, user);
+      const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName, userRole, user, request);
 
       return response.status(200).json(caseEditInformationList);
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
       this.blaiseApi.cloudLogger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
@@ -80,9 +81,9 @@ export default class CaseController implements Controller {
     }
   }
 
-  async GetCaseEditInformationForRole(questionnaireName: string, userRole: string, user: User): Promise<CaseEditInformation[]> {
+  async GetCaseEditInformationForRole(questionnaireName: string, userRole: string, user: User, request: Request<{ questionnaireName: string }>): Promise<CaseEditInformation[]> {
     const cases = await this.blaiseApi.getCaseEditInformation(questionnaireName);
-    this.blaiseApi.cloudLogger.info(`Retrieved ${cases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+    this.auditLogger.info(request.log, `Retrieved ${cases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
 
     const surveyTla = questionnaireName.substring(0, 3);
     const roleConfig = this.configuration.getSurveyConfigForRole(surveyTla, userRole);
@@ -91,7 +92,7 @@ export default class CaseController implements Controller {
       .filter((caseEditInformation) => (roleConfig.Organisations.length > 0 ? roleConfig.Organisations.includes(caseEditInformation.organisation) : caseEditInformation))
       .filter((caseEditInformation) => (roleConfig.Outcomes.length > 0 ? roleConfig.Outcomes.includes(caseEditInformation.outcome) : caseEditInformation));
 
-    this.blaiseApi.cloudLogger.info(`Filtered down to ${filteredcases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+    this.auditLogger.info(request.log, `Filtered down to ${filteredcases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
 
     return filteredcases;
   }
@@ -111,14 +112,14 @@ export default class CaseController implements Controller {
           });
         }),
       );
-      this.blaiseApi.cloudLogger.info(`Allocated ${cases.length} cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      this.auditLogger.info(request.log, `Allocated ${cases.length} cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }
@@ -136,14 +137,14 @@ export default class CaseController implements Controller {
         'QEdit.Edited': '',
         'QEdit.LastUpdated': moment('1900-01-01').format('DD-MM-YYYY_HH:mm'),
       });
-      this.blaiseApi.cloudLogger.info(`Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      this.auditLogger.info(request.log, `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
       return response.status(204).json();
     } catch (error: unknown) {
       if (notFound(error)) {
-        this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.blaiseApi.cloudLogger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }

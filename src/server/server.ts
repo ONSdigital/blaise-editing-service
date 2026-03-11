@@ -8,11 +8,25 @@ import { Auth, newLoginHandler } from 'blaise-login-react/blaise-login-react-ser
 import SurveyController from './controllers/surveyController';
 import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
+import BlaiseApiClient from 'blaise-api-node-client';
+import createLogger from "./pino";
+import { HttpLogger } from "pino-http";
+import AuditLogger from "./logger/auditLogger";
 import CaseController from './controllers/caseController';
+import newClientLogHandler from "./handlers/clientLogHandler";
 import UserController from './controllers/userController';
 
-export default function nodeServer(config: ConfigurationProvider, blaiseApi: BlaiseApi): Express {
+
+export default function nodeServer(config: ConfigurationProvider, logger: HttpLogger = createLogger()): Express {
+
+  // create client
+  const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
+
+  // create Blaise API
+  const blaiseApi = new BlaiseApi(config, blaiseApiClient);
+
   const server = express();
+  server.use(logger);
 
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));
@@ -36,21 +50,30 @@ export default function nodeServer(config: ConfigurationProvider, blaiseApi: Bla
 
   const auth = new Auth(config);
 
+  // Create audit logger
+  const auditLogger = new AuditLogger("BES");
+
   // survey routing
-  const surveyController = new SurveyController(blaiseApi, config, auth);
+  const surveyController = new SurveyController(blaiseApi, config, auth, auditLogger);
   server.use('/', surveyController.getRoutes());
 
   // case routing
-  const caseController = new CaseController(blaiseApi, config, auth);
+  const caseController = new CaseController(blaiseApi, config, auth, auditLogger);
   server.use('/', caseController.getRoutes());
 
   // User routing
-  const userController = new UserController(blaiseApi, config, auth);
+  const userController = new UserController(blaiseApi, config, auth, auditLogger);
   server.use('/', userController.getRoutes());
 
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
   server.use('/', loginHandler);
+
+
+  // client log handler
+
+  const clientLogHandler = newClientLogHandler(auth);
+  server.use("/", clientLogHandler);
 
   // fallback for any API endpoints that are not found
   server.use('/api/*', (_request: Request, response: Response) => {

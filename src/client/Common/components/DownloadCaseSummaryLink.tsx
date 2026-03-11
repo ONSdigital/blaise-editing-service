@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import mapCaseSummaryText from '../../Mappers/caseSummaryTextMapper';
 import { getCaseSummary } from '../../api/NodeApi';
+import { clientLogger } from "../../logger";
 
 export interface Props {
   caseId: string;
@@ -10,7 +11,7 @@ export interface Props {
 
 async function exportSummary(caseId: string, questionnaireName: string) {
   const fileName = `case-summary-${caseId}.txt`;
-  console.log(`Attempting to prepare summary for caseId: ${caseId}, questionnaireName: ${questionnaireName}`);
+  clientLogger.info(`Attempting to prepare summary for caseId: ${caseId}, questionnaireName: ${questionnaireName}`);
 
   try {
     const caseSummaryDetails = await getCaseSummary(questionnaireName, caseId);
@@ -25,9 +26,9 @@ async function exportSummary(caseId: string, questionnaireName: string) {
     link.href = `data:text/plain;charset=utf-8,${encodedFileContent}`;
 
     link.click();
-    console.log(`Successfully triggered download for case-summary-${caseId}.txt`);
+    clientLogger.info(`Successfully triggered download for case-summary-${caseId}.txt`);
   } catch (error) {
-    console.error(`Failed to export summary for caseId: ${caseId}:`, error);
+    clientLogger.error(`Failed to export summary for caseId: ${caseId}:`, error);
     throw error;
   }
 }
