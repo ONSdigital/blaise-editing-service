@@ -5,19 +5,15 @@ import BlaiseClient, {
 import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
 import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
 import mapQuestionnaireDetails from '../mappers/questionnaireMapper';
-import GoogleCloudLogger from '../logger/googleCloudLogger';
 
 export default class BlaiseApi {
   config: ServerConfiguration;
 
   blaiseApiClient: BlaiseClient;
 
-  cloudLogger: GoogleCloudLogger;
-
-  constructor(config: ServerConfiguration, blaiseApiClient: BlaiseClient, cloudLogger: GoogleCloudLogger) {
+  constructor(config: ServerConfiguration, blaiseApiClient: BlaiseClient) {
     this.config = config;
     this.blaiseApiClient = blaiseApiClient;
-    this.cloudLogger = cloudLogger;
     this.getQuestionnaires = this.getQuestionnaires.bind(this);
     this.getCase = this.getCase.bind(this);
     this.getCaseEditInformation = this.getCaseEditInformation.bind(this);

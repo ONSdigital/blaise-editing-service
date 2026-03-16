@@ -1,5 +1,5 @@
 import supertest, { Response } from 'supertest';
-import { IMock, Mock, Times } from 'typemoq';
+import { IMock, It, Mock, Times } from 'typemoq';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import BlaiseApiClient, { User } from 'blaise-api-node-client';
 import nodeServer from '../../../server/server';
@@ -7,8 +7,8 @@ import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { QuestionnaireDetails, Survey } from '../../../common/interfaces/surveyInterface';
-import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 import userMockObject from '../mockObjects/userMockObject';
+import AuditLogger from '../../../server/logger/auditLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
@@ -22,16 +22,16 @@ Auth.prototype.GetUser = vi.fn().mockReturnValue({ name: user.name, role: user.r
 
 // mock blaise api client and cloud logger
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
-const cloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
+const cloudLoggerMock: IMock<AuditLogger> = Mock.ofType(AuditLogger);
 
 // create blaise api
-const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock.object);
+const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object);
 
 // mock blaise api client
 const blaiseApiMock: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
 
 // need to test the endpoints through the express server
-const server = nodeServer(configFake, blaiseApiMock.object);
+const server = nodeServer(configFake, undefined as any, { blaiseApi: blaiseApiMock.object, auditLogger: cloudLoggerMock.object });
 
 // supertest will handle all http calls
 const sut = supertest(server);
@@ -208,8 +208,8 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('should return a 200 response with an expected list of surveys for the Survey Support Role', async () => {
@@ -377,8 +377,8 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${questionnaireDetailsListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${expectedFilteredQuestionnaireListMockObject.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a list of surveys and the rest api is not availiable', async () => {
@@ -406,7 +406,7 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -434,7 +434,7 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a list of surveys and the client returns a 404 not found', async () => {
@@ -462,6 +462,6 @@ describe('Get surveys tests', () => {
     await sut.get(`/api/surveys?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });

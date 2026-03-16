@@ -7,7 +7,7 @@ import { questionnaireListMockObject } from '../mockObjects/questionnaireListMoc
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import userMockObject from '../mockObjects/userMockObject';
 import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
-import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
+import AuditLogger from '../../../server/logger/auditLogger';
 
 // polyfill for setImmediate (when testing with logger)
 global.setImmediate = global.setImmediate || ((fn: () => void) => setTimeout(fn, 0));
@@ -17,10 +17,10 @@ const configFake = new FakeServerConfigurationProvider();
 
 // mock blaise api client and cloud logger
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
-const cloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
+const cloudLoggerMock: IMock<AuditLogger> = Mock.ofType(AuditLogger);
 
 // create service under test
-const sut = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock.object);
+const sut = new BlaiseApi(configFake, blaiseApiClientMock.object);
 
 describe('getQuestionnaires from Blaise', () => {
   beforeEach(() => {
