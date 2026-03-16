@@ -12,8 +12,8 @@ import createAxiosError from './axiosTestHelper';
 import BlaiseApi from '../../../server/api/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { caseResponseMockObject, caseSummaryDetailsMockObject } from '../mockObjects/CaseMockObject';
-import GoogleCloudLogger from '../../../server/logger/googleCloudLogger';
 import userMockObject from '../mockObjects/userMockObject';
+import AuditLogger from '../../../server/logger/auditLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();
@@ -27,16 +27,16 @@ Auth.prototype.GetUser = vi.fn().mockReturnValue({ name: user.name, role: user.r
 
 // mock blaise api client and cloud logger
 const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
-const cloudLoggerMock: IMock<GoogleCloudLogger> = Mock.ofType(GoogleCloudLogger);
+const cloudLoggerMock: IMock<AuditLogger> = Mock.ofType(AuditLogger);
 
 // create blaise api
-const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object, cloudLoggerMock.object);
+const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object);
 
 // mock blaise api client
 const blaiseApiMock: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
 
 // need to test the endpoints through the express server
-const server = nodeServer(configFake, blaiseApiMock.object);
+const server = nodeServer(configFake, undefined as any, { blaiseApi: blaiseApiMock.object, auditLogger: cloudLoggerMock.object });
 
 // supertest will handle all http calls
 const sut = supertest(server);
@@ -84,7 +84,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
@@ -114,7 +114,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -144,7 +144,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
@@ -174,7 +174,7 @@ describe('Get case summary tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });
 
@@ -406,8 +406,8 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it.each(validUserRoles)('should return a 200 response with an expected filtered list of case edit details When outcome codes match role', async (userRole) => {
@@ -607,8 +607,8 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it.each(validUserRoles)('should return a 200 response with an expected filtered list of case edit details When organisation match role', async (userRole) => {
@@ -768,8 +768,8 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('should return a 200 response with a list of all case edit details When the Outcome Filter list is empty', async () => {
@@ -903,8 +903,8 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(`Filtered down to ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('should return a 500 response if the users role is not configured for the survey', async () => {
@@ -957,7 +957,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
   });
 
   it('should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
@@ -989,7 +989,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
   });
 
   it('should return a 500 response when the api client throws an error', async () => {
@@ -1021,7 +1021,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`), Times.once());
   });
 
   it('should return a 500 response when CaseContorller is called without a userRole', async () => {
@@ -1048,7 +1048,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
   });
 
   it.each(['', 'INVALIDROLE'])('should return a 500 response when given an unknown userRole', async (userRoleInvalid) => {
@@ -1075,7 +1075,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRoleInvalid}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
   });
 
   it('should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
@@ -1107,7 +1107,7 @@ describe('Get case edit information tests', () => {
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });
 
@@ -1160,7 +1160,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
@@ -1190,7 +1190,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -1220,7 +1220,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
@@ -1250,7 +1250,7 @@ describe('allocate cases tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });
 
@@ -1296,7 +1296,7 @@ describe('set to update case tests', () => {
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
 
     // assert
-    cloudLoggerMock.verify((logger) => logger.info(`Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
   });
 
   it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
@@ -1320,7 +1320,7 @@ describe('set to update case tests', () => {
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
   });
 
   it('It should return a 500 response when the api client throws an error', async () => {
@@ -1344,7 +1344,7 @@ describe('set to update case tests', () => {
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
   });
 
   it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
@@ -1368,6 +1368,6 @@ describe('set to update case tests', () => {
     // act
     await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
     // assert
-    cloudLoggerMock.verify((logger) => logger.error(`Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });

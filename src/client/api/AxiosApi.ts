@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { AuthManager } from 'blaise-login-react/blaise-login-react-client';
 import notFound from '../../server/helpers/axiosHelper';
 
-function axiosConfig(): AxiosRequestConfig {
+export default function axiosConfig(): AxiosRequestConfig {
   const authManager = new AuthManager();
   return {
     headers: {
