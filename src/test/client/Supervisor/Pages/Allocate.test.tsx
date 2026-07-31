@@ -3,7 +3,7 @@ import {
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { getAllocationDetails, updateAllocationDetails } from '../../../../client/api/NodeApi';
-import UserRole from '../../../../client/Common/enums/UserTypes';
+import UserRole from '../../../../client/types/UserTypes';
 import { AllocationDetails } from '../../../../common/interfaces/allocationInterface';
 import AllocationMockObject from '../../MockObjects/AllocationMockObjects';
 import Allocate from '../../../../client/Supervisor/Pages/Allocate';

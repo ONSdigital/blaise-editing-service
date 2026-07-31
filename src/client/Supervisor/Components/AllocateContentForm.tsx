@@ -1,6 +1,6 @@
 import { ONSButton, ONSPanel, ONSSelect } from 'blaise-design-system-react-components';
 import { ReactElement, SetStateAction, useState } from 'react';
-import Option from '../../Interfaces/controlsInterface';
+import Option from '../../types/controlsInterface';
 import { UserAllocationDetails } from '../../../common/interfaces/allocationInterface';
 
 interface AllocateProps {

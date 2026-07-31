@@ -4,11 +4,11 @@ import {
 import { AllocationDetails } from '../../../common/interfaces/allocationInterface';
 import { getAllocationDetails, updateAllocationDetails } from '../../api/NodeApi';
 import AllocateContentForm from './AllocateContentForm';
-import Option from '../../Interfaces/controlsInterface';
+import Option from '../../types/controlsInterface';
 import { useAsyncRequestWithThreeParamsWithRefresh } from '../../Common/hooks/useAsyncRequest';
-import UserRole from '../../Common/enums/UserTypes';
+import UserRole from '../../types/UserTypes';
 import AsyncContent from '../../Common/components/AsyncContent';
-import { Message } from '../../Common/types/MessageType';
+import { Message } from '../../types/MessageType';
 
 interface AllocateProps {
   questionnaireName: string;

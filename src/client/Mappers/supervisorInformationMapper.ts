@@ -1,7 +1,7 @@
 import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/case';
 import EditedStatus from 'blaise-api-node-client/lib/cjs/enums/editedStatus';
 import { User } from 'blaise-api-node-client/lib/cjs/interfaces/user';
-import { SupervisorEditorInformation, SupervisorInformation } from '../Interfaces/supervisorInterface';
+import { SupervisorEditorInformation, SupervisorInformation } from '../types/supervisorInterface';
 
 function MapEditors(caseEditInformationList: CaseEditInformation[], editors: User[]): SupervisorEditorInformation[] {
   const editorInformation: SupervisorEditorInformation[] = [];

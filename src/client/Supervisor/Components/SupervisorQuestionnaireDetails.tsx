@@ -3,9 +3,9 @@ import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface
 import { useAsyncRequestWithThreeParams } from '../../Common/hooks/useAsyncRequest';
 import { getSupervisorEditorInformation } from '../../api/NodeApi';
 import AsyncContent from '../../Common/components/AsyncContent';
-import { SupervisorInformation } from '../../Interfaces/supervisorInterface';
+import { SupervisorInformation } from '../../types/supervisorInterface';
 import SupervisorContent from './SupervisorContent';
-import UserRole from '../../Common/enums/UserTypes';
+import UserRole from '../../types/UserTypes';
 
 interface SupervisorQuestionnairesDetailsProps {
   questionnaire: QuestionnaireDetails;

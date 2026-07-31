@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 import CaseSearchForm from '../../Common/components/CaseSearchForm';
 import { AllocateParams } from '../Pages/Allocate';
-import UserRole from '../../Common/enums/UserTypes';
+import UserRole from '../../types/UserTypes';
 import questionnaireDisplayName from '../../Common/functions/QuestionnaireFunctions';
 import Breadcrumbs from '../../Common/components/Breadcrumbs';
 

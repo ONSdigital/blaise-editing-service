@@ -6,10 +6,10 @@ import userMockObject from '../../../server/mockObjects/userMockObject';
 import { getEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
 import EditorHome from '../../../../client/Editor/Pages/EditorHome';
-import { EditorInformation } from '../../../../client/Interfaces/editorInterface';
+import { EditorInformation } from '../../../../client/types/editorInterface';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import { EditorInformationMockObject1, EditorInformationMockObject2 } from '../../MockObjects/EditorMockObjects';
-import UserRole from '../../../../client/Common/enums/UserTypes';
+import UserRole from '../../../../client/types/UserTypes';
 
 // set global vars
 const userRole:string = UserRole.SVT_Editor;

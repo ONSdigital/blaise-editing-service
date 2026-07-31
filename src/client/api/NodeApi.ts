@@ -1,8 +1,8 @@
 import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/case';
 import { User } from 'blaise-api-node-client/lib/cjs/interfaces/user';
 import { Survey } from '../../common/interfaces/surveyInterface';
-import { SupervisorInformation } from '../Interfaces/supervisorInterface';
-import { EditorInformation } from '../Interfaces/editorInterface';
+import { SupervisorInformation } from '../types/supervisorInterface';
+import { EditorInformation } from '../types/editorInterface';
 import mapEditorInformation from '../Mappers/editorInformaitionMapper';
 import mapSupervisorInformation from '../Mappers/supervisorInformationMapper';
 import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';

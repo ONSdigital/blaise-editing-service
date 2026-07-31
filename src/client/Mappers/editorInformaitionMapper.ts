@@ -1,6 +1,6 @@
 import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/case';
 import { EditedStatus } from 'blaise-api-node-client/lib/cjs/enums/editedStatus';
-import { EditorInformation } from '../Interfaces/editorInterface';
+import { EditorInformation } from '../types/editorInterface';
 
 const EditedStatusDescription = new Map<EditedStatus, string>([
   [EditedStatus.NotStarted, 'Not started'],

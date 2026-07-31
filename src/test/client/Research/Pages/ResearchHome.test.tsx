@@ -4,7 +4,7 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import UserRole from '../../../../client/Common/enums/UserTypes';
+import UserRole from '../../../../client/types/UserTypes';
 import { getCaseSearchResults, getSurveys } from '../../../../client/api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';

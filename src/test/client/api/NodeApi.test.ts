@@ -13,9 +13,9 @@ import {
   setCaseToUpdate,
   getSpecificCaseEditInformation,
 } from '../../../client/api/NodeApi';
-import { EditorInformation } from '../../../client/Interfaces/editorInterface';
-import { SupervisorInformation } from '../../../client/Interfaces/supervisorInterface';
-import UserRole from '../../../client/Common/enums/UserTypes';
+import { EditorInformation } from '../../../client/types/editorInterface';
+import { SupervisorInformation } from '../../../client/types/supervisorInterface';
+import UserRole from '../../../client/types/UserTypes';
 import { caseSummaryDetailsMockObject } from '../../server/mockObjects/CaseMockObject';
 import { AllocationDetails } from '../../../common/interfaces/allocationInterface';
 

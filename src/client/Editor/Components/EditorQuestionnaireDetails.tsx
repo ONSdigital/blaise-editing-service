@@ -4,8 +4,8 @@ import { useAsyncRequestWithThreeParams } from '../../Common/hooks/useAsyncReque
 import { getEditorInformation } from '../../api/NodeApi';
 import AsyncContent from '../../Common/components/AsyncContent';
 import EditorContent from './EditorContent';
-import { EditorInformation } from '../../Interfaces/editorInterface';
-import UserRole from '../../Common/enums/UserTypes';
+import { EditorInformation } from '../../types/editorInterface';
+import UserRole from '../../types/UserTypes';
 
 interface EditorQuestionnairesDetailsProps {
   questionnaire: QuestionnaireDetails;

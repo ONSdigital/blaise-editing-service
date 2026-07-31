@@ -2,7 +2,7 @@ import { ReactElement, SetStateAction, useState } from 'react';
 import { ONSSelect } from 'blaise-design-system-react-components';
 import { User } from 'blaise-api-node-client';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
-import Option from '../../Interfaces/controlsInterface';
+import Option from '../../types/controlsInterface';
 import UserRole from '../enums/UserTypes';
 import SupervisorQuestionnaireDetails from '../../Supervisor/Components/SupervisorQuestionnaireDetails';
 import EditorQuestionnaireDetails from '../../Editor/Components/EditorQuestionnaireDetails';
