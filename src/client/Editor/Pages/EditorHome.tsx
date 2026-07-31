@@ -2,7 +2,7 @@ import { User } from 'blaise-api-node-client';
 import AsyncContent from '../../Common/components/AsyncContent';
 import { Survey } from '../../../common/interfaces/surveyInterface';
 import { getSurveys } from '../../api/NodeApi';
-import { useAsyncRequestWithParam } from '../../Common/hooks/useAsyncRequest';
+import { useAsyncRequestWithParam } from '../../utils/useAsyncRequest';
 import SurveysList from '../../Common/components/SurveysList';
 import ErrorPanel from '../../Common/components/ErrorPanel';
 

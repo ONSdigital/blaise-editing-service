@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
-import { useAsyncRequestWithThreeParams } from '../../Common/hooks/useAsyncRequest';
+import { useAsyncRequestWithThreeParams } from '../../utils/useAsyncRequest';
 import { getSupervisorEditorInformation } from '../../api/NodeApi';
 import AsyncContent from '../../Common/components/AsyncContent';
 import { SupervisorInformation } from '../../types/supervisorInterface';

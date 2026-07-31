@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import mapCaseSummaryText from '../../Mappers/caseSummaryTextMapper';
+import mapCaseSummaryText from '../../utils/caseSummaryTextMapper';
 import { getCaseSummary } from '../../api/NodeApi';
 import { clientLogger } from "../../logger";
 

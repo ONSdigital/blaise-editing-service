@@ -1,6 +1,6 @@
 import { CaseEditInformation, CaseOutcome, EditedStatus } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import mapSupervisorInformaiton from '../../../client/Mappers/supervisorInformationMapper';
+import mapSupervisorInformaiton from '../../../client/utils/supervisorInformationMapper';
 import { SupervisorInformation } from '../../../client/types/supervisorInterface';
 
 describe('Map editor informaiton', () => {

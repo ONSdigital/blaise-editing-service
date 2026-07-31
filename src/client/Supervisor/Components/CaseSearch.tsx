@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CaseSearchForm from '../../Common/components/CaseSearchForm';
 import { AllocateParams } from '../Pages/Allocate';
 import UserRole from '../../types/UserTypes';
-import questionnaireDisplayName from '../../Common/functions/QuestionnaireFunctions';
+import questionnaireDisplayName from '../../utils/QuestionnaireFunctions';
 import Breadcrumbs from '../../Common/components/Breadcrumbs';
 
 export type CaseSearchParams = {

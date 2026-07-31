@@ -8,8 +8,8 @@ import {
   useAsyncRequestWithThreeParamsWithRefresh,
   isLoading,
   hasErrored
-} from '../../../../../src/client/Common/hooks/useAsyncRequest.js';
-import * as Hooks from '../../../../../src/client/Common/hooks/useAsyncRequest.js';
+} from '../../../../../src/client/utils/useAsyncRequest.js';
+import * as Hooks from '../../../../../src/client/utils/useAsyncRequest.js';
 
 describe('AsyncState Utilities', () => {
   it('isLoading correctly identifies loading state', () => {

@@ -6,7 +6,7 @@ import ErrorPanel from '../../Common/components/ErrorPanel';
 import SuccessPanel from '../../Common/components/SuccessPanel';
 import AllocateContent from '../Components/AllocateContent';
 import { Message } from '../../types/MessageType';
-import questionnaireDisplayName from '../../Common/functions/QuestionnaireFunctions';
+import questionnaireDisplayName from '../../utils/QuestionnaireFunctions';
 import Breadcrumbs from '../../Common/components/Breadcrumbs';
 
 interface AllocateProps {
