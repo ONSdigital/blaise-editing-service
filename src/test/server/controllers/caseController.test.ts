@@ -9,11 +9,11 @@ import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import nodeServer from '../../../server/server';
 import createAxiosError from './axiosTestHelper';
-import BlaiseApi from '../../../server/api/BlaiseApi';
+import BlaiseApi from '../../../server/BlaiseApi';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import { caseResponseMockObject, caseSummaryDetailsMockObject } from '../mockObjects/CaseMockObject';
 import userMockObject from '../mockObjects/userMockObject';
-import AuditLogger from '../../../server/logger/auditLogger';
+import AuditLogger from '../../../server/auditLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();

@@ -1,13 +1,13 @@
 import express, { Request, Response } from 'express';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import { User } from 'blaise-api-node-client';
-import { Controller } from '../interfaces/controllerInterface';
+import { Controller } from '../controllerInterface';
 import notFound from '../helpers/axiosHelper';
-import AuditLogger from "../logger/auditLogger";
+import AuditLogger from "../auditLogger";
 import { QuestionnaireDetails, Survey } from '../../common/interfaces/surveyInterface';
-import mapSurveys from '../mappers/surveyMapper';
-import BlaiseApi from '../api/BlaiseApi';
-import ServerConfigurationProvider from '../configuration/ServerConfigurationProvider';
+import mapSurveys from '../surveyMapper';
+import BlaiseApi from '../BlaiseApi';
+import ServerConfigurationProvider from '../ServerConfigurationProvider';
 
 export default class SurveyHandler implements Controller {
   blaiseApi: BlaiseApi;

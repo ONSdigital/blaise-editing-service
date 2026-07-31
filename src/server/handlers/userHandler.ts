@@ -1,11 +1,11 @@
 import express, { Request, Response } from 'express';
 import { User } from 'blaise-api-node-client';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
-import { Controller } from '../interfaces/controllerInterface';
+import { Controller } from '../controllerInterface';
 import notFound from '../helpers/axiosHelper';
-import BlaiseApi from '../api/BlaiseApi';
-import AuditLogger from "../logger/auditLogger";
-import ServerConfigurationProvider from '../configuration/ServerConfigurationProvider';
+import BlaiseApi from '../BlaiseApi';
+import AuditLogger from "../auditLogger";
+import ServerConfigurationProvider from '../ServerConfigurationProvider';
 
 export default class UserHandler implements Controller {
   blaiseApi: BlaiseApi;

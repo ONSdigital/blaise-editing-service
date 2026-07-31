@@ -2,12 +2,12 @@ import BlaiseApiClient, { CaseEditInformationListMockObject, Questionnaire } fro
 import {
   IMock, Mock, Times,
 } from 'typemoq';
-import BlaiseApi from '../../../server/api/BlaiseApi';
+import BlaiseApi from '../../../server/BlaiseApi';
 import { questionnaireListMockObject } from '../mockObjects/questionnaireListMockObject';
 import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
 import userMockObject from '../mockObjects/userMockObject';
 import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
-import AuditLogger from '../../../server/logger/auditLogger';
+import AuditLogger from '../../../server/auditLogger';
 
 // polyfill for setImmediate (when testing with logger)
 global.setImmediate = global.setImmediate || ((fn: () => void) => setTimeout(fn, 0));

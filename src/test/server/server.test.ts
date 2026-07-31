@@ -6,7 +6,7 @@ import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import ejs from 'ejs';
 import NodeServer from '../../server/server';
-import BlaiseApi from '../../server/api/BlaiseApi';
+import BlaiseApi from '../../server/BlaiseApi';
 import FakeServerConfigurationProvider from './configuration/FakeServerConfigurationProvider';
 
 // create fake config

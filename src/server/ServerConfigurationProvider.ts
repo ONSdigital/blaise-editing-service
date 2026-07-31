@@ -1,15 +1,15 @@
 import { AuthConfig } from 'blaise-login-react/blaise-login-react-server';
 import { CaseOutcome } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { ServerConfiguration } from '../interfaces/serverConfigurationInterface';
+import { ServerConfiguration } from './serverConfigurationInterface';
 import {
   fixUrl, generateSessionSecret,
   getNumberOrThrowError, getStringOrSetDefault, getStringOrThrowError, GetListOrSetDefault,
   getRoles,
   getSurveyConfigForRole,
   getSurveysForRole,
-} from '../helpers/configurationHelper';
-import { RoleConfiguration } from '../interfaces/roleConfigurationInterface';
+} from './helpers/configurationHelper';
+import { RoleConfiguration } from './roleConfigurationInterface';
 
 export default class ServerConfigurationProvider implements ServerConfiguration, AuthConfig {
   BlaiseApiUrl: string;

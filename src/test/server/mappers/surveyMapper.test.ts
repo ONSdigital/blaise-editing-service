@@ -1,5 +1,5 @@
 import { QuestionnaireDetails, Survey } from '../../../common/interfaces/surveyInterface';
-import mapSurveys from '../../../server/mappers/surveyMapper';
+import mapSurveys from '../../../server/surveyMapper';
 import {
   frsQuestionnaireDetails1MockObject, frsQuestionnaireDetails2MockObject, lmsQuestionnaireDetailsMockObject, opnQuestionnaireDetailsMockObject,
 } from '../mockObjects/questionnaireListMockObject';

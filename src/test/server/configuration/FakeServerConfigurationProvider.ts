@@ -1,7 +1,7 @@
 import { CaseOutcome } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import ServerConfigurationProvider from '../../../server/configuration/ServerConfigurationProvider';
-import { RoleConfiguration } from '../../../server/interfaces/roleConfigurationInterface';
+import ServerConfigurationProvider from '../../../server/ServerConfigurationProvider';
+import { RoleConfiguration } from '../../../server/roleConfigurationInterface';
 import { getSurveyConfigForRole, getSurveysForRole } from '../../../server/helpers/configurationHelper';
 
 export default class FakeServerConfigurationProvider implements ServerConfigurationProvider {

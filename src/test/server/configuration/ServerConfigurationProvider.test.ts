@@ -1,6 +1,6 @@
 import { CaseOutcome } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import ServerConfigurationProvider from '../../../server/configuration/ServerConfigurationProvider';
+import ServerConfigurationProvider from '../../../server/ServerConfigurationProvider';
 
  
 const emptyEnv = process.env;

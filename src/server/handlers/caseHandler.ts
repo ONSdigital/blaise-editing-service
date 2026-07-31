@@ -2,13 +2,13 @@ import express, { Request, Response } from 'express';
 import { CaseEditInformation, User } from 'blaise-api-node-client';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import moment from 'moment';
-import { Controller } from '../interfaces/controllerInterface';
+import { Controller } from '../controllerInterface';
 import notFound from '../helpers/axiosHelper';
-import BlaiseApi from '../api/BlaiseApi';
-import AuditLogger from "../logger/auditLogger";
-import ServerConfigurationProvider from '../configuration/ServerConfigurationProvider';
+import BlaiseApi from '../BlaiseApi';
+import AuditLogger from "../auditLogger";
+import ServerConfigurationProvider from '../ServerConfigurationProvider';
 import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
-import mapCaseSummary from '../mappers/caseMapper';
+import mapCaseSummary from '../caseMapper';
 
 export default class CaseHandler implements Controller {
   blaiseApi: BlaiseApi;
