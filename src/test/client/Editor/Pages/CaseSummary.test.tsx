@@ -4,7 +4,7 @@ import {
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { CaseSummaryDetails } from '../../../../common/interfaces/caseInterface';
-import CaseSummary from '../../../../client/Editor/Pages/CaseSummary';
+import CaseSummary from '../../../../client/pages/Editor/Pages/CaseSummary';
 import { getCaseSummary } from '../../../../client/api/NodeApi';
 import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';
 

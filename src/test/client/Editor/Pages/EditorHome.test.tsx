@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import userMockObject from '../../../server/mockObjects/userMockObject';
 import { getEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
-import EditorHome from '../../../../client/Editor/Pages/EditorHome';
+import EditorHome from '../../../../client/pages/Editor/Pages/EditorHome';
 import { EditorInformation } from '../../../../client/types/editorInterface';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import { EditorInformationMockObject1, EditorInformationMockObject2 } from '../../MockObjects/EditorMockObjects';

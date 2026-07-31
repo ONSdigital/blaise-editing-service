@@ -6,7 +6,7 @@ import { getAllocationDetails, updateAllocationDetails } from '../../../../clien
 import UserRole from '../../../../client/types/UserTypes';
 import { AllocationDetails } from '../../../../common/interfaces/allocationInterface';
 import AllocationMockObject from '../../MockObjects/AllocationMockObjects';
-import Allocate from '../../../../client/Supervisor/Pages/Allocate';
+import Allocate from '../../../../client/pages/Supervisor/Pages/Allocate';
 
 // set global vars
 const supervisorRole:UserRole = UserRole.SVT_Supervisor;

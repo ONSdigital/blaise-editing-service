@@ -7,13 +7,13 @@ import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import userMockObject from '../../../server/mockObjects/userMockObject';
 import { getCaseSearchResults, getSupervisorEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
-import SupervisorHome from '../../../../client/Supervisor/Pages/SupervisorHome';
+import SupervisorHome from '../../../../client/pages/Supervisor/Pages/SupervisorHome';
 import { SupervisorInformation } from '../../../../client/types/supervisorInterface';
 import UserRole from '../../../../client/types/UserTypes';
 import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
 import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../MockObjects/SupervisorMockObjects';
 import { CaseEditInformationListMockObject, CaseEditInformationEmptyListMockObject } from '../../../server/mockObjects/CaseMockObject';
-import CaseSearchForm from '../../../../client/Common/components/CaseSearchForm';
+import CaseSearchForm from '../../../../client/pages/shared/CaseSearchForm';
 
 // set global vars
 const userRole:string = UserRole.SVT_Supervisor;

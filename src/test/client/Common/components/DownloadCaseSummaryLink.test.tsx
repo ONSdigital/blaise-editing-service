@@ -3,7 +3,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { vi, type MockInstance } from 'vitest';
-import { DownloadCaseSummaryLink, Props } from '../../../../client/Common/components/DownloadCaseSummaryLink';
+import { DownloadCaseSummaryLink, Props } from '../../../../client/pages/shared/DownloadCaseSummaryLink';
 import { getCaseSummary } from '../../../../client/api/NodeApi';
 import mapCaseSummaryText from '../../../../client/utils/caseSummaryTextMapper';
 import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';

@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import { getSpecificCaseEditInformation, setCaseToUpdate } from '../../../../client/api/NodeApi';
 import UserRole from '../../../../client/types/UserTypes';
-import EditCaseContent from '../../../../client/Common/components/EditCaseContent';
+import EditCaseContent from '../../../../client/pages/shared/EditCaseContent';
 import { caseEditInformationMockObject1 } from '../../../server/mockObjects/CaseMockObject';
 
 // set global vars
