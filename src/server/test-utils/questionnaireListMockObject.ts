@@ -1,5 +1,5 @@
 import { Questionnaire } from 'blaise-api-node-client';
-import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
+import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
 
 export const lmsQuestionnaire1Mock: Questionnaire = {
   name: 'LMS2101_AA1_EDIT',

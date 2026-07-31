@@ -3,7 +3,7 @@ import express from "express";
 import supertest from "supertest";
 import { vi } from "vitest";
 
-import clientLogHandler from "../../../server/handlers/clientLogHandler";
+import clientLogHandler from "./clientLogHandler";
 
 function createTestApp() {
     const app = express();

@@ -19,7 +19,7 @@ vi.mock("@google-cloud/logging", () => ({
     Logging: gcpLoggingMocks.LoggingMock,
 }));
 
-import AuditLogger from "../../../server/auditLogger";
+import AuditLogger from "./auditLogger";
 
 describe("AuditLogger", () => {
     beforeEach(() => {

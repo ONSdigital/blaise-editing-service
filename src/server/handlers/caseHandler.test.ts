@@ -7,13 +7,13 @@ import BlaiseApiClient, {
 } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
-import nodeServer from '../../../server/server';
-import createAxiosError from './axiosTestHelper';
-import BlaiseApi from '../../../server/BlaiseApi';
-import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
-import { caseResponseMockObject, caseSummaryDetailsMockObject } from '../mockObjects/CaseMockObject';
-import userMockObject from '../mockObjects/userMockObject';
-import AuditLogger from '../../../server/auditLogger';
+import nodeServer from '../server';
+import createAxiosError from '../test-utils/axiosTestHelper';
+import BlaiseApi from '../BlaiseApi';
+import FakeServerConfigurationProvider from '../test-utils/FakeServerConfigurationProvider';
+import { caseResponseMockObject, caseSummaryDetailsMockObject } from '../test-utils/CaseMockObject';
+import userMockObject from '../test-utils/userMockObject';
+import AuditLogger from '../auditLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();

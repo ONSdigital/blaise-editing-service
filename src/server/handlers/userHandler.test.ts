@@ -2,12 +2,12 @@ import supertest, { Response } from 'supertest';
 import { IMock, It, Mock, Times } from 'typemoq';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import BlaiseApiClient, { User } from 'blaise-api-node-client';
-import nodeServer from '../../../server/server';
-import BlaiseApi from '../../../server/BlaiseApi';
-import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
-import createAxiosError from './axiosTestHelper';
-import userMockObject from '../mockObjects/userMockObject';
-import AuditLogger from '../../../server/auditLogger';
+import nodeServer from '../server';
+import BlaiseApi from '../BlaiseApi';
+import FakeServerConfigurationProvider from '../test-utils/FakeServerConfigurationProvider';
+import createAxiosError from '../test-utils/axiosTestHelper';
+import userMockObject from '../test-utils/userMockObject';
+import AuditLogger from '../auditLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();

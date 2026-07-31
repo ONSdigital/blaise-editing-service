@@ -14,7 +14,7 @@ describe("createLogger", () => {
             default: pinoHttpMock,
         }));
 
-        const createLogger = (await import("../../../server/pino")).default;
+        const createLogger = (await import("./pino")).default;
         createLogger({ autoLogging: false, customOpt: true });
 
         expect(pinoHttpMock).toHaveBeenCalledTimes(1);

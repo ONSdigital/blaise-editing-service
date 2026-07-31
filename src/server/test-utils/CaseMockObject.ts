@@ -2,7 +2,7 @@ import {
   CaseOutcome, CaseEditInformation, EditedStatus, CaseResponse,
 } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { CaseSummaryDetails } from '../../../common/interfaces/caseInterface';
+import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
 
 export const caseEditInformationMockObject1: CaseEditInformation = {
   primaryKey: '10001011',

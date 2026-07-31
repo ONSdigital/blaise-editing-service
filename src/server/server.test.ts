@@ -5,9 +5,9 @@ import supertest from 'supertest';
 import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import ejs from 'ejs';
-import NodeServer from '../../server/server';
-import BlaiseApi from '../../server/BlaiseApi';
-import FakeServerConfigurationProvider from './configuration/FakeServerConfigurationProvider';
+import NodeServer from './server';
+import BlaiseApi from './BlaiseApi';
+import FakeServerConfigurationProvider from './test-utils/FakeServerConfigurationProvider';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();

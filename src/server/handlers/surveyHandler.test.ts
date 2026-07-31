@@ -2,13 +2,13 @@ import supertest, { Response } from 'supertest';
 import { IMock, It, Mock, Times } from 'typemoq';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
 import BlaiseApiClient, { User } from 'blaise-api-node-client';
-import nodeServer from '../../../server/server';
-import createAxiosError from './axiosTestHelper';
-import BlaiseApi from '../../../server/BlaiseApi';
-import FakeServerConfigurationProvider from '../configuration/FakeServerConfigurationProvider';
-import { QuestionnaireDetails, Survey } from '../../../common/interfaces/surveyInterface';
-import userMockObject from '../mockObjects/userMockObject';
-import AuditLogger from '../../../server/auditLogger';
+import nodeServer from '../server';
+import createAxiosError from '../test-utils/axiosTestHelper';
+import BlaiseApi from '../BlaiseApi';
+import FakeServerConfigurationProvider from '../test-utils/FakeServerConfigurationProvider';
+import { QuestionnaireDetails, Survey } from '../../common/interfaces/surveyInterface';
+import userMockObject from '../test-utils/userMockObject';
+import AuditLogger from '../auditLogger';
 
 // create fake config
 const configFake = new FakeServerConfigurationProvider();

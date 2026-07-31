@@ -1,6 +1,6 @@
 import { Questionnaire } from 'blaise-api-node-client';
-import mapQuestionnaireDetails from '../../../server/questionnaireMapper';
-import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
+import mapQuestionnaireDetails from './questionnaireMapper';
+import { QuestionnaireDetails } from '../common/interfaces/surveyInterface';
 
 describe('Map a questionnaire', () => {
   it('It should return a correctly mapped questionnaire given all details are present', () => {

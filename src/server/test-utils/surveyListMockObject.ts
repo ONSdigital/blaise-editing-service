@@ -1,4 +1,4 @@
-import { Survey } from '../../../common/interfaces/surveyInterface';
+import { Survey } from '../../common/interfaces/surveyInterface';
 import { frsQuestionnaireDetails1MockObject, frsQuestionnaireDetails2MockObject } from './questionnaireListMockObject';
 
 const surveyListMockObject: Survey[] = [

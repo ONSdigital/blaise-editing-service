@@ -1,8 +1,8 @@
-import { QuestionnaireDetails, Survey } from '../../../common/interfaces/surveyInterface';
-import mapSurveys from '../../../server/surveyMapper';
+import { QuestionnaireDetails, Survey } from '../common/interfaces/surveyInterface';
+import mapSurveys from './surveyMapper';
 import {
   frsQuestionnaireDetails1MockObject, frsQuestionnaireDetails2MockObject, lmsQuestionnaireDetailsMockObject, opnQuestionnaireDetailsMockObject,
-} from '../mockObjects/questionnaireListMockObject';
+} from './test-utils/questionnaireListMockObject';
 
 describe('Map questionnaire list to survey list', () => {
   it('Should return expected list of surveys', () => {

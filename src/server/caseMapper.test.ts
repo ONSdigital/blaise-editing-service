@@ -2,9 +2,9 @@ import {
   describe, beforeEach, it, vi,
 } from 'vitest';
 import { CaseResponse } from 'blaise-api-node-client';
-import { caseResponseMockObject } from '../mockObjects/CaseMockObject';
-import { CaseSummaryDetails, HousingBenefits } from '../../../common/interfaces/caseInterface';
-import mapCaseSummary from '../../../server/caseMapper';
+import { caseResponseMockObject } from './test-utils/CaseMockObject';
+import { CaseSummaryDetails, HousingBenefits } from '../common/interfaces/caseInterface';
+import mapCaseSummary from './caseMapper';
 
 function SetFieldsToValue(CaseResponseData: CaseResponse, fieldEndsWith: string, fieldValue: string): void {
   Object.keys(CaseResponseData.fieldData).forEach((key) => {
