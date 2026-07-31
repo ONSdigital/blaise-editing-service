@@ -5,16 +5,16 @@ import express, {
 import ejs from 'ejs';
 import path from 'path';
 import { Auth, newLoginHandler } from 'blaise-login-react/blaise-login-react-server';
-import SurveyController from './controllers/surveyController';
+import SurveyHandler from './handlers/surveyHandler';
 import ConfigurationProvider from './configuration/ServerConfigurationProvider';
 import BlaiseApi from './api/BlaiseApi';
 import BlaiseApiClient from 'blaise-api-node-client';
 import createLogger from "./pino";
 import { HttpLogger } from "pino-http";
 import AuditLogger from "./logger/auditLogger";
-import CaseController from './controllers/caseController';
+import CaseHandler from './handlers/caseHandler';
 import newClientLogHandler from "./handlers/clientLogHandler";
-import UserController from './controllers/userController';
+import UserHandler from './handlers/userHandler';
 
 
 export interface NodeServerDependencies {
@@ -61,16 +61,16 @@ export default function nodeServer(
   const auditLogger = dependencies.auditLogger ?? new AuditLogger("BES");
 
   // survey routing
-  const surveyController = new SurveyController(blaiseApi, config, auth, auditLogger);
-  server.use('/', surveyController.getRoutes());
+  const surveyHandler = new SurveyHandler(blaiseApi, config, auth, auditLogger);
+  server.use('/', surveyHandler.getRoutes());
 
   // case routing
-  const caseController = new CaseController(blaiseApi, config, auth, auditLogger);
-  server.use('/', caseController.getRoutes());
+  const caseHandler = new CaseHandler(blaiseApi, config, auth, auditLogger);
+  server.use('/', caseHandler.getRoutes());
 
   // User routing
-  const userController = new UserController(blaiseApi, config, auth, auditLogger);
-  server.use('/', userController.getRoutes());
+  const userHandler = new UserHandler(blaiseApi, config, auth, auditLogger);
+  server.use('/', userHandler.getRoutes());
 
   // login routing
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);

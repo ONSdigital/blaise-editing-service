@@ -9,7 +9,7 @@ import mapSurveys from '../mappers/surveyMapper';
 import BlaiseApi from '../api/BlaiseApi';
 import ServerConfigurationProvider from '../configuration/ServerConfigurationProvider';
 
-export default class SurveyController implements Controller {
+export default class SurveyHandler implements Controller {
   blaiseApi: BlaiseApi;
   configuration: ServerConfigurationProvider;
   auth: Auth;

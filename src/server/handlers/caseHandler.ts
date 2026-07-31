@@ -10,7 +10,7 @@ import ServerConfigurationProvider from '../configuration/ServerConfigurationPro
 import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
 import mapCaseSummary from '../mappers/caseMapper';
 
-export default class CaseController implements Controller {
+export default class CaseHandler implements Controller {
   blaiseApi: BlaiseApi;
   configuration: ServerConfigurationProvider;
   auth: Auth;

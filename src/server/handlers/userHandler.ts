@@ -7,7 +7,7 @@ import BlaiseApi from '../api/BlaiseApi';
 import AuditLogger from "../logger/auditLogger";
 import ServerConfigurationProvider from '../configuration/ServerConfigurationProvider';
 
-export default class UserController implements Controller {
+export default class UserHandler implements Controller {
   blaiseApi: BlaiseApi;
   configuration: ServerConfigurationProvider;
   auth: Auth;
