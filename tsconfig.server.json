@@ -2,7 +2,7 @@
     "compilerOptions": {
       "target": "ESNext",
       "types": ["vite/client", "vitest/globals"],
-      "outDir": "dist",
+      "outDir": "build/server",
       "lib": [
         "dom",
         "dom.iterable",

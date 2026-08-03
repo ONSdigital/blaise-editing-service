@@ -5,7 +5,7 @@ import ServerConfigurationProvider from './ServerConfigurationProvider';
  
 const emptyEnv = process.env;
 const blaiseApiUrl = 'rest.api.blaise.com';
-const buildFolder = '../../dist';
+const buildFolder = '../client';
 const port = 5000;
 const serverPark = 'gusty';
 const externalWebUrl = 'cati.blaise.com';

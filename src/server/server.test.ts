@@ -51,7 +51,7 @@ describe('All expected routes are registered', () => {
 describe('Render react pages as default route', () => {
   it('should render the home page', async () => {
     // arrange
-    server.set('views', path.join(__dirname, '../../../dist'));
+    server.set('views', path.join(__dirname, '../../build/client'));
     const sut = supertest(server);
 
     // act
@@ -70,7 +70,7 @@ describe('500 Error Handling Middleware', () => {
     // Arrange
     const app = express();
 
-    app.set('views', path.join(__dirname, '../../../dist'));
+    app.set('views', path.join(__dirname, '../../build/client'));
     app.engine('html', ejs.renderFile);
 
     app.get('/test-error', (_req, _res, next) => {

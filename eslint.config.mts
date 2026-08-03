@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 export default tseslint.config(
   {
-    ignores: ["dist", "coverage", "node_modules", "vite.config.ts", "vitest.config.ts"],
+    ignores: ["dist", "build", "coverage", "node_modules", "vite.config.ts", "vitest.config.ts"],
   },
   {
     extends: [
