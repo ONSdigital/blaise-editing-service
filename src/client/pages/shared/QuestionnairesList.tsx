@@ -4,12 +4,12 @@ import { User } from 'blaise-api-node-client';
 import { QuestionnaireDetails } from '../../../common/interfaces/surveyInterface';
 import Option from '../../types/controlsInterface';
 import UserRole from '../../types/UserTypes';
-import SupervisorQuestionnaireDetails from '../Supervisor/Components/SupervisorQuestionnaireDetails';
-import EditorQuestionnaireDetails from '../Editor/Components/EditorQuestionnaireDetails';
+import SupervisorQuestionnaireDetails from '../supervisorPage/sections/SupervisorQuestionnaireDetails';
+import EditorQuestionnaireDetails from '../editorPage/sections/EditorQuestionnaireDetails';
 import ErrorPanel from './ErrorPanel';
 import questionnaireDisplayName from '../../utils/QuestionnaireFunctions';
-import ResearchQuestionnaireDetails from '../Research/Components/ResearchQuestionnaireDetails';
-import SupportQuestionnaireDetails from '../Support/Components/SupportQuestionnaireDetails';
+import ResearchQuestionnaireDetails from '../researchPage/sections/ResearchQuestionnaireDetails';
+import SupportQuestionnaireDetails from '../supportPage/sections/SupportQuestionnaireDetails';
 
 interface QuestionnairesListProps {
   questionnaires: QuestionnaireDetails[];

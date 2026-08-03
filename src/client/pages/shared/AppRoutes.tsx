@@ -3,14 +3,14 @@ import { Route } from 'react-router-dom';
 import { User } from 'blaise-api-node-client';
 import UserRole from '../../types/UserTypes';
 import CreateRoutes from './CreateRoutes';
-import SupervisorHome from '../Supervisor/Pages/SupervisorHome';
-import EditorHome from '../Editor/Pages/EditorHome';
-import Allocate from '../Supervisor/Pages/Allocate';
-import CaseSummary from '../Editor/Pages/CaseSummary';
-import ResearchHome from '../Research/Pages/ResearchHome';
-import CaseSearch from '../Supervisor/Components/CaseSearch';
+import SupervisorHome from '../supervisorPage/SupervisorHome';
+import EditorHome from '../editorPage/EditorHome';
+import Allocate from '../supervisorPage/Allocate';
+import CaseSummary from '../editorPage/CaseSummary';
+import ResearchHome from '../researchPage/ResearchHome';
+import CaseSearch from '../supervisorPage/sections/CaseSearch';
 import EditCaseContent from './EditCaseContent';
-import SupportHome from '../Support/Pages/SupportHome';
+import SupportHome from '../supportPage/SupportHome';
 
 interface AppContentProps {
   user:User

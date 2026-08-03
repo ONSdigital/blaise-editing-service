@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 import CaseSearchForm from '../../shared/CaseSearchForm';
-import { AllocateParams } from '../Pages/Allocate';
+import { AllocateParams } from '../Allocate';
 import UserRole from '../../../types/UserTypes';
 import questionnaireDisplayName from '../../../utils/QuestionnaireFunctions';
 import Breadcrumbs from '../../shared/Breadcrumbs';

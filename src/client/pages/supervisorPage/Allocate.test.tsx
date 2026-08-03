@@ -2,10 +2,10 @@ import {
   render, act, RenderResult, fireEvent,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { getAllocationDetails, updateAllocationDetails } from '../../../api/NodeApi';
-import UserRole from '../../../types/UserTypes';
-import { AllocationDetails } from '../../../../common/interfaces/allocationInterface';
-import AllocationMockObject from '../../../test-utils/AllocationMockObjects';
+import { getAllocationDetails, updateAllocationDetails } from '../../api/NodeApi';
+import UserRole from '../../types/UserTypes';
+import { AllocationDetails } from '../../../common/interfaces/allocationInterface';
+import AllocationMockObject from '../../test-utils/AllocationMockObjects';
 import Allocate from './Allocate';
 
 // set global vars
@@ -20,7 +20,7 @@ vi.mock('react-router-dom', async () => ({
   useParams: vi.fn().mockReturnValue({ questionnaireName: 'FRS2504A', caseId: '10001011' }),
 }));
 
-vi.mock('../../../api/NodeApi');
+vi.mock('../../api/NodeApi');
 const getAllocationDetailsMock = getAllocationDetails as vi.mock<Promise<AllocationDetails>>;
 const updateAllocationDetailsMock = updateAllocationDetails as vi.mock<Promise<void>>;
 

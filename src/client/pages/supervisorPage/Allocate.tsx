@@ -1,13 +1,13 @@
 import { ReactElement, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ONSPanel } from 'blaise-design-system-react-components';
-import UserRole from '../../../types/UserTypes';
-import ErrorPanel from '../../shared/ErrorPanel';
-import SuccessPanel from '../../shared/SuccessPanel';
-import AllocateContent from '../Components/AllocateContent';
-import { Message } from '../../../types/MessageType';
-import questionnaireDisplayName from '../../../utils/QuestionnaireFunctions';
-import Breadcrumbs from '../../shared/Breadcrumbs';
+import UserRole from '../../types/UserTypes';
+import ErrorPanel from '../shared/ErrorPanel';
+import SuccessPanel from '../shared/SuccessPanel';
+import AllocateContent from './sections/AllocateContent';
+import { Message } from '../../types/MessageType';
+import questionnaireDisplayName from '../../utils/QuestionnaireFunctions';
+import Breadcrumbs from '../shared/Breadcrumbs';
 
 interface AllocateProps {
   supervisorRole: UserRole;

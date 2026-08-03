@@ -4,21 +4,21 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import UserRole from '../../../types/UserTypes';
-import { getCaseSearchResults, getSurveys } from '../../../api/NodeApi';
-import { Survey } from '../../../../common/interfaces/surveyInterface';
-import FilteredSurveyListMockObject from '../../../test-utils/SurveyMockObjects';
-import userMockObject from '../../../../server/test-utils/userMockObject';
+import UserRole from '../../types/UserTypes';
+import { getCaseSearchResults, getSurveys } from '../../api/NodeApi';
+import { Survey } from '../../../common/interfaces/surveyInterface';
+import FilteredSurveyListMockObject from '../../test-utils/SurveyMockObjects';
+import userMockObject from '../../../server/test-utils/userMockObject';
 import SupportHome from './SupportHome';
-import { CaseEditInformationListMockObject } from '../../../../server/test-utils/CaseMockObject';
+import { CaseEditInformationListMockObject } from '../../../server/test-utils/CaseMockObject';
 
 // set global vars
 const userRole:string = UserRole.Survey_Support;
 let view:RenderResult;
 // set mocks
-vi.mock('../../../api/NodeApi', async () => {
-  const actual = await vi.importActual<typeof import('../../../api/NodeApi')>(
-    '../../../api/NodeApi');
+vi.mock('../../api/NodeApi', async () => {
+  const actual = await vi.importActual<typeof import('../../api/NodeApi')>(
+    '../../api/NodeApi');
 
   return {
     ...actual,

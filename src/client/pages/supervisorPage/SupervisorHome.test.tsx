@@ -4,25 +4,25 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import userMockObject from '../../../../server/test-utils/userMockObject';
-import { getCaseSearchResults, getSupervisorEditorInformation, getSurveys } from '../../../api/NodeApi';
-import { Survey } from '../../../../common/interfaces/surveyInterface';
+import userMockObject from '../../../server/test-utils/userMockObject';
+import { getCaseSearchResults, getSupervisorEditorInformation, getSurveys } from '../../api/NodeApi';
+import { Survey } from '../../../common/interfaces/surveyInterface';
 import SupervisorHome from './SupervisorHome';
-import { SupervisorInformation } from '../../../types/supervisorInterface';
-import UserRole from '../../../types/UserTypes';
-import FilteredSurveyListMockObject from '../../../test-utils/SurveyMockObjects';
-import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../../test-utils/SupervisorMockObjects';
-import { CaseEditInformationListMockObject, CaseEditInformationEmptyListMockObject } from '../../../../server/test-utils/CaseMockObject';
-import CaseSearchForm from '../../shared/CaseSearchForm';
+import { SupervisorInformation } from '../../types/supervisorInterface';
+import UserRole from '../../types/UserTypes';
+import FilteredSurveyListMockObject from '../../test-utils/SurveyMockObjects';
+import { SupervisorInformationMockObject1, SupervisorInformationMockObject2 } from '../../test-utils/SupervisorMockObjects';
+import { CaseEditInformationListMockObject, CaseEditInformationEmptyListMockObject } from '../../../server/test-utils/CaseMockObject';
+import CaseSearchForm from '../shared/CaseSearchForm';
 
 // set global vars
 const userRole:string = UserRole.SVT_Supervisor;
 let view:RenderResult;
 
 // set mocks
-vi.mock('../../../api/NodeApi', async () => {
-  const actual = await vi.importActual<typeof import('../../../api/NodeApi')>(
-    '../../../api/NodeApi');
+vi.mock('../../api/NodeApi', async () => {
+  const actual = await vi.importActual<typeof import('../../api/NodeApi')>(
+    '../../api/NodeApi');
 
   return {
     ...actual,
