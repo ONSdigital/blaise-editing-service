@@ -2,23 +2,23 @@ import {
   render, act, RenderResult, screen,
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import userMockObject from '../../../server/mockObjects/userMockObject';
-import { getEditorInformation, getSurveys } from '../../../../client/api/NodeApi';
+import userMockObject from '../../../../server/test-utils/userMockObject';
+import { getEditorInformation, getSurveys } from '../../../api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
-import EditorHome from '../../../../client/pages/Editor/Pages/EditorHome';
-import { EditorInformation } from '../../../../client/types/editorInterface';
-import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
-import { EditorInformationMockObject1, EditorInformationMockObject2 } from '../../MockObjects/EditorMockObjects';
-import UserRole from '../../../../client/types/UserTypes';
+import EditorHome from './EditorHome';
+import { EditorInformation } from '../../../types/editorInterface';
+import FilteredSurveyListMockObject from '../../../test-utils/SurveyMockObjects';
+import { EditorInformationMockObject1, EditorInformationMockObject2 } from '../../../test-utils/EditorMockObjects';
+import UserRole from '../../../types/UserTypes';
 
 // set global vars
 const userRole:string = UserRole.SVT_Editor;
 let view:RenderResult;
 
 // set mocks
-vi.mock('../../../../client/api/NodeApi', async () => {
-  const actual = await vi.importActual<typeof import('../../../../client/api/NodeApi')>(
-    '../../../../client/api/NodeApi');
+vi.mock('../../../api/NodeApi', async () => {
+  const actual = await vi.importActual<typeof import('../../../api/NodeApi')>(
+    '../../../api/NodeApi');
 
   return {
     ...actual,

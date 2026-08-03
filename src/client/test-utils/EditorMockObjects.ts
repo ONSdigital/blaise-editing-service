@@ -1,4 +1,4 @@
-import { EditorInformation } from '../../../client/types/editorInterface';
+import { EditorInformation } from '../types/editorInterface';
 
 export const EditorInformationMockObject1: EditorInformation = {
   numberOfCasesAllocated: 5,

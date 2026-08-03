@@ -4,21 +4,22 @@ import {
 import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import UserRole from '../../../../client/types/UserTypes';
-import { getCaseSearchResults, getSurveys } from '../../../../client/api/NodeApi';
+import UserRole from '../../../types/UserTypes';
+import { getCaseSearchResults, getSurveys } from '../../../api/NodeApi';
 import { Survey } from '../../../../common/interfaces/surveyInterface';
-import FilteredSurveyListMockObject from '../../MockObjects/SurveyMockObjects';
-import userMockObject from '../../../server/mockObjects/userMockObject';
-import SupportHome from '../../../../client/pages/Support/Pages/SupportHome';
-import { CaseEditInformationListMockObject } from '../../../server/mockObjects/CaseMockObject';
+import FilteredSurveyListMockObject from '../../../test-utils/SurveyMockObjects';
+import userMockObject from '../../../../server/test-utils/userMockObject';
+import ResearchHome from './ResearchHome';
+import { CaseEditInformationListMockObject } from '../../../../server/test-utils/CaseMockObject';
 
 // set global vars
-const userRole:string = UserRole.Survey_Support;
+const userRole:string = UserRole.FRS_Researcher;
 let view:RenderResult;
+
 // set mocks
-vi.mock('../../../../client/api/NodeApi', async () => {
-  const actual = await vi.importActual<typeof import('../../../../client/api/NodeApi')>(
-    '../../../../client/api/NodeApi');
+vi.mock('../../../api/NodeApi', async () => {
+  const actual = await vi.importActual<typeof import('../../../api/NodeApi')>(
+    '../../../api/NodeApi');
 
   return {
     ...actual,
@@ -38,7 +39,7 @@ describe('Given there are surveys available in blaise', () => {
     getCaseInformationMock.mockImplementation(() => Promise.resolve(CaseEditInformationListMockObject));
   });
 
-  it('should render the Support page correctly when surveys are returned', async () => {
+  it('should render the Research page correctly when surveys are returned', async () => {
     // arrange
     const user = userMockObject;
     user.role = userRole;
@@ -47,14 +48,14 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
 
     // assert
     expect(view).toMatchSnapshot(
-      'SupportPageSurveysReturned',
+      'ResearchPageSurveysReturned',
     );
   });
 
@@ -67,7 +68,7 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -87,13 +88,13 @@ describe('Given there are surveys available in blaise', () => {
 
       expect(questionnaireListView).toHaveTextContent(defaultQuestionnaire.questionnaireName.replace('_EDIT', ''));
 
-      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Support-Content`);
+      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Research-Content`);
       expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.fieldPeriod));
       expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.numberOfCases));
     });
   });
 
-  it('should render the Support page correctly and Search button disabled because search text not entered', async () => {
+  it('should render the Research page correctly and Search button disabled because search text not entered', async () => {
     // arrange
     const user = userMockObject;
     user.role = userRole;
@@ -101,7 +102,7 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -111,11 +112,11 @@ describe('Given there are surveys available in blaise', () => {
 
     // assert
     expect(view).toMatchSnapshot(
-      'SupportPageSurveysReturnedSearchInitial',
+      'ResearchPageSurveysReturnedSearchInitial',
     );
   });
 
-  it('should render the Support page correctly and Search button enabled after search text entered', async () => {
+  it('should render the Research page correctly and Search button enabled after search text entered', async () => {
     // arrange
     const user = userMockObject;
     user.role = userRole;
@@ -123,7 +124,7 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -135,11 +136,11 @@ describe('Given there are surveys available in blaise', () => {
 
     // assert
     expect(view).toMatchSnapshot(
-      'SupportPageSurveysReturnedSearchTextEntered',
+      'ResearchPageSurveysReturnedSearchTextEntered',
     );
   });
 
-  it('should render the Support page correctly when surveys are returned and search used', async () => {
+  it('should render the Research page correctly when surveys are returned and search used', async () => {
     // arrange
     const user = userMockObject;
     user.role = userRole;
@@ -147,7 +148,7 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -160,7 +161,7 @@ describe('Given there are surveys available in blaise', () => {
 
     // assert
     expect(view).toMatchSnapshot(
-      'SupportPageSurveysReturnedSearchUsed',
+      'ResearchPageSurveysReturnedSearchUsed',
     );
   });
 
@@ -172,7 +173,7 @@ describe('Given there are surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -199,7 +200,7 @@ describe('Given there are surveys available in blaise', () => {
 
       expect(questionnaireListView).toHaveTextContent(defaultQuestionnaire.questionnaireName.replace('_EDIT', ''));
 
-      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Support-Content`);
+      const questionnaireView = view.getByTestId(`${defaultQuestionnaireName}-Research-Content`);
       expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.fieldPeriod));
       expect(questionnaireView).toHaveTextContent(String(defaultQuestionnaire.numberOfCases));
 
@@ -214,7 +215,7 @@ describe('Given there are surveys available in blaise', () => {
         expect(outcomeRows[index]).toHaveTextContent(caseDetails.outcome.toString());
         expect(interviewerRows[index]).toHaveTextContent(caseDetails.interviewer);
         expect(organisationRows[index]).toHaveTextContent(Organisation[caseDetails.organisation]?.toString() ?? '');
-        expect(linksRows[index]).toHaveTextContent('Edit interviewer case | View interviewer case');
+        expect(linksRows[index]).toHaveTextContent('Edit case | View case');
       });
     });
   });
@@ -238,14 +239,14 @@ describe('Given there are no surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
 
     // assert
     expect(view).toMatchSnapshot(
-      'SupportPageNoSurveysReturned',
+      'ResearchPageNoSurveysReturned',
     );
   });
 
@@ -258,7 +259,7 @@ describe('Given there are no surveys available in blaise', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -287,7 +288,7 @@ describe('Given there the blaise rest api is not available', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
@@ -306,14 +307,14 @@ describe('Given there the blaise rest api is not available', () => {
     await act(async () => {
       view = render(
         <BrowserRouter>
-          <SupportHome user={user} />
+          <ResearchHome user={user} />
         </BrowserRouter>,
       );
     });
 
     // assert
     expect(view).toMatchSnapshot(
-      'SupportPageError',
+      'ResearchPageError',
     );
   });
 });
@@ -335,7 +336,7 @@ describe('Given there is an error that triggered a catch all 404 or 500 response
     user.role = userRole;
 
     // act
-    render(<SupportHome user={user} />);
+    render(<ResearchHome user={user} />);
 
     // assert
     expect(await screen.findByTestId('ErrorMessage')).toHaveTextContent('Something went wrong');

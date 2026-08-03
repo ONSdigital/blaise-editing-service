@@ -1,4 +1,4 @@
-import { AllocationDetails } from '../../../common/interfaces/allocationInterface';
+import { AllocationDetails } from '../../common/interfaces/allocationInterface';
 
 const AllocationMockObject: AllocationDetails = {
   Editors: [{

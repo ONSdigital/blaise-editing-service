@@ -3,19 +3,19 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { vi, type MockInstance } from 'vitest';
-import { DownloadCaseSummaryLink, Props } from '../../../../client/pages/shared/DownloadCaseSummaryLink';
-import { getCaseSummary } from '../../../../client/api/NodeApi';
-import mapCaseSummaryText from '../../../../client/utils/caseSummaryTextMapper';
-import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';
-import { clientLogger } from "../../../../client/logger";
+import { DownloadCaseSummaryLink, Props } from './DownloadCaseSummaryLink';
+import { getCaseSummary } from '../../api/NodeApi';
+import mapCaseSummaryText from '../../utils/caseSummaryTextMapper';
+import { caseSummaryDetailsMockObject } from '../../../server/test-utils/CaseMockObject';
+import { clientLogger } from "../../logger";
 
-vi.mock('../../../../client/api/NodeApi', () => ({
+vi.mock('../../api/NodeApi', () => ({
   getCaseSummary: vi.fn(),
 }));
 
-vi.mock('../../../../client/Mappers/caseSummaryTextMapper', () => ({ default: vi.fn() }));
+vi.mock('../../utils/caseSummaryTextMapper', () => ({ default: vi.fn() }));
 
-vi.mock('../../../../client/logger', () => ({
+vi.mock('../../logger', () => ({
   clientLogger: {
     debug: vi.fn(),
     info: vi.fn(),

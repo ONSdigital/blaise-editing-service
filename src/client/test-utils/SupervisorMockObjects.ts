@@ -1,4 +1,4 @@
-import { SupervisorInformation } from '../../../client/types/supervisorInterface';
+import { SupervisorInformation } from '../types/supervisorInterface';
 
 export const SupervisorInformationMockObject1: SupervisorInformation = {
   TotalNumberOfCases: 1000,

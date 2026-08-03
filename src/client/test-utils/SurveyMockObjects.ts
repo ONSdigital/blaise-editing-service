@@ -1,4 +1,4 @@
-import { Survey } from '../../../common/interfaces/surveyInterface';
+import { Survey } from '../../common/interfaces/surveyInterface';
 
 const FilteredSurveyListMockObject :Survey[] = [{
   name: 'FRS',

@@ -4,9 +4,9 @@ import {
 import { RenderResult, act, render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { CaseSummaryDetails } from '../../../../common/interfaces/caseInterface';
-import CaseSummary from '../../../../client/pages/Editor/Pages/CaseSummary';
-import { getCaseSummary } from '../../../../client/api/NodeApi';
-import { caseSummaryDetailsMockObject } from '../../../server/mockObjects/CaseMockObject';
+import CaseSummary from './CaseSummary';
+import { getCaseSummary } from '../../../api/NodeApi';
+import { caseSummaryDetailsMockObject } from '../../../../server/test-utils/CaseMockObject';
 
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
@@ -18,7 +18,7 @@ vi.mock('react-router-dom', async () => {
     }),
   };
 });
-vi.mock('../../../../client/api/NodeApi');
+vi.mock('../../../api/NodeApi');
 
 // declare global vars
 let view: RenderResult;

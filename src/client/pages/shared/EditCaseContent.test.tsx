@@ -4,10 +4,10 @@ import {
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { CaseEditInformation } from 'blaise-api-node-client';
-import { getSpecificCaseEditInformation, setCaseToUpdate } from '../../../../client/api/NodeApi';
-import UserRole from '../../../../client/types/UserTypes';
-import EditCaseContent from '../../../../client/pages/shared/EditCaseContent';
-import { caseEditInformationMockObject1 } from '../../../server/mockObjects/CaseMockObject';
+import { getSpecificCaseEditInformation, setCaseToUpdate } from '../../api/NodeApi';
+import UserRole from '../../types/UserTypes';
+import EditCaseContent from './EditCaseContent';
+import { caseEditInformationMockObject1 } from '../../../server/test-utils/CaseMockObject';
 
 // set global vars
 const supervisorRole:UserRole = UserRole.SVT_Supervisor;
@@ -22,7 +22,7 @@ vi.mock('react-router-dom', async () => ({
   useParams: vi.fn().mockReturnValue({ questionnaireName: 'FRS2504A', caseId: '10001011' }),
 }));
 
-vi.mock('../../../../client/api/NodeApi');
+vi.mock('../../api/NodeApi');
 const getSpecificCaseEditInformationMock = getSpecificCaseEditInformation as vi.mock<Promise<CaseEditInformation>>;
 const setCaseToUpdateMock = setCaseToUpdate as vi.mock<Promise<number>>;
 

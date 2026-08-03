@@ -2,8 +2,8 @@ import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/c
 import CaseOutcome from 'blaise-api-node-client/lib/cjs/enums/caseOutcome';
 import EditedStatus from 'blaise-api-node-client/lib/cjs/enums/editedStatus';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import mapAllocationDetails from '../../../client/utils/caseAllocationMapper';
-import { AllocationDetails } from '../../../common/interfaces/allocationInterface';
+import mapAllocationDetails from './caseAllocationMapper';
+import { AllocationDetails } from '../../common/interfaces/allocationInterface';
 
 describe('Map cases not allocated informaiton', () => {
   it('It should return a correctly mapped cases not allocated model given all details are present', () => {

@@ -2,8 +2,8 @@ import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/c
 import CaseOutcome from 'blaise-api-node-client/lib/cjs/enums/caseOutcome';
 import EditedStatus from 'blaise-api-node-client/lib/cjs/enums/editedStatus';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import mapEditorInformation from '../../../client/utils/editorInformaitionMapper';
-import { EditorInformation } from '../../../client/types/editorInterface';
+import mapEditorInformation from './editorInformaitionMapper';
+import { EditorInformation } from '../types/editorInterface';
 
 describe('Map editor informaiton', () => {
   it('It should return a correctly mapped editor information model given all details are present', () => {

@@ -5,12 +5,12 @@ import {
   render, screen
 } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { getEditorInformation, getSupervisorEditorInformation, getSurveys } from '../../client/api/NodeApi';
-import userMockObject from '../server/mockObjects/userMockObject';
-import App from '../../client/App';
-import { SupervisorInformationMockObject1 } from './MockObjects/SupervisorMockObjects';
-import FilteredSurveyListMockObject from './MockObjects/SurveyMockObjects';
-import { EditorInformationMockObject1 } from './MockObjects/EditorMockObjects';
+import { getEditorInformation, getSupervisorEditorInformation, getSurveys } from './api/NodeApi';
+import userMockObject from '../server/test-utils/userMockObject';
+import App from './App';
+import { SupervisorInformationMockObject1 } from './test-utils/SupervisorMockObjects';
+import FilteredSurveyListMockObject from './test-utils/SurveyMockObjects';
+import { EditorInformationMockObject1 } from './test-utils/EditorMockObjects';
 
 const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
 
@@ -24,7 +24,7 @@ vi.mock('blaise-login-react/blaise-login-react-client', async () => {
 
 const { MockAuthenticate } = await vi.importActual<typeof import('blaise-login-react/blaise-login-react-client')>('blaise-login-react/blaise-login-react-client');
 
-vi.mock('../../client/api/NodeApi');
+vi.mock('./api/NodeApi');
 const getSurveysMock = getSurveys as Mock;
 const getEditorInformationMock = getEditorInformation as Mock;
 const getSupervisorEditorInformationMock = getSupervisorEditorInformation as Mock;

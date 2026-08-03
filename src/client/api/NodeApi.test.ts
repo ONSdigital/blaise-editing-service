@@ -4,7 +4,7 @@ import {
   CaseEditInformation, CaseOutcome, EditedStatus, User,
 } from 'blaise-api-node-client/lib/cjs/blaiseApiClient';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import surveyListMockObject from '../../server/mockObjects/surveyListMockObject';
+import surveyListMockObject from '../../server/test-utils/surveyListMockObject';
 import {
   getSurveys, getEditorInformation, getSupervisorEditorInformation, getCaseSummary,
   getAllocationDetails,
@@ -12,12 +12,12 @@ import {
   getCaseSearchResults,
   setCaseToUpdate,
   getSpecificCaseEditInformation,
-} from '../../../client/api/NodeApi';
-import { EditorInformation } from '../../../client/types/editorInterface';
-import { SupervisorInformation } from '../../../client/types/supervisorInterface';
-import UserRole from '../../../client/types/UserTypes';
-import { caseSummaryDetailsMockObject } from '../../server/mockObjects/CaseMockObject';
-import { AllocationDetails } from '../../../common/interfaces/allocationInterface';
+} from './NodeApi';
+import { EditorInformation } from '../types/editorInterface';
+import { SupervisorInformation } from '../types/supervisorInterface';
+import UserRole from '../types/UserTypes';
+import { caseSummaryDetailsMockObject } from '../../server/test-utils/CaseMockObject';
+import { AllocationDetails } from '../../common/interfaces/allocationInterface';
 
 // use axios mock adapter
 const axiosMock = new MockAdapter(axios, { onNoMatch: 'throwException' });
