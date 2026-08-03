@@ -7,7 +7,7 @@ import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import userMockObject from '../../../server/test-utils/userMockObject';
 import { getCaseSearchResults, getSupervisorEditorInformation, getSurveys } from '../../api/NodeApi';
 import { Survey } from '../../../common/interfaces/surveyInterface';
-import SupervisorHome from './SupervisorHome';
+import SupervisorHome from './supervisorPage';
 import { SupervisorInformation } from '../../types/supervisorInterface';
 import UserRole from '../../types/UserTypes';
 import FilteredSurveyListMockObject from '../../test-utils/SurveyMockObjects';

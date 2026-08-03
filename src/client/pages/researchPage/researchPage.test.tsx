@@ -9,7 +9,7 @@ import { getCaseSearchResults, getSurveys } from '../../api/NodeApi';
 import { Survey } from '../../../common/interfaces/surveyInterface';
 import FilteredSurveyListMockObject from '../../test-utils/SurveyMockObjects';
 import userMockObject from '../../../server/test-utils/userMockObject';
-import ResearchHome from './ResearchHome';
+import ResearchHome from './researchPage';
 import { CaseEditInformationListMockObject } from '../../../server/test-utils/CaseMockObject';
 
 // set global vars
