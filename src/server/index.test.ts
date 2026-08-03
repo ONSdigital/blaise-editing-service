@@ -27,14 +27,14 @@ describe("server entrypoint", () => {
                 config: dotenvConfigMock,
             },
         }));
-        vi.doMock("../../server/server", () => ({
+        vi.doMock("./server", () => ({
             default: nodeServerMock,
         }));
-        vi.doMock("../../server/configuration/ServerConfigurationProvider", () => ({
+        vi.doMock("./ServerConfigurationProvider", () => ({
             default: configProviderMock,
         }));
 
-        await import("../../server/index");
+        await import("./index");
 
         expect(dotenvConfigMock).toHaveBeenCalledTimes(1);
         expect(configProviderMock).toHaveBeenCalledTimes(1);

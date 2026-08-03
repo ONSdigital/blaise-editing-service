@@ -5,7 +5,7 @@ import { CaseSummaryDetails } from '../../../../common/interfaces/caseInterface'
 import { CaseSummaryParams } from '../../../types/CaseSummaryParams';
 import AsyncContent from '../../shared/AsyncContent';
 import { useAsyncRequestWithTwoParams } from '../../../utils/useAsyncRequest';
-import { getCaseSummary } from '../../api/NodeApi';
+import { getCaseSummary } from '../../../api/NodeApi';
 
 function DisplayCaseSummary(questionnaireName: string, caseId: string) {
   const caseSummary = useAsyncRequestWithTwoParams<CaseSummaryDetails, string, string>(getCaseSummary, questionnaireName, caseId);

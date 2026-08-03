@@ -5,7 +5,7 @@ import { getSpecificCaseEditInformation } from '../../api/NodeApi';
 import { CaseSummaryParams } from '../../types/CaseSummaryParams';
 import UserRole from '../../types/UserTypes';
 import AsyncContent from './AsyncContent';
-import { useAsyncRequestWithThreeParams } from '../hooks/useAsyncRequest';
+import { useAsyncRequestWithThreeParams } from '../../utils/useAsyncRequest';
 import { Message } from '../../types/MessageType';
 import ErrorPanel from './ErrorPanel';
 import SuccessPanel from './SuccessPanel';

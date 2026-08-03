@@ -1,5 +1,5 @@
 import { CaseResponse } from 'blaise-api-node-client';
-import { CaseSummaryDetails, HousingBenefits } from '../../common/interfaces/caseInterface';
+import { CaseSummaryDetails, HousingBenefits } from '../common/interfaces/caseInterface';
 
 const Accommodation: Record<number, string> = {
   1: 'House/Bungalow',

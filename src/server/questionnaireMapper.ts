@@ -1,5 +1,5 @@
 import { Questionnaire } from 'blaise-api-node-client';
-import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
+import { QuestionnaireDetails } from '../common/interfaces/surveyInterface';
 
 function mapFieldPeriod(fieldPeriodDate: string | undefined): string {
   if (fieldPeriodDate === undefined) {

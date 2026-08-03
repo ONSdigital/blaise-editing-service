@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { CaseEditInformation } from 'blaise-api-node-client';
 import { ONSPanel, ONSTable } from 'blaise-design-system-react-components';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { useAsyncRequestWithThreeParams } from '../hooks/useAsyncRequest';
+import { useAsyncRequestWithThreeParams } from '../../utils/useAsyncRequest';
 import UserRole from '../../types/UserTypes';
 import { getCaseSearchResults } from '../../api/NodeApi';
 import AsyncContent from './AsyncContent';

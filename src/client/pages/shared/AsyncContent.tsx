@@ -1,5 +1,5 @@
 import { ONSLoadingPanel } from 'blaise-design-system-react-components';
-import { AsyncState, hasErrored, isLoading } from '../hooks/useAsyncRequest';
+import { AsyncState, hasErrored, isLoading } from '../../utils/useAsyncRequest';
 import ErrorPanel from './ErrorPanel';
 
 interface AsyncContentProps<T> {

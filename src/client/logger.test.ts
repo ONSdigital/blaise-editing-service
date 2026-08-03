@@ -1,11 +1,11 @@
 import { vi } from "vitest";
 
-vi.mock("../../client/clientLog", () => ({
+vi.mock("./clientLog", () => ({
     sendClientLog: vi.fn().mockResolvedValue(undefined),
 }));
 
-import { sendClientLog } from "../../client/clientLog";
-import { clientLogger } from "../../client/logger";
+import { sendClientLog } from "./clientLog";
+import { clientLogger } from "./logger";
 
 describe("clientLogger", () => {
     afterEach(() => {

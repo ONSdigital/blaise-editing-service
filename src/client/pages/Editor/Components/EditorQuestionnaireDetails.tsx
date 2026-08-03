@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { QuestionnaireDetails } from '../../../../common/interfaces/surveyInterface';
 import { useAsyncRequestWithThreeParams } from '../../../utils/useAsyncRequest';
-import { getEditorInformation } from '../../api/NodeApi';
+import { getEditorInformation } from '../../../api/NodeApi';
 import AsyncContent from '../../shared/AsyncContent';
 import EditorContent from './EditorContent';
 import { EditorInformation } from '../../../types/editorInterface';

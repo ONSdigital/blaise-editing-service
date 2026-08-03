@@ -1,9 +1,9 @@
 import axios from "axios";
 import { vi } from "vitest";
 
-import { sendClientLog } from "../../client/clientLog";
+import { sendClientLog } from "./clientLog";
 
-vi.mock("../../client/api/AxiosApi", () => ({
+vi.mock("./api/AxiosApi", () => ({
     default: () => ({
         headers: { "X-Test": "1" },
     }),

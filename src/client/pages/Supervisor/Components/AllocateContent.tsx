@@ -2,7 +2,7 @@ import {
   Dispatch, ReactElement, SetStateAction, useState,
 } from 'react';
 import { AllocationDetails } from '../../../../common/interfaces/allocationInterface';
-import { getAllocationDetails, updateAllocationDetails } from '../../api/NodeApi';
+import { getAllocationDetails, updateAllocationDetails } from '../../../api/NodeApi';
 import AllocateContentForm from './AllocateContentForm';
 import Option from '../../../types/controlsInterface';
 import { useAsyncRequestWithThreeParamsWithRefresh } from '../../../utils/useAsyncRequest';

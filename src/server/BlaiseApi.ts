@@ -3,7 +3,7 @@ import BlaiseClient, {
   CaseEditInformation, CaseResponse, Questionnaire, User,
 } from 'blaise-api-node-client';
 import { ServerConfiguration } from './serverConfigurationInterface';
-import { QuestionnaireDetails } from '../../common/interfaces/surveyInterface';
+import { QuestionnaireDetails } from '../common/interfaces/surveyInterface';
 import mapQuestionnaireDetails from './questionnaireMapper';
 
 export default class BlaiseApi {
