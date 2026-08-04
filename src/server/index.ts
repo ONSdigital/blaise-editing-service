@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import nodeServer from './server';
-import ServerConfigurationProvider from './configuration/ServerConfigurationProvider';
+import ServerConfigurationProvider from './ServerConfigurationProvider';
 
 // create/get configuration
 dotenv.config(); // TODO: only needed for running locally
