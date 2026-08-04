@@ -10,7 +10,7 @@
   "scripts": {
     "start": "yarn start-server",
     "build": "yarn build-client && yarn build-server",
-    "clean": "npx rimraf dist",
+    "clean": "npx rimraf build dist",
     "test": "yarn clean && yarn build && yarn test-vitest",
     "test-vitest": "vitest --coverage --no-watch",
     "test:bail": "yarn test-vitest --bail 1",
@@ -24,7 +24,7 @@
     "build-client": "vite build",
     "start-client": "vite",
     "build-server": "tsc --project tsconfig.server.json",
-    "start-server": "node ./dist/server/index.js"
+    "start-server": "node ./build/server/index.js"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {

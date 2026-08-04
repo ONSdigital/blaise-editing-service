@@ -1,0 +1,151 @@
+import express, { Request, Response } from 'express';
+import { CaseEditInformation, User } from 'blaise-api-node-client';
+import { Auth } from 'blaise-login-react/blaise-login-react-server';
+import moment from 'moment';
+import { Controller } from '../controllerInterface';
+import notFound from '../helpers/axiosHelper';
+import BlaiseApi from '../BlaiseApi';
+import AuditLogger from "../auditLogger";
+import ServerConfigurationProvider from '../ServerConfigurationProvider';
+import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
+import mapCaseSummary from '../caseMapper';
+
+export default class CaseHandler implements Controller {
+  blaiseApi: BlaiseApi;
+  configuration: ServerConfigurationProvider;
+  auth: Auth;
+  auditLogger: AuditLogger;
+
+  constructor(blaiseApi: BlaiseApi, configuration: ServerConfigurationProvider, auth: Auth, auditLogger: AuditLogger) {
+    this.blaiseApi = blaiseApi;
+    this.configuration = configuration;
+    this.getCaseEditInformation = this.getCaseEditInformation.bind(this);
+    this.getCaseSummary = this.getCaseSummary.bind(this);
+    this.allocateCases = this.allocateCases.bind(this);
+    this.setCaseToUpdate = this.setCaseToUpdate.bind(this);
+    this.auth = auth;
+    this.auditLogger = auditLogger;
+  }
+
+  getRoutes() {
+    const router = express.Router();
+    router.get('/api/questionnaires/:questionnaireName/cases/:caseId/summary', this.auth.Middleware, this.getCaseSummary);
+    router.get('/api/questionnaires/:questionnaireName/cases/edit', this.auth.Middleware, this.getCaseEditInformation);
+    router.patch('/api/questionnaires/:questionnaireName/cases/allocate', this.auth.Middleware, this.allocateCases);
+    router.patch('/api/questionnaires/:questionnaireName/cases/:caseId/update', this.auth.Middleware, this.setCaseToUpdate);
+
+    return router;
+  }
+
+  async getCaseSummary(request: Request<{ questionnaireName: string, caseId: string }>, response: Response<CaseSummaryDetails>) {
+    const {
+      questionnaireName,
+      caseId,
+    } = request.params;
+
+    const user = this.auth.GetUser(this.auth.GetToken(request));
+
+    try {
+      const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
+      const caseSummary = mapCaseSummary(caseResponse);
+
+      this.auditLogger.info(request.log, `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      return response.status(200).json(caseSummary);
+    } catch (error: unknown) {
+      if (notFound(error)) {
+        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        return response.status(404).json();
+      }
+      this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      return response.status(500).json();
+    }
+  }
+
+  async getCaseEditInformation(request: Request<{ questionnaireName: string }, Record<string, never>, Record<string, never>, { userRole: string }>, response: Response<CaseEditInformation[]>) {
+    const { questionnaireName } = request.params;
+    const { userRole } = request.query;
+
+    const user = this.auth.GetUser(this.auth.GetToken(request));
+
+    try {
+      const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName, userRole, user, request);
+
+      return response.status(200).json(caseEditInformationList);
+    } catch (error: unknown) {
+      if (notFound(error)) {
+        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        return response.status(404).json();
+      }
+      this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      return response.status(500).json();
+    }
+  }
+
+  async GetCaseEditInformationForRole(questionnaireName: string, userRole: string, user: User, request: Request<{ questionnaireName: string }>): Promise<CaseEditInformation[]> {
+    const cases = await this.blaiseApi.getCaseEditInformation(questionnaireName);
+    this.auditLogger.info(request.log, `Retrieved ${cases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+
+    const surveyTla = questionnaireName.substring(0, 3);
+    const roleConfig = this.configuration.getSurveyConfigForRole(surveyTla, userRole);
+
+    const filteredcases = cases
+      .filter((caseEditInformation) => (roleConfig.Organisations.length > 0 ? roleConfig.Organisations.includes(caseEditInformation.organisation) : caseEditInformation))
+      .filter((caseEditInformation) => (roleConfig.Outcomes.length > 0 ? roleConfig.Outcomes.includes(caseEditInformation.outcome) : caseEditInformation));
+
+    this.auditLogger.info(request.log, `Filtered down to ${filteredcases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+
+    return filteredcases;
+  }
+
+  async allocateCases(request: Request<{ questionnaireName: string }, Record<string, never>, { name: string, cases: string[] }, Record<string, never>>, response: Response) {
+    const { questionnaireName } = request.params;
+    const { name, cases } = request.body;
+
+    const user = this.auth.GetUser(this.auth.GetToken(request));
+
+    try {
+      await Promise.all(
+        cases.map(async (caseId) => {
+          await this.blaiseApi.updateCase(questionnaireName, caseId, {
+            'QEdit.AssignedTo': name,
+            'QEdit.Edited': 1,
+          });
+        }),
+      );
+      this.auditLogger.info(request.log, `Allocated ${cases.length} cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      return response.status(204).json();
+    } catch (error: unknown) {
+      if (notFound(error)) {
+        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        return response.status(404).json();
+      }
+      this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      return response.status(500).json();
+    }
+  }
+
+  async setCaseToUpdate(request: Request<{ questionnaireName: string, caseId: string }, Record<string, never>, Record<string, never>, Record<string, never>>, response: Response) {
+    const {
+      questionnaireName,
+      caseId,
+    } = request.params;
+    const user = this.auth.GetUser(this.auth.GetToken(request));
+
+    try {
+      await this.blaiseApi.updateCase(`${questionnaireName}_EDIT`, caseId, {
+        'QEdit.AssignedTo': '',
+        'QEdit.Edited': '',
+        'QEdit.LastUpdated': moment('1900-01-01').format('DD-MM-YYYY_HH:mm'),
+      });
+      this.auditLogger.info(request.log, `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      return response.status(204).json();
+    } catch (error: unknown) {
+      if (notFound(error)) {
+        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        return response.status(404).json();
+      }
+      this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      return response.status(500).json();
+    }
+  }
+}
