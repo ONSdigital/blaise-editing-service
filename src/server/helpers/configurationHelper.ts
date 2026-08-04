@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { RoleConfiguration } from '../interfaces/roleConfigurationInterface';
+import { RoleConfiguration } from '../roleConfigurationInterface';
 
 export function getStringOrThrowError(variable: string | undefined, variableName: string) {
   if (variable === undefined || variable.trim() === '') {

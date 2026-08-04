@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
   ],
   build: {
-    outDir: 'dist',
+    outDir: 'build/client',
     assetsDir: 'assets',
     emptyOutDir: true,
   },
