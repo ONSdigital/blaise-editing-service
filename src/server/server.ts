@@ -1,4 +1,5 @@
 import cors from 'cors';
+import helmet from 'helmet';
 import express, {
   Request, Response, Express, NextFunction,
 } from 'express';
@@ -35,6 +36,21 @@ export default function nodeServer(
   const blaiseApi = dependencies.blaiseApi ?? new BlaiseApi(config, blaiseApiClient);
 
   const server = express();
+  server.set('trust proxy', 1);
+  server.disable('x-powered-by');
+
+  server.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          'img-src': ["'self'", 'data:', 'https://cdn.ons.gov.uk'],
+        },
+      },
+      crossOriginEmbedderPolicy: false,
+    }),
+  );
+
   server.use(logger);
 
   server.use(express.json());
