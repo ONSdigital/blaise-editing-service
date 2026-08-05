@@ -1,5 +1,6 @@
 import cors from 'cors';
 import helmet from 'helmet';
+import { rateLimit } from 'express-rate-limit';
 import express, {
   Request, Response, Express, NextFunction,
 } from 'express';
@@ -25,6 +26,59 @@ export interface NodeServerDependencies {
   auditLogger?: AuditLogger;
 }
 
+function isApiRequest(request: Request): boolean {
+  return request.path === '/api' || request.path.startsWith('/api/');
+}
+
+function parseForwardedFor(forwardedHeader: string | undefined): string | undefined {
+  if (!forwardedHeader) {
+    return undefined;
+  }
+
+  const firstForwardedValue = forwardedHeader.split(',')[0]?.trim();
+  if (!firstForwardedValue) {
+    return undefined;
+  }
+
+  const forPart = firstForwardedValue
+    .split(';')
+    .map((part) => part.trim())
+    .find((part) => part.toLowerCase().startsWith('for='));
+
+  if (!forPart) {
+    return undefined;
+  }
+
+  let client = forPart.slice(4).trim();
+  if (!client) {
+    return undefined;
+  }
+
+  if (client.startsWith('"') && client.endsWith('"')) {
+    client = client.slice(1, -1);
+  }
+
+  if (client.startsWith('[')) {
+    const ipv6End = client.indexOf(']');
+    if (ipv6End > 0) {
+      client = client.slice(1, ipv6End);
+    }
+  } else {
+    const [hostOnly] = client.split(':');
+    client = hostOnly ?? client;
+  }
+
+  if (!client || client.toLowerCase() === 'unknown') {
+    return undefined;
+  }
+
+  return client;
+}
+
+function getRateLimitIp(request: Request): string {
+  return parseForwardedFor(request.header('forwarded')) ?? request.ip ?? 'unknown';
+}
+
 
 export default function nodeServer(
   config: ConfigurationProvider,
@@ -34,6 +88,8 @@ export default function nodeServer(
 
   const blaiseApiClient = dependencies.blaiseApiClient ?? new BlaiseApiClient(config.BlaiseApiUrl);
   const blaiseApi = dependencies.blaiseApi ?? new BlaiseApi(config, blaiseApiClient);
+  const auth = dependencies.auth ?? new Auth(config);
+  const auditLogger = dependencies.auditLogger ?? new AuditLogger('BES');
 
   const server = express();
   server.set('trust proxy', 1);
@@ -57,6 +113,39 @@ export default function nodeServer(
   server.use(express.urlencoded({ extended: true }));
   server.use(cors());
 
+  const pageRateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 600,
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (request) => isApiRequest(request),
+    keyGenerator: (request) => `ip:${getRateLimitIp(request)}`,
+  });
+
+  const apiRateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 200,
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: (request) => !isApiRequest(request),
+    keyGenerator: (request) => {
+      try {
+        const token = auth.GetToken(request);
+        const user = auth.GetUser(token);
+        if (user?.name) {
+          return `user:${user.name.toLowerCase()}`;
+        }
+      } catch {
+        // Fall back to forwarded client IP when auth context is unavailable.
+      }
+
+      return `ip:${getRateLimitIp(request)}`;
+    },
+  });
+
+  server.use(pageRateLimiter);
+  server.use(apiRateLimiter);
+
   server.get('/bes-ui/:version/health', (_req: Request, res: Response) => res.status(200).json({ healthy: true }));
 
   // serve the entire build folder as static
@@ -72,9 +161,6 @@ export default function nodeServer(
   // set up views for rendering index.html
   server.set('views', buildFolderPath);
   server.engine('html', ejs.renderFile);
-
-  const auth = dependencies.auth ?? new Auth(config);
-  const auditLogger = dependencies.auditLogger ?? new AuditLogger("BES");
 
   // survey routing
   const surveyHandler = new SurveyHandler(blaiseApi, config, auth, auditLogger);
