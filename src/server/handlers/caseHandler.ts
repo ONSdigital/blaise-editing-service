@@ -9,6 +9,7 @@ import AuditLogger from "../auditLogger";
 import ServerConfigurationProvider from '../ServerConfigurationProvider';
 import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
 import mapCaseSummary from '../caseMapper';
+import { CsvValidationError, validateQuestionnaireName } from '../validation';
 
 export default class CaseHandler implements Controller {
   blaiseApi: BlaiseApi;
@@ -38,45 +39,53 @@ export default class CaseHandler implements Controller {
   }
 
   async getCaseSummary(request: Request<{ questionnaireName: string, caseId: string }>, response: Response<CaseSummaryDetails>) {
-    const {
-      questionnaireName,
-      caseId,
-    } = request.params;
+    const { caseId } = request.params;
+    const questionnaireNameRaw = request.params.questionnaireName;
 
     const user = this.auth.GetUser(this.auth.GetToken(request));
 
     try {
+      const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
       const caseSummary = mapCaseSummary(caseResponse);
 
       this.auditLogger.info(request.log, `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
       return response.status(200).json(caseSummary);
     } catch (error: unknown) {
+      if (error instanceof CsvValidationError) {
+        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
+        return response.status(400).json();
+      }
       if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }
 
   async getCaseEditInformation(request: Request<{ questionnaireName: string }, Record<string, never>, Record<string, never>, { userRole: string }>, response: Response<CaseEditInformation[]>) {
-    const { questionnaireName } = request.params;
+    const questionnaireNameRaw = request.params.questionnaireName;
     const { userRole } = request.query;
 
     const user = this.auth.GetUser(this.auth.GetToken(request));
 
     try {
+      const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName, userRole, user, request);
 
       return response.status(200).json(caseEditInformationList);
     } catch (error: unknown) {
+      if (error instanceof CsvValidationError) {
+        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
+        return response.status(400).json();
+      }
       if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }
@@ -98,12 +107,13 @@ export default class CaseHandler implements Controller {
   }
 
   async allocateCases(request: Request<{ questionnaireName: string }, Record<string, never>, { name: string, cases: string[] }, Record<string, never>>, response: Response) {
-    const { questionnaireName } = request.params;
+    const questionnaireNameRaw = request.params.questionnaireName;
     const { name, cases } = request.body;
 
     const user = this.auth.GetUser(this.auth.GetToken(request));
 
     try {
+      const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       await Promise.all(
         cases.map(async (caseId) => {
           await this.blaiseApi.updateCase(questionnaireName, caseId, {
@@ -115,23 +125,26 @@ export default class CaseHandler implements Controller {
       this.auditLogger.info(request.log, `Allocated ${cases.length} cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
       return response.status(204).json();
     } catch (error: unknown) {
+      if (error instanceof CsvValidationError) {
+        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
+        return response.status(400).json();
+      }
       if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }
 
   async setCaseToUpdate(request: Request<{ questionnaireName: string, caseId: string }, Record<string, never>, Record<string, never>, Record<string, never>>, response: Response) {
-    const {
-      questionnaireName,
-      caseId,
-    } = request.params;
+    const { caseId } = request.params;
+    const questionnaireNameRaw = request.params.questionnaireName;
     const user = this.auth.GetUser(this.auth.GetToken(request));
 
     try {
+      const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       await this.blaiseApi.updateCase(`${questionnaireName}_EDIT`, caseId, {
         'QEdit.AssignedTo': '',
         'QEdit.Edited': '',
@@ -140,11 +153,15 @@ export default class CaseHandler implements Controller {
       this.auditLogger.info(request.log, `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
       return response.status(204).json();
     } catch (error: unknown) {
+      if (error instanceof CsvValidationError) {
+        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
+        return response.status(400).json();
+      }
       if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
+        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();
       }
-      this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
+      this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
       return response.status(500).json();
     }
   }

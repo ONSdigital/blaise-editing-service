@@ -1371,3 +1371,39 @@ describe('set to update case tests', () => {
     cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
 });
+
+describe('questionnaire input validation tests', () => {
+  beforeEach(() => {
+    blaiseApiMock.reset();
+    cloudLoggerMock.reset();
+  });
+
+  it('should return 400 for get case summary with invalid questionnaire name', async () => {
+    const response: Response = await sut.get('/api/questionnaires/frs2504a/cases/1/summary');
+
+    expect(response.status).toEqual(400);
+    blaiseApiMock.verify((api) => api.getCase(It.isAny(), It.isAny()), Times.never());
+  });
+
+  it('should return 400 for get case edit information with invalid questionnaire name', async () => {
+    const response: Response = await sut.get('/api/questionnaires/frs2504a/cases/edit?userRole=SVT%20Editor');
+
+    expect(response.status).toEqual(400);
+    blaiseApiMock.verify((api) => api.getCaseEditInformation(It.isAny()), Times.never());
+  });
+
+  it('should return 400 for allocate cases with invalid questionnaire name', async () => {
+    const payload = { name: 'jake', cases: ['1'] };
+    const response: Response = await sut.patch('/api/questionnaires/frs2504a/cases/allocate').send(payload);
+
+    expect(response.status).toEqual(400);
+    blaiseApiMock.verify((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()), Times.never());
+  });
+
+  it('should return 400 for set to update with invalid questionnaire name', async () => {
+    const response: Response = await sut.patch('/api/questionnaires/frs2504a/cases/9001/update');
+
+    expect(response.status).toEqual(400);
+    blaiseApiMock.verify((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()), Times.never());
+  });
+});
