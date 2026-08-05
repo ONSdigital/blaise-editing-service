@@ -88,13 +88,13 @@ export default class CaseHandler implements Controller {
     const surveyTla = questionnaireName.substring(0, 3);
     const roleConfig = this.configuration.getSurveyConfigForRole(surveyTla, userRole);
 
-    const filteredcases = cases
+    const filteredCases = cases
       .filter((caseEditInformation) => (roleConfig.Organisations.length > 0 ? roleConfig.Organisations.includes(caseEditInformation.organisation) : caseEditInformation))
       .filter((caseEditInformation) => (roleConfig.Outcomes.length > 0 ? roleConfig.Outcomes.includes(caseEditInformation.outcome) : caseEditInformation));
 
-    this.auditLogger.info(request.log, `Filtered down to ${filteredcases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+    this.auditLogger.info(request.log, `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
 
-    return filteredcases;
+    return filteredCases;
   }
 
   async allocateCases(request: Request<{ questionnaireName: string }, Record<string, never>, { name: string, cases: string[] }, Record<string, never>>, response: Response) {

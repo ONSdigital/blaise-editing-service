@@ -1,5 +1,5 @@
 import { ONSPanel, ONSSelect, ONSTable } from 'blaise-design-system-react-components';
-import { ReactElement, useState, useCallback } from 'react';
+import { ComponentProps, ReactElement, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { EditorInformation } from '../../../types/editorInterface';
 import { QuestionnaireDetails } from '../../../../common/interfaces/surveyInterface';
@@ -13,6 +13,7 @@ interface EditorContentProps {
 export default function EditorContent({ editorInformation, questionnaire }: EditorContentProps): ReactElement {
   const [status, setStatus] = useState('');
   const [errorPanelMessage, setErrorPanelMessage] = useState<string | null>(null);
+  const infoPanelProps = { status: 'info', className: 'ons-u-mt-m' } as unknown as ComponentProps<typeof ONSPanel>;
 
   const handleDownloadError = useCallback((message: string) => {
     setErrorPanelMessage(message);
@@ -30,7 +31,7 @@ export default function EditorContent({ editorInformation, questionnaire }: Edit
           <button type="button" className="ons-btn ons-btn--small ons-btn--secondary ons-u-mt-s" onClick={dismissErrorPanel}>Dismiss</button>
         </ONSPanel>
       )}
-      <ONSPanel status="info" className="ons-u-mt-m">
+      <ONSPanel {...infoPanelProps}>
         <dl
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
           title="editorContent"
