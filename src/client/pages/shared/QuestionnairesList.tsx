@@ -38,7 +38,7 @@ function RenderQuestionnaireDetails(user:User, questionnaire:QuestionnaireDetail
   return <ErrorPanel message={`User role ${role} not recognised`} />;
 }
 
-function getquestionnaireOptions(questionnaires: QuestionnaireDetails[]): Option[] {
+function getQuestionnaireOptions(questionnaires: QuestionnaireDetails[]): Option[] {
   const options: Option[] = [];
 
   questionnaires.forEach((questionnaire) => {
@@ -85,7 +85,7 @@ export default function QuestionnairesList({ questionnaires, user }: Questionnai
         defaultValue={questionnaireValue}
         id="select-questionnaire"
         label="Select questionnaire"
-        options={getquestionnaireOptions(questionnaires)}
+        options={getQuestionnaireOptions(questionnaires)}
         value=""
         onChange={handleQuestionnaireChange}
         testId="select-questionnaire"

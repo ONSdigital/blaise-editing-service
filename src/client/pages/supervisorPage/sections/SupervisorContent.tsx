@@ -15,7 +15,7 @@ export default function SupervisorContent({ questionnaire, supervisorInformation
       <ONSPanel status="info">
         <dl
           className="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-          title="Questionnares"
+          title="Questionnaires"
           data-testid={`${questionnaire.questionnaireName}-supervisor-Content`}
         >
           <dt className="ons-description-list__term ons-grid__col ons-col-6@m">Field period</dt>

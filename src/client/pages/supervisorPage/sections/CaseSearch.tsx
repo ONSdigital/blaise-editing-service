@@ -6,10 +6,6 @@ import UserRole from '../../../types/UserTypes';
 import questionnaireDisplayName from '../../../utils/QuestionnaireFunctions';
 import Breadcrumbs from '../../shared/Breadcrumbs';
 
-export type CaseSearchParams = {
-  questionnaireName: string
-};
-
 export default function CaseSearch(): ReactElement {
   const { questionnaireName } = useParams<keyof AllocateParams>() as AllocateParams;
 

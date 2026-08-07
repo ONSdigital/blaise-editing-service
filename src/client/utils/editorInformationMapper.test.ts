@@ -2,7 +2,7 @@ import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/c
 import CaseOutcome from 'blaise-api-node-client/lib/cjs/enums/caseOutcome';
 import EditedStatus from 'blaise-api-node-client/lib/cjs/enums/editedStatus';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import mapEditorInformation from './editorInformaitionMapper';
+import mapEditorInformation from './editorInformationMapper';
 import { EditorInformation } from '../types/editorInterface';
 
 describe('Map editor informaiton', () => {

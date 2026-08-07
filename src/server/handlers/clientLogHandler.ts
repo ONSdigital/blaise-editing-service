@@ -1,9 +1,9 @@
 import express, { Request, Response, Router } from "express";
 import { Auth } from "blaise-login-react/blaise-login-react-server";
 
-export type ClientLogLevel = "log" | "info" | "warn" | "error" | "debug";
+type ClientLogLevel = "log" | "info" | "warn" | "error" | "debug";
 
-export interface ClientLogPayload {
+interface ClientLogPayload {
     level: ClientLogLevel;
     message: string;
     args?: string[];

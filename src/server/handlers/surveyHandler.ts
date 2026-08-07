@@ -8,6 +8,7 @@ import { QuestionnaireDetails, Survey } from '../../common/interfaces/surveyInte
 import mapSurveys from '../surveyMapper';
 import BlaiseApi from '../BlaiseApi';
 import ServerConfigurationProvider from '../ServerConfigurationProvider';
+import { CsvValidationError, validateUserRole } from '../validation';
 
 export default class SurveyHandler implements Controller {
   blaiseApi: BlaiseApi;
@@ -29,14 +30,19 @@ export default class SurveyHandler implements Controller {
   }
 
   async getSurveys(request: Request<Record<string, never>, Record<string, never>, Record<string, never>, { userRole: string }>, response: Response<Survey[]>) {
-    const { userRole } = request.query;
+    const userRoleRaw = request.query.userRole;
     const user = this.auth.GetUser(this.auth.GetToken(request));
 
     try {
+      const userRole = validateUserRole(userRoleRaw);
       const questionnaires = await this.GetQuestionnairesForRole(userRole, user, request);
       const surveys = mapSurveys(questionnaires ?? []);
       return response.status(200).json(surveys);
     } catch (error: unknown) {
+      if (error instanceof CsvValidationError) {
+        this.auditLogger.error(request.log, `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
+        return response.status(400).json();
+      }
       if (notFound(error)) {
         this.auditLogger.error(request.log, `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
         return response.status(404).json();

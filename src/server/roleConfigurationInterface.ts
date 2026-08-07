@@ -6,7 +6,7 @@ export interface RoleConfiguration {
   Surveys: SurveyCaseConfiguration[]
 }
 
-export interface SurveyCaseConfiguration {
+interface SurveyCaseConfiguration {
   Survey: string
   Organisations: Organisation[];
   Outcomes: CaseOutcome[]

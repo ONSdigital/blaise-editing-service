@@ -243,7 +243,7 @@ describe('Given we wish to reallocte cases from an Editor to another Editor', ()
 
     // assert
     const panelView = view.getByTestId('allocation-page-panel');
-    expect(panelView).toHaveTextContent('Reallocate cases from one editor to another editor. All non-completed cases will be transfered');
+    expect(panelView).toHaveTextContent('Reallocate cases from one editor to another editor. All non-completed cases will be transferred');
   });
 
   it('should display a list of editors for realloction from', async () => {
