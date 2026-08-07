@@ -6,7 +6,7 @@ const gcpLoggingMocks = vi.hoisted(() => {
     const logMock = vi.fn(() => ({
         getEntries: getEntriesMock,
     }));
-    const LoggingMock = vi.fn().mockImplementation(function (this: any) {
+    const LoggingMock = vi.fn().mockImplementation(function () {
         return {
             log: logMock,
         };
@@ -31,7 +31,7 @@ describe("AuditLogger", () => {
         const reqLog = {
             info: vi.fn(),
             error: vi.fn(),
-        } as any;
+        } as unknown as Parameters<AuditLogger["info"]>[0];
 
         sut.info(reqLog, "hello");
         sut.error(reqLog, "boom");

@@ -7,6 +7,7 @@ import BlaiseApiClient, {
 } from 'blaise-api-node-client';
 import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
 import { Auth } from 'blaise-login-react/blaise-login-react-server';
+import { HttpLogger } from 'pino-http';
 import nodeServer from '../server';
 import createAxiosError from '../test-utils/axiosTestHelper';
 import BlaiseApi from '../BlaiseApi';
@@ -36,7 +37,7 @@ const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object);
 const blaiseApiMock: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
 
 // need to test the endpoints through the express server
-const server = nodeServer(configFake, undefined as any, { blaiseApi: blaiseApiMock.object, auditLogger: cloudLoggerMock.object });
+const server = nodeServer(configFake, undefined as unknown as HttpLogger, { blaiseApi: blaiseApiMock.object, auditLogger: cloudLoggerMock.object });
 
 // supertest will handle all http calls
 const sut = supertest(server);
