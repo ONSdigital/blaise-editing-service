@@ -1,6 +1,6 @@
 const QUESTIONNAIRE_NAME_REGEX = /^[A-Z0-9](?:[A-Z0-9_]{1,62}[A-Z0-9])?$/;
-const UAC_REGEX = /^[A-Za-z0-9]{6,32}$/;
-const UPLOADED_FILE_NAME_REGEX = /^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,126}[A-Za-z0-9])?\.csv$/i;
+const USER_ROLE_REGEX = /^[A-Za-z][A-Za-z0-9 _-]{1,63}$/;
+
 
 export class CsvValidationError extends Error {
   readonly statusCode: number;
@@ -28,38 +28,16 @@ export function validateQuestionnaireName(value: string, fieldName = 'questionna
   return value;
 }
 
-export function isValidUac(value: string): boolean {
-  return UAC_REGEX.test(value);
+export function isValidUserRole(value: unknown): value is string {
+  return typeof value === 'string' && USER_ROLE_REGEX.test(value);
 }
 
-export function validateUac(value: string, fieldName = 'UAC'): string {
-  if (!isValidUac(value)) {
+export function validateUserRole(value: unknown, fieldName = 'user role'): string {
+  if (!isValidUserRole(value)) {
     throwValidationError(fieldName);
   }
 
   return value;
 }
 
-export function isValidUploadedFileName(value: string): boolean {
-  if (!UPLOADED_FILE_NAME_REGEX.test(value)) {
-    return false;
-  }
 
-  if (value.includes('..')) {
-    return false;
-  }
-
-  if (value.includes('/') || value.includes('\\')) {
-    return false;
-  }
-
-  return true;
-}
-
-export function validateUploadedFileName(value: string, fieldName = 'uploaded file name'): string {
-  if (!isValidUploadedFileName(value)) {
-    throwValidationError(fieldName);
-  }
-
-  return value;
-}

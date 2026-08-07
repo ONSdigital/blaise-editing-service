@@ -1,11 +1,9 @@
 import {
   CsvValidationError,
   isValidQuestionnaireName,
-  isValidUac,
-  isValidUploadedFileName,
+  isValidUserRole,
   validateQuestionnaireName,
-  validateUac,
-  validateUploadedFileName,
+  validateUserRole,
 } from './validation';
 
 describe('CsvValidationError', () => {
@@ -34,35 +32,19 @@ describe('questionnaire name validation', () => {
   });
 });
 
-describe('UAC validation', () => {
-  it('should accept valid UAC values', () => {
-    expect(isValidUac('ABC123')).toBe(true);
-    expect(isValidUac('A1B2C3D4E5F6')).toBe(true);
-    expect(validateUac('ZXCVBN123456')).toBe('ZXCVBN123456');
+describe('user role validation', () => {
+  it('should accept valid user role values', () => {
+    expect(isValidUserRole('SVT Editor')).toBe(true);
+    expect(isValidUserRole('Survey Support')).toBe(true);
+    expect(validateUserRole('FRS Researcher')).toBe('FRS Researcher');
   });
 
-  it('should reject invalid UAC values', () => {
-    expect(isValidUac('A1B2')).toBe(false);
-    expect(isValidUac('ABC 123')).toBe(false);
-    expect(isValidUac('ABC-123')).toBe(false);
+  it('should reject invalid user role values', () => {
+    expect(isValidUserRole('')).toBe(false);
+    expect(isValidUserRole('!admin')).toBe(false);
+    expect(isValidUserRole(' role')).toBe(false);
 
-    expect(() => validateUac('ABC 123')).toThrow(CsvValidationError);
-  });
-});
-
-describe('uploaded file name validation', () => {
-  it('should accept valid upload file names', () => {
-    expect(isValidUploadedFileName('cases.csv')).toBe(true);
-    expect(isValidUploadedFileName('bes_upload_2026-08-05.csv')).toBe(true);
-    expect(validateUploadedFileName('upload.v2.csv')).toBe('upload.v2.csv');
-  });
-
-  it('should reject invalid upload file names', () => {
-    expect(isValidUploadedFileName('cases.txt')).toBe(false);
-    expect(isValidUploadedFileName('../cases.csv')).toBe(false);
-    expect(isValidUploadedFileName('folder/cases.csv')).toBe(false);
-    expect(isValidUploadedFileName('.env.csv')).toBe(false);
-
-    expect(() => validateUploadedFileName('../cases.csv')).toThrow(CsvValidationError);
+    expect(() => validateUserRole('!admin')).toThrow(CsvValidationError);
   });
 });
+
