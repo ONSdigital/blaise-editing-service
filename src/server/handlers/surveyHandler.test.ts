@@ -464,4 +464,18 @@ describe('Get surveys tests', () => {
     // assert
     cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
   });
+
+  it('should return a 400 response when userRole is missing', async () => {
+    const response: Response = await sut.get('/api/surveys');
+
+    expect(response.status).toEqual(400);
+    blaiseApiMock.verify((api) => api.getQuestionnaires(), Times.never());
+  });
+
+  it('should return a 400 response when userRole is invalid', async () => {
+    const response: Response = await sut.get('/api/surveys?userRole=!invalid-role');
+
+    expect(response.status).toEqual(400);
+    blaiseApiMock.verify((api) => api.getQuestionnaires(), Times.never());
+  });
 });

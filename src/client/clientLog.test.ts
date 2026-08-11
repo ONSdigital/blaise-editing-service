@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { vi } from "vitest";
 
 import { sendClientLog } from "./clientLog";
@@ -27,7 +27,7 @@ describe("sendClientLog", () => {
     });
 
     it("posts a structured payload including stack when an Error is present", async () => {
-        const postSpy = vi.spyOn(axios, "post").mockResolvedValue({} as any);
+        const postSpy = vi.spyOn(axios, "post").mockResolvedValue({} as AxiosResponse);
 
         const err = new Error("boom");
         err.stack = "STACK_TRACE";
@@ -54,9 +54,9 @@ describe("sendClientLog", () => {
     });
 
     it("handles circular values by falling back to String(value)", async () => {
-        const postSpy = vi.spyOn(axios, "post").mockResolvedValue({} as any);
+        const postSpy = vi.spyOn(axios, "post").mockResolvedValue({} as AxiosResponse);
 
-        const circular: any = { name: "c" };
+        const circular: Record<string, unknown> = { name: "c" };
         circular.self = circular;
 
         await sendClientLog("info", circular);

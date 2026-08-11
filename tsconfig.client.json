@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["vite/client", "vitest/globals"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "outDir": "dist",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src/client", "src/common", "src/index.tsx", "src/setupTests.ts"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
+}

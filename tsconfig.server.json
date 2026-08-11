@@ -1,42 +1,12 @@
 {
-    "compilerOptions": {
-      "target": "ESNext",
-      "types": ["vite/client", "vitest/globals"],
-      "rootDir": "src",
-      "outDir": "build",
-      "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-      ],
-      "allowJs": true,
-      "skipLibCheck": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "strict": true,
-      "useUnknownInCatchVariables": true,               /* Default catch clause variables as 'unknown' instead of 'any'. */
-      "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
-      "noUnusedParameters": true,                       /* Raise an error when a function parameter isn't read. */
-      "exactOptionalPropertyTypes": true,               /* Interpret optional property types as written, rather than adding 'undefined'. */
-      "noImplicitReturns": true,                        /* Enable error reporting for codepaths that do not explicitly return in a function. */
-      "noUncheckedIndexedAccess": true,                 /* Add 'undefined' to a type when accessed using an index. */
-      "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
-      "noPropertyAccessFromIndexSignature": true,       /* Enforces using indexed accessors for keys declared using an indexed type. */
-      "forceConsistentCasingInFileNames": true,
-      "noFallthroughCasesInSwitch": true,
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "resolveJsonModule": true,
-      "isolatedModules": true,
-      "jsx": "react-jsx"
-    },
-    "include": [
-      "src/server"  
-    ],
-    "exclude": [
-      "node_modules",
-      "server/**/*.test.js",
-      "**/*.test.ts"
-    ]
-  }
-  
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "vitest/globals"],
+    "lib": ["esnext"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true
+  },
+  "include": ["src/server", "src/common"],
+  "exclude": ["src/server/**/*.test.ts", "src/**/*.test.ts", "src/**/*.test.tsx"]
+}
