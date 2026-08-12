@@ -63,7 +63,7 @@ const Sex: Record<number, string> = {
   2: 'F',
 };
 
-const MartitalStatus: Record<number, string> = {
+const MaritalStatus: Record<number, string> = {
   1: 'S',
   2: 'M',
   3: 'CPL',
@@ -160,7 +160,7 @@ function GetMaritalStatus(caseResponse: CaseResponse, respondentNumber: number):
   if (caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].livewith`] === '1') {
     return 'COH';
   }
-  return MartitalStatus[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].ms`])] ?? '-';
+  return MaritalStatus[Number(caseResponse.fieldData[`qHousehold.QHHold.Person[${respondentNumber}].ms`])] ?? '-';
 }
 
 function GetRelationshipMatrix(caseResponse: CaseResponse, respondentNumber: number, numberOfRespondents: number): string[] {

@@ -1,9 +1,9 @@
 import axios from "axios";
 import axiosConfig from "./api/AxiosApi";
 
-export type ClientLogLevel = "log" | "info" | "warn" | "error" | "debug";
+type ClientLogLevel = "log" | "info" | "warn" | "error" | "debug";
 
-export interface ClientLogPayload {
+interface ClientLogPayload {
     level: ClientLogLevel;
     message: string;
     args?: string[];

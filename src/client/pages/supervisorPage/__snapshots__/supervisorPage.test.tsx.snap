@@ -1400,7 +1400,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                       <dl
                         class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
                         data-testid="FRS2504A_EDIT-supervisor-Content"
-                        title="Questionnares"
+                        title="Questionnaires"
                       >
                         <dt
                           class="ons-description-list__term ons-grid__col ons-col-6@m"
@@ -1735,7 +1735,7 @@ exports[`Given there are surveys available in blaise > should render the supervi
                     <dl
                       class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
                       data-testid="FRS2504A_EDIT-supervisor-Content"
-                      title="Questionnares"
+                      title="Questionnaires"
                     >
                       <dt
                         class="ons-description-list__term ons-grid__col ons-col-6@m"

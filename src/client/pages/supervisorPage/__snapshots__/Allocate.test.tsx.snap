@@ -571,7 +571,7 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor > sho
         <div
           class="ons-panel__body "
         >
-          Reallocate cases from one editor to another editor. All non-completed cases will be transfered
+          Reallocate cases from one editor to another editor. All non-completed cases will be transferred
         </div>
       </div>
       <br />
@@ -812,7 +812,7 @@ exports[`Given we wish to reallocte cases from an Editor to another Editor > sho
       <div
         class="ons-panel__body "
       >
-        Reallocate cases from one editor to another editor. All non-completed cases will be transfered
+        Reallocate cases from one editor to another editor. All non-completed cases will be transferred
       </div>
     </div>
     <br />

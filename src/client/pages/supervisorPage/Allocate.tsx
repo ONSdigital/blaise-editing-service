@@ -36,7 +36,7 @@ export default function Allocate({ supervisorRole, editorRole, reallocate }: All
         {
           reallocate === false
             ? 'Allocate cases from an interviewer to an editor. All cases conducted by that interviewer will be allocated to the editor'
-            : 'Reallocate cases from one editor to another editor. All non-completed cases will be transfered'
+            : 'Reallocate cases from one editor to another editor. All non-completed cases will be transferred'
         }
       </ONSPanel>
 

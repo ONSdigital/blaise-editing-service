@@ -2,6 +2,7 @@
 import express from "express";
 import supertest from "supertest";
 import { vi } from "vitest";
+import { Auth } from "blaise-login-react/blaise-login-react-server";
 
 import clientLogHandler from "./clientLogHandler";
 
@@ -17,13 +18,13 @@ function createTestApp() {
     };
 
     app.use((req, _res, next) => {
-        (req as any).log = requestLog;
+        (req as express.Request & { log: typeof requestLog }).log = requestLog;
         next();
     });
 
     const auth = {
-        Middleware: (_req: any, _res: any, next: any) => next(),
-    } as any;
+        Middleware: (_req: express.Request, _res: express.Response, next: express.NextFunction) => next(),
+    } as unknown as Auth;
 
     app.use(clientLogHandler(auth));
 
