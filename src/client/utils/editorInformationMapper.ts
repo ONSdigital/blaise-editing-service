@@ -1,21 +1,29 @@
-import { CaseEditInformation } from 'blaise-api-node-client/lib/cjs/interfaces/case';
-import { EditedStatus } from 'blaise-api-node-client/lib/cjs/enums/editedStatus';
-import { EditorInformation } from '../types/editorInterface';
+import type { EditorInformation } from "../types/editor.types";
+import type { CaseEditInformation } from "blaise-api-node-client";
 
-const EditedStatusDescription = new Map<EditedStatus, string>([
-  [EditedStatus.NotStarted, 'Not started'],
-  [EditedStatus.Started, 'In progress'],
-  [EditedStatus.Query, 'Queried'],
-  [EditedStatus.Finished, 'Completed'],
+const EDITED_STATUS = {
+  NotStarted: 0,
+  Started: 1,
+  Query: 2,
+  Finished: 3,
+} as const;
+
+const editedStatusDescription = new Map<number, string>([
+  [EDITED_STATUS.NotStarted, "Not started"],
+  [EDITED_STATUS.Started, "In progress"],
+  [EDITED_STATUS.Query, "Queried"],
+  [EDITED_STATUS.Finished, "Completed"],
 ]);
 
-export default function mapEditorInformation(caseEditInformationList: CaseEditInformation[]): EditorInformation {
+export default function toEditorInformation(
+  caseEditInformationList: CaseEditInformation[],
+): EditorInformation {
   const editorInformation = <EditorInformation>{ numberOfCasesAllocated: 0, Cases: [] };
 
   caseEditInformationList.forEach((caseEditInformation) => {
     editorInformation.Cases.push({
       CaseId: caseEditInformation.primaryKey,
-      EditStatus: EditedStatusDescription.get(caseEditInformation.editedStatus) ?? 'N/A',
+      EditStatus: editedStatusDescription.get(caseEditInformation.editedStatus) ?? "N/A",
       EditUrl: caseEditInformation.editUrl,
     });
   });

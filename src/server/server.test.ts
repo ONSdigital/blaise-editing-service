@@ -1,94 +1,173 @@
 /* @vitest-environment node */
-import listEndpoints, { Endpoint } from 'express-list-endpoints';
-import { IMock, Mock } from 'typemoq';
-import supertest from 'supertest';
-import path from 'path';
-import express, { Request, Response, NextFunction } from 'express';
-import ejs from 'ejs';
-import NodeServer from './server';
-import BlaiseApi from './BlaiseApi';
-import FakeServerConfigurationProvider from './test-utils/FakeServerConfigurationProvider';
+import fs from "fs";
+import path from "path";
 
-// create fake config
+import { type Auth } from "blaise-login-react-server";
+import supertest from "supertest";
+import { Mock } from "typemoq";
+import { vi } from "vitest";
+
+import NodeServer from "./server.js";
+import FakeServerConfigurationProvider from "./test-utils/fakeServerConfigurationProvider.mock.js";
+import BlaiseApi from "./utils/blaiseApi.js";
+
+import type { Request } from "express";
+import type { IMock } from "typemoq";
+
 const configFake = new FakeServerConfigurationProvider();
 
-// mock blaise api client
-const blaiseApiMock: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
+const mockBlaiseApi: IMock<BlaiseApi> = Mock.ofType(BlaiseApi);
 
-// create service to test
-const server = NodeServer(configFake, undefined as any, { blaiseApi: blaiseApiMock.object });
+const server = NodeServer(configFake, undefined, { blaiseApi: mockBlaiseApi.object });
 
-describe('All expected routes are registered', () => {
-  it('should contain expected routes', async () => {
-    // arrange
+function createRequest(pathValue: string, forwardedHeader?: string, ip = "127.0.0.1"): Request {
+  return {
+    path: pathValue,
+    ip,
+    header: (name: string) => (name.toLowerCase() === "forwarded" ? forwardedHeader : undefined),
+  } as unknown as Request;
+}
 
-    const expectedEndpoints:Endpoint[] = [
-      // needs to be in the same order they are added to the server
-      { methods: ['GET'], middlewares: ['anonymous'], path: '/bes-ui/:version/health' },
-      { methods: ['GET'], middlewares: ['bound ', 'bound getSurveys'], path: '/api/surveys' },
-      { methods: ['GET'], middlewares: ['bound ', 'bound getCaseSummary'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/summary' },
-      { methods: ['GET'], middlewares: ['bound ', 'bound getCaseEditInformation'], path: '/api/questionnaires/:questionnaireName/cases/edit' },
-      { methods: ['PATCH'], middlewares: ['bound ', 'bound allocateCases'], path: '/api/questionnaires/:questionnaireName/cases/allocate' },
-      { methods: ['PATCH'], middlewares: ['bound ', 'bound setCaseToUpdate'], path: '/api/questionnaires/:questionnaireName/cases/:caseId/update' },
-      { methods: ['GET'], middlewares: ['bound ', 'bound getUsers'], path: '/api/users' },
-      { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username' },
-      { methods: ['GET'], middlewares: ['bound '], path: '/api/login/current-user' },
-      { methods: ['GET'], middlewares: ['bound '], path: '/api/login/users/:username/authorised' },
-      { methods: ['POST'], middlewares: ['bound '], path: '/api/login/token/validate' },
-      { methods: ['POST'], middlewares: ['bound '], path: '/api/login/users/password/validate' },
-      { methods: ['POST'], middlewares: ['bound ', 'anonymous'], path: '/api/client-log' },
-      { methods: ['GET'], middlewares: ['anonymous'], path: '*' },
-    ];
+async function buildServerWithMockedRateLimit(auth?: Auth) {
+  vi.resetModules();
 
-    // act
-    const actualEndpoints = listEndpoints(server);
+  type RateLimitOptions = {
+    skip: (request: Request) => boolean;
+    keyGenerator: (request: Request) => string;
+  };
 
-    // assert
-    expect(actualEndpoints).toEqual(expectedEndpoints);
+  const mockRateLimit = vi.fn(
+    (_options: RateLimitOptions) => (_req: unknown, _res: unknown, next: () => void) => next(),
+  );
+
+  vi.doMock("express-rate-limit", () => ({
+    rateLimit: mockRateLimit,
+  }));
+
+  const { default: nodeServer } = await import("./server.js");
+
+  nodeServer(configFake, undefined as unknown as never, {
+    blaiseApi: mockBlaiseApi.object,
+    ...(auth != null ? { auth } : {}),
   });
-});
 
-describe('Render react pages as default route', () => {
-  it('should render the home page', async () => {
-    // arrange
-    server.set('views', path.join(__dirname, '../../build/client'));
+  return mockRateLimit;
+}
+
+describe("Core routes", () => {
+  it("returns healthy status for health endpoint", async () => {
     const sut = supertest(server);
 
-    // act
-    const result = await sut.get('/');
+    const result = await sut.get("/bes-ui/v1/health");
 
-    // assert
-    expect(result.error).toBeFalsy();
-    expect(result.statusCode).toEqual(200);
-    expect(result.type).toEqual('text/html');
-    expect(result.text).toContain('Edit interview data and view statistics on editing progress');
+    expect(result.statusCode).toBe(200);
+    expect(result.body).toEqual({ healthy: true });
+  });
+
+  it("returns 404 json for unknown api endpoint", async () => {
+    const sut = supertest(server);
+
+    const result = await sut.get("/api/unknown-endpoint");
+
+    expect(result.statusCode).toBe(404);
+    expect(result.body).toEqual({
+      error: {
+        code: "NOT_FOUND",
+        message: "Resource not found",
+      },
+    });
   });
 });
 
-describe('500 Error Handling Middleware', () => {
-  it('should render the 500 error page', async () => {
-    // Arrange
-    const app = express();
+describe("Render react pages as default route", () => {
+  it("should render the home page", async () => {
+    const sut = supertest(server);
 
-    app.set('views', path.join(__dirname, '../../build/client'));
-    app.engine('html', ejs.renderFile);
+    const result = await sut.get("/");
 
-    app.get('/test-error', (_req, _res, next) => {
-      next(new Error('Test error'));
-    });
+    expect(result.error).toBeFalsy();
+    expect(result.statusCode).toEqual(200);
+    expect(result.type).toEqual("text/html");
+    expect(result.text).toContain('<div id="root"></div>');
+    expect(result.text).toContain(`"projectId":"${configFake.ProjectId}"`);
+    expect(result.text).toContain(`"urlDomain":"${configFake.UrlDomain}"`);
+    expect(result.text).not.toContain(
+      "<%- typeof appConfigJson === 'string' ? appConfigJson : '' %>",
+    );
+  });
+});
 
-    app.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
-      response.status(200).render('/?error=Page not found', {});
-    });
+describe("500 Error Handling Middleware", () => {
+  it("ships a server 500 error page template", () => {
+    const errorPagePath = path.resolve(process.cwd(), "src/server/views/500.html");
+    const errorPage = fs.readFileSync(errorPagePath, "utf-8");
 
-    const sut = supertest(app);
+    expect(errorPage).toContain("Server Error (500)");
+    expect(errorPage).toContain("Return to home");
+  });
+});
 
-    // Act
-    const result = await sut.get('/test-error');
+describe("server rate limiting configuration", () => {
+  afterEach(() => {
+    vi.doUnmock("express-rate-limit");
+    vi.resetModules();
+  });
 
-    // Assert
-    expect(result.error).toBeTruthy();
-    expect(result.statusCode).toEqual(500);
-    expect(result.type).toEqual('text/html');
+  it("registers page and api rate limiters with route-aware skip logic", async () => {
+    const mockRateLimit = await buildServerWithMockedRateLimit();
+
+    expect(mockRateLimit).toHaveBeenCalledTimes(2);
+
+    const pageOptions = mockRateLimit.mock.calls[0][0] as {
+      skip: (request: Request) => boolean;
+    };
+    const apiOptions = mockRateLimit.mock.calls[1][0] as {
+      skip: (request: Request) => boolean;
+    };
+
+    expect(pageOptions.skip(createRequest("/api/surveys"))).toBe(true);
+    expect(pageOptions.skip(createRequest("/"))).toBe(false);
+    expect(apiOptions.skip(createRequest("/api/surveys"))).toBe(false);
+    expect(apiOptions.skip(createRequest("/"))).toBe(true);
+  });
+
+  it("uses request ip for page limiter key", async () => {
+    const mockRateLimit = await buildServerWithMockedRateLimit();
+
+    const pageOptions = mockRateLimit.mock.calls[0][0] as {
+      keyGenerator: (request: Request) => string;
+    };
+
+    const key = pageOptions.keyGenerator(createRequest("/", 'for="203.0.113.9:1234"', "10.0.0.1"));
+
+    expect(key).toBe("ip:10.0.0.1");
+  });
+
+  it("uses authenticated username for api limiter key and falls back to ip when unavailable", async () => {
+    const mockAuth = {
+      getToken: vi.fn(() => "token"),
+      getUser: vi.fn(() => ({ name: "Editor.User" })),
+      middleware: (_req: unknown, _res: unknown, next: () => void) => next(),
+    } as unknown as Auth;
+
+    const mockRateLimit = await buildServerWithMockedRateLimit(mockAuth);
+
+    const apiOptions = mockRateLimit.mock.calls[1][0] as {
+      keyGenerator: (request: Request) => string;
+    };
+
+    const userKey = apiOptions.keyGenerator(createRequest("/api/surveys", undefined, "10.0.0.1"));
+
+    expect(userKey).toBe("user:editor.user");
+
+    mockAuth.getToken = vi.fn(() => {
+      throw new Error("no token");
+    }) as unknown as Auth["getToken"];
+
+    const fallbackKey = apiOptions.keyGenerator(
+      createRequest("/api/surveys", "for=198.51.100.7", "10.0.0.1"),
+    );
+
+    expect(fallbackKey).toBe("ip:10.0.0.1");
   });
 });

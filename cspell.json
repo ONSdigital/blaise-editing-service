@@ -1,48 +1,4 @@
 {
-  "version": "0.2",
   "language": "en-GB",
-  "useGitignore": true,
-  "ignorePaths": [
-    "node_modules/**",
-    "build/**",
-    "coverage/**",
-    "dist/**",
-    "public/**",
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/**/test-utils/**",
-    "src/setupTests.ts",
-    "*.lock"
-  ],
-  "words": [
-    "Blaise",
-    "caseid",
-    "editcase",
-    "gutterless",
-    "ONS",
-    "ONSTable",
-    "ONSSelect",
-    "ONSPanel",
-    "Expandables",
-    "TTFB",
-    "json",
-    "Purp",
-    "Benef",
-    "Pers",
-    "Accomdat",
-    "qCounTax",
-    "livewith",
-    "questionnaire",
-    "questionnaires",
-    "supervisor",
-    "vitest",
-    "jsonc",
-    "pino"
-  ],
-  "overrides": [
-    {
-      "filename": "**/*.{ts,tsx,js,mjs,cjs,json,jsonc,md}",
-      "caseSensitive": false
-    }
-  ]
+  "words": ["blaise", "onsdigital"]
 }

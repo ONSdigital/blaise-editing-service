@@ -1,7 +1,4 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/server/index.ts"],
-  "project": ["src/**/*.{ts,tsx}", "*.config.{ts,mts}"],
-  "ignoreExportsUsedInFile": true,
-  "ignore": ["src/server/test-utils/**"]
+  "entry": ["**/*.test.ts", "**/*.test.tsx"],
+  "project": ["src/**/*.{ts,tsx}", "*.config.ts"]
 }
