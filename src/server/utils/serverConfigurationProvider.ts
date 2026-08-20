@@ -54,8 +54,16 @@ export default class ServerConfigurationProvider implements ConfigurationProvide
   }
 
   constructor() {
-    const { BLAISE_API_URL, PROJECT_ID, PORT, SERVER_PARK, CATI_URL, URL_DOMAIN, SESSION_SECRET } =
-      process.env;
+    const {
+      BLAISE_API_URL,
+      PROJECT_ID,
+      PORT,
+      SERVER_PARK,
+      CATI_URL,
+      VM_EXTERNAL_WEB_URL,
+      URL_DOMAIN,
+      SESSION_SECRET,
+    } = process.env;
 
     this.BuildFolder = "../client";
 
@@ -65,7 +73,9 @@ export default class ServerConfigurationProvider implements ConfigurationProvide
 
     this.ServerPark = getStringOrThrowError(SERVER_PARK, "SERVER_PARK");
 
-    this.ExternalWebUrl = getStringOrThrowError(CATI_URL, "CATI_URL");
+    const externalWebUrl = CATI_URL?.trim() ? CATI_URL : VM_EXTERNAL_WEB_URL;
+
+    this.ExternalWebUrl = getStringOrThrowError(externalWebUrl, "CATI_URL");
 
     this.ProjectId = getStringOrThrowError(PROJECT_ID, "PROJECT_ID");
 

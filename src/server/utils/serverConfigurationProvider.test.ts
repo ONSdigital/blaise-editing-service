@@ -115,6 +115,15 @@ describe("Authentication file tests", () => {
     expect(sut.TokenIssuer).toEqual(projectId);
   });
 
+  it("should use VM_EXTERNAL_WEB_URL when CATI_URL is not set", () => {
+    process.env["CATI_URL"] = "";
+    process.env["VM_EXTERNAL_WEB_URL"] = externalWebUrl;
+
+    const sut = new ServerConfigurationProvider();
+
+    expect(sut.ExternalWebUrl).toEqual(externalWebUrl);
+  });
+
   it.each([undefined, "", " ", "_SESSION_SECRET"])(
     "should throw an error if SESSION_SECRET is empty or does not exist",
     (value) => {
