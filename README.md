@@ -4,7 +4,7 @@ The Blaise Editing Service enables the review and editing of Blaise questionnair
 
 ## User Roles
 
-Case access and filtering are defined in `src\server\configuration\ServerConfigurationProvider.ts`, if the filtering array is empty then all cases are accessible.
+Case access and filtering are defined in `src/server/utils/serverConfigurationProvider.ts`.
 
 ### Roles Overview
 
@@ -17,7 +17,7 @@ Case access and filtering are defined in `src\server\configuration\ServerConfigu
   - Reviews and edits cases in the "edit" questionnaire assigned to them.
   - Access limited to cases in the "ONS" organisation with successful outcome codes.
 
-- **Researcher**
+- **FRS Researcher**
   - Full access to all cases in the "edit" questionnaire.
   - No filters applied.
 
@@ -41,22 +41,22 @@ Each questionnaire must exist in two versions:
 
 - Used exclusively for editing.
 - Duplicate of the "main" questionnaire, but with some modifications and an `_EDIT` suffix.
-- A PowerShell script to generate this version is available on the [FRS questionnaire respository](https://github.com/ONSdigital/FRS-Questionnaire).
+- A PowerShell script to generate this version is available in the [FRS questionnaire repository](https://github.com/ONSdigital/FRS-Questionnaire).
 
-### Fields
+### Questionnaire Fields
 
 These fields help the service manage case assignment and editing state:
 
-| Field | Purpose |
-|---|---|
-| `QEdit.AssignedTo` | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them. |
-| `QEdit.Edited` | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten. |
-| `QEdit.LastUpdated` | Timestamp of last edit set by the questionnaire. Used to determine sync status. |
-| `QEdit.EditedStatus` | An enum (``[NotStarted = 0, Started = 1, Query = 2, Finished = 3]``) indicating the case's editing stage. While triggered by editor actions, this field is updated by the questionnaire's internal logic, not directly by the editing service. The service uses this status for workload visibility and filtering. |
+| Field                | Purpose                                                                                                                                                                                                                                                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `QEdit.AssignedTo`   | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them.                                                                                                                           |
+| `QEdit.Edited`       | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten.                                                                                                                                                                                            |
+| `QEdit.LastUpdated`  | Timestamp of last edit set by the questionnaire. Used to determine sync status.                                                                                                                                                                                                                                  |
+| `QEdit.EditedStatus` | An enum (`[NotStarted = 0, Started = 1, Query = 2, Finished = 3]`) indicating the case's editing stage. While triggered by editor actions, this field is updated by the questionnaire's internal logic, not directly by the editing service. The service uses this status for workload visibility and filtering. |
 
 ### Data Entry Settings
 
-The questionnaire must include a `Data Entry Settings` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behavior and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
+The questionnaire must include a `Data Entry Settings` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behaviour and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
 
 ## Case Visibility
 
@@ -77,81 +77,87 @@ The `Survey Support` role can set a case for re-sync, allowing it to be overwrit
 
 This feature is typically used to ensure changes made to a case in the "main" questionnaire (e.g., an updated outcome code) are mirrored in its "edit" version, even if editing has already started on that case.
 
-## Local Setup
+## Local Development
 
-Prerequisites
+### Prerequisites
 
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
-- [Cloud SDK](https://cloud.google.com/sdk/)
+- [Node.js](https://nodejs.org/) 24+ (see `engines` in [package.json](package.json))
+- [Yarn](https://yarnpkg.com/) 4+
+- [Google Cloud SDK (`gcloud` CLI)](https://cloud.google.com/sdk/)
 
-Clone down the repository:
+### Clone and install packages
 
-```shell script
-git clone https://github.com/ONSdigital/blaise-editing-service
-```
-
-Install service dependencies:
-
-```shell script
+```shell
+git clone https://github.com/ONSdigital/blaise-editing-service.git
+cd blaise-editing-service
 yarn install
 ```
 
-Create an .env file in the root of the project and add the following environment variables:
+### Authenticate with Google Cloud
 
-| Variable | Description | Example |
-| --- | --- | --- |
-| PORT | Port for the Express server | 5001 |
-| BLAISE_API_URL | URL that the [Blaise Rest API](https://github.com/ONSdigital/blaise-api-rest) is running on (including protocol) | <http://localhost:90> |
-| SERVER_PARK | Name of the Blaise server park the questionnaires are installed on | gusty |
-| VM_EXTERNAL_WEB_URL | External URL used for CATI (not including protocol) | cati.example.com |
-| NODE_ENV | Type of environment. Set to `production` if you want to connect the logger to GCP | local |
+This is required for opening an IAP tunnel and for production-style application-default credentials.
+
+```shell
+gcloud auth login
+gcloud config set project ons-blaise-v2-dev
+gcloud auth application-default login --impersonate-service-account=ons-blaise-v2-dev@appspot.gserviceaccount.com
+```
+
+### Start an IAP tunnel to Blaise REST API
+
+Run this in a separate terminal and keep it running:
+
+```shell
+gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:8080 --zone europe-west2-a
+```
+
+Expected output includes `Listening on port [8080]`.
+
+### Configure environment variables
+
+Create a `.env` file in the repository root.
+
+Required variables:
+
+- `BLAISE_API_URL`: Blaise REST API URL (for example `localhost:8080` or `http://localhost:8080`).
+- `SERVER_PARK`: Blaise server park name.
+- `CATI_URL`: External CATI web URL (without protocol).
+- `PROJECT_ID`: GCP project ID used for auth/session keying and audit logging.
+- `URL_DOMAIN`: Cookie/session domain (for local development, typically `localhost`).
+- `SESSION_SECRET`: Session secret used by login middleware.
 
 Example `.env` file:
 
-```.env
-PORT='5001'
-BLAISE_API_URL='http://localhost:90'
-SERVER_PARK='gusty'
-VM_EXTERNAL_WEB_URL='cati.example.com'
-NODE_ENV='local'
+```ini
+BLAISE_API_URL=localhost:8080
+SERVER_PARK=gusty
+CATI_URL=dev-cati.social-surveys.gcp.onsdigital.uk
+PROJECT_ID=ons-blaise-v2-dev
+URL_DOMAIN=localhost
+SESSION_SECRET=blah
 ```
 
-Ensure `PORT` matches the port configured in the `proxy` setting of the `package.json` file.
+### Run the app
 
-For this service to connect to the custom Blaise RESTful API, open a tunnel in your GCP environment to the REST API VM:
-
-```shell script
-gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:<API_PORT> --zone europe-west2-a
-```
-
-Ensure `API_PORT` matches the port configured in the `BLAISE_API_URL` environment variable in your `.env` file.
-
-If you need to connect the service logger to GCP. You'll need to:
-
-1. Set the env var, `NODE_ENV` to `production`
-2. Authenticate with GCP and select your project.
-3. Afterwards, run the following to authenticate your local application:
-
-```shell script
-gcloud auth application-default login
-```
-
-## Running Service
-
-Run the service:
-
-```shell script
+```shell
 yarn dev
 ```
 
-Once the service is running, you can access it by visiting the URL displayed in the terminal. If you're using the example `.env` configuration, the service will be available at [localhost:5001](http://localhost:5001/).
+UI is available at http://localhost:3000/.
 
-## Testing
-
-Run the tests:
+If local processes become stale, stop known ports and watchers:
 
 ```shell
-yarn test
+yarn kill
 ```
+
+## Common Scripts
+
+- `yarn dev`: Run frontend and backend in watch mode
+- `yarn build`: Build client and server
+- `yarn typecheck`: Run TypeScript checks for frontend and server
+- `yarn lint`: Run typecheck, ESLint, Prettier checks, and knip
+- `yarn lint-fix`: Auto-fix lint/prettier issues and run knip fix
+- `yarn test`: Run Vitest suite with coverage
+- `yarn test-watch`: Run Vitest in watch mode
+- `yarn spellcheck`: Run cspell over code, config, and docs files

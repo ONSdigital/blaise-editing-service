@@ -1,9 +1,12 @@
 {
-  "extends": "./tsconfig.server.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "build",
-    "noEmit": false
+    "types": ["node"]
   },
-  "exclude": ["node_modules", "src/server/**/*.test.ts", "src/**/*.test.ts", "src/**/*.test.tsx"]
+  "exclude": [
+    "src/server/**/*.test.ts",
+    "src/server/test-utils/**",
+    "src/server/**/setupTests.ts",
+    "src/server/**/tests/**"
+  ],
+  "extends": "./tsconfig.server.json"
 }
