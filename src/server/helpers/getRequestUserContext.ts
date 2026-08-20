@@ -1,5 +1,7 @@
 import { type Auth } from "blaise-login-react-server";
 
+import { sanitiseForLogging } from "../utils/sanitisation.js";
+
 import type { Request } from "express";
 
 interface RequestUserContext {
@@ -10,16 +12,12 @@ interface RequestUserContext {
 const UNKNOWN_USERNAME = "Unknown User";
 const UNKNOWN_ROLE = "Unknown Role";
 
-function sanitise(value: string): string {
-  return value.replace(/[\r\n\t]+/g, " ").trim();
-}
-
 function sanitiseOrFallback(value: unknown, fallback: string): string {
   if (typeof value !== "string") {
     return fallback;
   }
 
-  const sanitised = sanitise(value);
+  const sanitised = sanitiseForLogging(value);
 
   return sanitised === "" ? fallback : sanitised;
 }
