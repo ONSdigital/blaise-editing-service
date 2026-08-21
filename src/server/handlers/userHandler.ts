@@ -62,7 +62,7 @@ export default class UserHandler implements Controller {
       this.auditLogger.info(
         request.log,
         sanitiseForLogging(
-          `Retrieved ${userList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          `AUDIT_LOG: Retrieved ${userList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
         ),
       );
       if (userRoleRaw) {
@@ -72,7 +72,7 @@ export default class UserHandler implements Controller {
         this.auditLogger.info(
           request.log,
           sanitiseForLogging(
-            `Filtered down to ${filteredUserList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+            `AUDIT_LOG: Filtered down to ${filteredUserList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
           ),
         );
 
@@ -86,7 +86,9 @@ export default class UserHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get Users, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Failed to get Users, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
     }
   }

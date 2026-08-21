@@ -10,6 +10,7 @@ import FakeServerConfigurationProvider from "../test-utils/fakeServerConfigurati
 import mockUser from "../test-utils/user.mock.js";
 import AuditLogger from "../utils/auditLogger.js";
 import BlaiseApi from "../utils/blaiseApi.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
 
 import type { CaseEditInformation, User } from "blaise-api-node-client";
 import type { HttpLogger } from "pino-http";
@@ -92,7 +93,9 @@ describe("Get case summary tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -144,7 +147,9 @@ describe("Get case summary tests", () => {
         (logger) =>
           logger.error(
             It.isAny(),
-            `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            ),
           ),
         Times.once(),
       );
@@ -172,7 +177,9 @@ describe("Get case summary tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          ),
         ),
       Times.once(),
     );
@@ -434,7 +441,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -442,7 +451,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -671,7 +682,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -679,7 +692,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -864,7 +879,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -872,7 +889,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -1024,7 +1043,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -1032,7 +1053,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Filtered down to ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Filtered down to ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -1094,7 +1117,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+          ),
         ),
       Times.once(),
     );
@@ -1133,7 +1158,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          ),
         ),
       Times.once(),
     );
@@ -1172,7 +1199,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          ),
         ),
       Times.once(),
     );
@@ -1204,7 +1233,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+          ),
         ),
       Times.once(),
     );
@@ -1245,7 +1276,9 @@ describe("Get case edit information tests", () => {
         (logger) =>
           logger.error(
             It.isAny(),
-            `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+            ),
           ),
         Times.once(),
       );
@@ -1285,7 +1318,9 @@ describe("Get case edit information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          ),
         ),
       Times.once(),
     );
@@ -1393,7 +1428,9 @@ describe("allocate cases tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -1427,7 +1464,9 @@ describe("allocate cases tests", () => {
         (logger) =>
           logger.error(
             It.isAny(),
-            `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            ),
           ),
         Times.once(),
       );
@@ -1457,7 +1496,9 @@ describe("allocate cases tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          ),
         ),
       Times.once(),
     );
@@ -1533,7 +1574,9 @@ describe("set to update case tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -1565,7 +1608,9 @@ describe("set to update case tests", () => {
         (logger) =>
           logger.error(
             It.isAny(),
-            `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            ),
           ),
         Times.once(),
       );
@@ -1593,7 +1638,9 @@ describe("set to update case tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          ),
         ),
       Times.once(),
     );

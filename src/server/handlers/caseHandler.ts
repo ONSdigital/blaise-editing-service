@@ -89,7 +89,7 @@ export default class CaseHandler implements Controller {
       this.auditLogger.info(
         request.log,
         sanitiseForLogging(
-          `Retrieved case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          `AUDIT_LOG: Retrieved case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
         ),
       );
 
@@ -100,7 +100,9 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get case details, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Failed to get case details, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
     }
   }
@@ -139,7 +141,9 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get case(s) edit information, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Failed to get case(s) edit information, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
     }
   }
@@ -159,7 +163,7 @@ export default class CaseHandler implements Controller {
     this.auditLogger.info(
       request.log,
       sanitiseForLogging(
-        `Retrieved ${cases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        `AUDIT_LOG: Retrieved ${cases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       ),
     );
 
@@ -181,7 +185,7 @@ export default class CaseHandler implements Controller {
     this.auditLogger.info(
       request.log,
       sanitiseForLogging(
-        `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        `AUDIT_LOG: Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       ),
     );
 
@@ -235,7 +239,7 @@ export default class CaseHandler implements Controller {
       this.auditLogger.info(
         request.log,
         sanitiseForLogging(
-          `Allocated ${cases.length} cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          `AUDIT_LOG: Allocated ${cases.length} cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
         ),
       );
 
@@ -246,7 +250,9 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to allocate cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Failed to allocate cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
     }
   }
@@ -280,7 +286,7 @@ export default class CaseHandler implements Controller {
       this.auditLogger.info(
         request.log,
         sanitiseForLogging(
-          `Set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          `AUDIT_LOG: Set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
         ),
       );
 
@@ -291,7 +297,9 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Failed to set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
     }
   }

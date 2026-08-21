@@ -1,7 +1,7 @@
 import { type IncomingMessage } from "http";
 
 import isNotFoundError from "../../common/helpers/axiosHelper.js";
-import { sanitiseForLogging } from "../utils/sanitisation.js";
+import { type SanitisedLogString, sanitiseForLogging } from "../utils/sanitisation.js";
 import { CsvValidationError } from "../utils/validation.js";
 
 import { type ApiErrorStatusCode, createApiErrorResponse } from "./apiErrorResponse.js";
@@ -26,13 +26,13 @@ export default function handleApiError(
   response: Response,
   auditLogger: AuditLogger,
   requestLog: IncomingMessage["log"],
-  failureMessage: string,
+  failureMessage: SanitisedLogString,
 ) {
   const statusCode = getErrorStatusCode(error);
   const sanitisedFailureMessage = sanitiseForLogging(failureMessage);
   const sanitisedError = sanitiseForLogging(String(error));
   const auditLogMessage = sanitiseForLogging(
-    `${sanitisedFailureMessage} with ${statusCode} ${sanitisedError}`,
+    `AUDIT_LOG: ${sanitisedFailureMessage} with ${statusCode} ${sanitisedError}`,
   );
 
   auditLogger.error(requestLog, auditLogMessage);

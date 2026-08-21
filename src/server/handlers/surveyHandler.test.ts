@@ -10,6 +10,7 @@ import FakeServerConfigurationProvider from "../test-utils/fakeServerConfigurati
 import mockUser from "../test-utils/user.mock.js";
 import AuditLogger from "../utils/auditLogger.js";
 import BlaiseApi from "../utils/blaiseApi.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
 
 import type { QuestionnaireDetails, Survey } from "../../common/types/survey.types.js";
 import type { User } from "blaise-api-node-client";
@@ -218,7 +219,9 @@ describe("Get surveys tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Retrieved ${mockQuestionnaireDetailsList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockQuestionnaireDetailsList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -226,7 +229,9 @@ describe("Get surveys tests", () => {
         (logger) =>
           logger.info(
             It.isAny(),
-            `Filtered down to ${mockExpectedFilteredQuestionnaireList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockExpectedFilteredQuestionnaireList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
           ),
         Times.once(),
       );
@@ -397,7 +402,9 @@ describe("Get surveys tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Retrieved ${mockQuestionnaireDetailsList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved ${mockQuestionnaireDetailsList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -405,7 +412,9 @@ describe("Get surveys tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Filtered down to ${mockExpectedFilteredQuestionnaireList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Filtered down to ${mockExpectedFilteredQuestionnaireList.length} questionnaire(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -440,7 +449,9 @@ describe("Get surveys tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          ),
         ),
       Times.once(),
     );
@@ -473,7 +484,9 @@ describe("Get surveys tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          ),
         ),
       Times.once(),
     );
@@ -508,7 +521,9 @@ describe("Get surveys tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get questionnaires, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          ),
         ),
       Times.once(),
     );

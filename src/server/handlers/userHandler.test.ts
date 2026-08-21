@@ -9,6 +9,7 @@ import FakeServerConfigurationProvider from "../test-utils/fakeServerConfigurati
 import mockUser from "../test-utils/user.mock.js";
 import AuditLogger from "../utils/auditLogger.js";
 import BlaiseApi from "../utils/blaiseApi.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
 
 import type { User } from "blaise-api-node-client";
 import type { Response } from "supertest";
@@ -101,7 +102,9 @@ describe("Get Users information tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Retrieved ${mockUserList.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved ${mockUserList.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -109,7 +112,9 @@ describe("Get Users information tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Filtered down to ${filteredUserListObject.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Filtered down to ${filteredUserListObject.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -134,7 +139,9 @@ describe("Get Users information tests", () => {
       (logger) =>
         logger.info(
           It.isAny(),
-          `Retrieved ${mockUserList.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved ${mockUserList.length} user(s), current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
         ),
       Times.once(),
     );
@@ -161,7 +168,9 @@ describe("Get Users information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          ),
         ),
       Times.once(),
     );
@@ -188,7 +197,9 @@ describe("Get Users information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          ),
         ),
       Times.once(),
     );
@@ -215,7 +226,9 @@ describe("Get Users information tests", () => {
       (logger) =>
         logger.error(
           It.isAny(),
-          `Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get Users, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          ),
         ),
       Times.once(),
     );

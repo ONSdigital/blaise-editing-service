@@ -70,7 +70,9 @@ export default class SurveyHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get questionnaires, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Failed to get questionnaires, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
     }
   }
@@ -89,7 +91,7 @@ export default class SurveyHandler implements Controller {
     this.auditLogger.info(
       request.log,
       sanitiseForLogging(
-        `Retrieved ${questionnaires.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        `AUDIT_LOG: Retrieved ${questionnaires.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       ),
     );
 
@@ -101,7 +103,7 @@ export default class SurveyHandler implements Controller {
       this.auditLogger.info(
         request.log,
         sanitiseForLogging(
-          `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          `AUDIT_LOG: Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
         ),
       );
 
@@ -115,7 +117,7 @@ export default class SurveyHandler implements Controller {
     this.auditLogger.info(
       request.log,
       sanitiseForLogging(
-        `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        `AUDIT_LOG: Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       ),
     );
 
