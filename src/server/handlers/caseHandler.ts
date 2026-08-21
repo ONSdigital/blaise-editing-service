@@ -5,6 +5,7 @@ import moment from "moment";
 import getRequestUserContext from "../helpers/getRequestUserContext.js";
 import handleApiError from "../helpers/handleApiError.js";
 import toCaseSummary from "../utils/caseMapper.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
 import { validateQuestionnaireName } from "../utils/validation.js";
 
 import type { CaseSummaryDetails } from "../../common/types/case.types.js";
@@ -74,15 +75,20 @@ export default class CaseHandler implements Controller {
     const questionnaireNameRaw = request.params.questionnaireName;
 
     const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedCaseId = sanitiseForLogging(caseId);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
       const caseSummary = toCaseSummary(caseResponse);
+      const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
 
       this.auditLogger.info(
         request.log,
-        `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Retrieved case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
 
       return response.status(200).json(caseSummary);
@@ -92,7 +98,7 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Failed to get case details, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
     }
   }
@@ -110,6 +116,9 @@ export default class CaseHandler implements Controller {
     const { userRole: requestedUserRole } = request.query;
 
     const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
@@ -128,7 +137,7 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Failed to get case(s) edit information, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
     }
   }
@@ -141,10 +150,13 @@ export default class CaseHandler implements Controller {
     request: Request<{ questionnaireName: string }>,
   ): Promise<CaseEditInformation[]> {
     const cases = await this.blaiseApi.getCaseEditInformation(questionnaireName);
+    const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     this.auditLogger.info(
       request.log,
-      `Retrieved ${cases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${username}, role: ${currentUserRole}}`,
+      `Retrieved ${cases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
     );
 
     const surveyTla = questionnaireName.substring(0, 3);
@@ -164,7 +176,7 @@ export default class CaseHandler implements Controller {
 
     this.auditLogger.info(
       request.log,
-      `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${username}, role: ${currentUserRole}}`,
+      `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
     );
 
     return filteredCases;
@@ -201,9 +213,14 @@ export default class CaseHandler implements Controller {
     const { name, cases } = request.body;
 
     const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedName = sanitiseForLogging(name);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
+      const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
 
       await this.updateCasesWithConcurrencyLimit(questionnaireName, cases, {
         "QEdit.AssignedTo": name,
@@ -211,7 +228,7 @@ export default class CaseHandler implements Controller {
       });
       this.auditLogger.info(
         request.log,
-        `Allocated ${cases.length} cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Allocated ${cases.length} cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
 
       return response.status(204).json();
@@ -221,7 +238,7 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Failed to allocate cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
     }
   }
@@ -238,9 +255,14 @@ export default class CaseHandler implements Controller {
     const { caseId } = request.params;
     const questionnaireNameRaw = request.params.questionnaireName;
     const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedCaseId = sanitiseForLogging(caseId);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
+      const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
 
       await this.blaiseApi.updateCase(`${questionnaireName}_EDIT`, caseId, {
         "QEdit.AssignedTo": "",
@@ -249,7 +271,7 @@ export default class CaseHandler implements Controller {
       });
       this.auditLogger.info(
         request.log,
-        `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
 
       return response.status(204).json();
@@ -259,7 +281,7 @@ export default class CaseHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Failed to set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
     }
   }

@@ -3,6 +3,7 @@ import express from "express";
 
 import getRequestUserContext from "../helpers/getRequestUserContext.js";
 import handleApiError from "../helpers/handleApiError.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
 import { validateUserRole } from "../utils/validation.js";
 
 import type { Controller } from "../controller.js";
@@ -48,6 +49,8 @@ export default class UserHandler implements Controller {
   ) {
     const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
     const userRoleRaw = request.query.userRole;
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       if (userRoleRaw !== undefined) {
@@ -58,7 +61,7 @@ export default class UserHandler implements Controller {
 
       this.auditLogger.info(
         request.log,
-        `Retrieved ${userList.length} user(s), current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Retrieved ${userList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
       if (userRoleRaw) {
         const userRole = userRoleRaw;
@@ -66,7 +69,7 @@ export default class UserHandler implements Controller {
 
         this.auditLogger.info(
           request.log,
-          `Filtered down to ${filteredUserList.length} user(s), current user: {name: ${username}, role: ${currentUserRole}}`,
+          `Filtered down to ${filteredUserList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
         );
 
         return response.status(200).json(filteredUserList);
@@ -79,7 +82,7 @@ export default class UserHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get Users, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Failed to get Users, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
     }
   }

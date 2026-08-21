@@ -3,6 +3,7 @@ import express from "express";
 
 import getRequestUserContext from "../helpers/getRequestUserContext.js";
 import handleApiError from "../helpers/handleApiError.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
 import toSurveys from "../utils/surveyMapper.js";
 import { validateUserRole } from "../utils/validation.js";
 
@@ -49,6 +50,8 @@ export default class SurveyHandler implements Controller {
   ) {
     const userRoleRaw = request.query.userRole;
     const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const userRole = validateUserRole(userRoleRaw);
@@ -67,7 +70,7 @@ export default class SurveyHandler implements Controller {
         response,
         this.auditLogger,
         request.log,
-        `Failed to get questionnaires, current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Failed to get questionnaires, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
     }
   }
@@ -80,10 +83,12 @@ export default class SurveyHandler implements Controller {
   ): Promise<QuestionnaireDetails[]> {
     const surveys = this.configuration.getSurveysForRole(userRole);
     const questionnaires = await this.blaiseApi.getQuestionnaires();
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     this.auditLogger.info(
       request.log,
-      `Retrieved ${questionnaires.length} questionnaire(s), current user: {name: ${username}, role: ${currentUserRole}}`,
+      `Retrieved ${questionnaires.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
     );
 
     if (userRole === "Survey Support") {
@@ -93,7 +98,7 @@ export default class SurveyHandler implements Controller {
 
       this.auditLogger.info(
         request.log,
-        `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${username}, role: ${currentUserRole}}`,
+        `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
       );
 
       return questionnairesList;
@@ -105,7 +110,7 @@ export default class SurveyHandler implements Controller {
 
     this.auditLogger.info(
       request.log,
-      `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${username}, role: ${currentUserRole}}`,
+      `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
     );
 
     return questionnairesList;
