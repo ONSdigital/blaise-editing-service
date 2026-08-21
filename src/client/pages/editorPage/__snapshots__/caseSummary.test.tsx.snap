@@ -1,0 +1,1290 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Given there is a case available in blaise for a questionnaire > should display the summary correctly > CaseSummary 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ons-u-mb-l"
+        data-testid="Summary"
+      >
+        <div
+          class="ons-summary ons-u-mt-m ons-u-mb-m"
+          data-testid="case-summary-details-summary"
+          id="case-summary-details"
+        >
+          <div
+            class="ons-summary__group"
+          >
+            <h2
+              class="ons-summary__group-title"
+            >
+              Interview details
+            </h2>
+            <dl
+              class="ons-summary__items"
+              id="case-summary-details-Interview-details-list"
+            >
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Interview-details-Serial-number-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Serial number
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Interview-details-Serial-number-value"
+                  >
+                    9001
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Interview-details-Outcome-code-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Outcome code
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Interview-details-Outcome-code-value"
+                  >
+                    110
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Interview-details-Interview-date-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Interview date
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Interview-details-Interview-date-value"
+                  >
+                    Sat May 11 2024
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Interview-details-District-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    District
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Interview-details-District-value"
+                  >
+                    Gwent
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Interview-details-Interviewer-name-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Interviewer name
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Interview-details-Interviewer-name-value"
+                  >
+                    Rich
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <div
+            class="ons-summary__group"
+          >
+            <h2
+              class="ons-summary__group-title"
+            >
+              Household details
+            </h2>
+            <dl
+              class="ons-summary__items"
+              id="case-summary-details-Household-details-list"
+            >
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Accommodation-type-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Accommodation type
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Accommodation-type-value"
+                  >
+                    Main: House/Bungalow, Type: Detached
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Floor-number-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Floor number
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Floor-number-value"
+                  >
+                    2
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Household-status-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Household status
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Household-status-value"
+                  >
+                    Conventional
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Number-of-bedrooms-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Number of bedrooms
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Number-of-bedrooms-value"
+                  >
+                    2
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Receipt-of-housing-benefit-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Receipt of housing benefit
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span>
+                    Amount: 380, Period: One week
+                    <br />
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Council-tax-band-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Council tax band
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Council-tax-band-value"
+                  >
+                    Band A
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Business-room-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Business room
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Business-room-value"
+                  >
+                    Yes
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Self-employed-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Self employed
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Self-employed-value"
+                  >
+                    Yes - H/H members: 1, 2
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Income-support-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Income support
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Income-support-value"
+                  >
+                    Yes - H/H members: 1
+                  </span>
+                </dd>
+              </div>
+              <div
+                class="ons-summary__item"
+                data-testid="case-summary-details-Household-details-Income-based-JA-support-row"
+              >
+                <dt
+                  class="ons-summary__item-title"
+                >
+                  <div
+                    class="ons-summary__item--text"
+                  >
+                    Income based JA support
+                  </div>
+                </dt>
+                <dd
+                  class="ons-summary__values"
+                >
+                  <span
+                    class="ons-summary__text"
+                    data-testid="case-summary-details-Household-details-Income-based-JA-support-value"
+                  >
+                    Yes - H/H members: 1
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <h2
+          class="ons-summary__group-title"
+        >
+          Relationship grid
+        </h2>
+        <div
+          class="ons-table-scrollable ons-table-scrollable--on"
+        >
+          <div
+            aria-label="Table"
+            class="ons-table-scrollable__content"
+            role="region"
+            tabindex="0"
+          >
+            <table
+              class="ons-table"
+              data-testid="Respondents-table-table"
+              id="Respondents-table"
+            >
+              <thead
+                class="ons-table__head"
+              >
+                <tr
+                  class="ons-table__row"
+                >
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    />
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      Name
+                    </span>
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      BU
+                    </span>
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      Sex
+                    </span>
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      DOB
+                    </span>
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      Marital status
+                    </span>
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      1
+                    </span>
+                  </th>
+                  <th
+                    class="ons-table__header ons-table__header--top"
+                    scope="col"
+                  >
+                    <span
+                      class="ons-table__header-text"
+                    >
+                      2
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="ons-table__body"
+              >
+                <tr
+                  class="ons-table__row"
+                >
+                  <td
+                    aria-label="RespondentNumber"
+                    class="ons-table__cell"
+                  >
+                    1
+                  </td>
+                  <td
+                    aria-label="RespondentName"
+                    class="ons-table__cell status"
+                  >
+                    Richmond Ricecake
+                  </td>
+                  <td
+                    aria-label="BenefitUnit"
+                    class="ons-table__cell"
+                  >
+                    1
+                  </td>
+                  <td
+                    aria-label="Sex"
+                    class="ons-table__cell"
+                  >
+                    M
+                  </td>
+                  <td
+                    aria-label="DateOfBirth"
+                    class="ons-table__cell"
+                  >
+                    Tue Jan 15 1980
+                  </td>
+                  <td
+                    aria-label="MaritalStatus"
+                    class="ons-table__cell"
+                  >
+                    COH
+                  </td>
+                  <td
+                    aria-label="Relationship-1"
+                    class="ons-table__cell"
+                  >
+                    *
+                  </td>
+                  <td
+                    aria-label="Relationship-1"
+                    class="ons-table__cell"
+                  >
+                    1
+                  </td>
+                </tr>
+                <tr
+                  class="ons-table__row"
+                >
+                  <td
+                    aria-label="RespondentNumber"
+                    class="ons-table__cell"
+                  >
+                    2
+                  </td>
+                  <td
+                    aria-label="RespondentName"
+                    class="ons-table__cell status"
+                  >
+                    Betty Bettison
+                  </td>
+                  <td
+                    aria-label="BenefitUnit"
+                    class="ons-table__cell"
+                  >
+                    1
+                  </td>
+                  <td
+                    aria-label="Sex"
+                    class="ons-table__cell"
+                  >
+                    F
+                  </td>
+                  <td
+                    aria-label="DateOfBirth"
+                    class="ons-table__cell"
+                  >
+                    Sun Jun 11 1995
+                  </td>
+                  <td
+                    aria-label="MaritalStatus"
+                    class="ons-table__cell"
+                  >
+                    COH
+                  </td>
+                  <td
+                    aria-label="Relationship-2"
+                    class="ons-table__cell"
+                  >
+                    1
+                  </td>
+                  <td
+                    aria-label="Relationship-2"
+                    class="ons-table__cell"
+                  >
+                    *
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ons-u-mb-l"
+      data-testid="Summary"
+    >
+      <div
+        class="ons-summary ons-u-mt-m ons-u-mb-m"
+        data-testid="case-summary-details-summary"
+        id="case-summary-details"
+      >
+        <div
+          class="ons-summary__group"
+        >
+          <h2
+            class="ons-summary__group-title"
+          >
+            Interview details
+          </h2>
+          <dl
+            class="ons-summary__items"
+            id="case-summary-details-Interview-details-list"
+          >
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Interview-details-Serial-number-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Serial number
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Interview-details-Serial-number-value"
+                >
+                  9001
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Interview-details-Outcome-code-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Outcome code
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Interview-details-Outcome-code-value"
+                >
+                  110
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Interview-details-Interview-date-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Interview date
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Interview-details-Interview-date-value"
+                >
+                  Sat May 11 2024
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Interview-details-District-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  District
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Interview-details-District-value"
+                >
+                  Gwent
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Interview-details-Interviewer-name-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Interviewer name
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Interview-details-Interviewer-name-value"
+                >
+                  Rich
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div
+          class="ons-summary__group"
+        >
+          <h2
+            class="ons-summary__group-title"
+          >
+            Household details
+          </h2>
+          <dl
+            class="ons-summary__items"
+            id="case-summary-details-Household-details-list"
+          >
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Accommodation-type-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Accommodation type
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Accommodation-type-value"
+                >
+                  Main: House/Bungalow, Type: Detached
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Floor-number-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Floor number
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Floor-number-value"
+                >
+                  2
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Household-status-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Household status
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Household-status-value"
+                >
+                  Conventional
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Number-of-bedrooms-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Number of bedrooms
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Number-of-bedrooms-value"
+                >
+                  2
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Receipt-of-housing-benefit-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Receipt of housing benefit
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span>
+                  Amount: 380, Period: One week
+                  <br />
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Council-tax-band-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Council tax band
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Council-tax-band-value"
+                >
+                  Band A
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Business-room-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Business room
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Business-room-value"
+                >
+                  Yes
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Self-employed-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Self employed
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Self-employed-value"
+                >
+                  Yes - H/H members: 1, 2
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Income-support-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Income support
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Income-support-value"
+                >
+                  Yes - H/H members: 1
+                </span>
+              </dd>
+            </div>
+            <div
+              class="ons-summary__item"
+              data-testid="case-summary-details-Household-details-Income-based-JA-support-row"
+            >
+              <dt
+                class="ons-summary__item-title"
+              >
+                <div
+                  class="ons-summary__item--text"
+                >
+                  Income based JA support
+                </div>
+              </dt>
+              <dd
+                class="ons-summary__values"
+              >
+                <span
+                  class="ons-summary__text"
+                  data-testid="case-summary-details-Household-details-Income-based-JA-support-value"
+                >
+                  Yes - H/H members: 1
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <h2
+        class="ons-summary__group-title"
+      >
+        Relationship grid
+      </h2>
+      <div
+        class="ons-table-scrollable ons-table-scrollable--on"
+      >
+        <div
+          aria-label="Table"
+          class="ons-table-scrollable__content"
+          role="region"
+          tabindex="0"
+        >
+          <table
+            class="ons-table"
+            data-testid="Respondents-table-table"
+            id="Respondents-table"
+          >
+            <thead
+              class="ons-table__head"
+            >
+              <tr
+                class="ons-table__row"
+              >
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  />
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    Name
+                  </span>
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    BU
+                  </span>
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    Sex
+                  </span>
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    DOB
+                  </span>
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    Marital status
+                  </span>
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    1
+                  </span>
+                </th>
+                <th
+                  class="ons-table__header ons-table__header--top"
+                  scope="col"
+                >
+                  <span
+                    class="ons-table__header-text"
+                  >
+                    2
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="ons-table__body"
+            >
+              <tr
+                class="ons-table__row"
+              >
+                <td
+                  aria-label="RespondentNumber"
+                  class="ons-table__cell"
+                >
+                  1
+                </td>
+                <td
+                  aria-label="RespondentName"
+                  class="ons-table__cell status"
+                >
+                  Richmond Ricecake
+                </td>
+                <td
+                  aria-label="BenefitUnit"
+                  class="ons-table__cell"
+                >
+                  1
+                </td>
+                <td
+                  aria-label="Sex"
+                  class="ons-table__cell"
+                >
+                  M
+                </td>
+                <td
+                  aria-label="DateOfBirth"
+                  class="ons-table__cell"
+                >
+                  Tue Jan 15 1980
+                </td>
+                <td
+                  aria-label="MaritalStatus"
+                  class="ons-table__cell"
+                >
+                  COH
+                </td>
+                <td
+                  aria-label="Relationship-1"
+                  class="ons-table__cell"
+                >
+                  *
+                </td>
+                <td
+                  aria-label="Relationship-1"
+                  class="ons-table__cell"
+                >
+                  1
+                </td>
+              </tr>
+              <tr
+                class="ons-table__row"
+              >
+                <td
+                  aria-label="RespondentNumber"
+                  class="ons-table__cell"
+                >
+                  2
+                </td>
+                <td
+                  aria-label="RespondentName"
+                  class="ons-table__cell status"
+                >
+                  Betty Bettison
+                </td>
+                <td
+                  aria-label="BenefitUnit"
+                  class="ons-table__cell"
+                >
+                  1
+                </td>
+                <td
+                  aria-label="Sex"
+                  class="ons-table__cell"
+                >
+                  F
+                </td>
+                <td
+                  aria-label="DateOfBirth"
+                  class="ons-table__cell"
+                >
+                  Sun Jun 11 1995
+                </td>
+                <td
+                  aria-label="MaritalStatus"
+                  class="ons-table__cell"
+                >
+                  COH
+                </td>
+                <td
+                  aria-label="Relationship-2"
+                  class="ons-table__cell"
+                >
+                  1
+                </td>
+                <td
+                  aria-label="Relationship-2"
+                  class="ons-table__cell"
+                >
+                  *
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,16 +1,21 @@
-import dotenv from 'dotenv';
-import nodeServer from './server';
-import ServerConfigurationProvider from './ServerConfigurationProvider';
+import dotenv from "dotenv";
 
-// create/get configuration
-dotenv.config(); // TODO: only needed for running locally
+import nodeServer from "./server.js";
+import ServerConfigurationProvider from "./utils/serverConfigurationProvider.js";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
+
 const config = new ServerConfigurationProvider();
 
-
-// create server
 const server = nodeServer(config);
 
-// run server
-server.listen(config.Port, () => {
-  console.log(`Blaise Editing Service running on port ${config.Port}`);
-});
+server
+  .listen(config.Port, () => {
+    console.log(`Blaise Editing Service running on port ${config.Port}`);
+  })
+  .on("error", (error: Error) => {
+    console.error(error, "Failed to start server");
+    process.exit(1);
+  });

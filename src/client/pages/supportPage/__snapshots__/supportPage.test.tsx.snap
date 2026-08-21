@@ -10,7 +10,14 @@ exports[`Given there are no surveys available in blaise > should render the page
       >
         <div
           class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
+          id="panel-_r_t_"
         >
+          <span
+            class="ons-panel__assistive-text ons-u-vh"
+          >
+            Important information:
+             
+          </span>
           <div
             class="ons-panel__body "
           >
@@ -26,7 +33,14 @@ exports[`Given there are no surveys available in blaise > should render the page
     >
       <div
         class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
+        id="panel-_r_t_"
       >
+        <span
+          class="ons-panel__assistive-text ons-u-vh"
+        >
+          Important information:
+           
+        </span>
         <div
           class="ons-panel__body "
         >
@@ -99,86 +113,83 @@ exports[`Given there are surveys available in blaise > should render the Support
       >
         <br />
         <div
-          class="ons-accordion"
-          id="survey-accordion"
+          data-testid="survey-accordion"
+          id="survey"
         >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
+          <div
+            class="ons-details ons-details--initialised ons-u-mt-l "
+            data-save-state="true"
+            id="survey-0"
+            role="group"
           >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
+            <div
+              aria-controls="survey-0-content"
+              aria-expanded="false"
+              class="ons-details__heading"
+              data-ga-action="Open panel"
+              data-testid="survey-0-heading"
+              role="button"
               tabindex="0"
             >
-              <div
-                class="ons-collapsible__controls"
+              <h2
+                class="ons-details__title ons-u-fs-r--b"
               >
-                <h2
-                  class="ons-collapsible__title"
+                FRS
+              </h2>
+              <span
+                class="ons-details__icon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="ons-icon"
+                  fill="currentColor"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 8 13"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
+                  <path
+                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                    transform="translate(-5.02 -1.59)"
+                  />
+                </svg>
+              </span>
+            </div>
             <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
+              aria-hidden="true"
+              class="ons-details__content"
+              data-testid="survey-0-content"
+              id="survey-0-content"
             >
-              <div>
+              <div
+                class="ons-field"
+              >
                 <label
                   class="ons-label"
                   for="select-questionnaire"
                 >
                   Select questionnaire
-                   
                 </label>
                 <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
+                  class="ons-input ons-input--select"
+                  data-testid="select-questionnaire-input"
                   id="select-questionnaire"
                   name="select"
                 >
                   <option
-                    data-testid="select-select-questionnaire"
                     disabled=""
                     value=""
                   >
                     Select an option
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
+                    data-testid="select-questionnaire-option-FRS2504A_EDIT"
                     value="FRS2504A_EDIT"
                   >
                     FRS2504A (April 2025)
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                    data-testid="select-questionnaire-option-FRS2505A_EDIT"
                     value="FRS2505A_EDIT"
                   >
                     FRS2505A (May 2025)
@@ -190,79 +201,53 @@ exports[`Given there are surveys available in blaise > should render the Support
                 data-testid="questionnaire"
               >
                 <div
-                  class="questionnaire"
+                  class="questionnaire ons-u-mb-xl"
+                  data-testid="FRS2504A_EDIT-Support-Content"
                 >
                   <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                    class="ons-u-mt-l"
                   >
                     <div
-                      class="ons-panel__body "
+                      class="ons-field"
                     >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="FRS2504A_EDIT-Support-Content"
-                        title="Questionnaires"
+                      <label
+                        class="ons-label"
+                        for="caseid"
                       >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Total cases
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
+                        Enter case ID
+                      </label>
+                      <input
+                        class="ons-input ons-input--text ons-input-type__input"
+                        data-testid="caseid-input"
+                        id="caseid"
+                        type="text"
+                        value=""
+                      />
                     </div>
                   </div>
-                  <br />
-                  <p
-                    class="ons-field"
+                  <div
+                    class="ons-u-mt-s"
                   >
-                    <label
-                      class="ons-label"
-                      for="caseid"
+                    <button
+                      class="ons-btn ons-btn--disabled"
+                      disabled=""
+                      type="button"
                     >
-                      Enter case ID
-                    </label>
-                    <input
-                      class="ons-input ons-input--text ons-input-type__input "
-                      data-testid="text-input"
-                      id="caseid"
-                      style="z-index: 0;"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <button
-                    class="ons-btn  ons-btn--disabled"
-                    data-testid="button"
-                    disabled=""
-                    type="button"
-                  >
-                    <span
-                      class="ons-btn__inner"
-                    >
-                      Search
-                    </span>
-                  </button>
-                  <br />
-                  <br />
+                      <span
+                        class="ons-btn__inner"
+                      >
+                        <span
+                          class="ons-btn__text"
+                        >
+                          Search
+                        </span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </details>
+          </div>
         </div>
       </div>
     </div>
@@ -273,86 +258,83 @@ exports[`Given there are surveys available in blaise > should render the Support
     >
       <br />
       <div
-        class="ons-accordion"
-        id="survey-accordion"
+        data-testid="survey-accordion"
+        id="survey"
       >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
+        <div
+          class="ons-details ons-details--initialised ons-u-mt-l "
+          data-save-state="true"
+          id="survey-0"
+          role="group"
         >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
+          <div
+            aria-controls="survey-0-content"
+            aria-expanded="false"
+            class="ons-details__heading"
+            data-ga-action="Open panel"
+            data-testid="survey-0-heading"
+            role="button"
             tabindex="0"
           >
-            <div
-              class="ons-collapsible__controls"
+            <h2
+              class="ons-details__title ons-u-fs-r--b"
             >
-              <h2
-                class="ons-collapsible__title"
+              FRS
+            </h2>
+            <span
+              class="ons-details__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="ons-icon"
+                fill="currentColor"
+                focusable="false"
+                role="img"
+                viewBox="0 0 8 13"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
+                <path
+                  d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                  transform="translate(-5.02 -1.59)"
+                />
+              </svg>
+            </span>
+          </div>
           <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
+            aria-hidden="true"
+            class="ons-details__content"
+            data-testid="survey-0-content"
+            id="survey-0-content"
           >
-            <div>
+            <div
+              class="ons-field"
+            >
               <label
                 class="ons-label"
                 for="select-questionnaire"
               >
                 Select questionnaire
-                 
               </label>
               <select
-                class="ons-input "
-                data-testid="select-questionnaire"
+                class="ons-input ons-input--select"
+                data-testid="select-questionnaire-input"
                 id="select-questionnaire"
                 name="select"
               >
                 <option
-                  data-testid="select-select-questionnaire"
                   disabled=""
                   value=""
                 >
                   Select an option
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
+                  data-testid="select-questionnaire-option-FRS2504A_EDIT"
                   value="FRS2504A_EDIT"
                 >
                   FRS2504A (April 2025)
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                  data-testid="select-questionnaire-option-FRS2505A_EDIT"
                   value="FRS2505A_EDIT"
                 >
                   FRS2505A (May 2025)
@@ -364,79 +346,53 @@ exports[`Given there are surveys available in blaise > should render the Support
               data-testid="questionnaire"
             >
               <div
-                class="questionnaire"
+                class="questionnaire ons-u-mb-xl"
+                data-testid="FRS2504A_EDIT-Support-Content"
               >
                 <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                  class="ons-u-mt-l"
                 >
                   <div
-                    class="ons-panel__body "
+                    class="ons-field"
                   >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      title="Questionnaires"
+                    <label
+                      class="ons-label"
+                      for="caseid"
                     >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Total cases
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
+                      Enter case ID
+                    </label>
+                    <input
+                      class="ons-input ons-input--text ons-input-type__input"
+                      data-testid="caseid-input"
+                      id="caseid"
+                      type="text"
+                      value=""
+                    />
                   </div>
                 </div>
-                <br />
-                <p
-                  class="ons-field"
+                <div
+                  class="ons-u-mt-s"
                 >
-                  <label
-                    class="ons-label"
-                    for="caseid"
+                  <button
+                    class="ons-btn ons-btn--disabled"
+                    disabled=""
+                    type="button"
                   >
-                    Enter case ID
-                  </label>
-                  <input
-                    class="ons-input ons-input--text ons-input-type__input "
-                    data-testid="text-input"
-                    id="caseid"
-                    style="z-index: 0;"
-                    type="text"
-                    value=""
-                  />
-                </p>
-                <button
-                  class="ons-btn  ons-btn--disabled"
-                  data-testid="button"
-                  disabled=""
-                  type="button"
-                >
-                  <span
-                    class="ons-btn__inner"
-                  >
-                    Search
-                  </span>
-                </button>
-                <br />
-                <br />
+                    <span
+                      class="ons-btn__inner"
+                    >
+                      <span
+                        class="ons-btn__text"
+                      >
+                        Search
+                      </span>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </div>
   </div>,
@@ -504,86 +460,83 @@ exports[`Given there are surveys available in blaise > should render the Support
       >
         <br />
         <div
-          class="ons-accordion"
-          id="survey-accordion"
+          data-testid="survey-accordion"
+          id="survey"
         >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
+          <div
+            class="ons-details ons-details--initialised ons-u-mt-l "
+            data-save-state="true"
+            id="survey-0"
+            role="group"
           >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
+            <div
+              aria-controls="survey-0-content"
+              aria-expanded="false"
+              class="ons-details__heading"
+              data-ga-action="Open panel"
+              data-testid="survey-0-heading"
+              role="button"
               tabindex="0"
             >
-              <div
-                class="ons-collapsible__controls"
+              <h2
+                class="ons-details__title ons-u-fs-r--b"
               >
-                <h2
-                  class="ons-collapsible__title"
+                FRS
+              </h2>
+              <span
+                class="ons-details__icon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="ons-icon"
+                  fill="currentColor"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 8 13"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
+                  <path
+                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                    transform="translate(-5.02 -1.59)"
+                  />
+                </svg>
+              </span>
+            </div>
             <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
+              aria-hidden="true"
+              class="ons-details__content"
+              data-testid="survey-0-content"
+              id="survey-0-content"
             >
-              <div>
+              <div
+                class="ons-field"
+              >
                 <label
                   class="ons-label"
                   for="select-questionnaire"
                 >
                   Select questionnaire
-                   
                 </label>
                 <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
+                  class="ons-input ons-input--select"
+                  data-testid="select-questionnaire-input"
                   id="select-questionnaire"
                   name="select"
                 >
                   <option
-                    data-testid="select-select-questionnaire"
                     disabled=""
                     value=""
                   >
                     Select an option
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
+                    data-testid="select-questionnaire-option-FRS2504A_EDIT"
                     value="FRS2504A_EDIT"
                   >
                     FRS2504A (April 2025)
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                    data-testid="select-questionnaire-option-FRS2505A_EDIT"
                     value="FRS2505A_EDIT"
                   >
                     FRS2505A (May 2025)
@@ -595,78 +548,52 @@ exports[`Given there are surveys available in blaise > should render the Support
                 data-testid="questionnaire"
               >
                 <div
-                  class="questionnaire"
+                  class="questionnaire ons-u-mb-xl"
+                  data-testid="FRS2504A_EDIT-Support-Content"
                 >
                   <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                    class="ons-u-mt-l"
                   >
                     <div
-                      class="ons-panel__body "
+                      class="ons-field"
                     >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="FRS2504A_EDIT-Support-Content"
-                        title="Questionnaires"
+                      <label
+                        class="ons-label"
+                        for="caseid"
                       >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Total cases
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
+                        Enter case ID
+                      </label>
+                      <input
+                        class="ons-input ons-input--text ons-input-type__input"
+                        data-testid="caseid-input"
+                        id="caseid"
+                        type="text"
+                        value="900"
+                      />
                     </div>
                   </div>
-                  <br />
-                  <p
-                    class="ons-field"
+                  <div
+                    class="ons-u-mt-s"
                   >
-                    <label
-                      class="ons-label"
-                      for="caseid"
+                    <button
+                      class="ons-btn"
+                      type="button"
                     >
-                      Enter case ID
-                    </label>
-                    <input
-                      class="ons-input ons-input--text ons-input-type__input "
-                      data-testid="text-input"
-                      id="caseid"
-                      style="z-index: 0;"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <button
-                    class="ons-btn "
-                    data-testid="button"
-                    type="button"
-                  >
-                    <span
-                      class="ons-btn__inner"
-                    >
-                      Search
-                    </span>
-                  </button>
-                  <br />
-                  <br />
+                      <span
+                        class="ons-btn__inner"
+                      >
+                        <span
+                          class="ons-btn__text"
+                        >
+                          Search
+                        </span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </details>
+          </div>
         </div>
       </div>
     </div>
@@ -677,86 +604,83 @@ exports[`Given there are surveys available in blaise > should render the Support
     >
       <br />
       <div
-        class="ons-accordion"
-        id="survey-accordion"
+        data-testid="survey-accordion"
+        id="survey"
       >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
+        <div
+          class="ons-details ons-details--initialised ons-u-mt-l "
+          data-save-state="true"
+          id="survey-0"
+          role="group"
         >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
+          <div
+            aria-controls="survey-0-content"
+            aria-expanded="false"
+            class="ons-details__heading"
+            data-ga-action="Open panel"
+            data-testid="survey-0-heading"
+            role="button"
             tabindex="0"
           >
-            <div
-              class="ons-collapsible__controls"
+            <h2
+              class="ons-details__title ons-u-fs-r--b"
             >
-              <h2
-                class="ons-collapsible__title"
+              FRS
+            </h2>
+            <span
+              class="ons-details__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="ons-icon"
+                fill="currentColor"
+                focusable="false"
+                role="img"
+                viewBox="0 0 8 13"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
+                <path
+                  d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                  transform="translate(-5.02 -1.59)"
+                />
+              </svg>
+            </span>
+          </div>
           <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
+            aria-hidden="true"
+            class="ons-details__content"
+            data-testid="survey-0-content"
+            id="survey-0-content"
           >
-            <div>
+            <div
+              class="ons-field"
+            >
               <label
                 class="ons-label"
                 for="select-questionnaire"
               >
                 Select questionnaire
-                 
               </label>
               <select
-                class="ons-input "
-                data-testid="select-questionnaire"
+                class="ons-input ons-input--select"
+                data-testid="select-questionnaire-input"
                 id="select-questionnaire"
                 name="select"
               >
                 <option
-                  data-testid="select-select-questionnaire"
                   disabled=""
                   value=""
                 >
                   Select an option
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
+                  data-testid="select-questionnaire-option-FRS2504A_EDIT"
                   value="FRS2504A_EDIT"
                 >
                   FRS2504A (April 2025)
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                  data-testid="select-questionnaire-option-FRS2505A_EDIT"
                   value="FRS2505A_EDIT"
                 >
                   FRS2505A (May 2025)
@@ -768,78 +692,52 @@ exports[`Given there are surveys available in blaise > should render the Support
               data-testid="questionnaire"
             >
               <div
-                class="questionnaire"
+                class="questionnaire ons-u-mb-xl"
+                data-testid="FRS2504A_EDIT-Support-Content"
               >
                 <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                  class="ons-u-mt-l"
                 >
                   <div
-                    class="ons-panel__body "
+                    class="ons-field"
                   >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      title="Questionnaires"
+                    <label
+                      class="ons-label"
+                      for="caseid"
                     >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Total cases
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
+                      Enter case ID
+                    </label>
+                    <input
+                      class="ons-input ons-input--text ons-input-type__input"
+                      data-testid="caseid-input"
+                      id="caseid"
+                      type="text"
+                      value="900"
+                    />
                   </div>
                 </div>
-                <br />
-                <p
-                  class="ons-field"
+                <div
+                  class="ons-u-mt-s"
                 >
-                  <label
-                    class="ons-label"
-                    for="caseid"
+                  <button
+                    class="ons-btn"
+                    type="button"
                   >
-                    Enter case ID
-                  </label>
-                  <input
-                    class="ons-input ons-input--text ons-input-type__input "
-                    data-testid="text-input"
-                    id="caseid"
-                    style="z-index: 0;"
-                    type="text"
-                    value=""
-                  />
-                </p>
-                <button
-                  class="ons-btn "
-                  data-testid="button"
-                  type="button"
-                >
-                  <span
-                    class="ons-btn__inner"
-                  >
-                    Search
-                  </span>
-                </button>
-                <br />
-                <br />
+                    <span
+                      class="ons-btn__inner"
+                    >
+                      <span
+                        class="ons-btn__text"
+                      >
+                        Search
+                      </span>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </div>
   </div>,
@@ -907,86 +805,83 @@ exports[`Given there are surveys available in blaise > should render the Support
       >
         <br />
         <div
-          class="ons-accordion"
-          id="survey-accordion"
+          data-testid="survey-accordion"
+          id="survey"
         >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
+          <div
+            class="ons-details ons-details--initialised ons-u-mt-l "
+            data-save-state="true"
+            id="survey-0"
+            role="group"
           >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
+            <div
+              aria-controls="survey-0-content"
+              aria-expanded="false"
+              class="ons-details__heading"
+              data-ga-action="Open panel"
+              data-testid="survey-0-heading"
+              role="button"
               tabindex="0"
             >
-              <div
-                class="ons-collapsible__controls"
+              <h2
+                class="ons-details__title ons-u-fs-r--b"
               >
-                <h2
-                  class="ons-collapsible__title"
+                FRS
+              </h2>
+              <span
+                class="ons-details__icon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="ons-icon"
+                  fill="currentColor"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 8 13"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
+                  <path
+                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                    transform="translate(-5.02 -1.59)"
+                  />
+                </svg>
+              </span>
+            </div>
             <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
+              aria-hidden="true"
+              class="ons-details__content"
+              data-testid="survey-0-content"
+              id="survey-0-content"
             >
-              <div>
+              <div
+                class="ons-field"
+              >
                 <label
                   class="ons-label"
                   for="select-questionnaire"
                 >
                   Select questionnaire
-                   
                 </label>
                 <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
+                  class="ons-input ons-input--select"
+                  data-testid="select-questionnaire-input"
                   id="select-questionnaire"
                   name="select"
                 >
                   <option
-                    data-testid="select-select-questionnaire"
                     disabled=""
                     value=""
                   >
                     Select an option
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
+                    data-testid="select-questionnaire-option-FRS2504A_EDIT"
                     value="FRS2504A_EDIT"
                   >
                     FRS2504A (April 2025)
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                    data-testid="select-questionnaire-option-FRS2505A_EDIT"
                     value="FRS2505A_EDIT"
                   >
                     FRS2505A (May 2025)
@@ -998,79 +893,53 @@ exports[`Given there are surveys available in blaise > should render the Support
                 data-testid="questionnaire"
               >
                 <div
-                  class="questionnaire"
+                  class="questionnaire ons-u-mb-xl"
+                  data-testid="FRS2504A_EDIT-Support-Content"
                 >
                   <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                    class="ons-u-mt-l"
                   >
                     <div
-                      class="ons-panel__body "
+                      class="ons-field"
                     >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="FRS2504A_EDIT-Support-Content"
-                        title="Questionnaires"
+                      <label
+                        class="ons-label"
+                        for="caseid"
                       >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Total cases
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
+                        Enter case ID
+                      </label>
+                      <input
+                        class="ons-input ons-input--text ons-input-type__input"
+                        data-testid="caseid-input"
+                        id="caseid"
+                        type="text"
+                        value=""
+                      />
                     </div>
                   </div>
-                  <br />
-                  <p
-                    class="ons-field"
+                  <div
+                    class="ons-u-mt-s"
                   >
-                    <label
-                      class="ons-label"
-                      for="caseid"
+                    <button
+                      class="ons-btn ons-btn--disabled"
+                      disabled=""
+                      type="button"
                     >
-                      Enter case ID
-                    </label>
-                    <input
-                      class="ons-input ons-input--text ons-input-type__input "
-                      data-testid="text-input"
-                      id="caseid"
-                      style="z-index: 0;"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <button
-                    class="ons-btn  ons-btn--disabled"
-                    data-testid="button"
-                    disabled=""
-                    type="button"
-                  >
-                    <span
-                      class="ons-btn__inner"
-                    >
-                      Search
-                    </span>
-                  </button>
-                  <br />
-                  <br />
+                      <span
+                        class="ons-btn__inner"
+                      >
+                        <span
+                          class="ons-btn__text"
+                        >
+                          Search
+                        </span>
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </details>
+          </div>
         </div>
       </div>
     </div>
@@ -1081,86 +950,83 @@ exports[`Given there are surveys available in blaise > should render the Support
     >
       <br />
       <div
-        class="ons-accordion"
-        id="survey-accordion"
+        data-testid="survey-accordion"
+        id="survey"
       >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
+        <div
+          class="ons-details ons-details--initialised ons-u-mt-l "
+          data-save-state="true"
+          id="survey-0"
+          role="group"
         >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
+          <div
+            aria-controls="survey-0-content"
+            aria-expanded="false"
+            class="ons-details__heading"
+            data-ga-action="Open panel"
+            data-testid="survey-0-heading"
+            role="button"
             tabindex="0"
           >
-            <div
-              class="ons-collapsible__controls"
+            <h2
+              class="ons-details__title ons-u-fs-r--b"
             >
-              <h2
-                class="ons-collapsible__title"
+              FRS
+            </h2>
+            <span
+              class="ons-details__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="ons-icon"
+                fill="currentColor"
+                focusable="false"
+                role="img"
+                viewBox="0 0 8 13"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
+                <path
+                  d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                  transform="translate(-5.02 -1.59)"
+                />
+              </svg>
+            </span>
+          </div>
           <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
+            aria-hidden="true"
+            class="ons-details__content"
+            data-testid="survey-0-content"
+            id="survey-0-content"
           >
-            <div>
+            <div
+              class="ons-field"
+            >
               <label
                 class="ons-label"
                 for="select-questionnaire"
               >
                 Select questionnaire
-                 
               </label>
               <select
-                class="ons-input "
-                data-testid="select-questionnaire"
+                class="ons-input ons-input--select"
+                data-testid="select-questionnaire-input"
                 id="select-questionnaire"
                 name="select"
               >
                 <option
-                  data-testid="select-select-questionnaire"
                   disabled=""
                   value=""
                 >
                   Select an option
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
+                  data-testid="select-questionnaire-option-FRS2504A_EDIT"
                   value="FRS2504A_EDIT"
                 >
                   FRS2504A (April 2025)
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                  data-testid="select-questionnaire-option-FRS2505A_EDIT"
                   value="FRS2505A_EDIT"
                 >
                   FRS2505A (May 2025)
@@ -1172,79 +1038,53 @@ exports[`Given there are surveys available in blaise > should render the Support
               data-testid="questionnaire"
             >
               <div
-                class="questionnaire"
+                class="questionnaire ons-u-mb-xl"
+                data-testid="FRS2504A_EDIT-Support-Content"
               >
                 <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                  class="ons-u-mt-l"
                 >
                   <div
-                    class="ons-panel__body "
+                    class="ons-field"
                   >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      title="Questionnaires"
+                    <label
+                      class="ons-label"
+                      for="caseid"
                     >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Total cases
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
+                      Enter case ID
+                    </label>
+                    <input
+                      class="ons-input ons-input--text ons-input-type__input"
+                      data-testid="caseid-input"
+                      id="caseid"
+                      type="text"
+                      value=""
+                    />
                   </div>
                 </div>
-                <br />
-                <p
-                  class="ons-field"
+                <div
+                  class="ons-u-mt-s"
                 >
-                  <label
-                    class="ons-label"
-                    for="caseid"
+                  <button
+                    class="ons-btn ons-btn--disabled"
+                    disabled=""
+                    type="button"
                   >
-                    Enter case ID
-                  </label>
-                  <input
-                    class="ons-input ons-input--text ons-input-type__input "
-                    data-testid="text-input"
-                    id="caseid"
-                    style="z-index: 0;"
-                    type="text"
-                    value=""
-                  />
-                </p>
-                <button
-                  class="ons-btn  ons-btn--disabled"
-                  data-testid="button"
-                  disabled=""
-                  type="button"
-                >
-                  <span
-                    class="ons-btn__inner"
-                  >
-                    Search
-                  </span>
-                </button>
-                <br />
-                <br />
+                    <span
+                      class="ons-btn__inner"
+                    >
+                      <span
+                        class="ons-btn__text"
+                      >
+                        Search
+                      </span>
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </div>
   </div>,
@@ -1312,86 +1152,83 @@ exports[`Given there are surveys available in blaise > should render the Support
       >
         <br />
         <div
-          class="ons-accordion"
-          id="survey-accordion"
+          data-testid="survey-accordion"
+          id="survey"
         >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
+          <div
+            class="ons-details ons-details--initialised ons-u-mt-l "
+            data-save-state="true"
+            id="survey-0"
+            role="group"
           >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
+            <div
+              aria-controls="survey-0-content"
+              aria-expanded="false"
+              class="ons-details__heading"
+              data-ga-action="Open panel"
+              data-testid="survey-0-heading"
+              role="button"
               tabindex="0"
             >
-              <div
-                class="ons-collapsible__controls"
+              <h2
+                class="ons-details__title ons-u-fs-r--b"
               >
-                <h2
-                  class="ons-collapsible__title"
+                FRS
+              </h2>
+              <span
+                class="ons-details__icon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="ons-icon"
+                  fill="currentColor"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 8 13"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
+                  <path
+                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                    transform="translate(-5.02 -1.59)"
+                  />
+                </svg>
+              </span>
+            </div>
             <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
+              aria-hidden="true"
+              class="ons-details__content"
+              data-testid="survey-0-content"
+              id="survey-0-content"
             >
-              <div>
+              <div
+                class="ons-field"
+              >
                 <label
                   class="ons-label"
                   for="select-questionnaire"
                 >
                   Select questionnaire
-                   
                 </label>
                 <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
+                  class="ons-input ons-input--select"
+                  data-testid="select-questionnaire-input"
                   id="select-questionnaire"
                   name="select"
                 >
                   <option
-                    data-testid="select-select-questionnaire"
                     disabled=""
                     value=""
                   >
                     Select an option
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
+                    data-testid="select-questionnaire-option-FRS2504A_EDIT"
                     value="FRS2504A_EDIT"
                   >
                     FRS2504A (April 2025)
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                    data-testid="select-questionnaire-option-FRS2505A_EDIT"
                     value="FRS2505A_EDIT"
                   >
                     FRS2505A (May 2025)
@@ -1403,347 +1240,517 @@ exports[`Given there are surveys available in blaise > should render the Support
                 data-testid="questionnaire"
               >
                 <div
-                  class="questionnaire"
+                  class="questionnaire ons-u-mb-xl"
+                  data-testid="FRS2504A_EDIT-Support-Content"
                 >
                   <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                    class="ons-u-mt-l"
                   >
                     <div
-                      class="ons-panel__body "
+                      class="ons-field"
                     >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="FRS2504A_EDIT-Support-Content"
-                        title="Questionnaires"
+                      <label
+                        class="ons-label"
+                        for="caseid"
                       >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          April 2025
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Total cases
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          3
-                        </dd>
-                      </dl>
+                        Enter case ID
+                      </label>
+                      <input
+                        class="ons-input ons-input--text ons-input-type__input"
+                        data-testid="caseid-input"
+                        id="caseid"
+                        type="text"
+                        value="900"
+                      />
                     </div>
                   </div>
-                  <br />
-                  <p
-                    class="ons-field"
-                  >
-                    <label
-                      class="ons-label"
-                      for="caseid"
-                    >
-                      Enter case ID
-                    </label>
-                    <input
-                      class="ons-input ons-input--text ons-input-type__input "
-                      data-testid="text-input"
-                      id="caseid"
-                      style="z-index: 0;"
-                      type="text"
-                      value=""
-                    />
-                  </p>
-                  <button
-                    class="ons-btn "
-                    data-testid="button"
-                    type="button"
-                  >
-                    <span
-                      class="ons-btn__inner"
-                    >
-                      Search
-                    </span>
-                  </button>
-                  <br />
-                  <br />
                   <div
-                    class="case-search-results"
-                    data-testid="case-search-results"
+                    class="ons-u-mt-s"
                   >
-                    <table
-                      class="ons-table"
-                      data-testid="FRS2504A_EDIT-Case-results"
-                      id="FRS2504A_EDIT-Case-results"
+                    <button
+                      class="ons-btn"
+                      type="button"
                     >
-                      <thead
-                        class="ons-table__head"
+                      <span
+                        class="ons-btn__inner"
                       >
-                        <tr
-                          class="ons-table__row"
+                        <span
+                          class="ons-btn__text"
                         >
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Case ID
-                          </th>
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Outcome
-                          </th>
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Interviewer
-                          </th>
-                          <th
-                            class="ons-table__header"
-                            scope="col"
-                          >
-                            Organisation
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody
-                        class="ons-table__body"
+                          Search
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                  <div
+                    class="ons-u-mb-l"
+                  >
+                    <div
+                      class="case-search-results"
+                      data-testid="case-search-results"
+                    >
+                      <div
+                        class="ons-table-scrollable ons-table-scrollable--on"
                       >
-                        <tr
-                          class="ons-table__row"
+                        <div
+                          aria-label="Table"
+                          class="ons-table-scrollable__content"
+                          role="region"
+                          tabindex="0"
                         >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
+                          <table
+                            class="ons-table"
+                            data-testid="FRS2504A_EDIT-Case-results-table"
+                            id="FRS2504A_EDIT-Case-results"
                           >
-                            10001011
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            110
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          >
-                            rich
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001011/editcase"
+                            <thead
+                              class="ons-table__head"
                             >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
+                              <tr
+                                class="ons-table__row"
+                              >
+                                <th
+                                  class="ons-table__header ons-table__header--top"
+                                  scope="col"
+                                >
+                                  <span
+                                    class="ons-table__header-text"
+                                  >
+                                    Case ID
+                                  </span>
+                                </th>
+                                <th
+                                  class="ons-table__header ons-table__header--top"
+                                  scope="col"
+                                >
+                                  <span
+                                    class="ons-table__header-text"
+                                  >
+                                    Outcome
+                                  </span>
+                                </th>
+                                <th
+                                  class="ons-table__header ons-table__header--top"
+                                  scope="col"
+                                >
+                                  <span
+                                    class="ons-table__header-text"
+                                  >
+                                    Interviewer
+                                  </span>
+                                </th>
+                                <th
+                                  class="ons-table__header ons-table__header--top"
+                                  scope="col"
+                                >
+                                  <span
+                                    class="ons-table__header-text"
+                                  >
+                                    Organisation
+                                  </span>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody
+                              class="ons-table__body"
                             >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001012
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            110
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001012/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001013
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            210
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001013/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001014
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            120
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001014/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                        <tr
-                          class="ons-table__row"
-                        >
-                          <td
-                            aria-label="FRS2504A_EDIT-CaseID"
-                            class="ons-table__cell"
-                          >
-                            10001015
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Outcome"
-                            class="ons-table__cell"
-                          >
-                            110
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Interviewer"
-                            class="ons-table__cell"
-                          />
-                          <td
-                            aria-label="FRS2504A_EDIT-Organisation"
-                            class="ons-table__cell"
-                          >
-                            ONS
-                          </td>
-                          <td
-                            aria-label="FRS2504A_EDIT-Links"
-                            class="ons-table__cell links"
-                          >
-                            <a
-                              href="/questionnaires/FRS2504A_EDIT/cases/10001015/editcase"
-                            >
-                              Edit interviewer case
-                            </a>
-                             | 
-                            <a
-                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly"
-                              rel="noopener noreferrer"
-                              target="_blank"
-                            >
-                              View interviewer case
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                              <tr
+                                class="ons-table__row"
+                              >
+                                <td
+                                  aria-label="FRS2504A_EDIT-CaseID"
+                                  class="ons-table__cell"
+                                >
+                                  10001011
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Outcome"
+                                  class="ons-table__cell"
+                                >
+                                  110
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Interviewer"
+                                  class="ons-table__cell"
+                                >
+                                  rich
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Organisation"
+                                  class="ons-table__cell"
+                                >
+                                  1
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Links"
+                                  class="ons-table__cell ons-u-ta-right"
+                                >
+                                  <a
+                                    data-discover="true"
+                                    href="/questionnaires/FRS2504A_EDIT/cases/10001011/editcase"
+                                  >
+                                    Edit interviewer case
+                                  </a>
+                                   | 
+                                  <a
+                                    class="ons-external-link"
+                                    href="https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                  >
+                                    <span
+                                      class="ons-external-link__text"
+                                    >
+                                      View interviewer case
+                                    </span>
+                                    <span
+                                      class="ons-external-link__icon"
+                                    >
+                                       
+                                      <svg
+                                        aria-hidden="true"
+                                        class="ons-icon"
+                                        focusable="false"
+                                        role="img"
+                                        viewBox="0 0 12 12"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                        <path
+                                          d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                      </svg>
+                                    </span>
+                                    <span
+                                      class="ons-external-link__new-window-description ons-u-vh"
+                                    >
+                                      (opens in a new tab)
+                                    </span>
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr
+                                class="ons-table__row"
+                              >
+                                <td
+                                  aria-label="FRS2504A_EDIT-CaseID"
+                                  class="ons-table__cell"
+                                >
+                                  10001012
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Outcome"
+                                  class="ons-table__cell"
+                                >
+                                  110
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Interviewer"
+                                  class="ons-table__cell"
+                                />
+                                <td
+                                  aria-label="FRS2504A_EDIT-Organisation"
+                                  class="ons-table__cell"
+                                >
+                                  1
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Links"
+                                  class="ons-table__cell ons-u-ta-right"
+                                >
+                                  <a
+                                    data-discover="true"
+                                    href="/questionnaires/FRS2504A_EDIT/cases/10001012/editcase"
+                                  >
+                                    Edit interviewer case
+                                  </a>
+                                   | 
+                                  <a
+                                    class="ons-external-link"
+                                    href="https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                  >
+                                    <span
+                                      class="ons-external-link__text"
+                                    >
+                                      View interviewer case
+                                    </span>
+                                    <span
+                                      class="ons-external-link__icon"
+                                    >
+                                       
+                                      <svg
+                                        aria-hidden="true"
+                                        class="ons-icon"
+                                        focusable="false"
+                                        role="img"
+                                        viewBox="0 0 12 12"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                        <path
+                                          d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                      </svg>
+                                    </span>
+                                    <span
+                                      class="ons-external-link__new-window-description ons-u-vh"
+                                    >
+                                      (opens in a new tab)
+                                    </span>
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr
+                                class="ons-table__row"
+                              >
+                                <td
+                                  aria-label="FRS2504A_EDIT-CaseID"
+                                  class="ons-table__cell"
+                                >
+                                  10001013
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Outcome"
+                                  class="ons-table__cell"
+                                >
+                                  210
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Interviewer"
+                                  class="ons-table__cell"
+                                />
+                                <td
+                                  aria-label="FRS2504A_EDIT-Organisation"
+                                  class="ons-table__cell"
+                                >
+                                  1
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Links"
+                                  class="ons-table__cell ons-u-ta-right"
+                                >
+                                  <a
+                                    data-discover="true"
+                                    href="/questionnaires/FRS2504A_EDIT/cases/10001013/editcase"
+                                  >
+                                    Edit interviewer case
+                                  </a>
+                                   | 
+                                  <a
+                                    class="ons-external-link"
+                                    href="https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                  >
+                                    <span
+                                      class="ons-external-link__text"
+                                    >
+                                      View interviewer case
+                                    </span>
+                                    <span
+                                      class="ons-external-link__icon"
+                                    >
+                                       
+                                      <svg
+                                        aria-hidden="true"
+                                        class="ons-icon"
+                                        focusable="false"
+                                        role="img"
+                                        viewBox="0 0 12 12"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                        <path
+                                          d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                      </svg>
+                                    </span>
+                                    <span
+                                      class="ons-external-link__new-window-description ons-u-vh"
+                                    >
+                                      (opens in a new tab)
+                                    </span>
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr
+                                class="ons-table__row"
+                              >
+                                <td
+                                  aria-label="FRS2504A_EDIT-CaseID"
+                                  class="ons-table__cell"
+                                >
+                                  10001014
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Outcome"
+                                  class="ons-table__cell"
+                                >
+                                  120
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Interviewer"
+                                  class="ons-table__cell"
+                                />
+                                <td
+                                  aria-label="FRS2504A_EDIT-Organisation"
+                                  class="ons-table__cell"
+                                >
+                                  1
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Links"
+                                  class="ons-table__cell ons-u-ta-right"
+                                >
+                                  <a
+                                    data-discover="true"
+                                    href="/questionnaires/FRS2504A_EDIT/cases/10001014/editcase"
+                                  >
+                                    Edit interviewer case
+                                  </a>
+                                   | 
+                                  <a
+                                    class="ons-external-link"
+                                    href="https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                  >
+                                    <span
+                                      class="ons-external-link__text"
+                                    >
+                                      View interviewer case
+                                    </span>
+                                    <span
+                                      class="ons-external-link__icon"
+                                    >
+                                       
+                                      <svg
+                                        aria-hidden="true"
+                                        class="ons-icon"
+                                        focusable="false"
+                                        role="img"
+                                        viewBox="0 0 12 12"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                        <path
+                                          d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                      </svg>
+                                    </span>
+                                    <span
+                                      class="ons-external-link__new-window-description ons-u-vh"
+                                    >
+                                      (opens in a new tab)
+                                    </span>
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr
+                                class="ons-table__row"
+                              >
+                                <td
+                                  aria-label="FRS2504A_EDIT-CaseID"
+                                  class="ons-table__cell"
+                                >
+                                  10001015
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Outcome"
+                                  class="ons-table__cell"
+                                >
+                                  110
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Interviewer"
+                                  class="ons-table__cell"
+                                />
+                                <td
+                                  aria-label="FRS2504A_EDIT-Organisation"
+                                  class="ons-table__cell"
+                                >
+                                  1
+                                </td>
+                                <td
+                                  aria-label="FRS2504A_EDIT-Links"
+                                  class="ons-table__cell ons-u-ta-right"
+                                >
+                                  <a
+                                    data-discover="true"
+                                    href="/questionnaires/FRS2504A_EDIT/cases/10001015/editcase"
+                                  >
+                                    Edit interviewer case
+                                  </a>
+                                   | 
+                                  <a
+                                    class="ons-external-link"
+                                    href="https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                  >
+                                    <span
+                                      class="ons-external-link__text"
+                                    >
+                                      View interviewer case
+                                    </span>
+                                    <span
+                                      class="ons-external-link__icon"
+                                    >
+                                       
+                                      <svg
+                                        aria-hidden="true"
+                                        class="ons-icon"
+                                        focusable="false"
+                                        role="img"
+                                        viewBox="0 0 12 12"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <path
+                                          d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                        <path
+                                          d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                          transform="translate(-2 -1.99)"
+                                        />
+                                      </svg>
+                                    </span>
+                                    <span
+                                      class="ons-external-link__new-window-description ons-u-vh"
+                                    >
+                                      (opens in a new tab)
+                                    </span>
+                                  </a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </details>
+          </div>
         </div>
       </div>
     </div>
@@ -1754,86 +1761,83 @@ exports[`Given there are surveys available in blaise > should render the Support
     >
       <br />
       <div
-        class="ons-accordion"
-        id="survey-accordion"
+        data-testid="survey-accordion"
+        id="survey"
       >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
+        <div
+          class="ons-details ons-details--initialised ons-u-mt-l "
+          data-save-state="true"
+          id="survey-0"
+          role="group"
         >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
+          <div
+            aria-controls="survey-0-content"
+            aria-expanded="false"
+            class="ons-details__heading"
+            data-ga-action="Open panel"
+            data-testid="survey-0-heading"
+            role="button"
             tabindex="0"
           >
-            <div
-              class="ons-collapsible__controls"
+            <h2
+              class="ons-details__title ons-u-fs-r--b"
             >
-              <h2
-                class="ons-collapsible__title"
+              FRS
+            </h2>
+            <span
+              class="ons-details__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="ons-icon"
+                fill="currentColor"
+                focusable="false"
+                role="img"
+                viewBox="0 0 8 13"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
+                <path
+                  d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                  transform="translate(-5.02 -1.59)"
+                />
+              </svg>
+            </span>
+          </div>
           <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
+            aria-hidden="true"
+            class="ons-details__content"
+            data-testid="survey-0-content"
+            id="survey-0-content"
           >
-            <div>
+            <div
+              class="ons-field"
+            >
               <label
                 class="ons-label"
                 for="select-questionnaire"
               >
                 Select questionnaire
-                 
               </label>
               <select
-                class="ons-input "
-                data-testid="select-questionnaire"
+                class="ons-input ons-input--select"
+                data-testid="select-questionnaire-input"
                 id="select-questionnaire"
                 name="select"
               >
                 <option
-                  data-testid="select-select-questionnaire"
                   disabled=""
                   value=""
                 >
                   Select an option
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
+                  data-testid="select-questionnaire-option-FRS2504A_EDIT"
                   value="FRS2504A_EDIT"
                 >
                   FRS2504A (April 2025)
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                  data-testid="select-questionnaire-option-FRS2505A_EDIT"
                   value="FRS2505A_EDIT"
                 >
                   FRS2505A (May 2025)
@@ -1845,347 +1849,517 @@ exports[`Given there are surveys available in blaise > should render the Support
               data-testid="questionnaire"
             >
               <div
-                class="questionnaire"
+                class="questionnaire ons-u-mb-xl"
+                data-testid="FRS2504A_EDIT-Support-Content"
               >
                 <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
+                  class="ons-u-mt-l"
                 >
                   <div
-                    class="ons-panel__body "
+                    class="ons-field"
                   >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="FRS2504A_EDIT-Support-Content"
-                      title="Questionnaires"
+                    <label
+                      class="ons-label"
+                      for="caseid"
                     >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        April 2025
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Total cases
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        3
-                      </dd>
-                    </dl>
+                      Enter case ID
+                    </label>
+                    <input
+                      class="ons-input ons-input--text ons-input-type__input"
+                      data-testid="caseid-input"
+                      id="caseid"
+                      type="text"
+                      value="900"
+                    />
                   </div>
                 </div>
-                <br />
-                <p
-                  class="ons-field"
-                >
-                  <label
-                    class="ons-label"
-                    for="caseid"
-                  >
-                    Enter case ID
-                  </label>
-                  <input
-                    class="ons-input ons-input--text ons-input-type__input "
-                    data-testid="text-input"
-                    id="caseid"
-                    style="z-index: 0;"
-                    type="text"
-                    value=""
-                  />
-                </p>
-                <button
-                  class="ons-btn "
-                  data-testid="button"
-                  type="button"
-                >
-                  <span
-                    class="ons-btn__inner"
-                  >
-                    Search
-                  </span>
-                </button>
-                <br />
-                <br />
                 <div
-                  class="case-search-results"
-                  data-testid="case-search-results"
+                  class="ons-u-mt-s"
                 >
-                  <table
-                    class="ons-table"
-                    data-testid="FRS2504A_EDIT-Case-results"
-                    id="FRS2504A_EDIT-Case-results"
+                  <button
+                    class="ons-btn"
+                    type="button"
                   >
-                    <thead
-                      class="ons-table__head"
+                    <span
+                      class="ons-btn__inner"
                     >
-                      <tr
-                        class="ons-table__row"
+                      <span
+                        class="ons-btn__text"
                       >
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Case ID
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Outcome
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Interviewer
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Organisation
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      class="ons-table__body"
+                        Search
+                      </span>
+                    </span>
+                  </button>
+                </div>
+                <div
+                  class="ons-u-mb-l"
+                >
+                  <div
+                    class="case-search-results"
+                    data-testid="case-search-results"
+                  >
+                    <div
+                      class="ons-table-scrollable ons-table-scrollable--on"
                     >
-                      <tr
-                        class="ons-table__row"
+                      <div
+                        aria-label="Table"
+                        class="ons-table-scrollable__content"
+                        role="region"
+                        tabindex="0"
                       >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
+                        <table
+                          class="ons-table"
+                          data-testid="FRS2504A_EDIT-Case-results-table"
+                          id="FRS2504A_EDIT-Case-results"
                         >
-                          10001011
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          110
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        >
-                          rich
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001011/editcase"
+                          <thead
+                            class="ons-table__head"
                           >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
+                            <tr
+                              class="ons-table__row"
+                            >
+                              <th
+                                class="ons-table__header ons-table__header--top"
+                                scope="col"
+                              >
+                                <span
+                                  class="ons-table__header-text"
+                                >
+                                  Case ID
+                                </span>
+                              </th>
+                              <th
+                                class="ons-table__header ons-table__header--top"
+                                scope="col"
+                              >
+                                <span
+                                  class="ons-table__header-text"
+                                >
+                                  Outcome
+                                </span>
+                              </th>
+                              <th
+                                class="ons-table__header ons-table__header--top"
+                                scope="col"
+                              >
+                                <span
+                                  class="ons-table__header-text"
+                                >
+                                  Interviewer
+                                </span>
+                              </th>
+                              <th
+                                class="ons-table__header ons-table__header--top"
+                                scope="col"
+                              >
+                                <span
+                                  class="ons-table__header-text"
+                                >
+                                  Organisation
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody
+                            class="ons-table__body"
                           >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001012
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          110
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001012/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001013
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          210
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001013/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001014
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          120
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001014/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-table__cell"
-                        >
-                          10001015
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Outcome"
-                          class="ons-table__cell"
-                        >
-                          110
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Interviewer"
-                          class="ons-table__cell"
-                        />
-                        <td
-                          aria-label="FRS2504A_EDIT-Organisation"
-                          class="ons-table__cell"
-                        >
-                          ONS
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-Links"
-                          class="ons-table__cell links"
-                        >
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001015/editcase"
-                          >
-                            Edit interviewer case
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            View interviewer case
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                            <tr
+                              class="ons-table__row"
+                            >
+                              <td
+                                aria-label="FRS2504A_EDIT-CaseID"
+                                class="ons-table__cell"
+                              >
+                                10001011
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Outcome"
+                                class="ons-table__cell"
+                              >
+                                110
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Interviewer"
+                                class="ons-table__cell"
+                              >
+                                rich
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Organisation"
+                                class="ons-table__cell"
+                              >
+                                1
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Links"
+                                class="ons-table__cell ons-u-ta-right"
+                              >
+                                <a
+                                  data-discover="true"
+                                  href="/questionnaires/FRS2504A_EDIT/cases/10001011/editcase"
+                                >
+                                  Edit interviewer case
+                                </a>
+                                 | 
+                                <a
+                                  class="ons-external-link"
+                                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly"
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                                >
+                                  <span
+                                    class="ons-external-link__text"
+                                  >
+                                    View interviewer case
+                                  </span>
+                                  <span
+                                    class="ons-external-link__icon"
+                                  >
+                                     
+                                    <svg
+                                      aria-hidden="true"
+                                      class="ons-icon"
+                                      focusable="false"
+                                      role="img"
+                                      viewBox="0 0 12 12"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                      <path
+                                        d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <span
+                                    class="ons-external-link__new-window-description ons-u-vh"
+                                  >
+                                    (opens in a new tab)
+                                  </span>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr
+                              class="ons-table__row"
+                            >
+                              <td
+                                aria-label="FRS2504A_EDIT-CaseID"
+                                class="ons-table__cell"
+                              >
+                                10001012
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Outcome"
+                                class="ons-table__cell"
+                              >
+                                110
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Interviewer"
+                                class="ons-table__cell"
+                              />
+                              <td
+                                aria-label="FRS2504A_EDIT-Organisation"
+                                class="ons-table__cell"
+                              >
+                                1
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Links"
+                                class="ons-table__cell ons-u-ta-right"
+                              >
+                                <a
+                                  data-discover="true"
+                                  href="/questionnaires/FRS2504A_EDIT/cases/10001012/editcase"
+                                >
+                                  Edit interviewer case
+                                </a>
+                                 | 
+                                <a
+                                  class="ons-external-link"
+                                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly"
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                                >
+                                  <span
+                                    class="ons-external-link__text"
+                                  >
+                                    View interviewer case
+                                  </span>
+                                  <span
+                                    class="ons-external-link__icon"
+                                  >
+                                     
+                                    <svg
+                                      aria-hidden="true"
+                                      class="ons-icon"
+                                      focusable="false"
+                                      role="img"
+                                      viewBox="0 0 12 12"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                      <path
+                                        d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <span
+                                    class="ons-external-link__new-window-description ons-u-vh"
+                                  >
+                                    (opens in a new tab)
+                                  </span>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr
+                              class="ons-table__row"
+                            >
+                              <td
+                                aria-label="FRS2504A_EDIT-CaseID"
+                                class="ons-table__cell"
+                              >
+                                10001013
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Outcome"
+                                class="ons-table__cell"
+                              >
+                                210
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Interviewer"
+                                class="ons-table__cell"
+                              />
+                              <td
+                                aria-label="FRS2504A_EDIT-Organisation"
+                                class="ons-table__cell"
+                              >
+                                1
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Links"
+                                class="ons-table__cell ons-u-ta-right"
+                              >
+                                <a
+                                  data-discover="true"
+                                  href="/questionnaires/FRS2504A_EDIT/cases/10001013/editcase"
+                                >
+                                  Edit interviewer case
+                                </a>
+                                 | 
+                                <a
+                                  class="ons-external-link"
+                                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly"
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                                >
+                                  <span
+                                    class="ons-external-link__text"
+                                  >
+                                    View interviewer case
+                                  </span>
+                                  <span
+                                    class="ons-external-link__icon"
+                                  >
+                                     
+                                    <svg
+                                      aria-hidden="true"
+                                      class="ons-icon"
+                                      focusable="false"
+                                      role="img"
+                                      viewBox="0 0 12 12"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                      <path
+                                        d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <span
+                                    class="ons-external-link__new-window-description ons-u-vh"
+                                  >
+                                    (opens in a new tab)
+                                  </span>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr
+                              class="ons-table__row"
+                            >
+                              <td
+                                aria-label="FRS2504A_EDIT-CaseID"
+                                class="ons-table__cell"
+                              >
+                                10001014
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Outcome"
+                                class="ons-table__cell"
+                              >
+                                120
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Interviewer"
+                                class="ons-table__cell"
+                              />
+                              <td
+                                aria-label="FRS2504A_EDIT-Organisation"
+                                class="ons-table__cell"
+                              >
+                                1
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Links"
+                                class="ons-table__cell ons-u-ta-right"
+                              >
+                                <a
+                                  data-discover="true"
+                                  href="/questionnaires/FRS2504A_EDIT/cases/10001014/editcase"
+                                >
+                                  Edit interviewer case
+                                </a>
+                                 | 
+                                <a
+                                  class="ons-external-link"
+                                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly"
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                                >
+                                  <span
+                                    class="ons-external-link__text"
+                                  >
+                                    View interviewer case
+                                  </span>
+                                  <span
+                                    class="ons-external-link__icon"
+                                  >
+                                     
+                                    <svg
+                                      aria-hidden="true"
+                                      class="ons-icon"
+                                      focusable="false"
+                                      role="img"
+                                      viewBox="0 0 12 12"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                      <path
+                                        d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <span
+                                    class="ons-external-link__new-window-description ons-u-vh"
+                                  >
+                                    (opens in a new tab)
+                                  </span>
+                                </a>
+                              </td>
+                            </tr>
+                            <tr
+                              class="ons-table__row"
+                            >
+                              <td
+                                aria-label="FRS2504A_EDIT-CaseID"
+                                class="ons-table__cell"
+                              >
+                                10001015
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Outcome"
+                                class="ons-table__cell"
+                              >
+                                110
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Interviewer"
+                                class="ons-table__cell"
+                              />
+                              <td
+                                aria-label="FRS2504A_EDIT-Organisation"
+                                class="ons-table__cell"
+                              >
+                                1
+                              </td>
+                              <td
+                                aria-label="FRS2504A_EDIT-Links"
+                                class="ons-table__cell ons-u-ta-right"
+                              >
+                                <a
+                                  data-discover="true"
+                                  href="/questionnaires/FRS2504A_EDIT/cases/10001015/editcase"
+                                >
+                                  Edit interviewer case
+                                </a>
+                                 | 
+                                <a
+                                  class="ons-external-link"
+                                  href="https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly"
+                                  rel="noopener noreferrer"
+                                  target="_blank"
+                                >
+                                  <span
+                                    class="ons-external-link__text"
+                                  >
+                                    View interviewer case
+                                  </span>
+                                  <span
+                                    class="ons-external-link__icon"
+                                  >
+                                     
+                                    <svg
+                                      aria-hidden="true"
+                                      class="ons-icon"
+                                      focusable="false"
+                                      role="img"
+                                      viewBox="0 0 12 12"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M13.5,9H13a.5.5,0,0,0-.5.5v3h-9v-9h3A.5.5,0,0,0,7,3V2.5A.5.5,0,0,0,6.5,2h-4a.5.5,0,0,0-.5.5v11a.5.5,0,0,0,.5.5h11a.5.5,0,0,0,.5-.5v-4A.5.5,0,0,0,13.5,9Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                      <path
+                                        d="M8.83,7.88a.51.51,0,0,0,.71,0l2.31-2.32,1.28,1.28A.51.51,0,0,0,14,6.49v-4a.52.52,0,0,0-.5-.5h-4A.51.51,0,0,0,9,2.52a.58.58,0,0,0,.14.33l1.28,1.28L8.12,6.46a.51.51,0,0,0,0,.71Z"
+                                        transform="translate(-2 -1.99)"
+                                      />
+                                    </svg>
+                                  </span>
+                                  <span
+                                    class="ons-external-link__new-window-description ons-u-vh"
+                                  >
+                                    (opens in a new tab)
+                                  </span>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </div>
   </div>,
@@ -2252,8 +2426,15 @@ exports[`Given there the blaise rest api is not available > should render the pa
         data-testid="Surveys"
       >
         <div
-          class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+          class="ons-panel ons-panel--error ons-panel--no-title ons-u-mt-m"
+          id="panel-_r_13_"
         >
+          <span
+            class="ons-panel__assistive-text ons-u-vh"
+          >
+            Error:
+             
+          </span>
           <div
             class="ons-panel__body "
           >
@@ -2275,8 +2456,15 @@ exports[`Given there the blaise rest api is not available > should render the pa
       data-testid="Surveys"
     >
       <div
-        class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+        class="ons-panel ons-panel--error ons-panel--no-title ons-u-mt-m"
+        id="panel-_r_13_"
       >
+        <span
+          class="ons-panel__assistive-text ons-u-vh"
+        >
+          Error:
+           
+        </span>
         <div
           class="ons-panel__body "
         >

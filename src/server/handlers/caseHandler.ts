@@ -1,23 +1,35 @@
-import express, { Request, Response } from 'express';
-import { CaseEditInformation, User } from 'blaise-api-node-client';
-import { Auth } from 'blaise-login-react/blaise-login-react-server';
-import moment from 'moment';
-import { Controller } from '../controllerInterface';
-import notFound from '../helpers/axiosHelper';
-import BlaiseApi from '../BlaiseApi';
-import AuditLogger from "../auditLogger";
-import ServerConfigurationProvider from '../ServerConfigurationProvider';
-import { CaseSummaryDetails } from '../../common/interfaces/caseInterface';
-import mapCaseSummary from '../caseMapper';
-import { CsvValidationError, validateQuestionnaireName } from '../validation';
+import { type Auth } from "blaise-login-react-server";
+import express from "express";
+import moment from "moment";
+
+import getRequestUserContext from "../helpers/getRequestUserContext.js";
+import handleApiError from "../helpers/handleApiError.js";
+import toCaseSummary from "../utils/caseMapper.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
+import { validateQuestionnaireName } from "../utils/validation.js";
+
+import type { CaseSummaryDetails } from "../../common/types/case.types.js";
+import type { Controller } from "../controller.js";
+import type AuditLogger from "../utils/auditLogger.js";
+import type BlaiseApi from "../utils/blaiseApi.js";
+import type { ConfigurationProvider } from "../utils/serverConfigurationProvider.js";
+import type { CaseEditInformation } from "blaise-api-node-client";
+import type { Request, Response } from "express";
+
+const CASE_ALLOCATION_CONCURRENCY_LIMIT = 10;
 
 export default class CaseHandler implements Controller {
   blaiseApi: BlaiseApi;
-  configuration: ServerConfigurationProvider;
+  configuration: ConfigurationProvider;
   auth: Auth;
   auditLogger: AuditLogger;
 
-  constructor(blaiseApi: BlaiseApi, configuration: ServerConfigurationProvider, auth: Auth, auditLogger: AuditLogger) {
+  constructor(
+    blaiseApi: BlaiseApi,
+    configuration: ConfigurationProvider,
+    auth: Auth,
+    auditLogger: AuditLogger,
+  ) {
     this.blaiseApi = blaiseApi;
     this.configuration = configuration;
     this.getCaseEditInformation = this.getCaseEditInformation.bind(this);
@@ -30,139 +42,265 @@ export default class CaseHandler implements Controller {
 
   getRoutes() {
     const router = express.Router();
-    router.get('/api/questionnaires/:questionnaireName/cases/:caseId/summary', this.auth.Middleware, this.getCaseSummary);
-    router.get('/api/questionnaires/:questionnaireName/cases/edit', this.auth.Middleware, this.getCaseEditInformation);
-    router.patch('/api/questionnaires/:questionnaireName/cases/allocate', this.auth.Middleware, this.allocateCases);
-    router.patch('/api/questionnaires/:questionnaireName/cases/:caseId/update', this.auth.Middleware, this.setCaseToUpdate);
+
+    router.get(
+      "/api/questionnaires/:questionnaireName/cases/:caseId/summary",
+      this.auth.middleware,
+      this.getCaseSummary,
+    );
+    router.get(
+      "/api/questionnaires/:questionnaireName/cases/edit",
+      this.auth.middleware,
+      this.getCaseEditInformation,
+    );
+    router.patch(
+      "/api/questionnaires/:questionnaireName/cases/allocate",
+      this.auth.middleware,
+      this.allocateCases,
+    );
+    router.patch(
+      "/api/questionnaires/:questionnaireName/cases/:caseId/update",
+      this.auth.middleware,
+      this.setCaseToUpdate,
+    );
 
     return router;
   }
 
-  async getCaseSummary(request: Request<{ questionnaireName: string, caseId: string }>, response: Response<CaseSummaryDetails>) {
+  async getCaseSummary(
+    request: Request<{ questionnaireName: string; caseId: string }>,
+    response: Response<CaseSummaryDetails>,
+  ) {
     const { caseId } = request.params;
     const questionnaireNameRaw = request.params.questionnaireName;
 
-    const user = this.auth.GetUser(this.auth.GetToken(request));
+    const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedCaseId = sanitiseForLogging(caseId);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       const caseResponse = await this.blaiseApi.getCase(questionnaireName, caseId);
-      const caseSummary = mapCaseSummary(caseResponse);
+      const caseSummary = toCaseSummary(caseResponse);
+      const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
 
-      this.auditLogger.info(request.log, `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      this.auditLogger.info(
+        request.log,
+        sanitiseForLogging(
+          `AUDIT_LOG: Retrieved case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
+
       return response.status(200).json(caseSummary);
     } catch (error: unknown) {
-      if (error instanceof CsvValidationError) {
-        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
-        return response.status(400).json();
-      }
-      if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
-        return response.status(404).json();
-      }
-      this.auditLogger.error(request.log, `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
-      return response.status(500).json();
+      return handleApiError(
+        error,
+        response,
+        this.auditLogger,
+        request.log,
+        sanitiseForLogging(
+          `Failed to get case details, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
     }
   }
 
-  async getCaseEditInformation(request: Request<{ questionnaireName: string }, Record<string, never>, Record<string, never>, { userRole: string }>, response: Response<CaseEditInformation[]>) {
+  async getCaseEditInformation(
+    request: Request<
+      { questionnaireName: string },
+      Record<string, never>,
+      Record<string, never>,
+      { userRole: string }
+    >,
+    response: Response<CaseEditInformation[]>,
+  ) {
     const questionnaireNameRaw = request.params.questionnaireName;
-    const { userRole } = request.query;
+    const { userRole: requestedUserRole } = request.query;
 
-    const user = this.auth.GetUser(this.auth.GetToken(request));
+    const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
-      const caseEditInformationList = await this.GetCaseEditInformationForRole(questionnaireName, userRole, user, request);
+      const caseEditInformationList = await this.getCaseEditInformationForRole(
+        questionnaireName,
+        requestedUserRole,
+        username,
+        currentUserRole,
+        request,
+      );
 
       return response.status(200).json(caseEditInformationList);
     } catch (error: unknown) {
-      if (error instanceof CsvValidationError) {
-        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
-        return response.status(400).json();
-      }
-      if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
-        return response.status(404).json();
-      }
-      this.auditLogger.error(request.log, `Failed to get case(s) edit information, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
-      return response.status(500).json();
+      return handleApiError(
+        error,
+        response,
+        this.auditLogger,
+        request.log,
+        sanitiseForLogging(
+          `Failed to get case(s) edit information, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
     }
   }
 
-  async GetCaseEditInformationForRole(questionnaireName: string, userRole: string, user: User, request: Request<{ questionnaireName: string }>): Promise<CaseEditInformation[]> {
+  async getCaseEditInformationForRole(
+    questionnaireName: string,
+    requestedUserRole: string,
+    username: string,
+    currentUserRole: string,
+    request: Request<{ questionnaireName: string }>,
+  ): Promise<CaseEditInformation[]> {
     const cases = await this.blaiseApi.getCaseEditInformation(questionnaireName);
-    this.auditLogger.info(request.log, `Retrieved ${cases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+    const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
+
+    this.auditLogger.info(
+      request.log,
+      sanitiseForLogging(
+        `AUDIT_LOG: Retrieved ${cases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      ),
+    );
 
     const surveyTla = questionnaireName.substring(0, 3);
-    const roleConfig = this.configuration.getSurveyConfigForRole(surveyTla, userRole);
+    const roleConfig = this.configuration.getSurveyConfigForRole(surveyTla, requestedUserRole);
 
     const filteredCases = cases
-      .filter((caseEditInformation) => (roleConfig.Organisations.length > 0 ? roleConfig.Organisations.includes(caseEditInformation.organisation) : caseEditInformation))
-      .filter((caseEditInformation) => (roleConfig.Outcomes.length > 0 ? roleConfig.Outcomes.includes(caseEditInformation.outcome) : caseEditInformation));
+      .filter((caseEditInformation) =>
+        roleConfig.Organisations.length > 0
+          ? roleConfig.Organisations.includes(caseEditInformation.organisation)
+          : true,
+      )
+      .filter((caseEditInformation) =>
+        roleConfig.Outcomes.length > 0
+          ? roleConfig.Outcomes.includes(caseEditInformation.outcome)
+          : true,
+      );
 
-    this.auditLogger.info(request.log, `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+    this.auditLogger.info(
+      request.log,
+      sanitiseForLogging(
+        `AUDIT_LOG: Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      ),
+    );
 
     return filteredCases;
   }
 
-  async allocateCases(request: Request<{ questionnaireName: string }, Record<string, never>, { name: string, cases: string[] }, Record<string, never>>, response: Response) {
-    const questionnaireNameRaw = request.params.questionnaireName;
-    const { name, cases } = request.body;
+  async updateCasesWithConcurrencyLimit(
+    questionnaireName: string,
+    caseIds: string[],
+    caseFields: Record<string, string | number>,
+  ): Promise<void> {
+    for (
+      let startIndex = 0;
+      startIndex < caseIds.length;
+      startIndex += CASE_ALLOCATION_CONCURRENCY_LIMIT
+    ) {
+      const caseBatch = caseIds.slice(startIndex, startIndex + CASE_ALLOCATION_CONCURRENCY_LIMIT);
 
-    const user = this.auth.GetUser(this.auth.GetToken(request));
-
-    try {
-      const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
       await Promise.all(
-        cases.map(async (caseId) => {
-          await this.blaiseApi.updateCase(questionnaireName, caseId, {
-            'QEdit.AssignedTo': name,
-            'QEdit.Edited': 1,
-          });
-        }),
+        caseBatch.map((caseId) => this.blaiseApi.updateCase(questionnaireName, caseId, caseFields)),
       );
-      this.auditLogger.info(request.log, `Allocated ${cases.length} cases to editor: ${name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
-      return response.status(204).json();
-    } catch (error: unknown) {
-      if (error instanceof CsvValidationError) {
-        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
-        return response.status(400).json();
-      }
-      if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
-        return response.status(404).json();
-      }
-      this.auditLogger.error(request.log, `Failed to allocate cases to editor: ${name}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
-      return response.status(500).json();
     }
   }
 
-  async setCaseToUpdate(request: Request<{ questionnaireName: string, caseId: string }, Record<string, never>, Record<string, never>, Record<string, never>>, response: Response) {
-    const { caseId } = request.params;
+  async allocateCases(
+    request: Request<
+      { questionnaireName: string },
+      Record<string, never>,
+      { name: string; cases: string[] },
+      Record<string, never>
+    >,
+    response: Response,
+  ) {
     const questionnaireNameRaw = request.params.questionnaireName;
-    const user = this.auth.GetUser(this.auth.GetToken(request));
+    const { name, cases } = request.body;
+
+    const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedName = sanitiseForLogging(name);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
 
     try {
       const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
-      await this.blaiseApi.updateCase(`${questionnaireName}_EDIT`, caseId, {
-        'QEdit.AssignedTo': '',
-        'QEdit.Edited': '',
-        'QEdit.LastUpdated': moment('1900-01-01').format('DD-MM-YYYY_HH:mm'),
+      const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
+
+      await this.updateCasesWithConcurrencyLimit(questionnaireName, cases, {
+        "QEdit.AssignedTo": name,
+        "QEdit.Edited": 1,
       });
-      this.auditLogger.info(request.log, `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`);
+      this.auditLogger.info(
+        request.log,
+        sanitiseForLogging(
+          `AUDIT_LOG: Allocated ${cases.length} cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
+
       return response.status(204).json();
     } catch (error: unknown) {
-      if (error instanceof CsvValidationError) {
-        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 400 ${error}`);
-        return response.status(400).json();
-      }
-      if (notFound(error)) {
-        this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${error}`);
-        return response.status(404).json();
-      }
-      this.auditLogger.error(request.log, `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireNameRaw}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`);
-      return response.status(500).json();
+      return handleApiError(
+        error,
+        response,
+        this.auditLogger,
+        request.log,
+        sanitiseForLogging(
+          `Failed to allocate cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
+    }
+  }
+
+  async setCaseToUpdate(
+    request: Request<
+      { questionnaireName: string; caseId: string },
+      Record<string, never>,
+      Record<string, never>,
+      Record<string, never>
+    >,
+    response: Response,
+  ) {
+    const { caseId } = request.params;
+    const questionnaireNameRaw = request.params.questionnaireName;
+    const { role: currentUserRole, username } = getRequestUserContext(request, this.auth);
+    const sanitisedCaseId = sanitiseForLogging(caseId);
+    const sanitisedQuestionnaireNameRaw = sanitiseForLogging(questionnaireNameRaw);
+    const sanitisedUsername = sanitiseForLogging(username);
+    const sanitisedCurrentUserRole = sanitiseForLogging(currentUserRole);
+
+    try {
+      const questionnaireName = validateQuestionnaireName(questionnaireNameRaw);
+      const sanitisedQuestionnaireName = sanitiseForLogging(questionnaireName);
+
+      await this.blaiseApi.updateCase(`${questionnaireName}_EDIT`, caseId, {
+        "QEdit.AssignedTo": "",
+        "QEdit.Edited": "",
+        "QEdit.LastUpdated": moment("1900-01-01").format("DD-MM-YYYY_HH:mm"),
+      });
+      this.auditLogger.info(
+        request.log,
+        sanitiseForLogging(
+          `AUDIT_LOG: Set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
+
+      return response.status(204).json();
+    } catch (error: unknown) {
+      return handleApiError(
+        error,
+        response,
+        this.auditLogger,
+        request.log,
+        sanitiseForLogging(
+          `Failed to set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireNameRaw}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
+      );
     }
   }
 }

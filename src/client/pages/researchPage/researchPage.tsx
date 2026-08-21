@@ -1,25 +1,30 @@
-import { User } from 'blaise-api-node-client';
-import { Survey } from '../../../common/interfaces/surveyInterface';
-import { useAsyncRequestWithParam } from '../../utils/useAsyncRequest';
-import { getSurveys } from '../../api/NodeApi';
-import AsyncContent from '../shared/AsyncContent';
-import SurveysList from '../shared/SurveysList';
-import ErrorPanel from '../shared/ErrorPanel';
+import { getSurveys } from "../../api/nodeApi";
+import { useAsyncRequest } from "../../utils/useAsyncRequest";
+import AsyncContent from "../shared/asyncContent";
+import ErrorPanel from "../shared/errorPanel";
+import SurveysList from "../shared/surveysList";
+
+import type { User } from "blaise-api-node-client";
 
 interface SurveyProps {
   user: User;
 }
 
-export default function ResearchHome({ user }: SurveyProps) {
-  const surveys = useAsyncRequestWithParam<Survey[], string>(getSurveys, user.role);
+export default function ResearchPage({ user }: SurveyProps) {
+  const surveys = useAsyncRequest(getSurveys, String(user.role));
   const params = new URLSearchParams(window.location.search);
-  const error = params.get('error') ?? '';
+  const error = params.get("error") ?? "";
 
   return (
     <div data-testid="Surveys">
       {error != null && error.length > 0 && <ErrorPanel message={error} />}
       <AsyncContent content={surveys}>
-        {(loadedSurveys) => <SurveysList surveys={loadedSurveys} user={user} />}
+        {(loadedSurveys) => (
+          <SurveysList
+            surveys={loadedSurveys}
+            user={user}
+          />
+        )}
       </AsyncContent>
     </div>
   );

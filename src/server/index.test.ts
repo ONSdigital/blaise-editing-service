@@ -1,45 +1,97 @@
-/* @vitest-environment node */
 import { vi } from "vitest";
 
 describe("server entrypoint", () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("loads env, creates config, builds server and listens", async () => {
+    vi.resetModules();
+
+    const mockDotenvConfig = vi.fn();
+    const mockOn = vi.fn();
+    const mockListen = vi.fn((_port: number, cb?: () => void) => {
+      cb?.();
+
+      return { on: mockOn };
+    });
+    const mockServer = {
+      listen: mockListen,
+    };
+    const mockNodeServer = vi.fn(() => mockServer);
+    const configInstance = { Port: 5678 };
+    const mockConfigProvider = vi.fn().mockImplementation(function MockConfigProvider() {
+      return configInstance;
     });
 
-    it("loads env, creates config, builds server and listens", async () => {
-        vi.resetModules();
+    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
-        const dotenvConfigMock = vi.fn();
-        const listenMock = vi.fn((_port: number, cb?: () => void) => cb?.());
-        const serverMock = {
-            listen: listenMock,
-        };
-        const nodeServerMock = vi.fn(() => serverMock);
-        const configInstance = { Port: 5678 };
-        const configProviderMock = vi.fn().mockImplementation(function (this: any) {
-            return configInstance;
-        });
+    vi.doMock("dotenv", () => ({
+      default: {
+        config: mockDotenvConfig,
+      },
+    }));
+    vi.doMock("./server.js", () => ({
+      default: mockNodeServer,
+    }));
+    vi.doMock("./utils/serverConfigurationProvider.js", () => ({
+      default: mockConfigProvider,
+    }));
 
-        const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    await import("./index.js");
 
-        vi.doMock("dotenv", () => ({
-            default: {
-                config: dotenvConfigMock,
-            },
-        }));
-        vi.doMock("./server", () => ({
-            default: nodeServerMock,
-        }));
-        vi.doMock("./ServerConfigurationProvider", () => ({
-            default: configProviderMock,
-        }));
+    expect(mockDotenvConfig).toHaveBeenCalledTimes(1);
+    expect(mockConfigProvider).toHaveBeenCalledTimes(1);
+    expect(mockNodeServer).toHaveBeenCalledWith(configInstance);
+    expect(mockListen).toHaveBeenCalledWith(configInstance.Port, expect.any(Function));
+    expect(mockOn).toHaveBeenCalledWith("error", expect.any(Function));
+    expect(consoleSpy).toHaveBeenCalledWith(
+      `Blaise Editing Service running on port ${configInstance.Port}`,
+    );
+  });
 
-        await import("./index");
+  it("logs and exits when startup fails", async () => {
+    vi.resetModules();
 
-        expect(dotenvConfigMock).toHaveBeenCalledTimes(1);
-        expect(configProviderMock).toHaveBeenCalledTimes(1);
-        expect(nodeServerMock).toHaveBeenCalledWith(configInstance);
-        expect(listenMock).toHaveBeenCalledWith(configInstance.Port, expect.any(Function));
-        expect(consoleSpy).toHaveBeenCalledWith(`Blaise Editing Service running on port ${configInstance.Port}`);
+    const startupError = new Error("Unable to start");
+    const mockDotenvConfig = vi.fn();
+    const mockOn = vi.fn((eventName: string, cb: (error: Error) => void) => {
+      if (eventName === "error") {
+        cb(startupError);
+      }
+
+      return { on: mockOn };
     });
+    const mockListen = vi.fn(() => ({ on: mockOn }));
+    const mockServer = {
+      listen: mockListen,
+    };
+    const mockNodeServer = vi.fn(() => mockServer);
+    const configInstance = { Port: 9001 };
+    const mockConfigProvider = vi.fn().mockImplementation(function MockConfigProvider() {
+      return configInstance;
+    });
+
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const processExitSpy = vi.spyOn(process, "exit").mockImplementation((() => undefined) as never);
+
+    vi.doMock("dotenv", () => ({
+      default: {
+        config: mockDotenvConfig,
+      },
+    }));
+    vi.doMock("./server.js", () => ({
+      default: mockNodeServer,
+    }));
+    vi.doMock("./utils/serverConfigurationProvider.js", () => ({
+      default: mockConfigProvider,
+    }));
+
+    await import("./index.js");
+
+    expect(mockListen).toHaveBeenCalledWith(configInstance.Port, expect.any(Function));
+    expect(mockOn).toHaveBeenCalledWith("error", expect.any(Function));
+    expect(consoleErrorSpy).toHaveBeenCalledWith(startupError, "Failed to start server");
+    expect(processExitSpy).toHaveBeenCalledWith(1);
+  });
 });

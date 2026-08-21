@@ -1,147 +1,104 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 type Loading = {
-  state: 'loading';
+  state: "loading";
 };
 
 type Errored = {
   error: string;
-  state: 'errored';
+  state: "errored";
 };
 
 type Succeeded<T> = {
   data: T;
-  state: 'succeeded';
+  state: "succeeded";
 };
 
 export type AsyncState<T> = Loading | Errored | Succeeded<T>;
 
 export function isLoading<T>(state: AsyncState<T>): state is Loading {
-  return state.state === 'loading';
+  return state.state === "loading";
 }
 
 export function hasErrored<T>(state: AsyncState<T>): state is Errored {
-  return state.state === 'errored';
+  return state.state === "errored";
 }
 
 function loading(): Loading {
-  return { state: 'loading' };
+  return { state: "loading" };
 }
 
 function errored(error: string): Errored {
-  return { state: 'errored', error };
+  return { state: "errored", error };
 }
 
 function succeeded<T>(data: T): Succeeded<T> {
-  return { state: 'succeeded', data };
+  return { state: "succeeded", data };
 }
 
-export function useAsyncRequest<T>(request: () => Promise<T>) {
-   const [state, setState] = useState<AsyncState<T>>(loading());
-   useEffect(() => {
-    let ignore = false;
-    request()
-      .then((response) => { 
-        if (!ignore) { 
-          setState(succeeded(response)); 
-        }
-      })
-      .catch((error) => { 
-        if (!ignore) { 
-          setState(errored(error.message)); 
-        }
-      });
-    return () => { 
-      ignore = true; 
-    };
-   }, [request]);
-   return state;
- }
+type AsyncRequest<TResponse, TParams extends readonly unknown[]> = (
+  ...params: TParams
+) => Promise<TResponse>;
 
-export function useAsyncRequestWithParam<T1, T2>(request:(param: T2) => Promise<T1>, param: T2) {
-  const [state, setState] = useState<AsyncState<T1>>(loading());
-  useEffect(() => {
-    let ignore = false;
-    request(param)
-      .then((response) => { 
-        if (!ignore) { 
-          setState(succeeded(response)); 
-        }
-      })
-      .catch((error) => { 
-        if (!ignore) { 
-          setState(errored(error.message)); 
-        }
-      });
-    return () => { 
-      ignore = true; 
-    };
-  }, [request, param]);
-  return state;
+function areParamsEqual<TParams extends readonly unknown[]>(
+  previousParams: TParams | null,
+  currentParams: TParams,
+): boolean {
+  if (previousParams === null || previousParams.length !== currentParams.length) {
+    return false;
+  }
+
+  for (let index = 0; index < currentParams.length; index += 1) {
+    if (!Object.is(previousParams[index], currentParams[index])) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
-export function useAsyncRequestWithTwoParams<T1, T2, T3>(request:(param1: T2, param2: T3) => Promise<T1>, param1: T2, param2: T3) {
-  const [state, setState] = useState<AsyncState<T1>>(loading());
-  useEffect(() => {
-    let ignore = false;
-    request(param1, param2)
-      .then((response) => { 
-        if (!ignore) { 
-          setState(succeeded(response)); 
-        }
-      })
-      .catch((error) => { 
-        if (!ignore) { 
-          setState(errored(error.message)); 
-        }
-      });
-    return () => { 
-      ignore = true;
-    };
-  }, [request, param1, param2]);
-  return state;
-}
+export function useAsyncRequest<TResponse, TParams extends readonly unknown[] = []>(
+  request: AsyncRequest<TResponse, TParams>,
+  ...params: TParams
+) {
+  const [state, setState] = useState<AsyncState<TResponse>>(() => loading());
+  const previousRequestRef = useRef<AsyncRequest<TResponse, TParams> | null>(null);
+  const previousParamsRef = useRef<TParams | null>(null);
+  const requestSequenceRef = useRef(0);
+  const isMountedRef = useRef(true);
 
-export function useAsyncRequestWithThreeParams<T1, T2, T3, T4>(request:(param1: T2, param2: T3, param3: T4) => Promise<T1>, param1: T2, param2: T3, param3: T4) {
-  const [state, setState] = useState<AsyncState<T1>>(loading());
   useEffect(() => {
-    let ignore = false;
-    request(param1, param2, param3)
-      .then((response) => { 
-        if (!ignore) { 
-          setState(succeeded(response)); 
-        }
-      })
-      .catch((error) => { 
-        if (!ignore) { 
-          setState(errored(error.message)); 
-        }
-      });
-    return () => { 
-      ignore = true; 
-    };
-  }, [request, param1, param2, param3]);
-  return state;
-}
+    isMountedRef.current = true;
 
-export function useAsyncRequestWithThreeParamsWithRefresh<T1, T2, T3, T4, T5>(request:(param1: T2, param2: T3, param3: T4, resetParam:T5) => Promise<T1>, param1: T2, param2: T3, param3: T4, refreshParam: T5) {
-  const [state, setState] = useState<AsyncState<T1>>(loading());
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
+
   useEffect(() => {
-    let ignore = false;
-    request(param1, param2, param3, refreshParam)
-      .then((response) => { 
-        if (!ignore) { 
-          setState(succeeded(response)); 
+    const requestChanged = previousRequestRef.current !== request;
+    const paramsChanged = !areParamsEqual(previousParamsRef.current, params);
+
+    if (!requestChanged && !paramsChanged) {
+      return;
+    }
+
+    previousRequestRef.current = request;
+    previousParamsRef.current = params;
+    const requestSequence = ++requestSequenceRef.current;
+
+    request(...params)
+      .then((response) => {
+        if (isMountedRef.current && requestSequenceRef.current === requestSequence) {
+          setState(succeeded(response));
         }
       })
-      .catch((error) => { 
-        if (!ignore) { 
-          setState(errored(error.message)); 
+      .catch((error: unknown) => {
+        if (isMountedRef.current && requestSequenceRef.current === requestSequence) {
+          setState(errored(error instanceof Error ? error.message : String(error)));
         }
       });
-    return () => { 
-      ignore = true; 
-    };
-  }, [request, param1, param2, param3, refreshParam]);
+  }, [request, params]);
+
   return state;
 }
