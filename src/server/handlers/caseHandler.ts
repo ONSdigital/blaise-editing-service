@@ -88,7 +88,9 @@ export default class CaseHandler implements Controller {
 
       this.auditLogger.info(
         request.log,
-        `Retrieved case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Retrieved case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
 
       return response.status(200).json(caseSummary);
@@ -156,7 +158,9 @@ export default class CaseHandler implements Controller {
 
     this.auditLogger.info(
       request.log,
-      `Retrieved ${cases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      sanitiseForLogging(
+        `Retrieved ${cases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      ),
     );
 
     const surveyTla = questionnaireName.substring(0, 3);
@@ -176,7 +180,9 @@ export default class CaseHandler implements Controller {
 
     this.auditLogger.info(
       request.log,
-      `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      sanitiseForLogging(
+        `Filtered down to ${filteredCases.length} case(s) edit information, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      ),
     );
 
     return filteredCases;
@@ -228,7 +234,9 @@ export default class CaseHandler implements Controller {
       });
       this.auditLogger.info(
         request.log,
-        `Allocated ${cases.length} cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Allocated ${cases.length} cases to editor: ${sanitisedName}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
 
       return response.status(204).json();
@@ -271,7 +279,9 @@ export default class CaseHandler implements Controller {
       });
       this.auditLogger.info(
         request.log,
-        `Set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Set to update edit dataset overnight, case: ${sanitisedCaseId}, questionnaire: ${sanitisedQuestionnaireName}, current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
 
       return response.status(204).json();

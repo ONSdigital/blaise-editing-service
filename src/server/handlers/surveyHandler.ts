@@ -88,7 +88,9 @@ export default class SurveyHandler implements Controller {
 
     this.auditLogger.info(
       request.log,
-      `Retrieved ${questionnaires.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      sanitiseForLogging(
+        `Retrieved ${questionnaires.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      ),
     );
 
     if (userRole === "Survey Support") {
@@ -98,7 +100,9 @@ export default class SurveyHandler implements Controller {
 
       this.auditLogger.info(
         request.log,
-        `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
 
       return questionnairesList;
@@ -110,7 +114,9 @@ export default class SurveyHandler implements Controller {
 
     this.auditLogger.info(
       request.log,
-      `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      sanitiseForLogging(
+        `Filtered down to ${questionnairesList.length} questionnaire(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+      ),
     );
 
     return questionnairesList;

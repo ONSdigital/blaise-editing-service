@@ -31,8 +31,11 @@ export default function handleApiError(
   const statusCode = getErrorStatusCode(error);
   const sanitisedFailureMessage = sanitiseForLogging(failureMessage);
   const sanitisedError = sanitiseForLogging(String(error));
+  const auditLogMessage = sanitiseForLogging(
+    `${sanitisedFailureMessage} with ${statusCode} ${sanitisedError}`,
+  );
 
-  auditLogger.error(requestLog, `${sanitisedFailureMessage} with ${statusCode} ${sanitisedError}`);
+  auditLogger.error(requestLog, auditLogMessage);
 
   return response.status(statusCode).json(createApiErrorResponse(statusCode));
 }

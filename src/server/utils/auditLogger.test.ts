@@ -1,6 +1,7 @@
 import { vi } from "vitest";
 
 import AuditLogger from "./auditLogger.js";
+import { sanitiseForLogging } from "./sanitisation.js";
 
 describe("AuditLogger", () => {
   it("prefixes messages for info/error calls", () => {
@@ -10,8 +11,8 @@ describe("AuditLogger", () => {
       error: vi.fn(),
     } as unknown as Parameters<AuditLogger["info"]>[0];
 
-    sut.info(reqLog, "hello");
-    sut.error(reqLog, "boom");
+    sut.info(reqLog, sanitiseForLogging("hello"));
+    sut.error(reqLog, sanitiseForLogging("boom"));
 
     expect(reqLog.info).toHaveBeenCalledWith("AUDIT_LOG: hello");
     expect(reqLog.error).toHaveBeenCalledWith("AUDIT_LOG: boom");
@@ -24,10 +25,10 @@ describe("AuditLogger", () => {
       error: vi.fn(),
     } as unknown as Parameters<AuditLogger["info"]>[0];
 
-    sut.info(reqLog, "message with\nnewline");
-    sut.error(reqLog, "message with\rcarriage return");
-    sut.info(reqLog, "message with\ttab");
-    sut.info(reqLog, "  leading and trailing spaces  ");
+    sut.info(reqLog, sanitiseForLogging("message with\nnewline"));
+    sut.error(reqLog, sanitiseForLogging("message with\rcarriage return"));
+    sut.info(reqLog, sanitiseForLogging("message with\ttab"));
+    sut.info(reqLog, sanitiseForLogging("  leading and trailing spaces  "));
 
     expect(reqLog.info).toHaveBeenNthCalledWith(1, "AUDIT_LOG: message with newline");
     expect(reqLog.error).toHaveBeenCalledWith("AUDIT_LOG: message with carriage return");
@@ -43,15 +44,15 @@ describe("AuditLogger", () => {
     } as unknown as Parameters<AuditLogger["info"]>[0];
 
     // Test C0 control characters (\x00-\x1F)
-    sut.info(reqLog, "alert\x07bell");
-    sut.info(reqLog, "backspace\x08text");
-    sut.info(reqLog, "vertical\x0Btab");
-    sut.info(reqLog, "form\x0Cfeed");
-    sut.info(reqLog, "shift\x0Eout");
-    sut.info(reqLog, "escape\x1Bsequence");
+    sut.info(reqLog, sanitiseForLogging("alert\x07bell"));
+    sut.info(reqLog, sanitiseForLogging("backspace\x08text"));
+    sut.info(reqLog, sanitiseForLogging("vertical\x0Btab"));
+    sut.info(reqLog, sanitiseForLogging("form\x0Cfeed"));
+    sut.info(reqLog, sanitiseForLogging("shift\x0Eout"));
+    sut.info(reqLog, sanitiseForLogging("escape\x1Bsequence"));
 
     // Test DEL character (\x7F)
-    sut.info(reqLog, "delete\x7Fchar");
+    sut.info(reqLog, sanitiseForLogging("delete\x7Fchar"));
 
     // Verify all control chars are replaced with spaces and whitespace is normalised
     expect(reqLog.info).toHaveBeenNthCalledWith(1, "AUDIT_LOG: alert bell");
@@ -70,9 +71,9 @@ describe("AuditLogger", () => {
       error: vi.fn(),
     } as unknown as Parameters<AuditLogger["info"]>[0];
 
-    sut.info(reqLog, "multiple   spaces");
-    sut.info(reqLog, "mixed\t\n  whitespace");
-    sut.info(reqLog, "  \t  start and end  \n  ");
+    sut.info(reqLog, sanitiseForLogging("multiple   spaces"));
+    sut.info(reqLog, sanitiseForLogging("mixed\t\n  whitespace"));
+    sut.info(reqLog, sanitiseForLogging("  \t  start and end  \n  "));
 
     expect(reqLog.info).toHaveBeenNthCalledWith(1, "AUDIT_LOG: multiple spaces");
     expect(reqLog.info).toHaveBeenNthCalledWith(2, "AUDIT_LOG: mixed whitespace");

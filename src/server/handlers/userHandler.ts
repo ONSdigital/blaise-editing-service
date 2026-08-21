@@ -61,7 +61,9 @@ export default class UserHandler implements Controller {
 
       this.auditLogger.info(
         request.log,
-        `Retrieved ${userList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        sanitiseForLogging(
+          `Retrieved ${userList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+        ),
       );
       if (userRoleRaw) {
         const userRole = userRoleRaw;
@@ -69,7 +71,9 @@ export default class UserHandler implements Controller {
 
         this.auditLogger.info(
           request.log,
-          `Filtered down to ${filteredUserList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          sanitiseForLogging(
+            `Filtered down to ${filteredUserList.length} user(s), current user: {name: ${sanitisedUsername}, role: ${sanitisedCurrentUserRole}}`,
+          ),
         );
 
         return response.status(200).json(filteredUserList);

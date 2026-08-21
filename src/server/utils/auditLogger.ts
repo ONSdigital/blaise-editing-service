@@ -6,10 +6,16 @@ export default class AuditLogger {
   constructor(_projectId: string, _moduleId = process.env.GAE_SERVICE ?? "bes-ui") {}
 
   info(logger: IncomingMessage["log"], message: string): void {
-    logger.info(`AUDIT_LOG: ${sanitiseForLogging(message)}`);
+    const sanitisedMessage = sanitiseForLogging(message);
+    const auditLogMessage = `AUDIT_LOG: ${sanitisedMessage}`;
+
+    logger.info(auditLogMessage);
   }
 
   error(logger: IncomingMessage["log"], message: string): void {
-    logger.error(`AUDIT_LOG: ${sanitiseForLogging(message)}`);
+    const sanitisedMessage = sanitiseForLogging(message);
+    const auditLogMessage = `AUDIT_LOG: ${sanitisedMessage}`;
+
+    logger.error(auditLogMessage);
   }
 }
