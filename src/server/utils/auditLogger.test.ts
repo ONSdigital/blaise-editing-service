@@ -14,8 +14,8 @@ describe("AuditLogger", () => {
     sut.info(reqLog, sanitiseForLogging("AUDIT_LOG: hello"));
     sut.error(reqLog, sanitiseForLogging("AUDIT_LOG: boom"));
 
-    expect(reqLog.info).toHaveBeenCalledWith("AUDIT_LOG: hello");
-    expect(reqLog.error).toHaveBeenCalledWith("AUDIT_LOG: boom");
+    expect(reqLog.info).toHaveBeenCalledWith({ auditLogMessage: "AUDIT_LOG: hello" }, "AUDIT_LOG");
+    expect(reqLog.error).toHaveBeenCalledWith({ auditLogMessage: "AUDIT_LOG: boom" }, "AUDIT_LOG");
   });
 
   it("sanitises control characters from log messages", () => {
@@ -30,10 +30,25 @@ describe("AuditLogger", () => {
     sut.info(reqLog, sanitiseForLogging("AUDIT_LOG: message with\ttab"));
     sut.info(reqLog, sanitiseForLogging("AUDIT_LOG:   leading and trailing spaces  "));
 
-    expect(reqLog.info).toHaveBeenNthCalledWith(1, "AUDIT_LOG: message with newline");
-    expect(reqLog.error).toHaveBeenCalledWith("AUDIT_LOG: message with carriage return");
-    expect(reqLog.info).toHaveBeenNthCalledWith(2, "AUDIT_LOG: message with tab");
-    expect(reqLog.info).toHaveBeenNthCalledWith(3, "AUDIT_LOG: leading and trailing spaces");
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      1,
+      { auditLogMessage: "AUDIT_LOG: message with newline" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.error).toHaveBeenCalledWith(
+      { auditLogMessage: "AUDIT_LOG: message with carriage return" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      2,
+      { auditLogMessage: "AUDIT_LOG: message with tab" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      3,
+      { auditLogMessage: "AUDIT_LOG: leading and trailing spaces" },
+      "AUDIT_LOG",
+    );
   });
 
   it("removes all C0 control characters and DEL to prevent log injection", () => {
@@ -55,13 +70,41 @@ describe("AuditLogger", () => {
     sut.info(reqLog, sanitiseForLogging("AUDIT_LOG: delete\x7Fchar"));
 
     // Verify all control chars are replaced with spaces and whitespace is normalised
-    expect(reqLog.info).toHaveBeenNthCalledWith(1, "AUDIT_LOG: alert bell");
-    expect(reqLog.info).toHaveBeenNthCalledWith(2, "AUDIT_LOG: backspace text");
-    expect(reqLog.info).toHaveBeenNthCalledWith(3, "AUDIT_LOG: vertical tab");
-    expect(reqLog.info).toHaveBeenNthCalledWith(4, "AUDIT_LOG: form feed");
-    expect(reqLog.info).toHaveBeenNthCalledWith(5, "AUDIT_LOG: shift out");
-    expect(reqLog.info).toHaveBeenNthCalledWith(6, "AUDIT_LOG: escape sequence");
-    expect(reqLog.info).toHaveBeenNthCalledWith(7, "AUDIT_LOG: delete char");
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      1,
+      { auditLogMessage: "AUDIT_LOG: alert bell" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      2,
+      { auditLogMessage: "AUDIT_LOG: backspace text" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      3,
+      { auditLogMessage: "AUDIT_LOG: vertical tab" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      4,
+      { auditLogMessage: "AUDIT_LOG: form feed" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      5,
+      { auditLogMessage: "AUDIT_LOG: shift out" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      6,
+      { auditLogMessage: "AUDIT_LOG: escape sequence" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      7,
+      { auditLogMessage: "AUDIT_LOG: delete char" },
+      "AUDIT_LOG",
+    );
   });
 
   it("normalises consecutive whitespace in log messages", () => {
@@ -75,8 +118,20 @@ describe("AuditLogger", () => {
     sut.info(reqLog, sanitiseForLogging("AUDIT_LOG: mixed\t\n  whitespace"));
     sut.info(reqLog, sanitiseForLogging("AUDIT_LOG:   \t  start and end  \n  "));
 
-    expect(reqLog.info).toHaveBeenNthCalledWith(1, "AUDIT_LOG: multiple spaces");
-    expect(reqLog.info).toHaveBeenNthCalledWith(2, "AUDIT_LOG: mixed whitespace");
-    expect(reqLog.info).toHaveBeenNthCalledWith(3, "AUDIT_LOG: start and end");
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      1,
+      { auditLogMessage: "AUDIT_LOG: multiple spaces" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      2,
+      { auditLogMessage: "AUDIT_LOG: mixed whitespace" },
+      "AUDIT_LOG",
+    );
+    expect(reqLog.info).toHaveBeenNthCalledWith(
+      3,
+      { auditLogMessage: "AUDIT_LOG: start and end" },
+      "AUDIT_LOG",
+    );
   });
 });
