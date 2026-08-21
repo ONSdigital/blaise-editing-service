@@ -1,12 +1,12 @@
 {
-  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node", "vitest/globals"],
-    "lib": ["esnext"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "noEmit": true
+    "outDir": "build",
+    "rootDir": "src",
+    "types": ["node", "vitest/globals"]
   },
-  "include": ["src/server", "src/common"],
-  "exclude": ["src/server/**/*.test.ts", "src/**/*.test.ts", "src/**/*.test.tsx"]
+  "exclude": ["src/server/test-utils/**", "src/server/setupTests.ts"],
+  "extends": "./tsconfig.base.json",
+  "include": ["src/server", "src/common"]
 }

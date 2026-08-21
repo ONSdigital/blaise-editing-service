@@ -1,23 +1,30 @@
-import cors from 'cors';
-import helmet from 'helmet';
-import { rateLimit } from 'express-rate-limit';
-import express, {
-  Request, Response, Express, NextFunction,
-} from 'express';
-import ejs from 'ejs';
-import path from 'path';
-import { Auth, newLoginHandler } from 'blaise-login-react/blaise-login-react-server';
-import SurveyHandler from './handlers/surveyHandler';
-import ConfigurationProvider from './ServerConfigurationProvider';
-import BlaiseApi from './BlaiseApi';
-import BlaiseApiClient from 'blaise-api-node-client';
-import createLogger from "./pino";
-import { HttpLogger } from "pino-http";
-import AuditLogger from "./auditLogger";
-import CaseHandler from './handlers/caseHandler';
-import newClientLogHandler from "./handlers/clientLogHandler";
-import UserHandler from './handlers/userHandler';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+import { BlaiseApiClient } from "blaise-api-node-client";
+import { Auth, newLoginHandler } from "blaise-login-react-server";
+import cors from "cors";
+import ejs from "ejs";
+import express from "express";
+import { rateLimit } from "express-rate-limit";
+import helmet from "helmet";
+
+import CaseHandler from "./handlers/caseHandler.js";
+import newClientLogHandler from "./handlers/clientLogHandler.js";
+import SurveyHandler from "./handlers/surveyHandler.js";
+import UserHandler from "./handlers/userHandler.js";
+import { createApiErrorResponse } from "./helpers/apiErrorResponse.js";
+import AuditLogger from "./utils/auditLogger.js";
+import BlaiseApi from "./utils/blaiseApi.js";
+import createLogger from "./utils/pino.js";
+
+import type { ConfigurationProvider } from "./utils/serverConfigurationProvider.js";
+import type { Express, NextFunction, Request, Response } from "express";
+import type { HttpLogger } from "pino-http";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export interface NodeServerDependencies {
   blaiseApiClient?: BlaiseApiClient;
@@ -26,81 +33,70 @@ export interface NodeServerDependencies {
   auditLogger?: AuditLogger;
 }
 
-function isApiRequest(request: Request): boolean {
-  return request.path === '/api' || request.path.startsWith('/api/');
+function firstExistingPath(candidates: string[]): string | undefined {
+  return candidates.find((candidate) => fs.existsSync(candidate));
 }
 
-function parseForwardedFor(forwardedHeader: string | undefined): string | undefined {
-  if (!forwardedHeader) {
+function resolveBuildFolderPath(buildFolder: string): string {
+  const candidateFolders = [
+    path.resolve(process.cwd(), "build/client"),
+    path.resolve(__dirname, buildFolder),
+    path.resolve(process.cwd()),
+  ];
+
+  const buildFolderPath = candidateFolders.find((candidate) =>
+    fs.existsSync(path.join(candidate, "index.html")),
+  );
+
+  return buildFolderPath ?? candidateFolders[0];
+}
+
+function loadErrorPageContent(buildFolderPath: string): string | undefined {
+  const errorPageCandidates = [
+    path.resolve(process.cwd(), "src/server/views/500.html"),
+    path.join(buildFolderPath, "500.html"),
+    path.join(buildFolderPath, "views/500.html"),
+  ];
+  const errorPagePath = firstExistingPath(errorPageCandidates);
+
+  if (!errorPagePath) {
     return undefined;
   }
 
-  const firstForwardedValue = forwardedHeader.split(',')[0]?.trim();
-  if (!firstForwardedValue) {
-    return undefined;
-  }
+  return fs.readFileSync(errorPagePath, "utf-8");
+}
 
-  const forPart = firstForwardedValue
-    .split(';')
-    .map((part) => part.trim())
-    .find((part) => part.toLowerCase().startsWith('for='));
-
-  if (!forPart) {
-    return undefined;
-  }
-
-  let client = forPart.slice(4).trim();
-  if (!client) {
-    return undefined;
-  }
-
-  if (client.startsWith('"') && client.endsWith('"')) {
-    client = client.slice(1, -1);
-  }
-
-  if (client.startsWith('[')) {
-    const ipv6End = client.indexOf(']');
-    if (ipv6End > 0) {
-      client = client.slice(1, ipv6End);
-    }
-  } else {
-    const [hostOnly] = client.split(':');
-    client = hostOnly ?? client;
-  }
-
-  if (!client || client.toLowerCase() === 'unknown') {
-    return undefined;
-  }
-
-  return client;
+function isApiRequest(request: Request): boolean {
+  return request.path === "/api" || request.path.startsWith("/api/");
 }
 
 function getRateLimitIp(request: Request): string {
-  return parseForwardedFor(request.header('forwarded')) ?? request.ip ?? 'unknown';
+  return request.ip ?? "unknown";
 }
-
 
 export default function nodeServer(
   config: ConfigurationProvider,
   logger: HttpLogger = createLogger(),
   dependencies: NodeServerDependencies = {},
 ): Express {
-
   const blaiseApiClient = dependencies.blaiseApiClient ?? new BlaiseApiClient(config.BlaiseApiUrl);
   const blaiseApi = dependencies.blaiseApi ?? new BlaiseApi(config, blaiseApiClient);
   const auth = dependencies.auth ?? new Auth(config);
-  const auditLogger = dependencies.auditLogger ?? new AuditLogger('BES');
+  const auditLogger = dependencies.auditLogger ?? new AuditLogger(config.ProjectId);
 
   const server = express();
-  server.set('trust proxy', 1);
-  server.disable('x-powered-by');
+  const buildFolderPath = resolveBuildFolderPath(config.BuildFolder);
+  const errorPageContent = loadErrorPageContent(buildFolderPath);
+
+  server.set("trust proxy", 1);
+  server.disable("x-powered-by");
 
   server.use(
     helmet({
       contentSecurityPolicy: {
         directives: {
           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-          'img-src': ["'self'", 'data:', 'https://cdn.ons.gov.uk'],
+          "img-src": ["'self'", "data:", "https://cdn.ons.gov.uk"],
         },
       },
       crossOriginEmbedderPolicy: false,
@@ -130,13 +126,14 @@ export default function nodeServer(
     skip: (request) => !isApiRequest(request),
     keyGenerator: (request) => {
       try {
-        const token = auth.GetToken(request);
-        const user = auth.GetUser(token);
+        const token = auth.getToken(request);
+        const user = auth.getUser(token);
+
         if (user?.name) {
           return `user:${user.name.toLowerCase()}`;
         }
       } catch {
-        // Fall back to forwarded client IP when auth context is unavailable.
+        // Fall back to trusted proxy-derived request IP when auth context is unavailable.
       }
 
       return `ip:${getRateLimitIp(request)}`;
@@ -146,57 +143,72 @@ export default function nodeServer(
   server.use(pageRateLimiter);
   server.use(apiRateLimiter);
 
-  server.get('/bes-ui/:version/health', (_req: Request, res: Response) => res.status(200).json({ healthy: true }));
+  server.get("/bes-ui/:version/health", (_req: Request, res: Response) =>
+    res.status(200).json({ healthy: true }),
+  );
 
-  // serve the entire build folder as static
-  const buildFolderPath = path.join(__dirname, config.BuildFolder);
-  server.use(express.static(buildFolderPath, {
-    setHeaders: (res, filePath) => {
-      if (filePath.endsWith('index.html')) {
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      }
-    },
-  }));
+  server.use("/assets", express.static(path.join(buildFolderPath, "assets")));
+  server.use("/static", express.static(path.join(buildFolderPath, "static")));
 
-  // set up views for rendering index.html
-  server.set('views', buildFolderPath);
-  server.engine('html', ejs.renderFile);
+  server.set("views", buildFolderPath);
+  server.engine("html", ejs.renderFile);
 
-  // survey routing
   const surveyHandler = new SurveyHandler(blaiseApi, config, auth, auditLogger);
-  server.use('/', surveyHandler.getRoutes());
 
-  // case routing
+  server.use("/", surveyHandler.getRoutes());
+
   const caseHandler = new CaseHandler(blaiseApi, config, auth, auditLogger);
-  server.use('/', caseHandler.getRoutes());
 
-  // User routing
+  server.use("/", caseHandler.getRoutes());
+
   const userHandler = new UserHandler(blaiseApi, config, auth, auditLogger);
-  server.use('/', userHandler.getRoutes());
 
-  // login routing
+  server.use("/", userHandler.getRoutes());
+
   const loginHandler = newLoginHandler(auth, blaiseApi.blaiseApiClient);
-  server.use('/', loginHandler);
 
-
-  // client log handler
+  server.use("/", loginHandler);
 
   const clientLogHandler = newClientLogHandler(auth);
+
   server.use("/", clientLogHandler);
 
-  // fallback for any API endpoints that are not found
-  server.use('/api/*', (_request: Request, response: Response) => {
-    response.redirect('/?error=API endpoint not found');
+  server.use(/^\/api(?:\/.*)?$/, (_request: Request, response: Response) => {
+    response.status(404).json(createApiErrorResponse(404));
   });
 
-  // catch all other routes renders react pages
-  server.get('*', (_request: Request, response: Response) => {
-    response.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    response.render('index.html');
+  server.get(/.*/, async (_request: Request, response: Response) => {
+    response.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    try {
+      const html = await ejs.renderFile(path.join(buildFolderPath, "index.html"), {
+        appConfigJson: JSON.stringify({
+          projectId: config.ProjectId,
+          urlDomain: config.UrlDomain,
+        }).replace(/</g, "\\u003c"),
+      });
+
+      response.send(html);
+    } catch {
+      if (errorPageContent != null) {
+        response.status(500).type("text/html").send(errorPageContent);
+
+        return;
+      }
+
+      response.status(500).type("text/plain").send("Sorry, there is a problem with the service.");
+    }
   });
 
-  server.use((_error: Error, _request: Request, response: Response, _next: NextFunction) => {
-    response.redirect('/?error=Server Error Occurred');
+  server.use((error: Error, request: Request, response: Response, _next: NextFunction) => {
+    request.log.error(error, error.message);
+
+    if (errorPageContent != null) {
+      response.status(500).type("text/html").send(errorPageContent);
+
+      return;
+    }
+
+    response.status(500).type("text/plain").send("Sorry, there is a problem with the service.");
   });
 
   return server;

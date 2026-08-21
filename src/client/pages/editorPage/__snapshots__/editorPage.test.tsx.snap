@@ -10,7 +10,14 @@ exports[`Given there are no surveys available in blaise > should render the page
       >
         <div
           class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
+          id="panel-_r_d_"
         >
+          <span
+            class="ons-panel__assistive-text ons-u-vh"
+          >
+            Important information:
+             
+          </span>
           <div
             class="ons-panel__body "
           >
@@ -26,7 +33,14 @@ exports[`Given there are no surveys available in blaise > should render the page
     >
       <div
         class="ons-panel ons-panel--info ons-panel--no-title ons-panel--spacious ons-u-mt-m"
+        id="panel-_r_d_"
       >
+        <span
+          class="ons-panel__assistive-text ons-u-vh"
+        >
+          Important information:
+           
+        </span>
         <div
           class="ons-panel__body "
         >
@@ -99,86 +113,83 @@ exports[`Given there are surveys available in blaise > should render the editor 
       >
         <br />
         <div
-          class="ons-accordion"
-          id="survey-accordion"
+          data-testid="survey-accordion"
+          id="survey"
         >
-          <details
-            class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-            data-btn-close="Hide"
-            data-group="accordion"
-            id="survey-accordion-0"
-            open=""
+          <div
+            class="ons-details ons-details--initialised ons-u-mt-l "
+            data-save-state="true"
+            id="survey-0"
+            role="group"
           >
-            <summary
-              aria-controls="survey-accordion-0"
-              aria-expanded="true"
-              class="ons-collapsible__heading ons-js-collapsible-heading"
-              data-ga-action="Close panel"
-              data-testid="survey-accordion-0-heading"
-              role="link"
+            <div
+              aria-controls="survey-0-content"
+              aria-expanded="false"
+              class="ons-details__heading"
+              data-ga-action="Open panel"
+              data-testid="survey-0-heading"
+              role="button"
               tabindex="0"
             >
-              <div
-                class="ons-collapsible__controls"
+              <h2
+                class="ons-details__title ons-u-fs-r--b"
               >
-                <h2
-                  class="ons-collapsible__title"
+                FRS
+              </h2>
+              <span
+                class="ons-details__icon"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="ons-icon"
+                  fill="currentColor"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 8 13"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  FRS
-                </h2>
-                <span
-                  class="ons-collapsible__icon"
-                >
-                  <svg
-                    class="ons-svg-icon"
-                    focusable="false"
-                    viewBox="0 0 7.5 12.85"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                      transform="translate(-5.02 -1.59)"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </summary>
+                  <path
+                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                    transform="translate(-5.02 -1.59)"
+                  />
+                </svg>
+              </span>
+            </div>
             <div
-              aria-hidden="false"
-              class="ons-collapsible__content ons-js-collapsible-content"
-              data-testid="survey-accordion-0-content"
-              id="survey-accordion-0-content"
+              aria-hidden="true"
+              class="ons-details__content"
+              data-testid="survey-0-content"
+              id="survey-0-content"
             >
-              <div>
+              <div
+                class="ons-field"
+              >
                 <label
                   class="ons-label"
                   for="select-questionnaire"
                 >
                   Select questionnaire
-                   
                 </label>
                 <select
-                  class="ons-input "
-                  data-testid="select-questionnaire"
+                  class="ons-input ons-input--select"
+                  data-testid="select-questionnaire-input"
                   id="select-questionnaire"
                   name="select"
                 >
                   <option
-                    data-testid="select-select-questionnaire"
                     disabled=""
                     value=""
                   >
                     Select an option
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                    selected=""
+                    data-testid="select-questionnaire-option-FRS2504A_EDIT"
                     value="FRS2504A_EDIT"
                   >
                     FRS2504A (April 2025)
                   </option>
                   <option
-                    data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                    data-testid="select-questionnaire-option-FRS2505A_EDIT"
                     value="FRS2505A_EDIT"
                   >
                     FRS2505A (May 2025)
@@ -190,94 +201,57 @@ exports[`Given there are surveys available in blaise > should render the editor 
                 data-testid="questionnaire"
               >
                 <div
-                  class="editorContent"
+                  class="editorContent ons-u-mb-l"
                   data-testid="FRS2504A_EDIT-editorContent"
                 >
-                  <div
-                    class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-                  >
-                    <div
-                      class="ons-panel__body "
-                    >
-                      <dl
-                        class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                        data-testid="editorContent-dl"
-                        title="editorContent"
-                      >
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Field period
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          <strong>
-                            April 2025
-                          </strong>
-                        </dd>
-                        <dt
-                          class="ons-description-list__term ons-grid__col ons-col-6@m"
-                        >
-                          Cases assigned to me
-                        </dt>
-                        <dd
-                          class="ons-description-list__value ons-grid__col ons-col-6@m"
-                        >
-                          <strong>
-                            5
-                          </strong>
-                        </dd>
-                      </dl>
-                    </div>
-                  </div>
                   <br />
-                  <div>
+                  <div
+                    class="ons-field"
+                  >
                     <label
                       class="ons-label"
                       for="filter-cases"
                     >
                       Filter cases
-                       
                     </label>
                     <select
-                      class="ons-input "
+                      class="ons-input ons-input--select"
+                      data-testid="filter-cases-input"
                       id="filter-cases"
                       name="select"
                     >
                       <option
-                        data-testid="select-filter-cases"
                         disabled=""
                         value=""
                       >
                         Select an option
                       </option>
                       <option
-                        data-testid="option-filter-cases-"
+                        data-testid="filter-cases-option-"
                         value=""
                       >
                         All
                       </option>
                       <option
-                        data-testid="option-filter-cases-In progress"
+                        data-testid="filter-cases-option-In progress"
                         value="In progress"
                       >
                         In progress
                       </option>
                       <option
-                        data-testid="option-filter-cases-Queried"
+                        data-testid="filter-cases-option-Queried"
                         value="Queried"
                       >
                         Queried
                       </option>
                       <option
-                        data-testid="option-filter-cases-Completed"
+                        data-testid="filter-cases-option-Completed"
                         value="Completed"
                       >
                         Completed
                       </option>
                       <option
-                        data-testid="option-filter-cases-Not started"
+                        data-testid="filter-cases-option-Not started"
                         value="Not started"
                       >
                         Not started
@@ -285,269 +259,282 @@ exports[`Given there are surveys available in blaise > should render the editor 
                     </select>
                   </div>
                   <br />
-                  <table
-                    class="ons-table"
-                    data-testid="FRS2504A_EDIT-Case-table"
-                    id="FRS2504A_EDIT-Case-table"
+                  <div
+                    class="ons-table-scrollable ons-table-scrollable--on"
                   >
-                    <thead
-                      class="ons-table__head"
+                    <div
+                      aria-label="Table"
+                      class="ons-table-scrollable__content"
+                      role="region"
+                      tabindex="0"
                     >
-                      <tr
-                        class="ons-table__row"
+                      <table
+                        class="ons-table"
+                        data-testid="FRS2504A_EDIT-Case-table-table"
+                        id="FRS2504A_EDIT-Case-table"
                       >
-                        <th
-                          class="ons-table__header"
-                          scope="col"
+                        <thead
+                          class="ons-table__head"
                         >
-                          Case ID
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        >
-                          Status
-                        </th>
-                        <th
-                          class="ons-table__header"
-                          scope="col"
-                        />
-                      </tr>
-                    </thead>
-                    <tbody
-                      class="ons-table__body"
-                    >
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-col-2@m ons-table__cell"
-                        >
-                          10001011
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-EditStatus"
-                          class="ons-col-2@m ons-table__cell status"
-                        >
-                          Completed
-                        </td>
-                        <td
-                          class="ons-col-8@m ons-table__cell links"
-                        >
-                          <span
-                            aria-disabled="false"
-                            aria-label="Download case summary"
-                            class="link"
-                            id="download-10001011-summary"
-                            role="link"
-                            style="cursor: pointer; opacity: 1;"
-                            tabindex="0"
+                          <tr
+                            class="ons-table__row"
                           >
-                            Download case summary
-                          </span>
-                           | 
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001011/summary"
-                          >
-                            View case summary
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Edit case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-col-2@m ons-table__cell"
+                            <th
+                              class="ons-table__header ons-table__header--top"
+                              scope="col"
+                            >
+                              <span
+                                class="ons-table__header-text"
+                              >
+                                Case ID
+                              </span>
+                            </th>
+                            <th
+                              class="ons-table__header ons-table__header--top"
+                              scope="col"
+                            >
+                              <span
+                                class="ons-table__header-text"
+                              >
+                                Status
+                              </span>
+                            </th>
+                            <th
+                              class="ons-table__header ons-table__header--top"
+                              scope="col"
+                            >
+                              <span
+                                class="ons-table__header-text"
+                              />
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          class="ons-table__body"
                         >
-                          10001012
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-EditStatus"
-                          class="ons-col-2@m ons-table__cell status"
-                        >
-                          In progress
-                        </td>
-                        <td
-                          class="ons-col-8@m ons-table__cell links"
-                        >
-                          <span
-                            aria-disabled="false"
-                            aria-label="Download case summary"
-                            class="link"
-                            id="download-10001012-summary"
-                            role="link"
-                            style="cursor: pointer; opacity: 1;"
-                            tabindex="0"
+                          <tr
+                            class="ons-table__row"
                           >
-                            Download case summary
-                          </span>
-                           | 
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001012/summary"
+                            <td
+                              aria-label="FRS2504A_EDIT-CaseID"
+                              class="ons-col-2@m ons-table__cell"
+                            >
+                              10001011
+                            </td>
+                            <td
+                              aria-label="FRS2504A_EDIT-EditStatus"
+                              class="ons-col-2@m ons-table__cell status"
+                            >
+                              Completed
+                            </td>
+                            <td
+                              class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                            >
+                              <a
+                                aria-disabled="false"
+                                aria-label="Download case summary"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001011/summary"
+                                id="download-10001011-summary"
+                              >
+                                Download case summary
+                              </a>
+                               | 
+                              <a
+                                data-discover="true"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001011/summary"
+                              >
+                                View case summary
+                              </a>
+                               | 
+                              <a
+                                href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                Edit case
+                              </a>
+                            </td>
+                          </tr>
+                          <tr
+                            class="ons-table__row"
                           >
-                            View case summary
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001012"
-                            rel="noopener noreferrer"
-                            target="_blank"
+                            <td
+                              aria-label="FRS2504A_EDIT-CaseID"
+                              class="ons-col-2@m ons-table__cell"
+                            >
+                              10001012
+                            </td>
+                            <td
+                              aria-label="FRS2504A_EDIT-EditStatus"
+                              class="ons-col-2@m ons-table__cell status"
+                            >
+                              In progress
+                            </td>
+                            <td
+                              class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                            >
+                              <a
+                                aria-disabled="false"
+                                aria-label="Download case summary"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001012/summary"
+                                id="download-10001012-summary"
+                              >
+                                Download case summary
+                              </a>
+                               | 
+                              <a
+                                data-discover="true"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001012/summary"
+                              >
+                                View case summary
+                              </a>
+                               | 
+                              <a
+                                href="https://cati.blaise.com/FRS2504A?KeyValue=10001012"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                Edit case
+                              </a>
+                            </td>
+                          </tr>
+                          <tr
+                            class="ons-table__row"
                           >
-                            Edit case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-col-2@m ons-table__cell"
-                        >
-                          10001013
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-EditStatus"
-                          class="ons-col-2@m ons-table__cell status"
-                        >
-                          Not started
-                        </td>
-                        <td
-                          class="ons-col-8@m ons-table__cell links"
-                        >
-                          <span
-                            aria-disabled="false"
-                            aria-label="Download case summary"
-                            class="link"
-                            id="download-10001013-summary"
-                            role="link"
-                            style="cursor: pointer; opacity: 1;"
-                            tabindex="0"
+                            <td
+                              aria-label="FRS2504A_EDIT-CaseID"
+                              class="ons-col-2@m ons-table__cell"
+                            >
+                              10001013
+                            </td>
+                            <td
+                              aria-label="FRS2504A_EDIT-EditStatus"
+                              class="ons-col-2@m ons-table__cell status"
+                            >
+                              Not started
+                            </td>
+                            <td
+                              class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                            >
+                              <a
+                                aria-disabled="false"
+                                aria-label="Download case summary"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001013/summary"
+                                id="download-10001013-summary"
+                              >
+                                Download case summary
+                              </a>
+                               | 
+                              <a
+                                data-discover="true"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001013/summary"
+                              >
+                                View case summary
+                              </a>
+                               | 
+                              <a
+                                href="https://cati.blaise.com/FRS2504A?KeyValue=10001013"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                Edit case
+                              </a>
+                            </td>
+                          </tr>
+                          <tr
+                            class="ons-table__row"
                           >
-                            Download case summary
-                          </span>
-                           | 
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001013/summary"
+                            <td
+                              aria-label="FRS2504A_EDIT-CaseID"
+                              class="ons-col-2@m ons-table__cell"
+                            >
+                              10001014
+                            </td>
+                            <td
+                              aria-label="FRS2504A_EDIT-EditStatus"
+                              class="ons-col-2@m ons-table__cell status"
+                            >
+                              Completed
+                            </td>
+                            <td
+                              class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                            >
+                              <a
+                                aria-disabled="false"
+                                aria-label="Download case summary"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001014/summary"
+                                id="download-10001014-summary"
+                              >
+                                Download case summary
+                              </a>
+                               | 
+                              <a
+                                data-discover="true"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001014/summary"
+                              >
+                                View case summary
+                              </a>
+                               | 
+                              <a
+                                href="https://cati.blaise.com/FRS2504A?KeyValue=10001014"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                Edit case
+                              </a>
+                            </td>
+                          </tr>
+                          <tr
+                            class="ons-table__row"
                           >
-                            View case summary
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001013"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Edit case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-col-2@m ons-table__cell"
-                        >
-                          10001014
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-EditStatus"
-                          class="ons-col-2@m ons-table__cell status"
-                        >
-                          Completed
-                        </td>
-                        <td
-                          class="ons-col-8@m ons-table__cell links"
-                        >
-                          <span
-                            aria-disabled="false"
-                            aria-label="Download case summary"
-                            class="link"
-                            id="download-10001014-summary"
-                            role="link"
-                            style="cursor: pointer; opacity: 1;"
-                            tabindex="0"
-                          >
-                            Download case summary
-                          </span>
-                           | 
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001014/summary"
-                          >
-                            View case summary
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001014"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Edit case
-                          </a>
-                        </td>
-                      </tr>
-                      <tr
-                        class="ons-table__row"
-                      >
-                        <td
-                          aria-label="FRS2504A_EDIT-CaseID"
-                          class="ons-col-2@m ons-table__cell"
-                        >
-                          10001015
-                        </td>
-                        <td
-                          aria-label="FRS2504A_EDIT-EditStatus"
-                          class="ons-col-2@m ons-table__cell status"
-                        >
-                          Completed
-                        </td>
-                        <td
-                          class="ons-col-8@m ons-table__cell links"
-                        >
-                          <span
-                            aria-disabled="false"
-                            aria-label="Download case summary"
-                            class="link"
-                            id="download-10001015-summary"
-                            role="link"
-                            style="cursor: pointer; opacity: 1;"
-                            tabindex="0"
-                          >
-                            Download case summary
-                          </span>
-                           | 
-                          <a
-                            href="/questionnaires/FRS2504A_EDIT/cases/10001015/summary"
-                          >
-                            View case summary
-                          </a>
-                           | 
-                          <a
-                            href="https://cati.blaise.com/FRS2504A?KeyValue=10001015"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            Edit case
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                            <td
+                              aria-label="FRS2504A_EDIT-CaseID"
+                              class="ons-col-2@m ons-table__cell"
+                            >
+                              10001015
+                            </td>
+                            <td
+                              aria-label="FRS2504A_EDIT-EditStatus"
+                              class="ons-col-2@m ons-table__cell status"
+                            >
+                              Completed
+                            </td>
+                            <td
+                              class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                            >
+                              <a
+                                aria-disabled="false"
+                                aria-label="Download case summary"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001015/summary"
+                                id="download-10001015-summary"
+                              >
+                                Download case summary
+                              </a>
+                               | 
+                              <a
+                                data-discover="true"
+                                href="/questionnaires/FRS2504A_EDIT/cases/10001015/summary"
+                              >
+                                View case summary
+                              </a>
+                               | 
+                              <a
+                                href="https://cati.blaise.com/FRS2504A?KeyValue=10001015"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                Edit case
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </details>
+          </div>
         </div>
       </div>
     </div>
@@ -558,86 +545,83 @@ exports[`Given there are surveys available in blaise > should render the editor 
     >
       <br />
       <div
-        class="ons-accordion"
-        id="survey-accordion"
+        data-testid="survey-accordion"
+        id="survey"
       >
-        <details
-          class="ons-collapsible ons-js-collapsible ons-collapsible--accordion "
-          data-btn-close="Hide"
-          data-group="accordion"
-          id="survey-accordion-0"
-          open=""
+        <div
+          class="ons-details ons-details--initialised ons-u-mt-l "
+          data-save-state="true"
+          id="survey-0"
+          role="group"
         >
-          <summary
-            aria-controls="survey-accordion-0"
-            aria-expanded="true"
-            class="ons-collapsible__heading ons-js-collapsible-heading"
-            data-ga-action="Close panel"
-            data-testid="survey-accordion-0-heading"
-            role="link"
+          <div
+            aria-controls="survey-0-content"
+            aria-expanded="false"
+            class="ons-details__heading"
+            data-ga-action="Open panel"
+            data-testid="survey-0-heading"
+            role="button"
             tabindex="0"
           >
-            <div
-              class="ons-collapsible__controls"
+            <h2
+              class="ons-details__title ons-u-fs-r--b"
             >
-              <h2
-                class="ons-collapsible__title"
+              FRS
+            </h2>
+            <span
+              class="ons-details__icon"
+            >
+              <svg
+                aria-hidden="true"
+                class="ons-icon"
+                fill="currentColor"
+                focusable="false"
+                role="img"
+                viewBox="0 0 8 13"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                FRS
-              </h2>
-              <span
-                class="ons-collapsible__icon"
-              >
-                <svg
-                  class="ons-svg-icon"
-                  focusable="false"
-                  viewBox="0 0 7.5 12.85"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
-                    transform="translate(-5.02 -1.59)"
-                  />
-                </svg>
-              </span>
-            </div>
-          </summary>
+                <path
+                  d="M5.74,14.28l-.57-.56a.5.5,0,0,1,0-.71h0l5-5-5-5a.5.5,0,0,1,0-.71h0l.57-.56a.5.5,0,0,1,.71,0h0l5.93,5.93a.5.5,0,0,1,0,.7L6.45,14.28a.5.5,0,0,1-.71,0Z"
+                  transform="translate(-5.02 -1.59)"
+                />
+              </svg>
+            </span>
+          </div>
           <div
-            aria-hidden="false"
-            class="ons-collapsible__content ons-js-collapsible-content"
-            data-testid="survey-accordion-0-content"
-            id="survey-accordion-0-content"
+            aria-hidden="true"
+            class="ons-details__content"
+            data-testid="survey-0-content"
+            id="survey-0-content"
           >
-            <div>
+            <div
+              class="ons-field"
+            >
               <label
                 class="ons-label"
                 for="select-questionnaire"
               >
                 Select questionnaire
-                 
               </label>
               <select
-                class="ons-input "
-                data-testid="select-questionnaire"
+                class="ons-input ons-input--select"
+                data-testid="select-questionnaire-input"
                 id="select-questionnaire"
                 name="select"
               >
                 <option
-                  data-testid="select-select-questionnaire"
                   disabled=""
                   value=""
                 >
                   Select an option
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2504A_EDIT"
-                  selected=""
+                  data-testid="select-questionnaire-option-FRS2504A_EDIT"
                   value="FRS2504A_EDIT"
                 >
                   FRS2504A (April 2025)
                 </option>
                 <option
-                  data-testid="option-select-questionnaire-FRS2505A_EDIT"
+                  data-testid="select-questionnaire-option-FRS2505A_EDIT"
                   value="FRS2505A_EDIT"
                 >
                   FRS2505A (May 2025)
@@ -649,94 +633,57 @@ exports[`Given there are surveys available in blaise > should render the editor 
               data-testid="questionnaire"
             >
               <div
-                class="editorContent"
+                class="editorContent ons-u-mb-l"
                 data-testid="FRS2504A_EDIT-editorContent"
               >
-                <div
-                  class="ons-panel ons-panel--info ons-panel--no-title  ons-u-mt-m"
-                >
-                  <div
-                    class="ons-panel__body "
-                  >
-                    <dl
-                      class="ons-metadata ons-metadata__list ons-grid ons-grid--gutterless ons-u-cf ons-u-mb-no"
-                      data-testid="editorContent-dl"
-                      title="editorContent"
-                    >
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Field period
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        <strong>
-                          April 2025
-                        </strong>
-                      </dd>
-                      <dt
-                        class="ons-description-list__term ons-grid__col ons-col-6@m"
-                      >
-                        Cases assigned to me
-                      </dt>
-                      <dd
-                        class="ons-description-list__value ons-grid__col ons-col-6@m"
-                      >
-                        <strong>
-                          5
-                        </strong>
-                      </dd>
-                    </dl>
-                  </div>
-                </div>
                 <br />
-                <div>
+                <div
+                  class="ons-field"
+                >
                   <label
                     class="ons-label"
                     for="filter-cases"
                   >
                     Filter cases
-                     
                   </label>
                   <select
-                    class="ons-input "
+                    class="ons-input ons-input--select"
+                    data-testid="filter-cases-input"
                     id="filter-cases"
                     name="select"
                   >
                     <option
-                      data-testid="select-filter-cases"
                       disabled=""
                       value=""
                     >
                       Select an option
                     </option>
                     <option
-                      data-testid="option-filter-cases-"
+                      data-testid="filter-cases-option-"
                       value=""
                     >
                       All
                     </option>
                     <option
-                      data-testid="option-filter-cases-In progress"
+                      data-testid="filter-cases-option-In progress"
                       value="In progress"
                     >
                       In progress
                     </option>
                     <option
-                      data-testid="option-filter-cases-Queried"
+                      data-testid="filter-cases-option-Queried"
                       value="Queried"
                     >
                       Queried
                     </option>
                     <option
-                      data-testid="option-filter-cases-Completed"
+                      data-testid="filter-cases-option-Completed"
                       value="Completed"
                     >
                       Completed
                     </option>
                     <option
-                      data-testid="option-filter-cases-Not started"
+                      data-testid="filter-cases-option-Not started"
                       value="Not started"
                     >
                       Not started
@@ -744,269 +691,282 @@ exports[`Given there are surveys available in blaise > should render the editor 
                   </select>
                 </div>
                 <br />
-                <table
-                  class="ons-table"
-                  data-testid="FRS2504A_EDIT-Case-table"
-                  id="FRS2504A_EDIT-Case-table"
+                <div
+                  class="ons-table-scrollable ons-table-scrollable--on"
                 >
-                  <thead
-                    class="ons-table__head"
+                  <div
+                    aria-label="Table"
+                    class="ons-table-scrollable__content"
+                    role="region"
+                    tabindex="0"
                   >
-                    <tr
-                      class="ons-table__row"
+                    <table
+                      class="ons-table"
+                      data-testid="FRS2504A_EDIT-Case-table-table"
+                      id="FRS2504A_EDIT-Case-table"
                     >
-                      <th
-                        class="ons-table__header"
-                        scope="col"
+                      <thead
+                        class="ons-table__head"
                       >
-                        Case ID
-                      </th>
-                      <th
-                        class="ons-table__header"
-                        scope="col"
-                      >
-                        Status
-                      </th>
-                      <th
-                        class="ons-table__header"
-                        scope="col"
-                      />
-                    </tr>
-                  </thead>
-                  <tbody
-                    class="ons-table__body"
-                  >
-                    <tr
-                      class="ons-table__row"
-                    >
-                      <td
-                        aria-label="FRS2504A_EDIT-CaseID"
-                        class="ons-col-2@m ons-table__cell"
-                      >
-                        10001011
-                      </td>
-                      <td
-                        aria-label="FRS2504A_EDIT-EditStatus"
-                        class="ons-col-2@m ons-table__cell status"
-                      >
-                        Completed
-                      </td>
-                      <td
-                        class="ons-col-8@m ons-table__cell links"
-                      >
-                        <span
-                          aria-disabled="false"
-                          aria-label="Download case summary"
-                          class="link"
-                          id="download-10001011-summary"
-                          role="link"
-                          style="cursor: pointer; opacity: 1;"
-                          tabindex="0"
+                        <tr
+                          class="ons-table__row"
                         >
-                          Download case summary
-                        </span>
-                         | 
-                        <a
-                          href="/questionnaires/FRS2504A_EDIT/cases/10001011/summary"
-                        >
-                          View case summary
-                        </a>
-                         | 
-                        <a
-                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          Edit case
-                        </a>
-                      </td>
-                    </tr>
-                    <tr
-                      class="ons-table__row"
-                    >
-                      <td
-                        aria-label="FRS2504A_EDIT-CaseID"
-                        class="ons-col-2@m ons-table__cell"
+                          <th
+                            class="ons-table__header ons-table__header--top"
+                            scope="col"
+                          >
+                            <span
+                              class="ons-table__header-text"
+                            >
+                              Case ID
+                            </span>
+                          </th>
+                          <th
+                            class="ons-table__header ons-table__header--top"
+                            scope="col"
+                          >
+                            <span
+                              class="ons-table__header-text"
+                            >
+                              Status
+                            </span>
+                          </th>
+                          <th
+                            class="ons-table__header ons-table__header--top"
+                            scope="col"
+                          >
+                            <span
+                              class="ons-table__header-text"
+                            />
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        class="ons-table__body"
                       >
-                        10001012
-                      </td>
-                      <td
-                        aria-label="FRS2504A_EDIT-EditStatus"
-                        class="ons-col-2@m ons-table__cell status"
-                      >
-                        In progress
-                      </td>
-                      <td
-                        class="ons-col-8@m ons-table__cell links"
-                      >
-                        <span
-                          aria-disabled="false"
-                          aria-label="Download case summary"
-                          class="link"
-                          id="download-10001012-summary"
-                          role="link"
-                          style="cursor: pointer; opacity: 1;"
-                          tabindex="0"
+                        <tr
+                          class="ons-table__row"
                         >
-                          Download case summary
-                        </span>
-                         | 
-                        <a
-                          href="/questionnaires/FRS2504A_EDIT/cases/10001012/summary"
+                          <td
+                            aria-label="FRS2504A_EDIT-CaseID"
+                            class="ons-col-2@m ons-table__cell"
+                          >
+                            10001011
+                          </td>
+                          <td
+                            aria-label="FRS2504A_EDIT-EditStatus"
+                            class="ons-col-2@m ons-table__cell status"
+                          >
+                            Completed
+                          </td>
+                          <td
+                            class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                          >
+                            <a
+                              aria-disabled="false"
+                              aria-label="Download case summary"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001011/summary"
+                              id="download-10001011-summary"
+                            >
+                              Download case summary
+                            </a>
+                             | 
+                            <a
+                              data-discover="true"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001011/summary"
+                            >
+                              View case summary
+                            </a>
+                             | 
+                            <a
+                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001011"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Edit case
+                            </a>
+                          </td>
+                        </tr>
+                        <tr
+                          class="ons-table__row"
                         >
-                          View case summary
-                        </a>
-                         | 
-                        <a
-                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001012"
-                          rel="noopener noreferrer"
-                          target="_blank"
+                          <td
+                            aria-label="FRS2504A_EDIT-CaseID"
+                            class="ons-col-2@m ons-table__cell"
+                          >
+                            10001012
+                          </td>
+                          <td
+                            aria-label="FRS2504A_EDIT-EditStatus"
+                            class="ons-col-2@m ons-table__cell status"
+                          >
+                            In progress
+                          </td>
+                          <td
+                            class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                          >
+                            <a
+                              aria-disabled="false"
+                              aria-label="Download case summary"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001012/summary"
+                              id="download-10001012-summary"
+                            >
+                              Download case summary
+                            </a>
+                             | 
+                            <a
+                              data-discover="true"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001012/summary"
+                            >
+                              View case summary
+                            </a>
+                             | 
+                            <a
+                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001012"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Edit case
+                            </a>
+                          </td>
+                        </tr>
+                        <tr
+                          class="ons-table__row"
                         >
-                          Edit case
-                        </a>
-                      </td>
-                    </tr>
-                    <tr
-                      class="ons-table__row"
-                    >
-                      <td
-                        aria-label="FRS2504A_EDIT-CaseID"
-                        class="ons-col-2@m ons-table__cell"
-                      >
-                        10001013
-                      </td>
-                      <td
-                        aria-label="FRS2504A_EDIT-EditStatus"
-                        class="ons-col-2@m ons-table__cell status"
-                      >
-                        Not started
-                      </td>
-                      <td
-                        class="ons-col-8@m ons-table__cell links"
-                      >
-                        <span
-                          aria-disabled="false"
-                          aria-label="Download case summary"
-                          class="link"
-                          id="download-10001013-summary"
-                          role="link"
-                          style="cursor: pointer; opacity: 1;"
-                          tabindex="0"
+                          <td
+                            aria-label="FRS2504A_EDIT-CaseID"
+                            class="ons-col-2@m ons-table__cell"
+                          >
+                            10001013
+                          </td>
+                          <td
+                            aria-label="FRS2504A_EDIT-EditStatus"
+                            class="ons-col-2@m ons-table__cell status"
+                          >
+                            Not started
+                          </td>
+                          <td
+                            class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                          >
+                            <a
+                              aria-disabled="false"
+                              aria-label="Download case summary"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001013/summary"
+                              id="download-10001013-summary"
+                            >
+                              Download case summary
+                            </a>
+                             | 
+                            <a
+                              data-discover="true"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001013/summary"
+                            >
+                              View case summary
+                            </a>
+                             | 
+                            <a
+                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001013"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Edit case
+                            </a>
+                          </td>
+                        </tr>
+                        <tr
+                          class="ons-table__row"
                         >
-                          Download case summary
-                        </span>
-                         | 
-                        <a
-                          href="/questionnaires/FRS2504A_EDIT/cases/10001013/summary"
+                          <td
+                            aria-label="FRS2504A_EDIT-CaseID"
+                            class="ons-col-2@m ons-table__cell"
+                          >
+                            10001014
+                          </td>
+                          <td
+                            aria-label="FRS2504A_EDIT-EditStatus"
+                            class="ons-col-2@m ons-table__cell status"
+                          >
+                            Completed
+                          </td>
+                          <td
+                            class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                          >
+                            <a
+                              aria-disabled="false"
+                              aria-label="Download case summary"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001014/summary"
+                              id="download-10001014-summary"
+                            >
+                              Download case summary
+                            </a>
+                             | 
+                            <a
+                              data-discover="true"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001014/summary"
+                            >
+                              View case summary
+                            </a>
+                             | 
+                            <a
+                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001014"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Edit case
+                            </a>
+                          </td>
+                        </tr>
+                        <tr
+                          class="ons-table__row"
                         >
-                          View case summary
-                        </a>
-                         | 
-                        <a
-                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001013"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          Edit case
-                        </a>
-                      </td>
-                    </tr>
-                    <tr
-                      class="ons-table__row"
-                    >
-                      <td
-                        aria-label="FRS2504A_EDIT-CaseID"
-                        class="ons-col-2@m ons-table__cell"
-                      >
-                        10001014
-                      </td>
-                      <td
-                        aria-label="FRS2504A_EDIT-EditStatus"
-                        class="ons-col-2@m ons-table__cell status"
-                      >
-                        Completed
-                      </td>
-                      <td
-                        class="ons-col-8@m ons-table__cell links"
-                      >
-                        <span
-                          aria-disabled="false"
-                          aria-label="Download case summary"
-                          class="link"
-                          id="download-10001014-summary"
-                          role="link"
-                          style="cursor: pointer; opacity: 1;"
-                          tabindex="0"
-                        >
-                          Download case summary
-                        </span>
-                         | 
-                        <a
-                          href="/questionnaires/FRS2504A_EDIT/cases/10001014/summary"
-                        >
-                          View case summary
-                        </a>
-                         | 
-                        <a
-                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001014"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          Edit case
-                        </a>
-                      </td>
-                    </tr>
-                    <tr
-                      class="ons-table__row"
-                    >
-                      <td
-                        aria-label="FRS2504A_EDIT-CaseID"
-                        class="ons-col-2@m ons-table__cell"
-                      >
-                        10001015
-                      </td>
-                      <td
-                        aria-label="FRS2504A_EDIT-EditStatus"
-                        class="ons-col-2@m ons-table__cell status"
-                      >
-                        Completed
-                      </td>
-                      <td
-                        class="ons-col-8@m ons-table__cell links"
-                      >
-                        <span
-                          aria-disabled="false"
-                          aria-label="Download case summary"
-                          class="link"
-                          id="download-10001015-summary"
-                          role="link"
-                          style="cursor: pointer; opacity: 1;"
-                          tabindex="0"
-                        >
-                          Download case summary
-                        </span>
-                         | 
-                        <a
-                          href="/questionnaires/FRS2504A_EDIT/cases/10001015/summary"
-                        >
-                          View case summary
-                        </a>
-                         | 
-                        <a
-                          href="https://cati.blaise.com/FRS2504A?KeyValue=10001015"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          Edit case
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                          <td
+                            aria-label="FRS2504A_EDIT-CaseID"
+                            class="ons-col-2@m ons-table__cell"
+                          >
+                            10001015
+                          </td>
+                          <td
+                            aria-label="FRS2504A_EDIT-EditStatus"
+                            class="ons-col-2@m ons-table__cell status"
+                          >
+                            Completed
+                          </td>
+                          <td
+                            class="ons-col-8@m ons-table__cell ons-u-ta-right"
+                          >
+                            <a
+                              aria-disabled="false"
+                              aria-label="Download case summary"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001015/summary"
+                              id="download-10001015-summary"
+                            >
+                              Download case summary
+                            </a>
+                             | 
+                            <a
+                              data-discover="true"
+                              href="/questionnaires/FRS2504A_EDIT/cases/10001015/summary"
+                            >
+                              View case summary
+                            </a>
+                             | 
+                            <a
+                              href="https://cati.blaise.com/FRS2504A?KeyValue=10001015"
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              Edit case
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </div>
   </div>,
@@ -1073,8 +1033,15 @@ exports[`Given there the blaise rest api is not available > should render the pa
         data-testid="Surveys"
       >
         <div
-          class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+          class="ons-panel ons-panel--error ons-panel--no-title ons-u-mt-m"
+          id="panel-_r_j_"
         >
+          <span
+            class="ons-panel__assistive-text ons-u-vh"
+          >
+            Error:
+             
+          </span>
           <div
             class="ons-panel__body "
           >
@@ -1096,8 +1063,15 @@ exports[`Given there the blaise rest api is not available > should render the pa
       data-testid="Surveys"
     >
       <div
-        class="ons-panel ons-panel--error ons-panel--no-title  ons-u-mt-m"
+        class="ons-panel ons-panel--error ons-panel--no-title ons-u-mt-m"
+        id="panel-_r_j_"
       >
+        <span
+          class="ons-panel__assistive-text ons-u-vh"
+        >
+          Error:
+           
+        </span>
         <div
           class="ons-panel__body "
         >

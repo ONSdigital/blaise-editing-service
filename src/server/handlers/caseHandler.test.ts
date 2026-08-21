@@ -1,1410 +1,1694 @@
-import supertest, { Response } from 'supertest';
-import {
-  IMock, It, Mock, Times,
-} from 'typemoq';
-import BlaiseApiClient, {
-  CaseEditInformation, CaseOutcome, EditedStatus, User,
-} from 'blaise-api-node-client';
-import Organisation from 'blaise-api-node-client/lib/cjs/enums/organisation';
-import { Auth } from 'blaise-login-react/blaise-login-react-server';
-import { HttpLogger } from 'pino-http';
-import nodeServer from '../server';
-import createAxiosError from '../test-utils/axiosTestHelper';
-import BlaiseApi from '../BlaiseApi';
-import FakeServerConfigurationProvider from '../test-utils/FakeServerConfigurationProvider';
-import { caseResponseMockObject, caseSummaryDetailsMockObject } from '../test-utils/CaseMockObject';
-import userMockObject from '../test-utils/userMockObject';
-import AuditLogger from '../auditLogger';
+import { BlaiseApiClient, CaseOutcome, EditedStatus, Organisation } from "blaise-api-node-client";
+import { Auth } from "blaise-login-react-server";
+import supertest from "supertest";
+import { It, Mock, MockBehavior, Times } from "typemoq";
 
-// create fake config
+import nodeServer from "../server.js";
+import createAxiosError from "../test-utils/axiosTestHelper.js";
+import { mockCaseSummaryDetails, mockCaseSummaryResponse } from "../test-utils/case.mock.js";
+import FakeServerConfigurationProvider from "../test-utils/fakeServerConfigurationProvider.mock.js";
+import mockUser from "../test-utils/user.mock.js";
+import AuditLogger from "../utils/auditLogger.js";
+import BlaiseApi from "../utils/blaiseApi.js";
+import { sanitiseForLogging } from "../utils/sanitisation.js";
+
+import type { CaseEditInformation, User } from "blaise-api-node-client";
+import type { HttpLogger } from "pino-http";
+import type { Response } from "supertest";
+import type { IMock } from "typemoq";
+
 const configFake = new FakeServerConfigurationProvider();
 
-// mock User
-const user: User = userMockObject;
+const user: User = mockUser;
 
-// mock auth
-Auth.prototype.ValidateToken = vi.fn().mockReturnValue(true);
-Auth.prototype.GetUser = vi.fn().mockReturnValue({ name: user.name, role: user.role });
+Auth.prototype.validateToken = vi.fn().mockReturnValue(true);
+Auth.prototype.getUser = vi.fn().mockReturnValue({ name: user.name, role: user.role });
 
-// mock blaise api client and cloud logger
-const blaiseApiClientMock: IMock<BlaiseApiClient> = Mock.ofType(BlaiseApiClient);
-const cloudLoggerMock: IMock<AuditLogger> = Mock.ofType(AuditLogger);
+const mockBlaiseApiClient: IMock<BlaiseApiClient> = Mock.ofType(
+  BlaiseApiClient,
+  MockBehavior.Loose,
+  true,
+  "http://restapi.blaise.com",
+);
+const mockCloudLogger: IMock<AuditLogger> = Mock.ofType(AuditLogger);
 
-// create blaise api
-const blaiseApi = new BlaiseApi(configFake, blaiseApiClientMock.object);
+const blaiseApi = new BlaiseApi(configFake, mockBlaiseApiClient.object);
 
-// mock blaise api client
-const blaiseApiMock: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
+const mockBlaiseApi: IMock<BlaiseApi> = Mock.ofInstance(blaiseApi);
 
-// need to test the endpoints through the express server
-const server = nodeServer(configFake, undefined as unknown as HttpLogger, { blaiseApi: blaiseApiMock.object, auditLogger: cloudLoggerMock.object });
+const server = nodeServer(configFake, undefined as unknown as HttpLogger, {
+  blaiseApi: mockBlaiseApi.object,
+  auditLogger: mockCloudLogger.object,
+});
 
-// supertest will handle all http calls
 const sut = supertest(server);
 
-// Using Node.js `assert`
-// const assert = require('assert').strict;
+const validUserRoles: string[] = ["SVT Supervisor", "SVT Editor"];
 
-const validUserRoles: string[] = ['SVT Supervisor', 'SVT Editor'];
+describe("Get case summary tests", () => {
+  const caseId: string = "1";
+  const questionnaireName: string = "TEST111A";
+  const caseSummaryPath = `/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`;
 
-describe('Get case summary tests', () => {
+  const setupGetCaseSuccess = (): void => {
+    mockBlaiseApi
+      .setup((api) => api.getCase(questionnaireName, caseId))
+      .returns(async () => mockCaseSummaryResponse);
+  };
+
+  const setupGetCaseFailure = (error: unknown): void => {
+    mockBlaiseApi
+      .setup((api) => api.getCase(questionnaireName, caseId))
+      .returns(() => Promise.reject(error));
+  };
+
+  const getCaseSummary = () => sut.get(caseSummaryPath);
+
   beforeEach(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
   afterAll(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
-  it('It should return a 200 response with expected case summary', async () => {
-    // arrange
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
+  it("It should return a 200 response with expected case summary", async () => {
+    setupGetCaseSuccess();
 
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(async () => caseResponseMockObject);
+    const response: Response = await getCaseSummary();
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
-
-    // assert
     expect(response.status).toEqual(200);
-    expect(response.text).toEqual(JSON.stringify(caseSummaryDetailsMockObject));
-    blaiseApiMock.verify((api) => api.getCase(questionnaireName, caseId), Times.once());
+    expect(response.text).toEqual(JSON.stringify(mockCaseSummaryDetails));
+    mockBlaiseApi.verify((api) => api.getCase(questionnaireName, caseId), Times.once());
   });
 
-  it('It should return a 200 response with expected case summary', async () => {
-    // arrange
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
+  it("It should log when case summary is retrieved", async () => {
+    setupGetCaseSuccess();
 
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(async () => caseResponseMockObject);
+    await getCaseSummary();
 
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.info(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
-    // arrange
-    const axiosError = createAxiosError(500);
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
+  it.each([
+    {
+      statusCode: 500,
+      expectedBody: {
+        error: {
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Unable to complete request, please try again in a few minutes",
+        },
+      },
+    },
+    {
+      statusCode: 404,
+      expectedBody: {
+        error: {
+          code: "NOT_FOUND",
+          message: "Resource not found",
+        },
+      },
+    },
+  ])(
+    "It should return a $statusCode response when get case fails with $statusCode",
+    async ({ statusCode, expectedBody }) => {
+      const axiosError = createAxiosError(statusCode);
 
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
+      setupGetCaseFailure(axiosError);
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+      const response: Response = await getCaseSummary();
 
-    // assert
+      expect(response.status).toEqual(statusCode);
+      expect(response.body).toEqual(expectedBody);
+    },
+  );
+
+  it.each([500, 404])(
+    "It should log a %i response error when get case fails with an axios error",
+    async (statusCode) => {
+      const axiosError = createAxiosError(statusCode);
+
+      setupGetCaseFailure(axiosError);
+
+      await getCaseSummary();
+
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.error(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
+
+  it("It should return a 500 response when get case summary client throws an error", async () => {
+    const clientError = new Error();
+
+    setupGetCaseFailure(clientError);
+
+    const response: Response = await getCaseSummary();
+
     expect(response.status).toEqual(500);
   });
 
-  it('It should log a 500 response error when a call is made to retrieve a case and the rest api is not availiable', async () => {
-    // arrange
-    const axiosError = createAxiosError(500);
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
-
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
-
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
-  });
-
-  it('It should return a 500 response when the api client throws an error', async () => {
-    // arrange
+  it("It should log a 500 response error when get case summary client throws an error", async () => {
     const clientError = new Error();
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
 
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(clientError));
+    setupGetCaseFailure(clientError);
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
+    await getCaseSummary();
 
-    // assert
-    expect(response.status).toEqual(500);
-  });
-
-  it('It should log a 500 response error when the api client throws an error', async () => {
-    // arrange
-    const clientError = new Error();
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
-
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(clientError));
-
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
-  });
-
-  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-    // arrange
-    const axiosError = createAxiosError(404);
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
-
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
-
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
-
-    // assert
-    expect(response.status).toEqual(404);
-  });
-
-  it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-    // arrange
-    const axiosError = createAxiosError(404);
-    const caseId: string = '1';
-    const questionnaireName: string = 'TEST111A';
-
-    blaiseApiMock.setup((api) => api.getCase(questionnaireName, caseId)).returns(() => Promise.reject(axiosError));
-
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/${caseId}/summary`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case details, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 });
 
-describe('Get case edit information tests', () => {
+describe("Get case edit information tests", () => {
   beforeEach(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
   afterAll(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
-  it.each(validUserRoles)('should return a 200 response with an expected filtered list of case edit details When given a valid questionnaire and userRole', async (userRole) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
+  it.each(validUserRoles)(
+    "should return a 200 response with an expected filtered list of case edit details When given a valid questionnaire and userRole",
+    async (userRole) => {
+      const questionnaireName = "FRS2504A";
 
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
+      const mockCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001013",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Julie",
+          interviewer: "",
+          editedStatus: EditedStatus.Query,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      const mockFilteredCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => mockCaseEditInformationList);
+
+      const response: Response = await sut.get(
+        `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+      );
+
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual(mockFilteredCaseEditInformationList);
+      mockBlaiseApi.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
+    },
+  );
+
+  it.each(validUserRoles)(
+    "should log the number of case and filtered cases When given a valid questionnaire and userRole",
+    async (userRole) => {
+      const questionnaireName = "FRS2504A";
+
+      const mockCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001013",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Julie",
+          interviewer: "",
+          editedStatus: EditedStatus.Query,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      const mockFilteredCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => mockCaseEditInformationList);
+
+      await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
+
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.info(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
+          ),
+        Times.once(),
+      );
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.info(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
+
+  it.each(validUserRoles)(
+    "should return a 200 response with an expected filtered list of case edit details When outcome codes match role",
+    async (userRole) => {
+      const questionnaireName = "FRS2504A";
+
+      const mockCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001013",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Julie",
+          interviewer: "",
+          editedStatus: EditedStatus.Query,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedProxy,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      const mockFilteredCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedProxy,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => mockCaseEditInformationList);
+
+      const response: Response = await sut.get(
+        `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+      );
+
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual(mockFilteredCaseEditInformationList);
+      mockBlaiseApi.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
+    },
+  );
+
+  it.each(validUserRoles)(
+    "should log the number of cases and filtered cases When outcome codes match role",
+    async (userRole) => {
+      const questionnaireName = "FRS2504A";
+
+      const mockCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001013",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Julie",
+          interviewer: "",
+          editedStatus: EditedStatus.Query,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedProxy,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      const mockFilteredCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedProxy,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => mockCaseEditInformationList);
+
+      await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
+
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.info(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
+          ),
+        Times.once(),
+      );
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.info(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
+
+  it.each(validUserRoles)(
+    "should return a 200 response with an expected filtered list of case edit details When organisation match role",
+    async (userRole) => {
+      const questionnaireName = "FRS2504A";
+
+      const mockCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.NatCen,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001013",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Julie",
+          interviewer: "",
+          editedStatus: EditedStatus.Query,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedProxy,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.Nisra,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      const mockFilteredCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => mockCaseEditInformationList);
+
+      const response: Response = await sut.get(
+        `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+      );
+
+      expect(response.status).toEqual(200);
+      expect(response.body).toEqual(mockFilteredCaseEditInformationList);
+      mockBlaiseApi.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
+    },
+  );
+
+  it.each(validUserRoles)(
+    "should log the number of cases and filtered cases When organisation match role",
+    async (userRole) => {
+      const questionnaireName = "FRS2504A";
+
+      const mockCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001011",
+          outcome: CaseOutcome.Completed,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Finished,
+          organisation: Organisation.NatCen,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001013",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Julie",
+          interviewer: "",
+          editedStatus: EditedStatus.Query,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001014",
+          outcome: CaseOutcome.CompletedProxy,
+          assignedTo: "Sarah",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.Nisra,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
+        },
+        {
+          primaryKey: "10001015",
+          outcome: CaseOutcome.Partial,
+          assignedTo: "Rich",
+          interviewer: "",
+          editedStatus: EditedStatus.Started,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      const mockFilteredCaseEditInformationList: CaseEditInformation[] = [
+        {
+          primaryKey: "10001012",
+          outcome: CaseOutcome.CompletedNudge,
+          assignedTo: "bob",
+          interviewer: "",
+          editedStatus: EditedStatus.NotStarted,
+          organisation: Organisation.ONS,
+          editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+          readOnlyUrl:
+            "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
+        },
+      ];
+
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => mockCaseEditInformationList);
+
+      await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
+
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.info(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
+          ),
+        Times.once(),
+      );
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.info(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Filtered down to ${mockFilteredCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
+
+  it("should return a 200 response with a list of all case edit details When the Outcome Filter list is empty", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT AllOutcomes";
+    const mockCaseEditInformationList: CaseEditInformation[] = [
       {
-        primaryKey: '10001011',
+        primaryKey: "10001011",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
+        assignedTo: "Rich",
+        interviewer: "",
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001012',
+        primaryKey: "10001012",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'bob',
-        interviewer: '',
+        assignedTo: "bob",
+        interviewer: "",
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001013',
+        primaryKey: "10001013",
         outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
+        assignedTo: "Julie",
+        interviewer: "",
         editedStatus: EditedStatus.Query,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001014',
+        primaryKey: "10001014",
         outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'Sarah',
-        interviewer: '',
+        assignedTo: "Sarah",
+        interviewer: "",
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001015',
+        primaryKey: "10001015",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
+        assignedTo: "Rich",
+        interviewer: "",
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
       },
     ];
 
-    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(async () => mockCaseEditInformationList);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
+    const response: Response = await sut.get(
+      `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+    );
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
     expect(response.status).toEqual(200);
-    expect(response.body).toEqual(filteredCaseEditInformationListMockObject);
-    blaiseApiMock.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
+    expect(response.body).toEqual(mockCaseEditInformationList);
+    mockBlaiseApi.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
   });
 
-  it.each(validUserRoles)('should log the number of case and filtered cases When given a valid questionnaire and userRole', async (userRole) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
+  it("should log the number of cases and filtered cases When the Outcome Filter list is empty", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT AllOutcomes";
+    const mockCaseEditInformationList: CaseEditInformation[] = [
       {
-        primaryKey: '10001011',
+        primaryKey: "10001011",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
+        assignedTo: "Rich",
+        interviewer: "",
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001012',
+        primaryKey: "10001012",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'bob',
-        interviewer: '',
+        assignedTo: "bob",
+        interviewer: "",
         editedStatus: EditedStatus.NotStarted,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001012",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001013',
+        primaryKey: "10001013",
         outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
+        assignedTo: "Julie",
+        interviewer: "",
         editedStatus: EditedStatus.Query,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001013",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001014',
+        primaryKey: "10001014",
         outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'Sarah',
-        interviewer: '',
+        assignedTo: "Sarah",
+        interviewer: "",
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001014",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly",
       },
       {
-        primaryKey: '10001015',
+        primaryKey: "10001015",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
+        assignedTo: "Rich",
+        interviewer: "",
         editedStatus: EditedStatus.Started,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001015",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly",
       },
     ];
 
-    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(async () => mockCaseEditInformationList);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.info(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Retrieved ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
+        ),
+      Times.once(),
+    );
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.info(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Filtered down to ${mockCaseEditInformationList.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it.each(validUserRoles)('should return a 200 response with an expected filtered list of case edit details When outcome codes match role', async (userRole) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
+  it("should return a 500 response if the users role is not configured for the survey", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT NotConfigured"; // configured for LMS questionnaires only
+    const mockCaseEditInformationList: CaseEditInformation[] = [
       {
-        primaryKey: '10001011',
+        primaryKey: "10001011",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
+        assignedTo: "Rich",
+        interviewer: "",
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001013',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
-        editedStatus: EditedStatus.Query,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedProxy,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
       },
     ];
 
-    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedProxy,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-    ];
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(async () => mockCaseEditInformationList);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
+    const response: Response = await sut.get(
+      `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+    );
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual(filteredCaseEditInformationListMockObject);
-    blaiseApiMock.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
-  });
-
-  it.each(validUserRoles)('should log the number of cases and filtered cases When outcome codes match role', async (userRole) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001013',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
-        editedStatus: EditedStatus.Query,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedProxy,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedProxy,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-  });
-
-  it.each(validUserRoles)('should return a 200 response with an expected filtered list of case edit details When organisation match role', async (userRole) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.NatCen,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001013',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
-        editedStatus: EditedStatus.Query,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedProxy,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.Nisra,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual(filteredCaseEditInformationListMockObject);
-    blaiseApiMock.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
-  });
-
-  it.each(validUserRoles)('should log the number of cases and filtered cases When organisation match role', async (userRole) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.NatCen,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001013',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
-        editedStatus: EditedStatus.Query,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedProxy,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.Nisra,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    const filteredCaseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${filteredCaseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-  });
-
-  it('should return a 200 response with a list of all case edit details When the Outcome Filter list is empty', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT AllOutcomes';
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001013',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
-        editedStatus: EditedStatus.Query,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
-    expect(response.status).toEqual(200);
-    expect(response.body).toEqual(caseEditInformationListMockObject);
-    blaiseApiMock.verify((api) => api.getCaseEditInformation(questionnaireName), Times.once());
-  });
-
-  it('should log the number of cases and filtered cases When the Outcome Filter list is empty', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT AllOutcomes';
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001012',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'bob',
-        interviewer: '',
-        editedStatus: EditedStatus.NotStarted,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001012&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001013',
-        outcome: CaseOutcome.Partial,
-        assignedTo: 'Julie',
-        interviewer: '',
-        editedStatus: EditedStatus.Query,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001013&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001014',
-        outcome: CaseOutcome.CompletedNudge,
-        assignedTo: 'Sarah',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001014&DataEntrySettings=ReadOnly',
-      },
-      {
-        primaryKey: '10001015',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Started,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001015&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Retrieved ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Filtered down to ${caseEditInformationListMockObject.length} case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
-  });
-
-  it('should return a 500 response if the users role is not configured for the survey', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
-      {
-        primaryKey: '10001011',
-        outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
-        editedStatus: EditedStatus.Finished,
-        organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
-      },
-    ];
-
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
-
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
-
-    // assert
     expect(response.status).toEqual(500);
   });
 
-  it('should log a 500 response error if the users role is not configured for the survey', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT NotConfigured'; // configured for LMS questionnaires only
+  it("should log a 500 response error if the users role is not configured for the survey", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT NotConfigured"; // configured for LMS questionnaires only
     const error = `Error: No '${questionnaireName.substring(0, 3)}' survey configuration found for Role ${userRole}`;
-    const caseEditInformationListMockObject: CaseEditInformation[] = [
+    const mockCaseEditInformationList: CaseEditInformation[] = [
       {
-        primaryKey: '10001011',
+        primaryKey: "10001011",
         outcome: CaseOutcome.Completed,
-        assignedTo: 'Rich',
-        interviewer: '',
+        assignedTo: "Rich",
+        interviewer: "",
         editedStatus: EditedStatus.Finished,
         organisation: Organisation.ONS,
-        editUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011',
-        readOnlyUrl: 'https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly',
+        editUrl: "https://cati.blaise.com/FRS2504A?KeyValue=10001011",
+        readOnlyUrl:
+          "https://cati.blaise.com/FRS2504A?KeyValue=10001011&DataEntrySettings=ReadOnly",
       },
     ];
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => caseEditInformationListMockObject);
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(async () => mockCaseEditInformationList);
 
-    // act
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it('should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT Editor';
+  it("should return a 500 response when a call is made to retrieve a list of editing details and the rest api is not availiable", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT Editor";
 
     const axiosError = createAxiosError(500);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(() => Promise.reject(axiosError));
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(() => Promise.reject(axiosError));
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
+    const response: Response = await sut.get(
+      `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+    );
 
-    // assert
     expect(response.status).toEqual(500);
   });
 
-  it('should log a 500 response error when a call is made to retrieve a list of editing details and the rest api is not availiable', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT Editor';
+  it("should log a 500 response error when a call is made to retrieve a list of editing details and the rest api is not availiable", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT Editor";
 
     const axiosError = createAxiosError(500);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(() => Promise.reject(axiosError));
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(() => Promise.reject(axiosError));
 
-    // act
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it('should return a 500 response when the api client throws an error', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT Editor';
+  it("should return a 500 response when the api client throws an error", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT Editor";
 
     const apiClientError = new Error();
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(() => Promise.reject(apiClientError));
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(() => Promise.reject(apiClientError));
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
+    const response: Response = await sut.get(
+      `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+    );
 
-    // assert
     expect(response.status).toEqual(500);
   });
 
-  it('should log a 500 response error when the api client throws an error', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT Editor';
+  it("should log a 500 response error when the api client throws an error", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT Editor";
 
     const apiClientError = new Error();
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(() => Promise.reject(apiClientError));
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(() => Promise.reject(apiClientError));
 
-    // act
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${apiClientError}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it('should return a 500 response when CaseContorller is called without a userRole', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
+  it("should return a 500 response when CaseContorller is called without a userRole", async () => {
+    const questionnaireName = "FRS2504A";
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => []);
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(async () => []);
 
-    // act
     const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit`);
 
-    // assert
     expect(response.status).toEqual(500);
   });
 
-  it('should log a 500 response error when CaseContorller is called without a userRole', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const error = 'Error: Role: \'undefined\' not found in Role configuration';
+  it("should log a 500 response error when CaseContorller is called without a userRole", async () => {
+    const questionnaireName = "FRS2504A";
+    const error = "Error: Role: 'undefined' not found in Role configuration";
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => []);
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(async () => []);
 
-    // act
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit`);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it.each(['', 'INVALIDROLE'])('should return a 500 response when given an unknown userRole', async (userRoleInvalid) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
+  it.each(["", "INVALIDROLE"])(
+    "should return a 500 response when given an unknown userRole",
+    async (userRoleInvalid) => {
+      const questionnaireName = "FRS2504A";
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => []);
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => []);
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRoleInvalid}`);
+      const response: Response = await sut.get(
+        `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRoleInvalid}`,
+      );
 
-    // assert
-    expect(response.status).toEqual(500);
-  });
+      expect(response.status).toEqual(500);
+    },
+  );
 
-  it.each(['', 'INVALIDROLE'])('should log a 500 response error when given an unknown userRole', async (userRoleInvalid) => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const error = `Error: Role: '${userRoleInvalid}' not found in Role configuration`;
+  it.each(["", "INVALIDROLE"])(
+    "should log a 500 response error when given an unknown userRole",
+    async (userRoleInvalid) => {
+      const questionnaireName = "FRS2504A";
+      const error = `Error: Role: '${userRoleInvalid}' not found in Role configuration`;
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(async () => []);
+      mockBlaiseApi
+        .setup((api) => api.getCaseEditInformation(questionnaireName))
+        .returns(async () => []);
 
-    // act
-    await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRoleInvalid}`);
+      await sut.get(
+        `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRoleInvalid}`,
+      );
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`), Times.once());
-  });
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.error(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${error}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
 
-  it('should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT Editor';
+  it("should return a 404 response when a call is made to retrieve a list of editing details and the client returns a 404 not found", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT Editor";
 
     const axiosError = createAxiosError(404);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(() => Promise.reject(axiosError));
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(() => Promise.reject(axiosError));
 
-    // act
-    const response: Response = await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
+    const response: Response = await sut.get(
+      `/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`,
+    );
 
-    // assert
     expect(response.status).toEqual(404);
   });
 
-  it('should log a 404 response error when a call is made to retrieve a list of editing details and the client returns a 404 not found', async () => {
-    // arrange
-    const questionnaireName = 'FRS2504A';
-    const userRole = 'SVT Editor';
+  it("should log a 404 response error when a call is made to retrieve a list of editing details and the client returns a 404 not found", async () => {
+    const questionnaireName = "FRS2504A";
+    const userRole = "SVT Editor";
 
     const axiosError = createAxiosError(404);
 
-    blaiseApiMock.setup((api) => api.getCaseEditInformation(questionnaireName)).returns(() => Promise.reject(axiosError));
+    mockBlaiseApi
+      .setup((api) => api.getCaseEditInformation(questionnaireName))
+      .returns(() => Promise.reject(axiosError));
 
-    // act
     await sut.get(`/api/questionnaires/${questionnaireName}/cases/edit?userRole=${userRole}`);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to get case(s) edit information, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 });
 
-describe('allocate cases tests', () => {
+describe("allocate cases tests", () => {
+  const questionnaireName: string = "TEST111A";
+  const allocateCasesPath = `/api/questionnaires/${questionnaireName}/cases/allocate`;
+
+  const buildAllocatePayload = (
+    overrides: Partial<{ name: string; cases: string[] }> = {},
+  ): { name: string; cases: string[] } => ({
+    name: "jake",
+    cases: ["1"],
+    ...overrides,
+  });
+
+  const requestAllocateCases = (payload: { name: string; cases: string[] }) =>
+    sut.patch(allocateCasesPath).send(payload);
+
+  const setupUpdateCaseFailure = (error: unknown): void => {
+    mockBlaiseApi
+      .setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()))
+      .returns(() => Promise.reject(error));
+  };
+
   beforeEach(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
   afterAll(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
-  it('It should return a 204 response when cases are allocated', async () => {
-    // arrange
-    const caseId1: string = '1';
-    const caseId2: string = '2';
-    const questionnaireName: string = 'TEST111A';
-    const editor: string = 'jake';
-    const payload = { name: editor, cases: [caseId1, caseId2] };
-    const caseFields = { 'QEdit.AssignedTo': editor, 'QEdit.Edited': 1 };
+  it("It should return a 204 response when cases are allocated", async () => {
+    const caseId1: string = "1";
+    const caseId2: string = "2";
+    const editor: string = "jake";
+    const payload = buildAllocatePayload({ name: editor, cases: [caseId1, caseId2] });
+    const caseFields = { "QEdit.AssignedTo": editor, "QEdit.Edited": 1 };
 
-    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId1, caseFields));
-    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId2, caseFields));
+    mockBlaiseApi.setup((api) => api.updateCase(questionnaireName, caseId1, caseFields));
+    mockBlaiseApi.setup((api) => api.updateCase(questionnaireName, caseId2, caseFields));
 
-    // act
-    const response: Response = await sut
-      .patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+    const response: Response = await requestAllocateCases(payload);
 
-    // assert
     expect(response.status).toEqual(204);
-    blaiseApiMock.verify((api) => api.updateCase(questionnaireName, caseId1, caseFields), Times.once());
-    blaiseApiMock.verify((api) => api.updateCase(questionnaireName, caseId2, caseFields), Times.once());
+    mockBlaiseApi.verify(
+      (api) => api.updateCase(questionnaireName, caseId1, caseFields),
+      Times.once(),
+    );
+    mockBlaiseApi.verify(
+      (api) => api.updateCase(questionnaireName, caseId2, caseFields),
+      Times.once(),
+    );
   });
 
-  it('It should log when cases are successfully allocated', async () => {
-    // arrange
-    const caseId1: string = '1';
-    const caseId2: string = '2';
-    const questionnaireName: string = 'TEST111A';
-    const editor: string = 'jake';
-    const payload = { name: editor, cases: [caseId1, caseId2] };
-    const caseFields = { 'QEdit.AssignedTo': editor, 'QEdit.Edited': 1 };
+  it("It should limit concurrent upstream case updates when allocating many cases", async () => {
+    const payload = buildAllocatePayload({
+      cases: Array.from({ length: 25 }, (_, index) => `${index + 1}`),
+    });
 
-    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId1, caseFields));
-    blaiseApiMock.setup((api) => api.updateCase(questionnaireName, caseId2, caseFields));
+    let inFlightUpdates = 0;
+    let peakInFlightUpdates = 0;
 
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+    mockBlaiseApi
+      .setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()))
+      .returns(async () => {
+        inFlightUpdates += 1;
+        peakInFlightUpdates = Math.max(peakInFlightUpdates, inFlightUpdates);
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+        await new Promise<void>((resolve) => {
+          setTimeout(resolve, 0);
+        });
+
+        inFlightUpdates -= 1;
+      });
+
+    const response: Response = await requestAllocateCases(payload);
+
+    expect(response.status).toEqual(204);
+    expect(peakInFlightUpdates).toBeLessThanOrEqual(10);
+    mockBlaiseApi.verify(
+      (api) => api.updateCase(questionnaireName, It.isAny(), It.isAny()),
+      Times.exactly(payload.cases.length),
+    );
   });
 
-  it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
-    // arrange
-    const axiosError = createAxiosError(500);
-    const questionnaireName: string = 'TEST111A';
-    const payload = { name: 'jake', cases: ['1'] };
+  it("It should log when cases are successfully allocated", async () => {
+    const caseId1: string = "1";
+    const caseId2: string = "2";
+    const editor: string = "jake";
+    const payload = buildAllocatePayload({ name: editor, cases: [caseId1, caseId2] });
+    const caseFields = { "QEdit.AssignedTo": editor, "QEdit.Edited": 1 };
 
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
+    mockBlaiseApi.setup((api) => api.updateCase(questionnaireName, caseId1, caseFields));
+    mockBlaiseApi.setup((api) => api.updateCase(questionnaireName, caseId2, caseFields));
 
-    // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+    await requestAllocateCases(payload);
 
-    // assert
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.info(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Allocated ${payload.cases.length} cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
+        ),
+      Times.once(),
+    );
+  });
+
+  it.each([500, 404])(
+    "It should return a %i response when case allocation fails with an axios error",
+    async (statusCode) => {
+      const axiosError = createAxiosError(statusCode);
+      const payload = buildAllocatePayload();
+
+      setupUpdateCaseFailure(axiosError);
+
+      const response: Response = await requestAllocateCases(payload);
+
+      expect(response.status).toEqual(statusCode);
+    },
+  );
+
+  it.each([500, 404])(
+    "It should log a %i response error when case allocation fails with an axios error",
+    async (statusCode) => {
+      const axiosError = createAxiosError(statusCode);
+      const payload = buildAllocatePayload();
+
+      setupUpdateCaseFailure(axiosError);
+
+      await requestAllocateCases(payload);
+
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.error(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
+
+  it("It should return a 500 response when case allocation client throws an error", async () => {
+    const clientError = new Error();
+    const payload = buildAllocatePayload();
+
+    setupUpdateCaseFailure(clientError);
+
+    const response: Response = await requestAllocateCases(payload);
+
     expect(response.status).toEqual(500);
   });
 
-  it('It should log a 500 response error when a call is made to retrieve a case and the rest api is not availiable', async () => {
-    // arrange
-    const axiosError = createAxiosError(500);
-    const questionnaireName: string = 'TEST111A';
-    const payload = { name: 'jake', cases: ['1'] };
-
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
-  });
-
-  it('It should return a 500 response when the api client throws an error', async () => {
-    // arrange
+  it("It should log a 500 response error when case allocation client throws an error", async () => {
     const clientError = new Error();
-    const questionnaireName: string = 'TEST111A';
-    const payload = { name: 'jake', cases: ['1'] };
+    const payload = buildAllocatePayload();
 
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
+    setupUpdateCaseFailure(clientError);
 
-    // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
+    await requestAllocateCases(payload);
 
-    // assert
-    expect(response.status).toEqual(500);
-  });
-
-  it('It should log a 500 response error when the api client throws an error', async () => {
-    // arrange
-    const clientError = new Error();
-    const questionnaireName: string = 'TEST111A';
-    const payload = { name: 'jake', cases: ['1'] };
-
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
-
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
-  });
-
-  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-    // arrange
-    const axiosError = createAxiosError(404);
-    const questionnaireName: string = 'TEST111A';
-    const payload = { name: 'jake', cases: ['1'] };
-
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-
-    // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
-
-    // assert
-    expect(response.status).toEqual(404);
-  });
-
-  it('It should log a 404 response error when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-    // arrange
-    const axiosError = createAxiosError(404);
-    const questionnaireName: string = 'TEST111A';
-    const payload = { name: 'jake', cases: ['1'] };
-
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/allocate`).send(payload);
-
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to allocate cases to editor: ${payload.name}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 });
 
-describe('set to update case tests', () => {
+describe("set to update case tests", () => {
+  const caseFields = {
+    "QEdit.AssignedTo": "",
+    "QEdit.Edited": "",
+    "QEdit.LastUpdated": "01-01-1900_00:00",
+  };
+
+  const buildSetToUpdateFixture = (
+    overrides: Partial<{ questionnaireName: string; caseId: string }> = {},
+  ): {
+    questionnaireName: string;
+    editQuestionnaireName: string;
+    caseId: string;
+    setToUpdatePath: string;
+  } => {
+    const questionnaireName = overrides.questionnaireName ?? "TEST111A";
+    const caseId = overrides.caseId ?? "9001";
+
+    return {
+      questionnaireName,
+      editQuestionnaireName: `${questionnaireName}_EDIT`,
+      caseId,
+      setToUpdatePath: `/api/questionnaires/${questionnaireName}/cases/${caseId}/update`,
+    };
+  };
+
+  const requestSetToUpdate = (setToUpdatePath: string) => sut.patch(setToUpdatePath);
+
+  const setupSetToUpdateFailure = (error: unknown): void => {
+    mockBlaiseApi
+      .setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()))
+      .returns(() => Promise.reject(error));
+  };
+
   beforeEach(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
   afterAll(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
-  it('It should return a 204 response when cases are set to update', async () => {
-    // arrange
-    const questionnaireName: string = 'TEST111A';
-    const editQuestionnaireName: string = 'TEST111A_EDIT';
-    const caseId: string = '9001';
-    const caseFields2 = {
-      'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
-    };
-    blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
-    // act
-    const response: Response = await sut
-      .patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
+  it("It should return a 204 response when cases are set to update", async () => {
+    const { editQuestionnaireName, caseId, setToUpdatePath } = buildSetToUpdateFixture();
+
+    mockBlaiseApi.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields));
+    const response: Response = await requestSetToUpdate(setToUpdatePath);
+
     expect(response.status).toEqual(204);
-    blaiseApiMock.verify((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2), Times.once());
+    mockBlaiseApi.verify(
+      (api) => api.updateCase(editQuestionnaireName, caseId, caseFields),
+      Times.once(),
+    );
   });
 
-  it('It should log when cases are set to update', async () => {
-    // arrange
-    const questionnaireName: string = 'TEST111A';
-    const editQuestionnaireName: string = 'TEST111A_EDIT';
-    const caseId: string = '9001';
-    const caseFields2 = {
-      'QEdit.AssignedTo': '', 'QEdit.Edited': '', 'QEdit.LastUpdated': '01-01-1900_00:00',
-    };
-    blaiseApiMock.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields2));
+  it("It should log when cases are set to update", async () => {
+    const { questionnaireName, editQuestionnaireName, caseId, setToUpdatePath } =
+      buildSetToUpdateFixture();
 
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
+    mockBlaiseApi.setup((api) => api.updateCase(editQuestionnaireName, caseId, caseFields));
 
-    // assert
-    cloudLoggerMock.verify((logger) => logger.info(It.isAny(), `Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`), Times.once());
+    await requestSetToUpdate(setToUpdatePath);
+
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.info(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 
-  it('It should return a 500 response when a call is made to retrieve a case and the rest api is not availiable', async () => {
-    // arrange
-    const axiosError = createAxiosError(500);
-    const questionnaireName: string = 'TEST111A';
-    const caseId: string = '9001';
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-    // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
+  it.each([500, 404])(
+    "It should return a %i response when set to update fails with an axios error",
+    async (statusCode) => {
+      const { setToUpdatePath } = buildSetToUpdateFixture();
+      const axiosError = createAxiosError(statusCode);
+
+      setupSetToUpdateFailure(axiosError);
+      const response: Response = await requestSetToUpdate(setToUpdatePath);
+
+      expect(response.status).toEqual(statusCode);
+    },
+  );
+
+  it.each([500, 404])(
+    "It should log a %i response error when set to update fails with an axios error",
+    async (statusCode) => {
+      const { questionnaireName, caseId, setToUpdatePath } = buildSetToUpdateFixture();
+      const axiosError = createAxiosError(statusCode);
+
+      setupSetToUpdateFailure(axiosError);
+      await requestSetToUpdate(setToUpdatePath);
+
+      mockCloudLogger.verify(
+        (logger) =>
+          logger.error(
+            It.isAny(),
+            sanitiseForLogging(
+              `AUDIT_LOG: Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with ${statusCode} ${axiosError}`,
+            ),
+          ),
+        Times.once(),
+      );
+    },
+  );
+
+  it("It should return a 500 response when set to update client throws an error", async () => {
+    const clientError = new Error();
+    const { setToUpdatePath } = buildSetToUpdateFixture();
+
+    setupSetToUpdateFailure(clientError);
+    const response: Response = await requestSetToUpdate(setToUpdatePath);
+
     expect(response.status).toEqual(500);
   });
 
-  it('It should log a 500 response error when a call is made to retrieve a case and the rest api is not availiable', async () => {
-    // arrange
-    const axiosError = createAxiosError(500);
-    const questionnaireName: string = 'TEST111A';
-    const caseId: string = '9001';
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${axiosError}`), Times.once());
-  });
-
-  it('It should return a 500 response when the api client throws an error', async () => {
-    // arrange
+  it("It should log a 500 response error when set to update client throws an error", async () => {
     const clientError = new Error();
-    const questionnaireName: string = 'TEST111A';
-    const caseId: string = '9001';
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
-    // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
-    expect(response.status).toEqual(500);
-  });
+    const { questionnaireName, caseId, setToUpdatePath } = buildSetToUpdateFixture();
 
-  it('It should log a 500 response error when the api client throws an error', async () => {
-    // arrange
-    const clientError = new Error();
-    const questionnaireName: string = 'TEST111A';
-    const caseId: string = '9001';
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(clientError));
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`), Times.once());
-  });
+    setupSetToUpdateFailure(clientError);
+    await requestSetToUpdate(setToUpdatePath);
 
-  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-    // arrange
-    const axiosError = createAxiosError(404);
-    const questionnaireName: string = 'TEST111A';
-    const caseId: string = '9001';
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-    // act
-    const response: Response = await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
-    expect(response.status).toEqual(404);
-  });
-
-  it('It should return a 404 response when a call is made to retrieve a case and the client returns a 404 not found', async () => {
-    // arrange
-    const axiosError = createAxiosError(404);
-    const questionnaireName: string = 'TEST111A';
-    const caseId: string = '9001';
-    blaiseApiMock.setup((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny())).returns(() => Promise.reject(axiosError));
-    // act
-    await sut.patch(`/api/questionnaires/${questionnaireName}/cases/${caseId}/update`);
-    // assert
-    cloudLoggerMock.verify((logger) => logger.error(It.isAny(), `Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 404 ${axiosError}`), Times.once());
+    mockCloudLogger.verify(
+      (logger) =>
+        logger.error(
+          It.isAny(),
+          sanitiseForLogging(
+            `AUDIT_LOG: Failed to set to update edit dataset overnight, case: ${caseId}, questionnaire: ${questionnaireName}, current user: {name: ${user.name}, role: ${user.role}} with 500 ${clientError}`,
+          ),
+        ),
+      Times.once(),
+    );
   });
 });
 
-describe('questionnaire input validation tests', () => {
+describe("questionnaire input validation tests", () => {
   beforeEach(() => {
-    blaiseApiMock.reset();
-    cloudLoggerMock.reset();
+    mockBlaiseApi.reset();
+    mockCloudLogger.reset();
   });
 
-  it('should return 400 for get case summary with invalid questionnaire name', async () => {
-    const response: Response = await sut.get('/api/questionnaires/frs2504a/cases/1/summary');
+  it("should return 400 for get case summary with invalid questionnaire name", async () => {
+    const response: Response = await sut.get("/api/questionnaires/frs2504a/cases/1/summary");
 
     expect(response.status).toEqual(400);
-    blaiseApiMock.verify((api) => api.getCase(It.isAny(), It.isAny()), Times.never());
+    mockBlaiseApi.verify((api) => api.getCase(It.isAny(), It.isAny()), Times.never());
   });
 
-  it('should return 400 for get case edit information with invalid questionnaire name', async () => {
-    const response: Response = await sut.get('/api/questionnaires/frs2504a/cases/edit?userRole=SVT%20Editor');
+  it("should return 400 for get case edit information with invalid questionnaire name", async () => {
+    const response: Response = await sut.get(
+      "/api/questionnaires/frs2504a/cases/edit?userRole=SVT%20Editor",
+    );
 
     expect(response.status).toEqual(400);
-    blaiseApiMock.verify((api) => api.getCaseEditInformation(It.isAny()), Times.never());
+    mockBlaiseApi.verify((api) => api.getCaseEditInformation(It.isAny()), Times.never());
   });
 
-  it('should return 400 for allocate cases with invalid questionnaire name', async () => {
-    const payload = { name: 'jake', cases: ['1'] };
-    const response: Response = await sut.patch('/api/questionnaires/frs2504a/cases/allocate').send(payload);
+  it("should return 400 for allocate cases with invalid questionnaire name", async () => {
+    const payload = { name: "jake", cases: ["1"] };
+    const response: Response = await sut
+      .patch("/api/questionnaires/frs2504a/cases/allocate")
+      .send(payload);
 
     expect(response.status).toEqual(400);
-    blaiseApiMock.verify((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()), Times.never());
+    mockBlaiseApi.verify(
+      (api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()),
+      Times.never(),
+    );
   });
 
-  it('should return 400 for set to update with invalid questionnaire name', async () => {
-    const response: Response = await sut.patch('/api/questionnaires/frs2504a/cases/9001/update');
+  it("should return 400 for set to update with invalid questionnaire name", async () => {
+    const response: Response = await sut.patch("/api/questionnaires/frs2504a/cases/9001/update");
 
     expect(response.status).toEqual(400);
-    blaiseApiMock.verify((api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()), Times.never());
+    mockBlaiseApi.verify(
+      (api) => api.updateCase(It.isAny(), It.isAny(), It.isAny()),
+      Times.never(),
+    );
   });
 });

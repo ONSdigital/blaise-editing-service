@@ -1,8 +1,8 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from "axios";
 
-export default function createAxiosError(responceStatus: number) {
+export default function createAxiosError(responseStatus: number) {
   const axiosResponse: AxiosResponse = {
-    status: responceStatus,
+    status: responseStatus,
   } as AxiosResponse;
 
   return {
