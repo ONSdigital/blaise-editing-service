@@ -56,7 +56,7 @@ These fields help the service manage case assignment and editing state:
 
 ### Data Entry Settings
 
-The questionnaire must include a `Data Entry Settings` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behaviour and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
+The questionnaire must include a `Data Entry Setting` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option and have `Apply Record Locking` unchecked. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behaviour and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
 
 ## Case Visibility
 
