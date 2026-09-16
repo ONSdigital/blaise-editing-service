@@ -47,16 +47,16 @@ Each questionnaire must exist in two versions:
 
 These fields help the service manage case assignment and editing state:
 
-| Field                | Purpose                                                                                                                                                                                                                                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `QEdit.AssignedTo`   | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them.                                                                                                                           |
-| `QEdit.Edited`       | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten.                                                                                                                                                                                            |
-| `QEdit.LastUpdated`  | Timestamp of last edit set by the questionnaire. Used to determine sync status.                                                                                                                                                                                                                                  |
+| Field | Purpose |
+| --- | --- |
+| `QEdit.AssignedTo` | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them. |
+| `QEdit.Edited` | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten. |
+| `QEdit.LastUpdated` | Timestamp of last edit set by the questionnaire. Used to determine sync status. |
 | `QEdit.EditedStatus` | An enum (`[NotStarted = 0, Started = 1, Query = 2, Finished = 3]`) indicating the case's editing stage. While triggered by editor actions, this field is updated by the questionnaire's internal logic, not directly by the editing service. The service uses this status for workload visibility and filtering. |
 
 ### Data Entry Settings
 
-The questionnaire must include a `Data Entry Settings` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behaviour and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
+The questionnaire must include a `Data Entry Setting` specifically named `ReadOnly`. This setting should be configured with the `Accept input, don't save` option and have `Apply Record Locking` unchecked. It allows users, such as the research team, to run through the questionnaire and test data entries without these changes being saved to the database. This is valuable for observing the questionnaire's behaviour and determining the consequences of potential modifications. To activate this mode for a case, `DataEntrySettings=ReadOnly` is appended to the URL.
 
 ## Case Visibility
 
