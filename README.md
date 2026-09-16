@@ -47,11 +47,11 @@ Each questionnaire must exist in two versions:
 
 These fields help the service manage case assignment and editing state:
 
-| Field | Purpose |
-| --- | --- |
-| `QEdit.AssignedTo` | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them. |
-| `QEdit.Edited` | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten. |
-| `QEdit.LastUpdated` | Timestamp of last edit set by the questionnaire. Used to determine sync status. |
+| Field                | Purpose                                                                                                                                                                                                                                                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `QEdit.AssignedTo`   | The service populates this field when a supervisor assigns a case to an editor. This ensures that upon login, an editor's view is filtered to display only the cases assigned to them.                                                                                                                           |
+| `QEdit.Edited`       | Set to `1` (true) by the questionnaire when editing begins. Prevents overnight sync so that edits aren't overwritten.                                                                                                                                                                                            |
+| `QEdit.LastUpdated`  | Timestamp of last edit set by the questionnaire. Used to determine sync status.                                                                                                                                                                                                                                  |
 | `QEdit.EditedStatus` | An enum (`[NotStarted = 0, Started = 1, Query = 2, Finished = 3]`) indicating the case's editing stage. While triggered by editor actions, this field is updated by the questionnaire's internal logic, not directly by the editing service. The service uses this status for workload visibility and filtering. |
 
 ### Data Entry Settings
