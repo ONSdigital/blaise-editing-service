@@ -11,7 +11,6 @@ env_variables:
   SERVER_PARK: _SERVER_PARK
   URL_DOMAIN: _URL_DOMAIN
   SESSION_SECRET: _SESSION_SECRET
-  ROLES: _ROLES
 
 automatic_scaling:
   min_instances: _MIN_INSTANCES
